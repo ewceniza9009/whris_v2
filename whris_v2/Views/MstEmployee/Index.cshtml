@@ -1,0 +1,149 @@
+﻿@{
+    ViewBag.Title = "Employee";
+}
+
+<style>
+    .cmd-buttons {
+        margin-left: 10px;
+        width: 90px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-6">
+        <h3 class="zero-tpm">Employee</h3>
+    </div>
+
+    <div class="col-md-6">
+        <button class="btn btn-danger cmd-buttons pull-right btn-labeled"
+                type="button"
+                onclick="Back()">
+            <span class="btn-label">
+                <i class="fa fa-eject"></i>
+            </span>Back
+        </button>
+        <button class="btn btn-primary cmd-buttons pull-right btn-labeled"
+                type="button"
+                onclick="Add()">
+            <span class="btn-label">
+                <i class="fa fa-plus-square"></i>
+            </span>
+            Add
+        </button>
+    </div>
+</div>
+
+<div id="content">
+    <div id="MstEmployeeGrid"></div>
+    <script>
+        function Add() {
+            location.href = "MstEmployeeDetail?empId=0";
+        }
+
+        function ShowEmployee(e) {
+            var tr = $(e.target).closest("tr");
+            var item = this.dataItem(tr);
+
+            location.href = "MstEmployeeDetail?empId=" + item.Id;
+        }
+
+         $(document).ready(function() {
+             $("#MstEmployeeGrid").kendoGrid({
+                 height: 550,
+                 columns: [
+                     {
+                         command: {
+                             text: "Detail",
+                             click: ShowEmployee,
+                             className: "k-primary"
+                         },
+                         title: "Detail",
+                         width: 95
+
+                     },
+                     {
+                         command: {
+                             text: "Delete",
+                             //click: DeleteUser,
+                             attributes: {
+                                 "class": "btn btn-danger"
+                             }
+                         },
+                         title: "Delete",
+                         width: 100
+
+                     },
+                     {
+                         hidden: true,
+                         field: "Id",
+                         title: "Id",
+                         width: 80
+                     },
+                     {
+                         field: "IdNumber",
+                         title: "Id Number",
+                         width: 140
+                     },
+                     {
+                         field: "FullName",
+                         title: "Name",
+                         width: 500
+                     },
+                     {
+                         field: "Position",
+                         title: "Position"
+                     },
+                     {
+                         template: "<input type=\"checkbox\" #= IsLocked ? \"checked=checked\" : \"\" # disabled=\"disabled\"></input>",
+                         width: "50px",
+                         field: "IsLocked",
+                         title: "L"
+                     }
+                 ],
+                 sortable: true,
+                 filterable: true,
+                 pageable: {
+                     refresh: true,
+                     pageSizes: true,
+                     buttonCount: 5
+                 },
+                 dataSource: {
+                     serverPaging: true,
+                     serverFiltering: true,
+                     serverSorting: true,
+                     pageSize: 20,
+                     schema: {
+                         data: "Data",
+                         total: "Total",
+                         model: {
+                             id: "Id",
+                             fields: {
+                                 Id: { editable: false },
+                                 IdNumber: { editable: false },
+                                 FullName: { editable: false },
+                                 FullName: { editable: false },
+                                 Position: { editable: false },
+                                 IsLocked: { type: "boolean" }
+                             }
+                         }
+                     },
+                     transport: {
+                         read: {
+                             url: "@Url.Action("GetEmployeeList", "MstEmployee")",
+                             contentType: "application/json",
+                             type: "POST"
+                         },
+                         parameterMap: function (data, operation) {
+
+                             return JSON.stringify(data);
+
+                         }
+                     }
+                 }
+             });
+        });
+    </script>
+</div>
+
+
+

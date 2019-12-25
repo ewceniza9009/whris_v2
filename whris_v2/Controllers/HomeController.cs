@@ -9,23 +9,6 @@ namespace whris_v2.Controllers
 {
     public class HomeController : Controller
     {
-        public whrisDataContext whris;
-        public JsonResult GetUserList()
-        {
-            whris = new whrisDataContext();
-
-            var userList = whris.MstUsers
-                .Select(i => new Models.MstUser
-                {
-                    Id = i.Id,
-                    Username = i.UserName,
-                    FullName = i.FullName,
-                    IsLocked = i.IsLocked
-                });
-
-            return Json(userList.ToList(), JsonRequestBehavior.AllowGet);
-        }
-
         public ActionResult Index()
         {
             return View();
