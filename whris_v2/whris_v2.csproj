@@ -276,6 +276,7 @@
     <Compile Include="Models\MstEmployeeMemo.cs" />
     <Compile Include="Models\MstEmployeeShiftCode.cs" />
     <Compile Include="Models\MstUser.cs" />
+    <Compile Include="Models\Page\Pager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

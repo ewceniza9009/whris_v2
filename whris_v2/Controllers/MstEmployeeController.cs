@@ -18,18 +18,29 @@ namespace whris_v2.Controllers
 
             whris = new Data.whrisDataContext();
 
-            var result = whris.MstEmployees
-                .Select(x => new Models.MstEmployee()
-                {
-                    Id = x.Id,
-                    IdNumber = x.IdNumber,
-                    FullName = x.FullName,
-                    Position = x.MstPosition.Position,
-                    IsLocked = x.IsLocked
-                })
-                .OrderBy(x => x.FullName)
-                .ToDataSourceResult(take, skip, sort, filter);
+            //var result1 = whris.MstEmployees
+            //    .Select(x => new Models.MstEmployee()
+            //    {
+            //        Id = x.Id,
+            //        IdNumber = x.IdNumber,
+            //        FullName = x.FullName,
+            //        Position = x.MstPosition.Position,
+            //        IsLocked = x.IsLocked
+            //    })
+            //    .OrderBy(x => x.FullName)
+            //    .ToDataSourceResult(take, skip, sort, filter);
 
+            var data = whris.MstEmployees.ToDataSourceResult(take, skip, sort, filter);
+
+            var mappingProfile = new Mapping.MappingProfile<Data.MstEmployee, Models.MstEmployee>();
+            var dataConverted = mappingProfile.mapper.Map<IEnumerable<Data.MstEmployee>, IEnumerable<Models.MstEmployee>>(data.Data.Cast<Data.MstEmployee>());
+
+            var result = new Kendo.DynamicLinq.DataSourceResult()
+            {
+                Data = dataConverted,
+                Total = data.Total,
+                Aggregates = data.Aggregates
+            };
 
             return Json(result);
         }
