@@ -15,7 +15,6 @@ namespace whris_v2.Controllers
 
         public JsonResult GetEmployeeList(int take, int skip, IEnumerable<Sort> sort, Kendo.DynamicLinq.Filter filter)
         {
-
             whris = new Data.whrisDataContext();
 
             var data = whris.MstEmployees.ToDataSourceResult(take, skip, sort, filter);
