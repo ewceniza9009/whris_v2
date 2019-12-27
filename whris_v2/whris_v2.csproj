@@ -270,6 +270,20 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ComboBox\MstEmployee\CmbEmployeeBranch.cs" />
+    <Compile Include="Models\ComboBox\MstEmployee\CmbEmployeeCitizenship.cs" />
+    <Compile Include="Models\ComboBox\MstEmployee\CmbEmployeeCompany.cs" />
+    <Compile Include="Models\ComboBox\MstEmployee\CmbEmployeeDepartment.cs" />
+    <Compile Include="Models\ComboBox\MstEmployee\CmbEmployeeDivison.cs" />
+    <Compile Include="Models\ComboBox\MstEmployee\CmbEmployeeGLAccount.cs" />
+    <Compile Include="Models\ComboBox\MstEmployee\CmbEmployeePayrollGroup.cs" />
+    <Compile Include="Models\ComboBox\MstEmployee\CmbEmployeePayrollType.cs" />
+    <Compile Include="Models\ComboBox\MstEmployee\CmbEmployeePosition.cs" />
+    <Compile Include="Models\ComboBox\MstEmployee\CmbEmployeeReligion.cs" />
+    <Compile Include="Models\ComboBox\MstEmployee\CmbEmployeeShiftCode.cs" />
+    <Compile Include="Models\ComboBox\MstEmployee\CmbEmployeeTaxCode.cs" />
+    <Compile Include="Models\ComboBox\MstEmployee\CmbEmplyeeZipCode.cs" />
+    <Compile Include="Models\ComboBox\MstUser\CmbForms.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MstEmployee.cs" />
