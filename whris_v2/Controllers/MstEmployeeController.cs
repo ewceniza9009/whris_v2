@@ -54,7 +54,7 @@ namespace whris_v2.Controllers
 
             return Json(result);
         }
-        public ActionResult GetEmployee(int empId)
+        public ActionResult MstEmployeeDetail(Models.MstEmployee model)
         {
             var result = new Models.MstEmployee();
             var data = new Data.MstEmployee();
@@ -63,9 +63,9 @@ namespace whris_v2.Controllers
 
             using (whris = new Data.whrisDataContext())
             {
-                data = whris.MstEmployees.Where(x => x.Id == empId).FirstOrDefault();
+                data = whris.MstEmployees.Where(x => x.Id == model.Id).FirstOrDefault();
 
-                if (empId == 0)
+                if (model.Id == 0)
                 {
                     var DefaultZipCodeId = whris.MstZipCodes.FirstOrDefault().Id;
                     var DefaultCitizenshipId = whris.MstCitizenships.FirstOrDefault().Id;
@@ -151,21 +151,21 @@ namespace whris_v2.Controllers
                 result = mappingProfile.mapper.Map<Data.MstEmployee, Models.MstEmployee>(data);
             }
 
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return View(model);
         }
         [HttpPost]
-        public ActionResult SaveEmployee(Models.MstEmployee empClient)
+        public ActionResult SaveEmployee(Models.MstEmployee model)
         {
             var result = new Data.MstEmployee();
             var mappingProfile = new Mapping.MappingProfile<Data.MstEmployee, Models.MstEmployee>();
 
             using (whris = new Data.whrisDataContext())
             {
-                if (empClient.Id != 0)
+                if (model.Id != 0)
                 {
-                    result = whris.MstEmployees.Where(x => x.Id == empClient.Id).FirstOrDefault();
+                    result = whris.MstEmployees.Where(x => x.Id == model.Id).FirstOrDefault();
 
-                    result = mappingProfile.mapper.Map<Models.MstEmployee, Data.MstEmployee>(empClient);
+                    result = mappingProfile.mapper.Map<Models.MstEmployee, Data.MstEmployee>(model);
 
                     result.EntryUserId = 1;
                     result.EntryDateTime = DateTime.Now;
@@ -174,7 +174,7 @@ namespace whris_v2.Controllers
                 }
                 else
                 {
-                    result = mappingProfile.mapper.Map<Models.MstEmployee, Data.MstEmployee>(empClient);
+                    result = mappingProfile.mapper.Map<Models.MstEmployee, Data.MstEmployee>(model);
 
                     result.EntryUserId = 1;
                     result.EntryDateTime = DateTime.Now;
@@ -187,7 +187,7 @@ namespace whris_v2.Controllers
                 whris.SubmitChanges();
             }
 
-            return View(empClient);
+            return View(model);
         }
 
         // GET: MstEmployee
