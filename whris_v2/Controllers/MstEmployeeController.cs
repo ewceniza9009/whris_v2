@@ -17,17 +17,40 @@ namespace whris_v2.Controllers
         {
             whris = new Data.whrisDataContext();
 
-            var data = whris.MstEmployees.ToDataSourceResult(take, skip, sort, filter);
+            //var data = whris.MstEmployees.ToDataSourceResult(take, skip, sort, filter);
 
-            var mappingProfile = new Mapping.MappingProfile<Data.MstEmployee, Models.MstEmployee>();
-            var dataConverted = mappingProfile.mapper.Map<IEnumerable<Data.MstEmployee>, IEnumerable<Models.MstEmployee>>(data.Data.Cast<Data.MstEmployee>());
+            //var mappingProfile = new Mapping.MappingProfile<Data.MstEmployee, Models.MstEmployee>();
+            //var dataConverted = mappingProfile.mapper.Map<IEnumerable<Data.MstEmployee>, IEnumerable<Models.MstEmployee>>(data.Data.Cast<Data.MstEmployee>());
 
-            var result = new Kendo.DynamicLinq.DataSourceResult()
-            {
-                Data = dataConverted,
-                Total = data.Total,
-                Aggregates = data.Aggregates
-            };
+            //var result = new Kendo.DynamicLinq.DataSourceResult()
+            //{
+            //    Data = dataConverted,
+            //    Total = data.Total,
+            //    Aggregates = data.Aggregates
+            //};
+
+            //var result = (from emp in whris.MstEmployees
+            //              join pos in whris.MstPositions on emp.PositionId equals pos.Id
+            //              orderby emp.FullName
+            //              select new Models.MstEmployee
+            //              {
+            //                  Id = emp.Id,
+            //                  IdNumber = emp.IdNumber,
+            //                  FullName = emp.FullName,
+            //                  Position = pos.Position,
+            //                  IsLocked = emp.IsLocked
+            //              }).ToDataSourceResult(take, skip, sort, filter);
+
+            var result = whris.MstEmployees
+                .Select(x => new Models.MstEmployee
+                {
+                    Id = x.Id,
+                    IdNumber = x.IdNumber,
+                    FullName = x.FullName,
+                    Position = x.MstPosition.Position,
+                    IsLocked = x.IsLocked
+                })
+                .ToDataSourceResult(take, skip, sort, filter);
 
             return Json(result);
         }
