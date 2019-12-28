@@ -304,6 +304,9 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\img\51e284d41bb81a795b17440fd843af57.png" />
+    <Content Include="Content\img\b1.png" />
+    <Content Include="Content\img\b2.png" />
+    <Content Include="Content\img\b3.jpg" />
     <Content Include="Content\img\Background.png" />
     <Content Include="Content\img\download.png" />
     <Content Include="Content\img\logofullV2.5.png" />

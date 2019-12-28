@@ -1,6 +1,6 @@
 ﻿namespace whris_v2.Models.ComboBox.MstEmployee
 {
-    public class CmbEmplyeeZipCode
+    public class CmbEmployeeZipCode
     {
         public int Id { get; set; }
         public string ZipCode { get; set; }

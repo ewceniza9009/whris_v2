@@ -34,27 +34,6 @@
     </style>
 </head>
 <body">
-    @*<div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("HRManager", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    </ul>
-                    @Html.Partial("_LoginPartial")
-                </div>
-            </div>
-        </div>*@
-
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm fixed-top">
         <h5 class="my-0 mr-md-auto font-weight-normal">@Html.ActionLink("HRManager", "Index", "Home", new { area = "" }, null)</h5>
         <form class="form-inline mt-2 mt-md-0">
@@ -99,22 +78,20 @@
                     <div class="sidebar-menu">
                         <ul>
                             <li class="header-menu">
-                                <span>General</span>
+                                <span>System Navigation</span>
                             </li>
                             <li class="sidebar-dropdown">
                                 <a href="#">
                                     <i class="fa fa-list"></i>
-                                    <span>Dashboard</span>
+                                    <span>Setup</span>
                                 </a>
                                 <div class="sidebar-submenu">
                                     <ul>
                                         <li>
-                                            <a href="#">
-                                               Dashboard 1
-                                            </a>
+                                            <a href="#">Users</a>
                                         </li>
                                         <li>
-                                            <a href="#">Dashboard 2</a>
+                                            <a href="@Url.Action("Index","MstEmployee")">Employee</a>
                                         </li>
                                         <li>
                                             <a href="#">Dashboard 3</a>
@@ -125,7 +102,7 @@
                             <li class="sidebar-dropdown">
                                 <a href="#">
                                     <i class="fa fa-shopping-cart"></i>
-                                    <span>E-commerce</span>
+                                    <span>Activities</span>
                                 </a>
                                 <div class="sidebar-submenu">
                                     <ul>
@@ -147,7 +124,7 @@
                             <li class="sidebar-dropdown">
                                 <a href="#">
                                     <i class="fa fa-compass"></i>
-                                    <span>Components</span>
+                                    <span>Reports</span>
                                 </a>
                                 <div class="sidebar-submenu">
                                     <ul>
@@ -172,7 +149,7 @@
                             <li class="sidebar-dropdown">
                                 <a href="#">
                                     <i class="fa fa-area-chart"></i>
-                                    <span>Charts</span>
+                                    <span>Settings</span>
                                 </a>
                                 <div class="sidebar-submenu">
                                     <ul>
@@ -187,22 +164,6 @@
                                         </li>
                                         <li>
                                             <a href="#">Histogram</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="sidebar-dropdown">
-                                <a href="#">
-                                    <i class="fa fa-globe"></i>
-                                    <span>Maps</span>
-                                </a>
-                                <div class="sidebar-submenu">
-                                    <ul>
-                                        <li>
-                                            <a href="#">Google maps</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Open street map</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -236,7 +197,7 @@
             </nav>
         }
         <main class="page-content">
-            <div class="container body-content">
+            <div class="container body-content" style="padding-top: 80px; padding-bottom: 20px; margin-bottom:20px; border-radius: 0px 0px 15px 15px; background-color: #e9ecefe6">
                 @RenderBody()
                 <hr />
                 <footer>

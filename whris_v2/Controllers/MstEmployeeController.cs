@@ -54,7 +54,7 @@ namespace whris_v2.Controllers
 
             return Json(result);
         }
-        public ActionResult MstEmployeeDetail(Models.MstEmployee model)
+        public ActionResult MstEmployeeDetail(int modelId)
         {
             var result = new Models.MstEmployee();
             var data = new Data.MstEmployee();
@@ -63,9 +63,9 @@ namespace whris_v2.Controllers
 
             using (whris = new Data.whrisDataContext())
             {
-                data = whris.MstEmployees.Where(x => x.Id == model.Id).FirstOrDefault();
+                data = whris.MstEmployees.Where(x => x.Id == modelId).FirstOrDefault();
 
-                if (model.Id == 0)
+                if (modelId == 0)
                 {
                     var DefaultZipCodeId = whris.MstZipCodes.FirstOrDefault().Id;
                     var DefaultCitizenshipId = whris.MstCitizenships.FirstOrDefault().Id;
@@ -151,7 +151,7 @@ namespace whris_v2.Controllers
                 result = mappingProfile.mapper.Map<Data.MstEmployee, Models.MstEmployee>(data);
             }
 
-            return View(model);
+            return View(result);
         }
         [HttpPost]
         public ActionResult SaveEmployee(Models.MstEmployee model)
@@ -189,6 +189,217 @@ namespace whris_v2.Controllers
 
             return View(model);
         }
+
+        #region Combobox
+        #region Employee Details Tab1
+        public JsonResult CmbZipCode()
+        {
+            whris = new Data.whrisDataContext();
+
+            var result = from i in whris.MstZipCodes
+                         orderby i.ZipCode ascending
+                         select new Models.ComboBox.MstEmployee.CmbEmployeeZipCode
+                         {
+                             Id = i.Id,
+                             ZipCode = i.ZipCode,
+                             Location = i.Location
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult CmbPlaceOfBirthZipCode()
+        {
+            whris = new Data.whrisDataContext();
+
+            var result = from i in whris.MstZipCodes
+                         orderby i.ZipCode ascending
+                         select new Models.ComboBox.MstEmployee.CmbEmployeeZipCode
+                         {
+                             Id = i.Id,
+                             ZipCode = i.ZipCode,
+                             Location = i.Location
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult CmbCitizenship()
+        {
+            whris = new Data.whrisDataContext();
+
+            var result = from i in whris.MstCitizenships
+                         orderby i.Citizenship ascending
+                         select new Models.ComboBox.MstEmployee.CmbEmployeeCitizenship
+                         {
+                             Id = i.Id,
+                             Citizenship = i.Citizenship,
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult CmbReligion()
+        {
+            whris = new Data.whrisDataContext();
+
+            var result = from i in whris.MstReligions
+                         orderby i.Religion ascending
+                         select new Models.ComboBox.MstEmployee.CmbEmployeeReligion
+                         {
+                             Id = i.Id,
+                             Religion = i.Religion,
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region Employee Details Tab2
+        #region Column1
+        public JsonResult CmbTaxCode()
+        {
+            whris = new Data.whrisDataContext();
+
+            var result = from i in whris.MstTaxCodes
+                         orderby i.TaxCode ascending
+                         select new Models.ComboBox.MstEmployee.CmbEmployeeTaxCode
+                         {
+                             Id = i.Id,
+                             TaxCode = i.TaxCode,
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult CmbCompany()
+        {
+            whris = new Data.whrisDataContext();
+
+            var result = from i in whris.MstCompanies
+                         orderby i.Company ascending
+                         select new Models.ComboBox.MstEmployee.CmbEmployeeCompany
+                         {
+                             Id = i.Id,
+                             Company = i.Company,
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult CmbBranch()
+        {
+            whris = new Data.whrisDataContext();
+
+            var result = from i in whris.MstBranches
+                         orderby i.Branch ascending
+                         select new Models.ComboBox.MstEmployee.CmbEmployeeBranch
+                         {
+                             Id = i.Id,
+                             Branch = i.Branch,
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult CmbDepartment()
+        {
+            whris = new Data.whrisDataContext();
+
+            var result = from i in whris.MstDepartments
+                         orderby i.Department ascending
+                         select new Models.ComboBox.MstEmployee.CmbEmployeeDepartment
+                         {
+                             Id = i.Id,
+                             Department = i.Department,
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult CmbPosition()
+        {
+            whris = new Data.whrisDataContext();
+
+            var result = from i in whris.MstPositions
+                         orderby i.Position ascending
+                         select new Models.ComboBox.MstEmployee.CmbEmployeePosition
+                         {
+                             Id = i.Id,
+                             Position = i.Position,
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult CmbDivision()
+        {
+            whris = new Data.whrisDataContext();
+
+            var result = from i in whris.MstDivisions
+                         orderby i.Division ascending
+                         select new Models.ComboBox.MstEmployee.CmbEmployeeDivison
+                         {
+                             Id = i.Id,
+                             Division = i.Division,
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region Column2
+        public JsonResult CmbPayrollGroup()
+        {
+            whris = new Data.whrisDataContext();
+
+            var result = from i in whris.MstPayrollGroups
+                         orderby i.PayrollGroup ascending
+                         select new Models.ComboBox.MstEmployee.CmbEmployeePayrollGroup
+                         {
+                             Id = i.Id,
+                             PayrollGroup = i.PayrollGroup,
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult CmbPayrollType()
+        {
+            whris = new Data.whrisDataContext();
+
+            var result = from i in whris.MstPayrollTypes
+                         orderby i.PayrollType ascending
+                         select new Models.ComboBox.MstEmployee.CmbEmployeePayrollType
+                         {
+                             Id = i.Id,
+                             PayrollType = i.PayrollType,
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult CmbGLAccount()
+        {
+            whris = new Data.whrisDataContext();
+
+            var result = from i in whris.MstAccounts
+                         orderby i.Account ascending
+                         select new Models.ComboBox.MstEmployee.CmbEmployeeGLAccount
+                         {
+                             Id = i.Id,
+                             Account = i.Account,
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult CmbShiftCode()
+        {
+            whris = new Data.whrisDataContext();
+
+            var result = from i in whris.MstShiftCodes
+                         orderby i.ShiftCode ascending
+                         select new Models.ComboBox.MstEmployee.CmbEmployeeShiftCode
+                         {
+                             Id = i.Id,
+                             ShiftCode = i.ShiftCode,
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+        #endregion
+        #endregion
 
         // GET: MstEmployee
         public ActionResult Index()
