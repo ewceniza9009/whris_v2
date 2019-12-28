@@ -32,16 +32,16 @@
     }
 </style>
 
-<div class="row" style="margin-bottom: 20px">
+<div class="row" style="margin-bottom: 20px; margin-top: -20px">
     <div class="col-md-6">
-        <h5>Employee Detail</h5>
+        <h5 style="margin-top: 5px;">Employee Detail</h5>
     </div>
     <div class="col-md-6">
         <button class="btn btn-danger cmd-buttons pull-right btn-labeled"
                 type="button"
                 onclick="Close_OnClick()">
             <span class="btn-label">
-                <i class="fa fa-eject"></i>
+                <i class="fa fa-arrow-left"></i>
             </span>Back
         </button>
         <button class="btn btn-outline-primary cmd-buttons pull-right btn-labeled"
@@ -54,14 +54,14 @@
         <button class="btn btn-primary cmd-buttons pull-right btn-labeled"
                 type="button">
             <span class="btn-label">
-                <i class="fa fa-edit"></i>
+                <i class="fa fa-pencil"></i>
             </span>
             Edit
         </button>
         <button class="btn btn-primary cmd-buttons pull-right btn-labeled"
                 type="submit">
             <span class="btn-label">
-                <i class="fa fa-save"></i>
+                <i class="fa fa-lock"></i>
             </span>
             Save
         </button>
@@ -112,7 +112,7 @@
             <div class="form-group row">
                 @Html.LabelFor(model => model.ExtensionName, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
                 <div class="col-sm-9">
-                    @Html.TextBoxFor(model => model.ExtensionName, new { @class = "form-control input-width-sm", id = "ExtensionNameMem", placeholder = "Extension Name", type = "text" })
+                    @Html.TextBoxFor(model => model.ExtensionName, new { @class = "form-control input-width-sm", id = "ExtensionNameMem", placeholder = "Ext. Name", type = "text" })
                     @Html.ValidationMessageFor(model => model.ExtensionName, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -130,7 +130,7 @@
             <div class="form-group row">
                 @Html.LabelFor(model => model.BiometricIdNumber, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
                 <div class="col-sm-9">
-                    @Html.TextBoxFor(model => model.BiometricIdNumber, new { @class = "form-control input-width-sm", id = "BiometricIdNumberMem", placeholder = "BiometricId Number", type = "text", disabled = "disabled" })
+                    @Html.TextBoxFor(model => model.BiometricIdNumber, new { @class = "form-control input-width-sm", id = "BiometricIdNumberMem", placeholder = "BiometricId Number", type = "text" })
                     @Html.ValidationMessageFor(model => model.BiometricIdNumber, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -169,9 +169,9 @@
         <li class="nav-item pull-right"><a class="nav-link"><i class="fa fa-gear"></i></a></li>
     </ul>
 
-    <div class="tab-content">
+    <div class="tab-content" style=" background-color: #476f7514; border-radius: 15px; padding-left: 10px; padding-top: 5px;">
         <div class="tab-pane active" id="tab_1">
-            <div class="row" style="margin-top: 20px">
+            <div class="row" style="margin-top: 10px">
                 <div class="col-md-6">
                     <div class="form-group row">
                         @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
@@ -353,7 +353,7 @@
                     <div class="form-group row">
                         @Html.LabelFor(model => model.Height, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
                         <div class="col-sm-9">
-                            @Html.TextBoxFor(model => model.Height, new { @class = "form-control input-width-md", id = "HeightMem", placeholder = "Height", type = "number", step="0.01" })
+                            @Html.TextBoxFor(model => model.Height, "{0:00.00}", new { @class = "form-control input-width-md", id = "HeightMem", placeholder = "Height", type = "number", step = "0.01" })
                             @Html.ValidationMessageFor(model => model.Height, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -361,7 +361,7 @@
                     <div class="form-group row">
                         @Html.LabelFor(model => model.Weight, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
                         <div class="col-sm-9">
-                            @Html.TextBoxFor(model => model.Weight, new { @class = "form-control input-width-md", id = "WeightMem", placeholder = "Weight", type = "number", step="0.01"})
+                            @Html.TextBoxFor(model => model.Weight, "{0:00.00}", new { @class = "form-control input-width-md", id = "WeightMem", placeholder = "Weight", type = "number", step = "0.01" })
                             @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -370,13 +370,382 @@
         </div>
 
         <div class="tab-pane" id="tab_2">
+            <div class="row" style="margin-top: 10px">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.GSISNumber, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.GSISNumber, new { @class = "form-control input-width-sm", id = "GSISNumberMem", placeholder = "GSIS No.", type = "text" })
+                            @Html.ValidationMessageFor(model => model.GSISNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        </div>
-        <div class="tab-pane" id="tab_3">
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.SSSNumber, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.SSSNumber, new { @class = "form-control input-width-md", id = "SSSNumberMem", placeholder = "SSS No.", type = "text" })
+                            @Html.ValidationMessageFor(model => model.SSSNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        </div>
-        <div class="tab-pane" id="tab_4">
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.SSSAddOn, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.SSSAddOn, "{0:00.00}", new { @class = "form-control input-width-sm", id = "SSSAddOnMem", placeholder = "SSS Addon", type = "number", step = "0.01" })
+                            @Html.ValidationMessageFor(model => model.SSSAddOn, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.SSSIsGrossAmount, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.CheckBoxFor(model => model.SSSIsGrossAmount, new { @class = "form-check-input", id = "SSSIsGrossAmountMem", style = "margin-left: 5px; margin-top: 10px" })
+                            @Html.ValidationMessageFor(model => model.SSSIsGrossAmount, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.HDMFNumber, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.HDMFNumber, new { @class = "form-control input-width-md", id = "HDMFNumberMem", placeholder = "HDMF No.", type = "text" })
+                            @Html.ValidationMessageFor(model => model.HDMFNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.HDMFType, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @(Html.Kendo().ComboBoxFor(model => model.HDMFType)
+                               .Name("HDMFTypeMem")
+                               .Placeholder("HDMF Type")
+                               .BindTo(new List<string>() {
+                                   "Percentage",
+                                   "Value"
+                               })
+                               .Suggest(true)
+                            )
+                            @Html.ValidationMessageFor(model => model.HDMFType, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.HDMFAddOn, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.HDMFAddOn, "{0:00.00}", new { @class = "form-control input-width-sm", id = "HDMFAddOnMem", placeholder = "HDMF Addon", type = "number", step = "0.01" })
+                            @Html.ValidationMessageFor(model => model.HDMFAddOn, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.PHICNumber, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.PHICNumber, new { @class = "form-control input-width-md", id = "PHICNumberMem", placeholder = "PHIC No.", type = "text" })
+                            @Html.ValidationMessageFor(model => model.PHICNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.TIN, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.TIN, new { @class = "form-control input-width-lg", id = "TINMem", placeholder = "TIN", type = "text" })
+                            @Html.ValidationMessageFor(model => model.TIN, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.TaxCodeId, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @(Html.Kendo().ComboBoxFor(model => model.TaxCodeId)
+                               .Placeholder("TaxCode")
+                               .DataTextField("TaxCode")
+                               .DataValueField("Id")
+                               .DataSource(source =>
+                                       {
+                                   source.Read(read =>
+                                   {
+                                       read.Action("CmbTaxCode", "MstEmployee");
+                                   });
+                               })
+                            )
+                            @Html.ValidationMessageFor(model => model.TaxCodeId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.TaxTable, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @(Html.Kendo().ComboBoxFor(model => model.TaxTable)
+                               .Name("TaxTableMem")
+                               .Placeholder("HDMF Type")
+                               .BindTo(new List<string>() {
+                                   "Semi-Monthly",
+                                   "Monthly"
+                               })
+                               .Suggest(true)
+                            )
+                            @Html.ValidationMessageFor(model => model.TaxTable, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.ATMAccountNumber, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.ATMAccountNumber, new { @class = "form-control input-width-md", id = "ATMAccountNumberMem", placeholder = "ATM No.", type = "text" })
+                            @Html.ValidationMessageFor(model => model.ATMAccountNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.CompanyId, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @(Html.Kendo().ComboBoxFor(model => model.CompanyId)
+                               .Placeholder("Company")
+                               .DataTextField("Company")
+                               .DataValueField("Id")
+                               .DataSource(source =>
+                                       {
+                                   source.Read(read =>
+                                   {
+                                       read.Action("CmbCompany", "MstEmployee");
+                                   });
+                               })
+                            )
+                            @Html.ValidationMessageFor(model => model.CompanyId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.BranchId, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @(Html.Kendo().ComboBoxFor(model => model.BranchId)
+                               .Placeholder("Branch")
+                               .DataTextField("Branch")
+                               .DataValueField("Id")
+                               .DataSource(source =>
+                                       {
+                                   source.Read(read =>
+                                   {
+                                       read.Action("CmbBranch", "MstEmployee");
+                                   });
+                               })
+                            )
+                            @Html.ValidationMessageFor(model => model.BranchId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.DepartmentId, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @(Html.Kendo().ComboBoxFor(model => model.DepartmentId)
+                               .Placeholder("Department")
+                               .DataTextField("Department")
+                               .DataValueField("Id")
+                               .DataSource(source =>
+                                       {
+                                   source.Read(read =>
+                                   {
+                                       read.Action("CmbDepartment", "MstEmployee");
+                                   });
+                               })
+                            )
+                            @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.PositionId, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @(Html.Kendo().ComboBoxFor(model => model.PositionId)
+                               .Placeholder("Position")
+                               .DataTextField("Position")
+                               .DataValueField("Id")
+                               .DataSource(source =>
+                                       {
+                                   source.Read(read =>
+                                   {
+                                       read.Action("CmbPosition", "MstEmployee");
+                                   });
+                               })
+                            )
+                            @Html.ValidationMessageFor(model => model.PositionId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.PayrollGroupId, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @(Html.Kendo().ComboBoxFor(model => model.PayrollGroupId)
+                               .Placeholder("Payroll Group")
+                               .DataTextField("PayrollGroup")
+                               .DataValueField("Id")
+                               .DataSource(source =>
+                                       {
+                                   source.Read(read =>
+                                   {
+                                       read.Action("CmbPayrollGroup", "MstEmployee");
+                                   });
+                               })
+                            )
+                            @Html.ValidationMessageFor(model => model.PayrollGroupId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.PayrollTypeId, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @(Html.Kendo().ComboBoxFor(model => model.PayrollTypeId)
+                               .Placeholder("Payroll Type")
+                               .DataTextField("PayrollType")
+                               .DataValueField("Id")
+                               .DataSource(source =>
+                                       {
+                                   source.Read(read =>
+                                   {
+                                       read.Action("CmbPayrollType", "MstEmployee");
+                                   });
+                               })
+                            )
+                            @Html.ValidationMessageFor(model => model.PayrollTypeId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.AccountId, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @(Html.Kendo().ComboBoxFor(model => model.AccountId)
+                               .Placeholder("Account")
+                               .DataTextField("Account")
+                               .DataValueField("Id")
+                               .DataSource(source =>
+                                       {
+                                   source.Read(read =>
+                                   {
+                                       read.Action("CmbGLAccount", "MstEmployee");
+                                   });
+                               })
+                            )
+                            @Html.ValidationMessageFor(model => model.AccountId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.FixNumberOfDays, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.FixNumberOfDays, new { @class = "form-control input-width-sm", id = "FixNumberOfDaysMem", placeholder = "Fix No. of days", type = "number", step = "1" })
+                            @Html.ValidationMessageFor(model => model.FixNumberOfDays, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.FixNumberOfHours, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.FixNumberOfHours, new { @class = "form-control input-width-sm", id = "FixNumberOfHoursMem", placeholder = "Fix No. of hours", type = "number", step = "1" })
+                            @Html.ValidationMessageFor(model => model.FixNumberOfHours, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.MonthlyRate, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.MonthlyRate, "{0:N2}", new { @class = "form-control input-width-sm", id = "MonthlyRateMem", placeholder = "Monthly rate", type = "text"})
+                            @Html.ValidationMessageFor(model => model.MonthlyRate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.PayrollRate, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.PayrollRate, "{0:N2}", new { @class = "form-control input-width-sm", id = "PayrollRateMem", placeholder = "Payroll rate", type = "text" })
+                            @Html.ValidationMessageFor(model => model.PayrollRate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.DailyRate, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.DailyRate, "{0:N2}", new { @class = "form-control input-width-sm", id = "DailyRateMem", placeholder = "Daily rate", type = "text" })
+                            @Html.ValidationMessageFor(model => model.DailyRate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.AbsentDailyRate, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.AbsentDailyRate, "{0:N2}", new { @class = "form-control input-width-sm", id = "AbsentDailyRateMem", placeholder = "Absent daily rate", type = "text" })
+                            @Html.ValidationMessageFor(model => model.AbsentDailyRate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.HourlyRate, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.HourlyRate, "{0:N2}", new { @class = "form-control input-width-sm", id = "HourlyRateMem", placeholder = "Hourly rate", type = "text" })
+                            @Html.ValidationMessageFor(model => model.HourlyRate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.NightHourlyRate, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.NightHourlyRate, "{0:N2}", new { @class = "form-control input-width-sm", id = "NightHourlyRateMem", placeholder = "Night hourly rate", type = "text" })
+                            @Html.ValidationMessageFor(model => model.NightHourlyRate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.OvertimeHourlyRate, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.OvertimeHourlyRate, "{0:N2}", new { @class = "form-control input-width-sm", id = "OvertimeHourlyRateMem", placeholder = "Overtime hourly rate", type = "text" })
+                            @Html.ValidationMessageFor(model => model.OvertimeHourlyRate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.OvertimeNightHourlyRate, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.OvertimeNightHourlyRate, "{0:N2}", new { @class = "form-control input-width-sm", id = "OvertimeNightHourlyRateMem", placeholder = "Night overtime hourly rate", type = "text"})
+                            @Html.ValidationMessageFor(model => model.OvertimeNightHourlyRate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.TardyHourlyRate, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.TardyHourlyRate, "{0:N2}", new { @class = "form-control input-width-sm", id = "TardyHourlyRateMem", placeholder = "Tardy hourly rate", type = "text" })
+                            @Html.ValidationMessageFor(model => model.TardyHourlyRate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.ShiftCodeId, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @(Html.Kendo().ComboBoxFor(model => model.ShiftCodeId)
+                               .Placeholder("Shift code")
+                               .DataTextField("ShiftCode")
+                               .DataValueField("Id")
+                               .DataSource(source =>
+                                       {
+                                   source.Read(read =>
+                                   {
+                                       read.Action("CmbShiftCode", "MstEmployee");
+                                   });
+                               })
+                            )
+                            @Html.ValidationMessageFor(model => model.ShiftCodeId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane" id="tab_3">
+
+            </div>
+
+            <div class="tab-pane" id="tab_4">
+
+            </div>
         </div>
     </div>
 }
@@ -386,4 +755,6 @@
         location.href = "@Url.Action("Index","MstEmployee")";
     }
 
+    $(document).ready(function () {
+    });
 </script>

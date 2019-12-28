@@ -57,7 +57,9 @@ namespace whris_v2.Models
         public int CitizenshipId { get; set; }
         [Display(Name = "Religion")]
         public int ReligionId { get; set; }
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal Height { get; set; }
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal Weight { get; set; }
         [Display(Name = "GSIS No.")]
         public string GSISNumber { get; set; }
@@ -95,23 +97,32 @@ namespace whris_v2.Models
         [Display(Name = "Fix No. Hours")]
         public int? FixNumberOfHours { get; set; }
         [Display(Name = "Monthly Rate")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal? MonthlyRate { get; set; }
         [Display(Name = "Payroll Rate")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal? PayrollRate { get; set; }
         [Display(Name = "Daily Rate")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal? DailyRate { get; set; }
 
         [Display(Name = "Absent Rate")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal? AbsentDailyRate { get; set; }
         [Display(Name = "Hourly Rate")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal? HourlyRate { get; set; }
         [Display(Name = "N Hourly Rate")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal? NightHourlyRate { get; set; }
         [Display(Name = "OT Hourly Rate")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal? OvertimeHourlyRate { get; set; }
         [Display(Name = "OTN Hourly Rate")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal? OvertimeNightHourlyRate { get; set; }
         [Display(Name = "Tardy Hourly Rate")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal? TardyHourlyRate { get; set; }
         public int? EntryUserId { get; set; }
         public DateTime? EntryDateTime { get; set; }
@@ -122,8 +133,10 @@ namespace whris_v2.Models
         [Display(Name = "Tax Table")]
         public string TaxTable { get; set; }
         [Display(Name = "HDMF Add on")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal HDMFAddOn { get; set; }
         [Display(Name = "SSS Add on")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal SSSAddOn { get; set; }
         [Display(Name = "HDMF Type")]
         public string HDMFType { get; set; }
