@@ -13,6 +13,7 @@ namespace whris_v2.Controllers
     {
         public Data.whrisDataContext whris;
 
+        #region Parent
         public JsonResult GetEmployeeList(int take, int skip, IEnumerable<Sort> sort, Kendo.DynamicLinq.Filter filter)
         {
             whris = new Data.whrisDataContext();
@@ -189,6 +190,219 @@ namespace whris_v2.Controllers
 
             return View(model);
         }
+        #endregion
+
+        #region Child 
+        #region Memo
+        [HttpPost]
+        public ActionResult Read(int take, int skip, IEnumerable<Sort> sort, Kendo.DynamicLinq.Filter filter, int modelFilterId)
+        {
+            using (whris = new Data.whrisDataContext())
+            {
+                var result = whris.MstEmployeeMemos
+                    .Where(w => w.EmployeeId == modelFilterId)
+                    .OrderBy(x => x.MemoDate)
+                    .Select(y => new Models.MstEmployeeMemo()
+                    {
+                        Id = y.Id,
+                        EmployeeId = y.EmployeeId,
+                        MemoDate = y.MemoDate,
+                        MemoSubject = y.MemoSubject,
+                        MemoContent = y.MemoContent,
+                        PreparedBy = y.PreparedBy,
+                        ApprovedBy = y.ApprovedBy
+                    })
+                    .ToDataSourceResult(take, skip, sort, filter);
+                return Json(result);
+            }
+        }
+
+        public ActionResult ReadEmployeeMemoDetail(int modelId)
+        {
+            var result = new Models.MstEmployeeMemo();
+
+            using (whris = new Data.whrisDataContext())
+            {
+                if (modelId == 0)
+                {
+                    result.Id = 0;
+                    result.MemoDate = DateTime.Now;
+                    result.MemoSubject = "NA";
+                    result.MemoContent = "NA";
+                    result.PreparedBy = 1;
+                    result.ApprovedBy = 1;
+                }
+                else
+                {
+                    result = whris.MstEmployeeMemos
+                    .Where(x => x.Id == modelId)
+                    .Select(y => new Models.MstEmployeeMemo()
+                    {
+                        Id = y.Id,
+                        EmployeeId = y.EmployeeId,
+                        MemoDate = y.MemoDate.Date,
+                        MemoSubject = y.MemoSubject,
+                        MemoContent = y.MemoContent,
+                        PreparedBy = y.PreparedBy,
+                        ApprovedBy = y.ApprovedBy
+                    })
+                    .FirstOrDefault();
+                }
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult SaveEmployeeMemoDetail(Models.MstEmployeeMemo model)
+        {
+            var memo = new Data.MstEmployeeMemo();
+
+            using (var whris = new Data.whrisDataContext())
+            {
+                if (model.Id == 0)
+                {
+                    memo.EmployeeId = model.EmployeeId;
+                    memo.MemoDate = model.MemoDate;
+                    memo.MemoSubject = model.MemoSubject;
+                    memo.MemoContent = model.MemoContent;
+                    memo.PreparedBy = 1;
+                    memo.ApprovedBy = 1;
+
+                    whris.MstEmployeeMemos.InsertOnSubmit(memo);
+                }
+                else
+                {
+                    memo = whris.MstEmployeeMemos.Where(x => x.Id == model.Id).FirstOrDefault();
+
+                    memo.MemoDate = model.MemoDate;
+                    memo.MemoSubject = model.MemoSubject;
+                    memo.MemoContent = model.MemoContent;
+                    memo.PreparedBy = 1;
+                    memo.ApprovedBy = 1;
+                }
+
+                whris.SubmitChanges();
+            }
+
+            return null;
+        }
+
+        [HttpDelete]
+        public ActionResult DeleteEmployeeMemoDetail(int modelId)
+        {
+            if (modelId > 0)
+            {
+                using (var whris = new Data.whrisDataContext())
+                {
+                    var memo = whris.MstEmployeeMemos.Where(x => x.Id == modelId).FirstOrDefault();
+
+                    whris.MstEmployeeMemos.DeleteOnSubmit(memo);
+
+                    whris.SubmitChanges();
+                }
+            }
+
+            return null;
+        }
+        #endregion
+
+        #region Shift Code
+        [HttpPost]
+        public ActionResult ReadShiftCodes(int take, int skip, IEnumerable<Sort> sort, Kendo.DynamicLinq.Filter filter, int modelFilterId)
+        {
+            using (whris = new Data.whrisDataContext())
+            {
+                var result = whris.MstEmployeeShiftCodes
+                    .Where(w => w.EmployeeId == modelFilterId)
+                    .OrderBy(x => x.Id)
+                    .Select(y => new Models.MstEmployeeShiftCode()
+                    {
+                        Id = y.Id,
+                        EmployeeId = y.EmployeeId,
+                        ShiftCodeId = y.ShiftCodeId
+                    })
+                    .ToDataSourceResult(take, skip, sort, filter);
+
+                return Json(result);
+            }
+        }
+        [HttpPost]
+        public ActionResult CreateShiftCode(IEnumerable<Models.MstEmployeeShiftCode> models, int modelFilterId)
+        {
+            var result = new List<Data.MstEmployeeShiftCode>();
+
+            using (var whris = new Data.whrisDataContext())
+            {
+                foreach (var model in models)
+                {
+                    var empShiftCodeServerLine = new Data.MstEmployeeShiftCode()
+                    {
+                        EmployeeId = modelFilterId,
+                        ShiftCodeId = model.ShiftCodeId
+
+                    };
+
+                    result.Add(empShiftCodeServerLine);
+
+                    whris.MstEmployeeShiftCodes.InsertAllOnSubmit(result);
+                }
+
+                whris.SubmitChanges();
+            }
+
+            return Json(result.Select(y => new Models.MstEmployeeShiftCode()
+            {
+                ShiftCodeId = y.ShiftCodeId
+            })
+           .ToList());
+        }
+        [HttpPost]
+        public ActionResult UpdateShiftCode(IEnumerable<Models.MstEmployeeShiftCode> models, int modelFilterId)
+        {
+            using (var whris = new Data.whrisDataContext())
+            {
+                foreach (var model in models)
+                {
+                    var shiftCode = whris.MstEmployeeShiftCodes.SingleOrDefault(x => x.Id == model.Id);
+
+                    if (shiftCode != null)
+                    {
+                        shiftCode.ShiftCodeId = model.ShiftCodeId;
+                    }
+                }
+
+                whris.SubmitChanges();
+            }
+
+            return null;
+        }
+        [HttpPost]
+        public ActionResult DestroyShiftCode(IEnumerable<Models.MstEmployeeShiftCode> models, int modelFilterId)
+        {
+            using (whris = new Data.whrisDataContext())
+            {
+                var shiftCodes = new List<Data.MstEmployeeShiftCode>();
+
+                foreach (var model in models)
+                {
+                    var shiftCode = new Data.MstEmployeeShiftCode
+                    {
+                        Id = model.Id
+                    };
+
+                    shiftCodes.Add(shiftCode);
+                }
+
+                whris.MstEmployeeShiftCodes.DeleteAllOnSubmit(shiftCodes);
+
+                whris.SubmitChanges();
+            }
+
+            return null;
+        }
+        #endregion
+        #endregion
 
         #region Combobox
         #region Employee Details Tab1
@@ -399,12 +613,30 @@ namespace whris_v2.Controllers
         }
         #endregion
         #endregion
+        #region Others
+        public JsonResult CmbLineShiftCode()
+        {
+            whris = new Data.whrisDataContext();
+
+            var result = from i in whris.MstShiftCodes
+                         orderby i.ShiftCode ascending
+                         select new Models.ComboBox.MstEmployee.CmbEmployeeShiftCode
+                         {
+                             Id = i.Id,
+                             ShiftCode = i.ShiftCode,
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
         #endregion
 
+        #region Views
         // GET: MstEmployee
         public ActionResult Index()
         {
             return View();
-        }
+        } 
+        #endregion
     }
 }

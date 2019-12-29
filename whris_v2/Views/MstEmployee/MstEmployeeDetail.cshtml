@@ -73,7 +73,7 @@
     @Html.AntiForgeryToken()
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.Id, new { id = "IdMem"})
 
     <div class="row">
         <div class="col-md-6">
@@ -169,7 +169,7 @@
         <li class="nav-item pull-right"><a class="nav-link"><i class="fa fa-gear"></i></a></li>
     </ul>
 
-    <div class="tab-content" style=" background-color: #476f7514; border-radius: 15px; padding-left: 10px; padding-top: 5px;">
+    <div class="tab-content" style=" background-color: #476f7514; border-radius: 5px; padding-left: 10px; padding-top: 5px;">
         <div class="tab-pane active" id="tab_1">
             <div class="row" style="margin-top: 10px">
                 <div class="col-md-6">
@@ -649,7 +649,7 @@
                     <div class="form-group row">
                         @Html.LabelFor(model => model.MonthlyRate, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
                         <div class="col-sm-9">
-                            @Html.TextBoxFor(model => model.MonthlyRate, "{0:N2}", new { @class = "form-control input-width-sm", id = "MonthlyRateMem", placeholder = "Monthly rate", type = "text"})
+                            @Html.TextBoxFor(model => model.MonthlyRate, "{0:N2}", new { @class = "form-control input-width-sm", id = "MonthlyRateMem", placeholder = "Monthly rate", type = "text" })
                             @Html.ValidationMessageFor(model => model.MonthlyRate, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -705,7 +705,7 @@
                     <div class="form-group row">
                         @Html.LabelFor(model => model.OvertimeNightHourlyRate, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
                         <div class="col-sm-9">
-                            @Html.TextBoxFor(model => model.OvertimeNightHourlyRate, "{0:N2}", new { @class = "form-control input-width-sm", id = "OvertimeNightHourlyRateMem", placeholder = "Night overtime hourly rate", type = "text"})
+                            @Html.TextBoxFor(model => model.OvertimeNightHourlyRate, "{0:N2}", new { @class = "form-control input-width-sm", id = "OvertimeNightHourlyRateMem", placeholder = "Night overtime hourly rate", type = "text" })
                             @Html.ValidationMessageFor(model => model.OvertimeNightHourlyRate, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -738,23 +738,431 @@
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="tab-pane" id="tab_3">
+        <div class="tab-pane" id="tab_3">
+            <div class="row" style="padding: 10px 10px 10px 0px">
+                <div class="col-md-12">
+                    @*@(Html.Kendo().Grid(Model.Memos)
+                        .Name("MstEmployeeDetailSF1")
+                        .Columns(columns =>
+                        {
+                            columns.Command(command =>
+                            {
+                                command.Custom("Edit").Click("EditEmployeeMemo").HtmlAttributes(new { @class = "k-primary" });
+                            })
+                                .Title("Edit")
+                                .Width(80);
+                            columns.Command(command =>
+                            {
+                                command.Custom("Delete").Click("DeleteEmployeeMemo").HtmlAttributes(new { @class = "k-danger" }); ;
+                            })
+                                .Title("Delete")
+                                .Width(100);
+                            columns.Bound(model => model.Id).Hidden(true);
+                            columns.Bound(model => model.EmployeeId).Hidden(true);
+                            columns.Bound(model => model.MemoDate)
+                                .Title("Date")
+                                .Format("{0:MM/dd/yyyy}")
+                                .Width(110)
+                                .Filterable(true);
+                            columns.Bound(model => model.MemoSubject).Title("Subject").Filterable(true);
+                            columns.Bound(model => model.MemoContent).Hidden(true);
+                        })
+                        .Sortable()
+                        .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                         )*@
 
+                    <div id="MstEmployeeMemoSF1">
+                    </div>
+                </div>
             </div>
+        </div>
 
-            <div class="tab-pane" id="tab_4">
+        <div class="tab-pane" id="tab_4">
+            <div class="row" style="padding: 10px 10px 10px 0px">
+                <div class="col-md-12">
+                    <div id="MstEmployeeShiftCodeSF2">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="modal fade" id="memoModal" role="dialog" aria-labelledby="Memo Detail" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="col-md-6">
+                            <h5 class="modal-title pull-left" id="myModalLabel">Memo Detail</h5>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-danger cmd-buttons pull-right btn-labeled"
+                                    type="button"
+                                    data-dismiss="modal">
+                                <span class="btn-label">
+                                    <i class="fa fa-arrow-left"></i>
+                                </span>Back
+                            </button>
+                            <button class="btn btn-outline-primary cmd-buttons pull-right btn-labeled"
+                                    type="button">
+                                <span class="btn-label">
+                                    <i class="fa fa-print"></i>
+                                </span>
+                                Print
+                            </button>
+                            <button class="btn btn-primary cmd-buttons pull-right btn-labeled"
+                                    type="button"
+                                    data-dismiss="modal"
+                                    onclick="SaveEmployeeMemo()">
+                                <span class="btn-label">
+                                    <i class="fa fa-lock"></i>
+                                </span>
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-4">
+
+                                    @(Html.Kendo().DatePicker()
+                                      .Name("MemoDateMem")
+                                      .HtmlAttributes(new { id = "MemoDateMem", style = "width: 100%", placeholder="Date" , title = "datepicker" })
+                                    )
+                                </div>
+                                <div class="col-md-8"><input id="SubjectMem" type="text" class="form-control pull-right" placeholder="Subject" value=""/></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12" style="padding-top: 10px">
+                                    <textarea id="ContentMem" class="form-control" style="height: 250px"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 }
 
 <script>
+    var empData = {};
+    var empId = 0;
+    var shiftCodes = null;
+
     function Close_OnClick() {
         location.href = "@Url.Action("Index","MstEmployee")";
     }
 
+    //Employee Memo CRUD
+    function ShowEmployeeMemo(e) {
+        var memo = {};
+        var tr = $(e.target).closest("tr");
+        var item = this.dataItem(tr);
+
+        $.ajax({
+            url: "@Url.Action("ReadEmployeeMemoDetail", "MstEmployee")",
+            type: "GET",
+            async: false,
+            contentType: "application/json",
+            data: {
+                'modelId': item.Id
+            },
+            success: function (data) {
+                memo = data;
+            }
+        });
+
+        $("#IdMem").val(item.Id)
+        $("#MemoDateMem").val(parseDate(memo.MemoDate))
+        $("#SubjectMem").val(memo.MemoSubject)
+        $("#ContentMem").val(memo.MemoContent)
+
+        $("#memoModal").modal("show");
+    }
+
+    function AddEmployeeMemo()
+    {
+        if (empId == 0)
+        {
+            alert("Windows will now reload for new employee!");
+        }
+
+        $.ajax({
+            url: "@Url.Action("ReadEmployeeMemoDetail", "MstEmployee")",
+            type: "GET",
+            async: false,
+            contentType: "application/json",
+            data: {
+                'memoId': 0
+            },
+            success: function (data) {
+                memo = data;
+            }
+        });
+
+
+        $("#IdMem").val(0)
+        $("#MemoDateMem").val(parseDate(memo.MemoDate))
+        $("#SubjectMem").val(memo.MemoSubject)
+        $("#ContentMem").val(memo.MemoContent)
+
+        $("#memoModal").modal("show");
+    }
+
+    function SaveEmployeeMemo()
+    {
+        var memo = {};
+
+        memo.Id =  $("#IdMem").val();
+        memo.EmployeeId = empId;
+        memo.MemoDate = $("#MemoDateMem").val();
+        memo.MemoSubject = $("#SubjectMem").val();
+        memo.MemoContent = $("#ContentMem").val();
+
+        $.ajax({
+            url: "@Url.Action("SaveEmployeeMemoDetail", "MstEmployee")",
+            type: "POST",
+            dataType: "json",
+            data: {
+                'model': memo
+            },
+            success: function (data) {
+            }
+        });
+
+        $("#MstEmployeeMemoSF1").data("kendoGrid").dataSource.read();
+        $("#MstEmployeeMemoSF1").data("kendoGrid").refresh();
+    }
+
+    function DeleteEmployeeMemo(e)
+    {
+        var tr = $(e.target).closest("tr");
+        var item = this.dataItem(tr);
+
+        $.ajax({
+            url: "@Url.Action("DeleteEmployeeMemoDetail", "MstEmployee")",
+            type: "DELETE",
+            dataType: "json",
+            data: {
+                'memoId': item.Id
+            },
+            success: function (data) {
+                memo = data;
+            }
+        });
+
+        $("#MstEmployeeMemoSF1").data("kendoGrid").dataSource.read();
+        $("#MstEmployeeMemoSF1").data("kendoGrid").refresh();
+    }
+    //Employee Memo CRUD
+
+    //Shift Codes Combobox binding begin
+    function cmbShiftCode(container, options) {
+        $('<input required name="' + options.field + '"/>')
+            .appendTo(container)
+            .kendoDropDownList({
+                autoBind: false,
+                dataTextField: "ShiftCode",
+                dataValueField: "Id",
+                dataSource: shiftCodes
+            });
+    }
+
+    function getShiftCodes(shiftCodeId) {
+        for (var idx = 0, length = shiftCodes.length; idx < length; idx++) {
+            if (shiftCodes[idx].Id === shiftCodeId) {
+                return shiftCodes[idx].ShiftCode;
+            }
+        }
+
+        return null;
+    }
+    //Shift Codes Combobox binding end
+
+    function parseDate(dt)
+    {
+        var milli = dt.replace(/\/Date\((-?\d+)\)\//, '$1');
+        var d = new Date(parseInt(milli));
+
+        return d.toLocaleDateString();
+    }
+
     $(document).ready(function () {
+        //Employee Memo
+        $("#MstEmployeeMemoSF1").kendoGrid({
+            columns: [
+                {
+                    command: {
+                        text: "Detail",
+                        click: ShowEmployeeMemo,
+                        className: "k-primary"
+                    },
+                    title: "Detail",
+                    width: 100
+
+                },
+                {
+                    command: {
+                        text: "Delete",
+                        click: DeleteEmployeeMemo,
+                        attributes: {
+                            "class": "btn btn-danger"
+                        }
+                    },
+                    title: "Delete",
+                    width: 100
+
+                },
+                {
+                    hidden: true,
+                    field: "Id",
+                    title: "Id",
+                    width: 80
+                },
+                { width: "100px", field: "MemoDate", title: "Memo Date", format: "{0:MM/dd/yyyy}"},
+                { width: "150px", field: "MemoSubject", title: "Memo Subject" },
+                { width: "500px", field: "MemoContent", title: "Memo Content" }
+            ],
+            editable: false,
+            pageable: true,
+            sortable: true,
+            filterable: true,
+            dataSource: {
+                serverPaging: true,
+                serverFiltering: true,
+                serverSorting: true,
+                pageSize: 5,
+                schema: {
+                    data: "Data",
+                    total: "Total",
+                    model: {
+                        id: "Id",
+                        fields: {
+                            Id: { editable: false },
+                            EmployeeId: { editable: false },
+                            MemoDate: { type: "date" },
+                            MemoSubject: { type: "string" },
+                            MemoContent: { type: "string" }
+                        }
+                    }
+                },
+                transport: {
+                    read: {
+                        url: "@Url.Action("Read", "MstEmployee", new {modelFilterId = HttpContext.Current.Request.QueryString["modelId"]})",
+                        contentType: "application/json",
+                        type: "POST"
+                    },
+                    parameterMap: function(data, operation) {
+                        return JSON.stringify(data);
+                    }
+                }
+            }
+        });
+
+        $("#MstEmployeeShiftCodeSF2").kendoGrid({
+            columns: [
+                {
+                    width: "0px",
+                    field: "Id",
+                    title: "Id",
+                    hidden: true
+                },
+                {
+                    width: "0px",
+                    field: "EmployeeId",
+                    title: "EmployeeId",
+                    hidden: true
+                },
+                {
+                    width: "200px",
+                    field: "ShiftCodeId",
+                    title: "Shift Code",
+                    editor: cmbShiftCode,
+                    template: "#=getShiftCodes(ShiftCodeId)#"
+                },
+                {
+                    command: ["destroy"],
+                    title: "&nbsp;",
+                    width: "200px"
+                }
+            ],
+            editable: true,
+            pageable: true,
+            sortable: true,
+            filterable: true,
+            toolbar: ["create", "save", "cancel"],
+            dataSource: {
+                serverPaging: true,
+                serverFiltering: true,
+                serverSorting: true,
+                pageSize: 5,
+                schema: {
+                    data: "Data",
+                    total: "Total",
+                    model: {
+                        id: "Id",
+                        fields: {
+                            Id: { editable: false },
+                            EmployeeId: { editable: false },
+                            ShiftCodeId: { editable: true }
+                        }
+                    }
+                },
+                batch: true,
+                transport: {
+                    create: {
+                        url: "@Url.Action("CreateShiftCode", "MstEmployee", new { modelFilterId = HttpContext.Current.Request.QueryString["modelId"]})",
+                        type: "POST"
+                    },
+                    read: {
+                        url: "@Url.Action("ReadShiftCodes", "MstEmployee", new {modelFilterId = HttpContext.Current.Request.QueryString["modelId"]})",
+                        contentType: "application/json",
+                        type: "POST"
+                    },
+                    update: {
+                        url:"@Url.Action("UpdateShiftCode", "MstEmployee", new { modelFilterId = HttpContext.Current.Request.QueryString["modelId"]})",
+                        type: "POST"
+                    },
+                    destroy: {
+                        url: "@Url.Action("DestroyShiftCode", "MstEmployee", new { modelFilterId = HttpContext.Current.Request.QueryString["modelId"]})",
+                        type: "POST"
+                    },
+                    parameterMap: function(data, operation) {
+                        if (operation !== "read") {
+                            var result = {};
+
+                            for (var i = 0; i < data.models.length; i++) {
+                                var empLineShiftCodes = data.models[i];
+
+                                for (var member in empLineShiftCodes) {
+                                    if (empLineShiftCodes.hasOwnProperty(member)) {
+                                        result["empLineShiftCodes[" + i + "]." + member] = empLineShiftCodes[member];
+                                    }
+                                }
+                            }
+
+                            return result;
+                        }
+                        else {
+                            return JSON.stringify(data);
+                        }
+                    }
+                }
+            }
+        });
+
+        $.ajax({
+            url: "@Url.Action("CmbLineShiftCode", "MstEmployee")",
+            type: "GET",
+            async: false,
+            contentType: "application/json",
+            success: function(data) {
+                shiftCodes = data;
+            }
+        });
     });
 </script>

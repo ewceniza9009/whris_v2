@@ -8,6 +8,11 @@ namespace whris_v2.Models
 {
     public class MstEmployee
     {
+        public MstEmployee()
+        {
+            Memos = new List<MstEmployeeMemo>();
+        }
+
         #region List
         public int Id { get; set; }
         [Display(Name = "Id Number")]
@@ -145,5 +150,7 @@ namespace whris_v2.Models
         [Display(Name = "Min Wager")]
         public bool IsMinimumWageEarner { get; set; }
         public int Capacity { get; set; }
+
+        public List<MstEmployeeMemo> Memos { get; set; }
     }
 }
