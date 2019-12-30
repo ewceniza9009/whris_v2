@@ -283,6 +283,7 @@
     <Compile Include="Models\ComboBox\MstEmployee\CmbEmployeeShiftCode.cs" />
     <Compile Include="Models\ComboBox\MstEmployee\CmbEmployeeTaxCode.cs" />
     <Compile Include="Models\ComboBox\MstEmployee\CmbEmplyeeZipCode.cs" />
+    <Compile Include="Models\ComboBox\MstEmployee\Simple\SingleField.cs" />
     <Compile Include="Models\ComboBox\MstUser\CmbForms.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -804,6 +805,9 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.facebox.js" />
     <Content Include="Scripts\jquery.facebox.min.js" />
+    <Content Include="Scripts\jquery.maskedinput.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

@@ -8,11 +8,6 @@ namespace whris_v2.Models
 {
     public class MstEmployee
     {
-        public MstEmployee()
-        {
-            Memos = new List<MstEmployeeMemo>();
-        }
-
         #region List
         public int Id { get; set; }
         [Display(Name = "Id Number")]
@@ -46,7 +41,7 @@ namespace whris_v2.Models
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
         public string EmailAddress { get; set; }
         [Display(Name = "Birth Date")]
-        public DateTime? DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
         [Display(Name = "Birth Place")]
         public string PlaceOfBirth { get; set; }
         [Display(Name = "Birth Place Zip")]
@@ -62,9 +57,9 @@ namespace whris_v2.Models
         public int CitizenshipId { get; set; }
         [Display(Name = "Religion")]
         public int ReligionId { get; set; }
-        [DisplayFormat(DataFormatString = "{0:C}")]
+        
         public decimal Height { get; set; }
-        [DisplayFormat(DataFormatString = "{0:C}")]
+        
         public decimal Weight { get; set; }
         [Display(Name = "GSIS No.")]
         public string GSISNumber { get; set; }
@@ -76,72 +71,65 @@ namespace whris_v2.Models
         public string PHICNumber { get; set; }
         public string TIN { get; set; }
         [Display(Name = "Tax Code")]
-        public int? TaxCodeId { get; set; }
+        public int TaxCodeId { get; set; }
         [Display(Name = "ATM No.")]
         public string ATMAccountNumber { get; set; }
         [Display(Name = "Company")]
-        public int? CompanyId { get; set; }
+        public int CompanyId { get; set; }
         [Display(Name = "Branch")]
-        public int? BranchId { get; set; }
+        public int BranchId { get; set; }
         [Display(Name = "Department")]
-        public int? DepartmentId { get; set; }
+        public int DepartmentId { get; set; }
         [Display(Name = "Division")]
-        public int? DivisionId { get; set; }
+        public int DivisionId { get; set; }
         [Display(Name = "Position")]
-        public int? PositionId { get; set; }
+        public int PositionId { get; set; }
         [Display(Name = "Payroll Group")]
-        public int? PayrollGroupId { get; set; }
+        public int PayrollGroupId { get; set; }
         [Display(Name = "Account")]
-        public int? AccountId { get; set; }
+        public int AccountId { get; set; }
         [Display(Name = "Payroll Type")]
-        public int? PayrollTypeId { get; set; }
+        public int PayrollTypeId { get; set; }
         [Display(Name = "Shift Code")]
-        public int? ShiftCodeId { get; set; }
+        public int ShiftCodeId { get; set; }
         [Display(Name = "Fix No. Days")]
-        public int? FixNumberOfDays { get; set; }
+        public int FixNumberOfDays { get; set; }
         [Display(Name = "Fix No. Hours")]
-        public int? FixNumberOfHours { get; set; }
+        public int FixNumberOfHours { get; set; }
         [Display(Name = "Monthly Rate")]
-        [DisplayFormat(DataFormatString = "{0:C}")]
-        public decimal? MonthlyRate { get; set; }
+        public decimal MonthlyRate { get; set; }
         [Display(Name = "Payroll Rate")]
-        [DisplayFormat(DataFormatString = "{0:C}")]
-        public decimal? PayrollRate { get; set; }
+        
+        public decimal PayrollRate { get; set; }
         [Display(Name = "Daily Rate")]
-        [DisplayFormat(DataFormatString = "{0:C}")]
-        public decimal? DailyRate { get; set; }
+        
+        public decimal DailyRate { get; set; }
 
         [Display(Name = "Absent Rate")]
-        [DisplayFormat(DataFormatString = "{0:C}")]
-        public decimal? AbsentDailyRate { get; set; }
-        [Display(Name = "Hourly Rate")]
-        [DisplayFormat(DataFormatString = "{0:C}")]
-        public decimal? HourlyRate { get; set; }
-        [Display(Name = "N Hourly Rate")]
-        [DisplayFormat(DataFormatString = "{0:C}")]
-        public decimal? NightHourlyRate { get; set; }
+        public decimal AbsentDailyRate { get; set; }
+        [Display(Name = "Hourly Rate")]        
+        public decimal HourlyRate { get; set; }
+        [Display(Name = "N Hourly Rate")]   
+        public decimal NightHourlyRate { get; set; }
         [Display(Name = "OT Hourly Rate")]
-        [DisplayFormat(DataFormatString = "{0:C}")]
-        public decimal? OvertimeHourlyRate { get; set; }
+        public decimal OvertimeHourlyRate { get; set; }
         [Display(Name = "OTN Hourly Rate")]
-        [DisplayFormat(DataFormatString = "{0:C}")]
-        public decimal? OvertimeNightHourlyRate { get; set; }
-        [Display(Name = "Tardy Hourly Rate")]
-        [DisplayFormat(DataFormatString = "{0:C}")]
-        public decimal? TardyHourlyRate { get; set; }
-        public int? EntryUserId { get; set; }
-        public DateTime? EntryDateTime { get; set; }
-        public int? UpdateUserId { get; set; }
-        public DateTime? UpdateDateTime { get; set; }
+        public decimal OvertimeNightHourlyRate { get; set; }
+        [Display(Name = "Tardy Hourly Rate")]  
+        public decimal TardyHourlyRate { get; set; }
+        public int EntryUserId { get; set; }
+        public DateTime EntryDateTime { get; set; }
+        public int UpdateUserId { get; set; }
+        public DateTime UpdateDateTime { get; set; }
         [Display(Name = "Locked")]
         public bool IsLocked { get; set; }
         [Display(Name = "Tax Table")]
         public string TaxTable { get; set; }
         [Display(Name = "HDMF Add on")]
-        [DisplayFormat(DataFormatString = "{0:C}")]
+        
         public decimal HDMFAddOn { get; set; }
         [Display(Name = "SSS Add on")]
-        [DisplayFormat(DataFormatString = "{0:C}")]
+        
         public decimal SSSAddOn { get; set; }
         [Display(Name = "HDMF Type")]
         public string HDMFType { get; set; }
@@ -150,7 +138,5 @@ namespace whris_v2.Models
         [Display(Name = "Min Wager")]
         public bool IsMinimumWageEarner { get; set; }
         public int Capacity { get; set; }
-
-        public List<MstEmployeeMemo> Memos { get; set; }
     }
 }

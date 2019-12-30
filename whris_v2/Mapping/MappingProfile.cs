@@ -7,7 +7,7 @@
 
         public MappingProfile()
         {
-            config = new AutoMapper.MapperConfiguration(x => x.CreateMap<TSource, TDestination>());
+            config = new AutoMapper.MapperConfiguration(x => x.CreateMap<TSource, TDestination>().IgnoreAllPropertiesWithAnInaccessibleSetter());
             mapper = new AutoMapper.Mapper(config);
         }
     }

@@ -13,6 +13,14 @@ namespace whris_v2.Controllers
     {
         public Data.whrisDataContext whris;
 
+        #region Views
+        // GET: MstEmployee
+        public ActionResult Index()
+        {
+            return View();
+        }
+        #endregion
+
         #region Parent
         public JsonResult GetEmployeeList(int take, int skip, IEnumerable<Sort> sort, Kendo.DynamicLinq.Filter filter)
         {
@@ -158,29 +166,138 @@ namespace whris_v2.Controllers
         public ActionResult SaveEmployee(Models.MstEmployee model)
         {
             var result = new Data.MstEmployee();
-            var mappingProfile = new Mapping.MappingProfile<Data.MstEmployee, Models.MstEmployee>();
 
             using (whris = new Data.whrisDataContext())
             {
                 if (model.Id != 0)
                 {
-                    result = whris.MstEmployees.Where(x => x.Id == model.Id).FirstOrDefault();
+                    result = whris.MstEmployees.FirstOrDefault(x => x.Id == model.Id);
 
-                    result = mappingProfile.mapper.Map<Models.MstEmployee, Data.MstEmployee>(model);
-
+                    result.IdNumber = model.IdNumber;
+                    result.BiometricIdNumber = model.BiometricIdNumber;
+                    result.LastName = model.LastName;
+                    result.FirstName = model.FirstName;
+                    result.MiddleName = model.MiddleName;
+                    result.ExtensionName = model.ExtensionName;
+                    result.FullName = model.FullName;
+                    result.Address = model.Address;
+                    result.ZipCodeId = model.ZipCodeId;
+                    result.PhoneNumber = model.PhoneNumber;
+                    result.CellphoneNumber = model.CellphoneNumber;
+                    result.EmailAddress = model.EmailAddress;
+                    result.DateOfBirth = model.DateOfBirth;
+                    result.PlaceOfBirth = model.PlaceOfBirth;
+                    result.PlaceOfBirthZipCodeId = model.PlaceOfBirthZipCodeId;
+                    result.DateHired = model.DateHired;
+                    result.DateResigned = model.DateResigned;
+                    result.Sex = model.Sex;
+                    result.CivilStatus = model.CivilStatus;
+                    result.CitizenshipId = model.CitizenshipId;
+                    result.ReligionId = model.ReligionId;
+                    result.Height = model.Height;
+                    result.Weight = model.Weight;
+                    result.GSISNumber = model.GSISNumber;
+                    result.SSSNumber = model.SSSNumber;
+                    result.HDMFNumber = model.HDMFNumber;
+                    result.PHICNumber = model.PHICNumber;
+                    result.TIN = model.TIN;
+                    result.TaxCodeId = model.TaxCodeId;
+                    result.ATMAccountNumber = model.ATMAccountNumber;
+                    result.CompanyId = model.CompanyId;
+                    result.BranchId = model.BranchId;
+                    result.DepartmentId = model.DepartmentId;
+                    result.DivisionId = model.DivisionId;
+                    result.PositionId = model.PositionId;
+                    result.PayrollGroupId = model.PayrollGroupId;
+                    result.AccountId = model.AccountId;
+                    result.PayrollTypeId = model.PayrollTypeId;
+                    result.ShiftCodeId = model.ShiftCodeId;
+                    result.FixNumberOfDays = model.FixNumberOfDays;
+                    result.FixNumberOfHours = model.FixNumberOfHours;
+                    result.MonthlyRate = model.MonthlyRate;
+                    result.PayrollRate = model.PayrollRate;
+                    result.DailyRate = model.DailyRate;
+                    result.AbsentDailyRate = model.AbsentDailyRate;
+                    result.HourlyRate = model.HourlyRate;
+                    result.NightHourlyRate = model.NightHourlyRate;
+                    result.OvertimeHourlyRate = model.OvertimeHourlyRate;
+                    result.OvertimeNightHourlyRate = model.OvertimeNightHourlyRate;
+                    result.TardyHourlyRate = model.TardyHourlyRate;
                     result.EntryUserId = 1;
-                    result.EntryDateTime = DateTime.Now;
+                    result.EntryDateTime = DateTime.Now.Date;
                     result.UpdateUserId = 1;
-                    result.UpdateDateTime = DateTime.Now;
+                    result.UpdateDateTime = DateTime.Now.Date;
+                    result.IsLocked = model.IsLocked;
+                    result.TaxTable = model.TaxTable;
+                    result.HDMFAddOn = model.HDMFAddOn;
+                    result.SSSAddOn = model.SSSAddOn;
+                    result.HDMFType = model.HDMFType;
+                    result.SSSIsGrossAmount = model.SSSIsGrossAmount;
+                    result.IsMinimumWageEarner = model.IsMinimumWageEarner;
                 }
                 else
                 {
-                    result = mappingProfile.mapper.Map<Models.MstEmployee, Data.MstEmployee>(model);
-
+                    result.IdNumber = model.IdNumber;
+                    result.BiometricIdNumber = model.BiometricIdNumber;
+                    result.LastName = model.LastName;
+                    result.FirstName = model.FirstName;
+                    result.MiddleName = model.MiddleName;
+                    result.ExtensionName = model.ExtensionName;
+                    result.FullName = model.FullName;
+                    result.Address = model.Address;
+                    result.ZipCodeId = model.ZipCodeId;
+                    result.PhoneNumber = model.PhoneNumber;
+                    result.CellphoneNumber = model.CellphoneNumber;
+                    result.EmailAddress = model.EmailAddress;
+                    result.DateOfBirth = model.DateOfBirth;
+                    result.PlaceOfBirth = model.PlaceOfBirth;
+                    result.PlaceOfBirthZipCodeId = model.PlaceOfBirthZipCodeId;
+                    result.DateHired = model.DateHired;
+                    result.DateResigned = model.DateResigned;
+                    result.Sex = model.Sex;
+                    result.CivilStatus = model.CivilStatus;
+                    result.CitizenshipId = model.CitizenshipId;
+                    result.ReligionId = model.ReligionId;
+                    result.Height = model.Height;
+                    result.Weight = model.Weight;
+                    result.GSISNumber = model.GSISNumber;
+                    result.SSSNumber = model.SSSNumber;
+                    result.HDMFNumber = model.HDMFNumber;
+                    result.PHICNumber = model.PHICNumber;
+                    result.TIN = model.TIN;
+                    result.TaxCodeId = model.TaxCodeId;
+                    result.ATMAccountNumber = model.ATMAccountNumber;
+                    result.CompanyId = model.CompanyId;
+                    result.BranchId = model.BranchId;
+                    result.DepartmentId = model.DepartmentId;
+                    result.DivisionId = model.DivisionId;
+                    result.PositionId = model.PositionId;
+                    result.PayrollGroupId = model.PayrollGroupId;
+                    result.AccountId = model.AccountId;
+                    result.PayrollTypeId = model.PayrollTypeId;
+                    result.ShiftCodeId = model.ShiftCodeId;
+                    result.FixNumberOfDays = model.FixNumberOfDays;
+                    result.FixNumberOfHours = model.FixNumberOfHours;
+                    result.MonthlyRate = model.MonthlyRate;
+                    result.PayrollRate = model.PayrollRate;
+                    result.DailyRate = model.DailyRate;
+                    result.AbsentDailyRate = model.AbsentDailyRate;
+                    result.HourlyRate = model.HourlyRate;
+                    result.NightHourlyRate = model.NightHourlyRate;
+                    result.OvertimeHourlyRate = model.OvertimeHourlyRate;
+                    result.OvertimeNightHourlyRate = model.OvertimeNightHourlyRate;
+                    result.TardyHourlyRate = model.TardyHourlyRate;
                     result.EntryUserId = 1;
-                    result.EntryDateTime = DateTime.Now;
+                    result.EntryDateTime = DateTime.Now.Date;
                     result.UpdateUserId = 1;
-                    result.UpdateDateTime = DateTime.Now;
+                    result.UpdateDateTime = DateTime.Now.Date;
+                    result.IsLocked = model.IsLocked;
+                    result.TaxTable = model.TaxTable;
+                    result.HDMFAddOn = model.HDMFAddOn;
+                    result.SSSAddOn = model.SSSAddOn;
+                    result.HDMFType = model.HDMFType;
+                    result.SSSIsGrossAmount = model.SSSIsGrossAmount;
+                    result.IsMinimumWageEarner = model.IsMinimumWageEarner;
 
                     whris.MstEmployees.InsertOnSubmit(result);
                 }
@@ -188,7 +305,7 @@ namespace whris_v2.Controllers
                 whris.SubmitChanges();
             }
 
-            return View(model);
+            return PartialView("MstEmployeeDetail");
         }
         #endregion
 
@@ -436,6 +553,15 @@ namespace whris_v2.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult CmbSex()
+        {
+            return Json(whris_v2.Models.ComboBox.MstEmployee.Simple.CmbSex.Sex, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult CmbCivilStatus()
+        {
+            return Json(whris_v2.Models.ComboBox.MstEmployee.Simple.CmbCivilStatus.CivilStatus, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult CmbCitizenship()
         {
             whris = new Data.whrisDataContext();
@@ -555,6 +681,14 @@ namespace whris_v2.Controllers
         #endregion
 
         #region Column2
+        public JsonResult CmbHDMFType()
+        {
+            return Json(whris_v2.Models.ComboBox.MstEmployee.Simple.CmbHDMFType.HDMFType, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult CmbTaxTable()
+        {
+            return Json(whris_v2.Models.ComboBox.MstEmployee.Simple.CmbTaxTable.TaxTable, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult CmbPayrollGroup()
         {
             whris = new Data.whrisDataContext();
@@ -631,12 +765,5 @@ namespace whris_v2.Controllers
         #endregion
         #endregion
 
-        #region Views
-        // GET: MstEmployee
-        public ActionResult Index()
-        {
-            return View();
-        } 
-        #endregion
     }
 }
