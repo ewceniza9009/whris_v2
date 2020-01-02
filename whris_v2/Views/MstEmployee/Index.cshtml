@@ -52,9 +52,45 @@
             location.href = "@Url.Action("MstEmployeeDetail", "MstEmployee")" + "?modelId=" + item.Id;
         }
 
+        function DeleteEmployee(e) {
+            var tr = $(e.target).closest("tr");
+            var item = this.dataItem(tr);
+
+            $.ajax({
+                url: "@Url.Action("DeleteEmployee", "MstEmployee")",
+                contentType: "application/json",
+                data: {
+                    'modelId': item.Id
+                },
+                success: function (data) {
+                    toastr["success"]("Deleted!")
+
+                    toastr.options = {
+                      "closeButton": false,
+                      "debug": false,
+                      "newestOnTop": false,
+                      "progressBar": true,
+                      "positionClass": "toast-top-right",
+                      "preventDuplicates": false,
+                      "onclick": null,
+                      "showDuration": "300",
+                      "hideDuration": "1000",
+                      "timeOut": "5000",
+                      "extendedTimeOut": "1000",
+                      "showEasing": "swing",
+                      "hideEasing": "linear",
+                      "showMethod": "fadeIn",
+                      "hideMethod": "fadeOut"
+                    }
+
+                    $("#MstEmployeeGrid").data("kendoGrid").dataSource.read();
+                }
+            });
+        }
+
          $(document).ready(function() {
              $("#MstEmployeeGrid").kendoGrid({
-                 height: 550,
+                 height: 500,
                  columns: [
                      {
                          command: {
@@ -63,19 +99,19 @@
                              className: "k-primary"
                          },
                          title: "Detail",
-                         width: 95
+                         width: 110
 
                      },
                      {
                          command: {
                              text: "Delete",
-                             //click: DeleteUser,
+                             click: DeleteEmployee,
                              attributes: {
                                  "class": "btn btn-danger"
                              }
                          },
                          title: "Delete",
-                         width: 100
+                         width: 110
 
                      },
                      {
@@ -139,7 +175,6 @@
                              type: "POST"
                          },
                          parameterMap: function (data, operation) {
-
                              return JSON.stringify(data);
                          }
                      }

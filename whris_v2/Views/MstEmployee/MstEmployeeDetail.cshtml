@@ -33,7 +33,7 @@
 </style>
 
 <div id="model">
-    @using (Ajax.BeginForm("SaveEmployee", "MstEmployee", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "model" }))
+    @using (Ajax.BeginForm("SaveEmployee", "MstEmployee", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "model", OnSuccess="ModelSaveSuccess" }))
     {
         <div class="row" style="margin-bottom: 20px; margin-top: -20px">
             <div class="col-md-6">
@@ -358,7 +358,10 @@
                         <div class="form-group row">
                             @Html.LabelFor(model => model.Height, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
                             <div class="col-sm-9">
-                                @Html.TextBoxFor(model => model.Height, "{0:00.00}", new { @class = "form-control input-width-md", id = "HeightMem", placeholder = "Height", type = "number", step = "0.01" })
+                                @(Html.Kendo().NumericTextBoxFor(model => model.Height)
+                                 .Format("n2")
+                                 .HtmlAttributes(new { id = "HeightMem", placeholder = "Height", style = "width: 35%; text-align: right" })
+                                )
                                 @Html.ValidationMessageFor(model => model.Height, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -366,7 +369,10 @@
                         <div class="form-group row">
                             @Html.LabelFor(model => model.Weight, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
                             <div class="col-sm-9">
-                                @Html.TextBoxFor(model => model.Weight, "{0:00.00}", new { @class = "form-control input-width-md", id = "WeightMem", placeholder = "Weight", type = "number", step = "0.01" })
+                                @(Html.Kendo().NumericTextBoxFor(model => model.Weight)
+                                 .Format("n2")
+                                 .HtmlAttributes(new { id = "WeightMem", placeholder = "Weight", style = "width: 35%; text-align: right" })
+                                )
                                 @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -396,7 +402,10 @@
                         <div class="form-group row">
                             @Html.LabelFor(model => model.SSSAddOn, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
                             <div class="col-sm-9">
-                                @Html.TextBoxFor(model => model.SSSAddOn, "{0:00.00}", new { @class = "form-control input-width-sm", id = "SSSAddOnMem", placeholder = "SSS Addon", type = "number", step = "0.01" })
+                                @(Html.Kendo().NumericTextBoxFor(model => model.SSSAddOn)
+                                 .Format("n2")
+                                 .HtmlAttributes(new { id = "SSSAddOnMem", placeholder = "SSS AddOn", style = "width: 35%; text-align: right" })
+                                )
                                 @Html.ValidationMessageFor(model => model.SSSAddOn, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -439,7 +448,10 @@
                         <div class="form-group row">
                             @Html.LabelFor(model => model.HDMFAddOn, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
                             <div class="col-sm-9">
-                                @Html.TextBoxFor(model => model.HDMFAddOn, "{0:00.00}", new { @class = "form-control input-width-sm", id = "HDMFAddOnMem", placeholder = "HDMF Addon", type = "number", step = "0.01" })
+                                @(Html.Kendo().NumericTextBoxFor(model => model.HDMFAddOn)
+                                 .Format("n2")
+                                 .HtmlAttributes(new { id = "HDMFAddOnMem", placeholder = "HDMF AddOn", style = "width: 35%; text-align: right" })
+                                )
                                 @Html.ValidationMessageFor(model => model.HDMFAddOn, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -663,7 +675,7 @@
                         <div class="form-group row">
                             @Html.LabelFor(model => model.FixNumberOfDays, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
                             <div class="col-sm-9">
-                                @Html.TextBoxFor(model => model.FixNumberOfDays, new { @class = "form-control input-width-sm", id = "FixNumberOfDaysMem", placeholder = "Fix No. of days", type = "number", step = "1" })
+                                @Html.TextBoxFor(model => model.FixNumberOfDays, new { @class = "form-control input-width-sm", id = "FixNumberOfDaysMem", placeholder = "Fix No. of days", type = "number", step = "1", style = "text-align: right" })
                                 @Html.ValidationMessageFor(model => model.FixNumberOfDays, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -671,7 +683,7 @@
                         <div class="form-group row">
                             @Html.LabelFor(model => model.FixNumberOfHours, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
                             <div class="col-sm-9">
-                                @Html.TextBoxFor(model => model.FixNumberOfHours, new { @class = "form-control input-width-sm", id = "FixNumberOfHoursMem", placeholder = "Fix No. of hours", type = "number", step = "1" })
+                                @Html.TextBoxFor(model => model.FixNumberOfHours, new { @class = "form-control input-width-sm", id = "FixNumberOfHoursMem", placeholder = "Fix No. of hours", type = "number", step = "1", style = "text-align: right" })
                                 @Html.ValidationMessageFor(model => model.FixNumberOfHours, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -681,7 +693,7 @@
                             <div class="col-sm-9">
                                 @(Html.Kendo().NumericTextBoxFor(model => model.MonthlyRate)
                                   .Format("n2")
-                                  .HtmlAttributes(new { id = "MonthlyRateMem", placeholder = "Monthly rate", style = "width: 35%" })
+                                  .HtmlAttributes(new { id = "MonthlyRateMem", placeholder = "Monthly rate", style = "width: 35%; text-align: right" })
                                   )
                                 @Html.ValidationMessageFor(model => model.MonthlyRate, "", new { @class = "text-danger" })
                             </div>
@@ -692,7 +704,7 @@
                             <div class="col-sm-9">
                                 @(Html.Kendo().NumericTextBoxFor(model => model.PayrollRate)
                                   .Format("n2")
-                                  .HtmlAttributes(new { id = "PayrollRateMem", placeholder = "Payroll rate", style = "width: 35%" })
+                                  .HtmlAttributes(new { id = "PayrollRateMem", placeholder = "Payroll rate", style = "width: 35%; text-align: right" })
                                 )
                                 @Html.ValidationMessageFor(model => model.PayrollRate, "", new { @class = "text-danger" })
                             </div>
@@ -703,7 +715,7 @@
                             <div class="col-sm-9">
                                 @(Html.Kendo().NumericTextBoxFor(model => model.DailyRate)
                                   .Format("n2")
-                                  .HtmlAttributes(new { id = "DailyRateMem", placeholder = "Daily rate", style = "width: 35%" })
+                                  .HtmlAttributes(new { id = "DailyRateMem", placeholder = "Daily rate", style = "width: 35%; text-align: right" })
                                 )
                                 @Html.ValidationMessageFor(model => model.DailyRate, "", new { @class = "text-danger" })
                             </div>
@@ -714,7 +726,7 @@
                             <div class="col-sm-9">
                                 @(Html.Kendo().NumericTextBoxFor(model => model.AbsentDailyRate)
                                   .Format("n2")
-                                  .HtmlAttributes(new { id = "AbsentDailyRateMem", placeholder = "Absent daily rate", style = "width: 35%" })
+                                  .HtmlAttributes(new { id = "AbsentDailyRateMem", placeholder = "Absent daily rate", style = "width: 35%; text-align: right" })
                                 )
                                 @Html.ValidationMessageFor(model => model.AbsentDailyRate, "", new { @class = "text-danger" })
                             </div>
@@ -725,7 +737,7 @@
                             <div class="col-sm-9">
                                 @(Html.Kendo().NumericTextBoxFor(model => model.HourlyRate)
                                   .Format("n2")
-                                  .HtmlAttributes(new { id = "HourlyRateMem", placeholder = "Hourly rate", style = "width: 35%" })
+                                  .HtmlAttributes(new { id = "HourlyRateMem", placeholder = "Hourly rate", style = "width: 35%; text-align: right" })
                                 )
                                 @Html.ValidationMessageFor(model => model.HourlyRate, "", new { @class = "text-danger" })
                             </div>
@@ -736,7 +748,7 @@
                             <div class="col-sm-9">
                                 @(Html.Kendo().NumericTextBoxFor(model => model.NightHourlyRate)
                                   .Format("n2")
-                                  .HtmlAttributes(new { id = "NightHourlyRateMem", placeholder = "Night hourly rate", style = "width: 35%" })
+                                  .HtmlAttributes(new { id = "NightHourlyRateMem", placeholder = "Night hourly rate", style = "width: 35%; text-align: right" })
                                 )
                                 @Html.ValidationMessageFor(model => model.NightHourlyRate, "", new { @class = "text-danger" })
                             </div>
@@ -747,7 +759,7 @@
                             <div class="col-sm-9">
                                 @(Html.Kendo().NumericTextBoxFor(model => model.OvertimeHourlyRate)
                                   .Format("n2")
-                                  .HtmlAttributes(new { id = "OvertimeHourlyRateMem", placeholder = "Overtime hourly rate", style = "width: 35%" })
+                                  .HtmlAttributes(new { id = "OvertimeHourlyRateMem", placeholder = "Overtime hourly rate", style = "width: 35%; text-align: right" })
                                 )
                                 @Html.ValidationMessageFor(model => model.OvertimeHourlyRate, "", new { @class = "text-danger" })
                             </div>
@@ -758,7 +770,7 @@
                             <div class="col-sm-9">
                                 @(Html.Kendo().NumericTextBoxFor(model => model.OvertimeNightHourlyRate)
                                   .Format("n2")
-                                  .HtmlAttributes(new { id = "OvertimeNightHourlyRateMem", placeholder = "Overtime night hourly rate", style = "width: 35%" })
+                                  .HtmlAttributes(new { id = "OvertimeNightHourlyRateMem", placeholder = "Overtime night hourly rate", style = "width: 35%; text-align: right" })
                                 )
                                 @Html.ValidationMessageFor(model => model.OvertimeNightHourlyRate, "", new { @class = "text-danger" })
                             </div>
@@ -769,7 +781,7 @@
                             <div class="col-sm-9">
                                 @(Html.Kendo().NumericTextBoxFor(model => model.TardyHourlyRate)
                                  .Format("n2")
-                                 .HtmlAttributes(new { id = "TardyHourlyRateRateMem", placeholder = "Tardy hourly rate", style = "width: 35%" })
+                                 .HtmlAttributes(new { id = "TardyHourlyRateRateMem", placeholder = "Tardy hourly rate", style = "width: 35%; text-align: right" })
                                 )
                                 @Html.ValidationMessageFor(model => model.TardyHourlyRate, "", new { @class = "text-danger" })
                             </div>
@@ -886,7 +898,6 @@
     }
 </div>
 
-<script src="~/Scripts/jquery.maskedinput.min.js"></script>
 <script src="~/Scripts/jquery.dirtyforms.min.js"></script>
 
 <script>
@@ -894,11 +905,60 @@
     var empId = 0;
     var shiftCodes = null;
 
+    //Employe begin
     function Close_OnClick() {
         location.href = "@Url.Action("Index","MstEmployee")";
     }
 
-    //Employee Memo CRUD
+    function ModelSaveSuccess(data)
+    {
+        toastr["success"]("Success!")
+
+        toastr.options = {
+          "closeButton": false,
+          "debug": false,
+          "newestOnTop": false,
+          "progressBar": true,
+          "positionClass": "toast-top-right",
+          "preventDuplicates": false,
+          "onclick": null,
+          "showDuration": "300",
+          "hideDuration": "1000",
+          "timeOut": "5000",
+          "extendedTimeOut": "1000",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut"
+        }
+    }
+
+    //Events begin
+    $('#LastNameMem').on('input',function(e){
+        ChangeFullName();
+    });
+
+    $('#FirstNameMem').on('input',function(e){
+        ChangeFullName();
+    });
+
+    $('#MiddleNameMem').on('input',function(e){
+        ChangeFullName();
+    });
+
+    $('#ExtensionNameMem').on('input',function(e){
+        ChangeFullName();
+    });
+
+    function ChangeFullName()
+    {
+        $("#FullNameMem").val($("#ExtensionNameMem").val() + " " + $("#LastNameMem").val() + ", " + $("#FirstNameMem").val() + " " + $("#MiddleNameMem").val());
+    }
+    //Events end
+
+    //Employee end
+
+    //Employee Memo begin
     function ShowEmployeeMemo(e) {
         var memo = {};
         var tr = $(e.target).closest("tr");
@@ -928,10 +988,41 @@
     function AddEmployeeMemo()
     {
         var memo = {};
+        var newEmpId = 0;
+        empId = getParameterByName('modelId');
 
         if (empId == 0)
         {
             alert("Windows will now reload for new employee!");
+
+            var model = @Html.Raw(Json.Encode(Model));
+
+            model.DateHired = parseDate(model.DateHired);
+            model.DateResigned = parseDate(model.DateResigned);
+            model.DateOfBirth = parseDate(model.DateOfBirth);
+
+            $.ajax({
+                url: "@Url.Action("GetEmployee", "MstEmployee")",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    'model': model
+                }
+                ,
+                success: function (data) {
+                    newEmpId = data;
+
+                    var page = "@Url.Action("MstEmployeeDetail", "MstEmployee")" + "?modelId=" + empId;
+                    var newPage = "@Url.Action("MstEmployeeDetail", "MstEmployee")" + "?modelId=" + newEmpId;
+
+                    ChangeUrl(page, newPage);
+
+                    empId = newEmpId;
+
+                    $("#MstEmployeeMemoSF1").data("kendoGrid").dataSource.options.transport.read.url = "@Url.Action("Read", "MstEmployee")?modelFilterId=" + empId;
+                    $("#MstEmployeeMemoSF1").data("kendoGrid").dataSource.read();
+                }
+            }); 
         }
 
         $.ajax({
@@ -940,7 +1031,7 @@
             async: false,
             contentType: "application/json",
             data: {
-                'memoId': 0
+                'modelId': 0
             },
             success: function (data) {
                 memo = data;
@@ -973,11 +1064,11 @@
                 'model': memo
             },
             success: function (data) {
+                $("#MstEmployeeMemoSF1").data("kendoGrid").dataSource.read();
             }
         });
 
-        $("#MstEmployeeMemoSF1").data("kendoGrid").dataSource.read();
-        $("#MstEmployeeMemoSF1").data("kendoGrid").refresh();
+        
     }
 
     function DeleteEmployeeMemo(e)
@@ -990,19 +1081,17 @@
             type: "DELETE",
             dataType: "json",
             data: {
-                'memoId': item.Id
+                'modelId': item.Id
             },
             success: function (data) {
                 memo = data;
+                $("#MstEmployeeMemoSF1").data("kendoGrid").dataSource.read();
             }
         });
-
-        $("#MstEmployeeMemoSF1").data("kendoGrid").dataSource.read();
-        $("#MstEmployeeMemoSF1").data("kendoGrid").refresh();
     }
-    //Employee Memo CRUD
+    //Employee Memo end
 
-    //Shift Codes Combobox binding begin
+    //Shift Codes begin
     function cmbShiftCode(container, options) {
         $('<input required name="' + options.field + '"/>')
             .appendTo(container)
@@ -1023,14 +1112,149 @@
 
         return null;
     }
-    //Shift Codes Combobox binding end
+
+    function reloadPage()
+    {
+        var newEmpId = 0;
+        empId = getParameterByName('modelId');
+
+        if (empId == 0)
+        {
+            alert("Windows will now reload for new employee!");
+
+            var model = @Html.Raw(Json.Encode(Model));
+
+            model.DateHired = parseDate(model.DateHired);
+            model.DateResigned = parseDate(model.DateResigned);
+            model.DateOfBirth = parseDate(model.DateOfBirth);
+
+            $.ajax({
+                url: "@Url.Action("GetEmployee", "MstEmployee")",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    'model': model
+                },
+                success: function (data) {
+                    newEmpId = data;
+
+                    var page = "@Url.Action("MstEmployeeDetail", "MstEmployee")" + "?modelId=" + empId;
+                    var newPage = "@Url.Action("MstEmployeeDetail", "MstEmployee")" + "?modelId=" + newEmpId;
+
+                    ChangeUrl(page, newPage);
+
+                    empId = newEmpId;
+
+                    $("#MstEmployeeShiftCodeSF2").data("kendoGrid").setDataSource(shifCodeDataSource(empId));
+                    $("#MstEmployeeShiftCodeSF2").data("kendoGrid").dataSource.read();
+                },
+                error: function (xhr, status, error) {
+                    newEmpId = xhr.responseText;
+
+                    var page = "@Url.Action("MstEmployeeDetail", "MstEmployee")" + "?modelId=" + empId;
+                    var newPage = "@Url.Action("MstEmployeeDetail", "MstEmployee")" + "?modelId=" + newEmpId;
+
+                    ChangeUrl(page, newPage);
+
+                    empId = newEmpId;
+
+                    $("#MstEmployeeShiftCodeSF2").data("kendoGrid").setDataSource(shifCodeDataSource(empId));
+                    $("#MstEmployeeShiftCodeSF2").data("kendoGrid").dataSource.read();
+                }
+            });
+        }
+    }
+
+    function shifCodeDataSource(empId)
+    {
+        var dataSource = new kendo.data.DataSource({
+            serverPaging: true,
+            serverFiltering: true,
+            serverSorting: true,
+            pageSize: 5,
+            schema: {
+                data: "Data",
+                total: "Total",
+                model: {
+                    id: "Id",
+                    fields: {
+                        Id: { editable: false },
+                        EmployeeId: { editable: false },
+                        ShiftCodeId: { editable: true }
+                    }
+                }
+            },
+            batch: true,
+            transport:  {
+                create: {
+                    url: "@Url.Action("CreateShiftCode", "MstEmployee")?modelFilterId=" + empId,
+                    type: "POST"
+                },
+                read: {
+                    url: "@Url.Action("ReadShiftCodes", "MstEmployee")?modelFilterId=" + empId,
+                    contentType: "application/json",
+                    type: "POST"
+                },
+                update: {
+                    url:"@Url.Action("UpdateShiftCode", "MstEmployee")?modelFilterId=" + empId,
+                    type: "POST"
+                },
+                destroy: {
+                    url: "@Url.Action("DestroyShiftCode", "MstEmployee")?modelFilterId=" + empId,
+                    type: "POST"
+                },
+                parameterMap: function (data, operation)
+                {
+                    if (operation !== "read") {
+                        var result = {};
+
+                        for (var i = 0; i < data.models.length; i++) {
+                            var empLineShiftCodes = data.models[i];
+
+                            for (var member in empLineShiftCodes) {
+                                if (empLineShiftCodes.hasOwnProperty(member)) {
+                                    result["models[" + i + "]." + member] = empLineShiftCodes[member];
+                                }
+                            }
+                        }
+
+                        return result;
+                    }
+                    else
+                    {
+                        return JSON.stringify(data);
+                    }
+                }
+            }
+        });
+
+        return dataSource;
+    }
+    //Shift Codes end
+
+    //Utis begin
+    function ChangeUrl(page, url) {
+        if (typeof (history.pushState) != "undefined") {
+            var obj = { Page: page, Url: url };
+            history.pushState(obj, obj.Page, obj.Url);
+        } else {
+            alert("Browser does not support HTML5.");
+        }
+    }
 
     function parseDate(dt)
     {
-        var milli = dt.replace(/\/Date\((-?\d+)\)\//, '$1');
-        var d = new Date(parseInt(milli));
+        try
+        {
+            var milli = dt.replace(/\/Date\((-?\d+)\)\//, '$1');
+            var d = new Date(parseInt(milli));
 
-        return d.toLocaleDateString();
+            return d.toLocaleDateString();
+        }
+        catch (err)
+        {
+            return null;
+        }
     }
 
     function getParameterByName(name, url) {
@@ -1042,11 +1266,12 @@
         if (!results[2]) return '';
         return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
+    //Utils end
 
     $('form').dirtyForms();
 
     $(document).ready(function () {
-        empId = getParameterByName('empId');
+        var empId = getParameterByName('modelId');
 
         //Employee Memo
         $("#MstEmployeeMemoSF1").kendoGrid({
@@ -1108,7 +1333,7 @@
                 },
                 transport: {
                     read: {
-                        url: "@Url.Action("Read", "MstEmployee", new {modelFilterId = HttpContext.Current.Request.QueryString["modelId"]})",
+                        url: "@Url.Action("Read", "MstEmployee")?modelFilterId=" + empId,
                         contentType: "application/json",
                         type: "POST"
                     },
@@ -1151,64 +1376,14 @@
             sortable: true,
             filterable: true,
             toolbar: ["create", "save", "cancel"],
-            dataSource: {
-                serverPaging: true,
-                serverFiltering: true,
-                serverSorting: true,
-                pageSize: 5,
-                schema: {
-                    data: "Data",
-                    total: "Total",
-                    model: {
-                        id: "Id",
-                        fields: {
-                            Id: { editable: false },
-                            EmployeeId: { editable: false },
-                            ShiftCodeId: { editable: true }
-                        }
-                    }
-                },
-                batch: true,
-                transport: {
-                    create: {
-                        url: "@Url.Action("CreateShiftCode", "MstEmployee", new { modelFilterId = HttpContext.Current.Request.QueryString["modelId"]})",
-                        type: "POST"
-                    },
-                    read: {
-                        url: "@Url.Action("ReadShiftCodes", "MstEmployee", new {modelFilterId = HttpContext.Current.Request.QueryString["modelId"]})",
-                        contentType: "application/json",
-                        type: "POST"
-                    },
-                    update: {
-                        url:"@Url.Action("UpdateShiftCode", "MstEmployee", new { modelFilterId = HttpContext.Current.Request.QueryString["modelId"]})",
-                        type: "POST"
-                    },
-                    destroy: {
-                        url: "@Url.Action("DestroyShiftCode", "MstEmployee", new { modelFilterId = HttpContext.Current.Request.QueryString["modelId"]})",
-                        type: "POST"
-                    },
-                    parameterMap: function(data, operation) {
-                        if (operation !== "read") {
-                            var result = {};
+            dataBound:function(e){
+              $('.k-grid-add').unbind("click");
 
-                            for (var i = 0; i < data.models.length; i++) {
-                                var empLineShiftCodes = data.models[i];
-
-                                for (var member in empLineShiftCodes) {
-                                    if (empLineShiftCodes.hasOwnProperty(member)) {
-                                        result["models[" + i + "]." + member] = empLineShiftCodes[member];
-                                    }
-                                }
-                            }
-
-                            return result;
-                        }
-                        else {
-                            return JSON.stringify(data);
-                        }
-                    }
-                }
-            }
+              $('.k-grid-add').bind("click", function(){
+                  reloadPage();
+              });
+            },
+            dataSource: shifCodeDataSource(empId)
         });
 
         $.ajax({

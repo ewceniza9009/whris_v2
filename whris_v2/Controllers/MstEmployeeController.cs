@@ -162,8 +162,7 @@ namespace whris_v2.Controllers
 
             return View(result);
         }
-        [HttpPost]
-        public ActionResult SaveEmployee(Models.MstEmployee model)
+        public Models.MstEmployee SaveEmployeeData(Models.MstEmployee model) 
         {
             var result = new Data.MstEmployee();
 
@@ -288,9 +287,9 @@ namespace whris_v2.Controllers
                     result.OvertimeNightHourlyRate = model.OvertimeNightHourlyRate;
                     result.TardyHourlyRate = model.TardyHourlyRate;
                     result.EntryUserId = 1;
-                    result.EntryDateTime = DateTime.Now.Date;
+                    result.EntryDateTime = DateTime.Now;
                     result.UpdateUserId = 1;
-                    result.UpdateDateTime = DateTime.Now.Date;
+                    result.UpdateDateTime = DateTime.Now;
                     result.IsLocked = model.IsLocked;
                     result.TaxTable = model.TaxTable;
                     result.HDMFAddOn = model.HDMFAddOn;
@@ -303,9 +302,36 @@ namespace whris_v2.Controllers
                 }
 
                 whris.SubmitChanges();
+
+                model.Id = result.Id;
             }
 
+            return model;
+        }
+        [HttpPost]
+        public ActionResult SaveEmployee(Models.MstEmployee model)
+        {
+            var result = SaveEmployeeData(model);
+
             return PartialView("MstEmployeeDetail");
+        }
+        [HttpPost]
+        public ActionResult GetEmployee(Models.MstEmployee model) 
+        {
+            var modelId = SaveEmployeeData(model).Id;
+
+            return Json(modelId, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult DeleteEmployee(int modelId) 
+        {
+            whris = new Data.whrisDataContext();
+
+            var model = whris.MstEmployees.FirstOrDefault(x => x.Id == modelId);
+
+            whris.MstEmployees.DeleteOnSubmit(model);
+            whris.SubmitChanges();
+
+            return null;
         }
         #endregion
 
@@ -457,7 +483,6 @@ namespace whris_v2.Controllers
                     {
                         EmployeeId = modelFilterId,
                         ShiftCodeId = model.ShiftCodeId
-
                     };
 
                     result.Add(empShiftCodeServerLine);
@@ -503,10 +528,7 @@ namespace whris_v2.Controllers
 
                 foreach (var model in models)
                 {
-                    var shiftCode = new Data.MstEmployeeShiftCode
-                    {
-                        Id = model.Id
-                    };
+                    var shiftCode = whris.MstEmployeeShiftCodes.FirstOrDefault(x => x.Id == model.Id);
 
                     shiftCodes.Add(shiftCode);
                 }
@@ -747,6 +769,7 @@ namespace whris_v2.Controllers
         }
         #endregion
         #endregion
+
         #region Others
         public JsonResult CmbLineShiftCode()
         {

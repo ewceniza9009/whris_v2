@@ -30,6 +30,7 @@ namespace whris_v2.Models
         public string ExtensionName { get; set; }
         public string Address { get; set; }
         [Display(Name = "Zip Code")]
+        [Range(1, int.MaxValue, ErrorMessage = "Value not found!")]
         public int ZipCodeId { get; set; }
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
