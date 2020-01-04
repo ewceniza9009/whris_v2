@@ -1,0 +1,142 @@
+﻿
+@{
+    ViewBag.Title = "User";
+}
+
+<style>
+    .cmd-buttons {
+        margin-left: 10px;
+        width: 90px;
+    }
+</style>
+
+<div class="row" style="margin-bottom: 20px; margin-top: -20px">
+    <div class="col-md-6">
+        <h5 style="margin-top: 5px;">User</h5>
+    </div>
+
+    <div class="col-md-6">
+        <button class="btn btn-danger cmd-buttons pull-right btn-labeled"
+                type="button"
+                onclick="Back()">
+            <span class="btn-label">
+                <i class="fa fa-arrow-left"></i>
+            </span>Home
+        </button>
+        <button class="btn btn-primary cmd-buttons pull-right btn-labeled"
+                type="button"
+                onclick="Add()">
+            <span class="btn-label">
+                <i class="fa fa-plus-square"></i>
+            </span>
+            Add
+        </button>
+    </div>
+</div>
+
+<div id="content">
+    <div id="MstUserGrid"></div>
+</div>
+
+<script>
+    function Add() {
+        location.href = "@Url.Action("MstUserDetail","MstUser")?userId=0";
+    }
+
+    function Back()
+    {
+        location.href = "@Url.Action("Index","Home")";
+    }
+
+    function ShowUser(e) {
+        var tr = $(e.target).closest("tr");
+        var item = this.dataItem(tr);
+
+        location.href = "@Url.Action("MstUserDetail","MstUser")?modelId=" + item.Id;
+    }
+
+    function DeleteUser(e) {
+        var tr = $(e.target).closest("tr");
+        var item = this.dataItem(tr);
+
+        $.ajax({
+            url: "@Url.Action("DeleteUser", "MstUser")?modelId=" + item.Id,
+            type: "DELETE",
+            async: false,
+            contentType: "application/json",
+            success: function (data) {
+                $('#MstUserGrid').data('kendoGrid').dataSource.read();
+                $("#MstUserGrid").data('kendoGrid').refresh();
+
+                alert("Successfully Deleted!!!");
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        $("#MstUserGrid").kendoGrid({
+            dataSource: {
+                dataType: "json",
+                transport: {
+                    read: "@Url.Action("GetUserList", "MstUser")"
+                },
+                pageSize: 8
+            },
+            height: 500,
+            //groupable: true,
+            sortable: true,
+            filterable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
+            columns: [
+                {
+                    command: {
+                        text: "Detail",
+                        click: ShowUser,
+                        className: "k-primary"
+                    },
+                    title: "Detail",
+                    width: 110
+
+                },
+                {
+                    command: {
+                        text: "Delete",
+                        click: DeleteUser,
+                        attributes: {
+                            "class": "btn btn-danger"
+                        }
+                    },
+                    title: "Delete",
+                    width: 110
+
+                },
+                {
+                    field: "Id",
+                    title: "Id",
+                    width: 80
+                },
+                {
+                    field: "Username",
+                    title: "User",
+                    width: 150
+                },
+                {
+                    field: "FullName",
+                    title: "Full name"
+                },
+                {
+                    template: "<input type=\"checkbox\" #= IsLocked ? \"checked=checked\" : \"\" # disabled=\"disabled\"></input>",
+                    width: "50px",
+                    field: "IsLocked",
+                    title: "L"
+                }
+            ]
+        });
+    });
+</script>
+
+

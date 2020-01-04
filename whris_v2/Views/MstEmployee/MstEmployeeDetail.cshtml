@@ -978,7 +978,7 @@
         });
 
         $("#IdMem").val(item.Id)
-        $("#MemoDateMem").val(parseDate(memo.MemoDate))
+        $("#MemoDateMem").val(ParseDate(memo.MemoDate))
         $("#SubjectMem").val(memo.MemoSubject)
         $("#ContentMem").val(memo.MemoContent)
 
@@ -989,7 +989,7 @@
     {
         var memo = {};
         var newEmpId = 0;
-        empId = getParameterByName('modelId');
+        empId = GetParameterByName('modelId');
 
         if (empId == 0)
         {
@@ -997,9 +997,9 @@
 
             var model = @Html.Raw(Json.Encode(Model));
 
-            model.DateHired = parseDate(model.DateHired);
-            model.DateResigned = parseDate(model.DateResigned);
-            model.DateOfBirth = parseDate(model.DateOfBirth);
+            model.DateHired = ParseDate(model.DateHired);
+            model.DateResigned = ParseDate(model.DateResigned);
+            model.DateOfBirth = ParseDate(model.DateOfBirth);
 
             $.ajax({
                 url: "@Url.Action("GetEmployee", "MstEmployee")",
@@ -1039,7 +1039,7 @@
         });
 
         $("#IdMem").val(0)
-        $("#MemoDateMem").val(parseDate(memo.MemoDate))
+        $("#MemoDateMem").val(ParseDate(memo.MemoDate))
         $("#SubjectMem").val(memo.MemoSubject)
         $("#ContentMem").val(memo.MemoContent)
 
@@ -1064,11 +1064,11 @@
                 'model': memo
             },
             success: function (data) {
-                $("#MstEmployeeMemoSF1").data("kendoGrid").dataSource.read();
+                memo = data;
             }
         });
 
-        
+        $("#MstEmployeeMemoSF1").data("kendoGrid").dataSource.read();
     }
 
     function DeleteEmployeeMemo(e)
@@ -1085,14 +1085,15 @@
             },
             success: function (data) {
                 memo = data;
-                $("#MstEmployeeMemoSF1").data("kendoGrid").dataSource.read();
             }
         });
+
+        $("#MstEmployeeMemoSF1").data("kendoGrid").dataSource.read();
     }
     //Employee Memo end
 
     //Shift Codes begin
-    function cmbShiftCode(container, options) {
+    function CmbShiftCode(container, options) {
         $('<input required name="' + options.field + '"/>')
             .appendTo(container)
             .kendoDropDownList({
@@ -1103,7 +1104,7 @@
             });
     }
 
-    function getShiftCodes(shiftCodeId) {
+    function GetShiftCodes(shiftCodeId) {
         for (var idx = 0, length = shiftCodes.length; idx < length; idx++) {
             if (shiftCodes[idx].Id === shiftCodeId) {
                 return shiftCodes[idx].ShiftCode;
@@ -1113,10 +1114,10 @@
         return null;
     }
 
-    function reloadPage()
+    function ReloadPage()
     {
         var newEmpId = 0;
-        empId = getParameterByName('modelId');
+        empId = GetParameterByName('modelId');
 
         if (empId == 0)
         {
@@ -1124,9 +1125,9 @@
 
             var model = @Html.Raw(Json.Encode(Model));
 
-            model.DateHired = parseDate(model.DateHired);
-            model.DateResigned = parseDate(model.DateResigned);
-            model.DateOfBirth = parseDate(model.DateOfBirth);
+            model.DateHired = ParseDate(model.DateHired);
+            model.DateResigned = ParseDate(model.DateResigned);
+            model.DateOfBirth = ParseDate(model.DateOfBirth);
 
             $.ajax({
                 url: "@Url.Action("GetEmployee", "MstEmployee")",
@@ -1145,7 +1146,7 @@
 
                     empId = newEmpId;
 
-                    $("#MstEmployeeShiftCodeSF2").data("kendoGrid").setDataSource(shifCodeDataSource(empId));
+                    $("#MstEmployeeShiftCodeSF2").data("kendoGrid").setDataSource(ShifCodeDataSource(empId));
                     $("#MstEmployeeShiftCodeSF2").data("kendoGrid").dataSource.read();
                 },
                 error: function (xhr, status, error) {
@@ -1158,14 +1159,14 @@
 
                     empId = newEmpId;
 
-                    $("#MstEmployeeShiftCodeSF2").data("kendoGrid").setDataSource(shifCodeDataSource(empId));
+                    $("#MstEmployeeShiftCodeSF2").data("kendoGrid").setDataSource(ShifCodeDataSource(empId));
                     $("#MstEmployeeShiftCodeSF2").data("kendoGrid").dataSource.read();
                 }
             });
         }
     }
 
-    function shifCodeDataSource(empId)
+    function ShifCodeDataSource(empId)
     {
         var dataSource = new kendo.data.DataSource({
             serverPaging: true,
@@ -1242,7 +1243,7 @@
         }
     }
 
-    function parseDate(dt)
+    function ParseDate(dt)
     {
         try
         {
@@ -1257,7 +1258,7 @@
         }
     }
 
-    function getParameterByName(name, url) {
+    function GetParameterByName(name, url) {
         if (!url) url = window.location.href;
         name = name.replace(/[\[\]]/g, '\\$&');
         var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
@@ -1271,7 +1272,7 @@
     $('form').dirtyForms();
 
     $(document).ready(function () {
-        var empId = getParameterByName('modelId');
+        var empId = GetParameterByName('modelId');
 
         //Employee Memo
         $("#MstEmployeeMemoSF1").kendoGrid({
@@ -1362,8 +1363,8 @@
                     width: "200px",
                     field: "ShiftCodeId",
                     title: "Shift Code",
-                    editor: cmbShiftCode,
-                    template: "#=getShiftCodes(ShiftCodeId)#"
+                    editor: CmbShiftCode,
+                    template: "#=GetShiftCodes(ShiftCodeId)#"
                 },
                 {
                     command: ["destroy"],
@@ -1380,10 +1381,10 @@
               $('.k-grid-add').unbind("click");
 
               $('.k-grid-add').bind("click", function(){
-                  reloadPage();
+                  ReloadPage();
               });
             },
-            dataSource: shifCodeDataSource(empId)
+            dataSource: ShifCodeDataSource(empId)
         });
 
         $.ajax({

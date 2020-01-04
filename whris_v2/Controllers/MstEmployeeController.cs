@@ -13,7 +13,7 @@ namespace whris_v2.Controllers
     {
         public Data.whrisDataContext whris;
 
-        #region Views
+        #region View
         // GET: MstEmployee
         public ActionResult Index()
         {
@@ -438,9 +438,12 @@ namespace whris_v2.Controllers
             {
                 using (var whris = new Data.whrisDataContext())
                 {
-                    var memo = whris.MstEmployeeMemos.Where(x => x.Id == modelId).FirstOrDefault();
+                    var memo = whris.MstEmployeeMemos.FirstOrDefault(x => x.Id == modelId);
 
-                    whris.MstEmployeeMemos.DeleteOnSubmit(memo);
+                    if (memo != null) 
+                    {
+                        whris.MstEmployeeMemos.DeleteOnSubmit(memo);
+                    }
 
                     whris.SubmitChanges();
                 }
