@@ -24,6 +24,7 @@
             </span>Home
         </button>
         <button class="btn btn-primary cmd-buttons pull-right btn-labeled"
+                id="CmdAdd"
                 type="button"
                 onclick="Add()">
             <span class="btn-label">
@@ -73,7 +74,7 @@
         });
     }
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         $("#MstUserGrid").kendoGrid({
             dataSource: {
                 dataType: "json",
@@ -94,6 +95,7 @@
             columns: [
                 {
                     command: {
+                        id: "CmdDetail",
                         text: "Detail",
                         click: ShowUser,
                         className: "k-primary"
@@ -104,6 +106,7 @@
                 },
                 {
                     command: {
+                        id: "CmdDelete",
                         text: "Delete",
                         click: DeleteUser,
                         attributes: {
@@ -135,6 +138,38 @@
                     title: "L"
                 }
             ]
+        });
+    });
+
+    $(window).on('load', function () {
+        //var nodeList = $("#MstUserGrid").data("kendoGrid").element[0].childNodes[1].getElementsByTagName("table")[0].childNodes[1].children;
+        //var nodeList = document.getElementsByTagName("button");
+
+        //for(item in nodeList) {
+        //    if (nodeList[item].id.substr(0, 3) == "Cmd" && !== "undefined") {
+        //        console.log(nodeList[item].id);
+        //    }   
+        //    console.log(nodeList[item].id.substr(0, 3) != undefined);
+        //};
+
+        $.ajax({
+            url: "@Url.Action("CurrentFormRights", "Security")?form=" + "MstUser",
+            async: false,
+            contentType: "application/json",
+            success: function (data) {
+                if (!data.CurrentUserForms.CanAdd)
+                {
+                    $("#CmdAdd").prop("disabled",true);
+                }
+                if (!data.CurrentUserForms.CanEdit)
+                {
+                    $(".k-button.k-button-icontext.k-primary.k-grid-Detail").addClass("k-state-disabled")
+                }
+                if (!data.CurrentUserForms.CanDelete)
+                {
+                    $(".k-button.k-button-icontext.k-primary.k-grid-Delete").addClass("k-state-disabled")
+                }
+            }
         });
     });
 </script>

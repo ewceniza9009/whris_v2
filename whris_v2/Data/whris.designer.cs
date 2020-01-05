@@ -48,9 +48,6 @@ namespace whris_v2.Data
     partial void InsertAspNetUserRole(AspNetUserRole instance);
     partial void UpdateAspNetUserRole(AspNetUserRole instance);
     partial void DeleteAspNetUserRole(AspNetUserRole instance);
-    partial void InsertAspNetUser(AspNetUser instance);
-    partial void UpdateAspNetUser(AspNetUser instance);
-    partial void DeleteAspNetUser(AspNetUser instance);
     partial void InsertMstAccount(MstAccount instance);
     partial void UpdateMstAccount(MstAccount instance);
     partial void DeleteMstAccount(MstAccount instance);
@@ -144,9 +141,6 @@ namespace whris_v2.Data
     partial void InsertMstTaxCode(MstTaxCode instance);
     partial void UpdateMstTaxCode(MstTaxCode instance);
     partial void DeleteMstTaxCode(MstTaxCode instance);
-    partial void InsertMstUser(MstUser instance);
-    partial void UpdateMstUser(MstUser instance);
-    partial void DeleteMstUser(MstUser instance);
     partial void InsertMstUserForm(MstUserForm instance);
     partial void UpdateMstUserForm(MstUserForm instance);
     partial void DeleteMstUserForm(MstUserForm instance);
@@ -222,6 +216,12 @@ namespace whris_v2.Data
     partial void InsertTrnPayrollOtherIncome(TrnPayrollOtherIncome instance);
     partial void UpdateTrnPayrollOtherIncome(TrnPayrollOtherIncome instance);
     partial void DeleteTrnPayrollOtherIncome(TrnPayrollOtherIncome instance);
+    partial void InsertAspNetUser(AspNetUser instance);
+    partial void UpdateAspNetUser(AspNetUser instance);
+    partial void DeleteAspNetUser(AspNetUser instance);
+    partial void InsertMstUser(MstUser instance);
+    partial void UpdateMstUser(MstUser instance);
+    partial void DeleteMstUser(MstUser instance);
     #endregion
 		
 		public whrisDataContext() : 
@@ -299,14 +299,6 @@ namespace whris_v2.Data
 			get
 			{
 				return this.GetTable<AspNetUserRole>();
-			}
-		}
-		
-		public System.Data.Linq.Table<AspNetUser> AspNetUsers
-		{
-			get
-			{
-				return this.GetTable<AspNetUser>();
 			}
 		}
 		
@@ -558,14 +550,6 @@ namespace whris_v2.Data
 			}
 		}
 		
-		public System.Data.Linq.Table<MstUser> MstUsers
-		{
-			get
-			{
-				return this.GetTable<MstUser>();
-			}
-		}
-		
 		public System.Data.Linq.Table<MstUserForm> MstUserForms
 		{
 			get
@@ -763,6 +747,22 @@ namespace whris_v2.Data
 			get
 			{
 				return this.GetTable<TrnPayrollOtherIncome>();
+			}
+		}
+		
+		public System.Data.Linq.Table<AspNetUser> AspNetUsers
+		{
+			get
+			{
+				return this.GetTable<AspNetUser>();
+			}
+		}
+		
+		public System.Data.Linq.Table<MstUser> MstUsers
+		{
+			get
+			{
+				return this.GetTable<MstUser>();
 			}
 		}
 	}
@@ -1787,416 +1787,6 @@ namespace whris_v2.Data
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AspNetUsers")]
-	public partial class AspNetUser : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _Id;
-		
-		private string _Email;
-		
-		private bool _EmailConfirmed;
-		
-		private string _PasswordHash;
-		
-		private string _SecurityStamp;
-		
-		private string _PhoneNumber;
-		
-		private bool _PhoneNumberConfirmed;
-		
-		private bool _TwoFactorEnabled;
-		
-		private System.Nullable<System.DateTime> _LockoutEndDateUtc;
-		
-		private bool _LockoutEnabled;
-		
-		private int _AccessFailedCount;
-		
-		private string _UserName;
-		
-		private EntitySet<AspNetUserClaim> _AspNetUserClaims;
-		
-		private EntitySet<AspNetUserLogin> _AspNetUserLogins;
-		
-		private EntitySet<AspNetUserRole> _AspNetUserRoles;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(string value);
-    partial void OnIdChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    partial void OnEmailConfirmedChanging(bool value);
-    partial void OnEmailConfirmedChanged();
-    partial void OnPasswordHashChanging(string value);
-    partial void OnPasswordHashChanged();
-    partial void OnSecurityStampChanging(string value);
-    partial void OnSecurityStampChanged();
-    partial void OnPhoneNumberChanging(string value);
-    partial void OnPhoneNumberChanged();
-    partial void OnPhoneNumberConfirmedChanging(bool value);
-    partial void OnPhoneNumberConfirmedChanged();
-    partial void OnTwoFactorEnabledChanging(bool value);
-    partial void OnTwoFactorEnabledChanged();
-    partial void OnLockoutEndDateUtcChanging(System.Nullable<System.DateTime> value);
-    partial void OnLockoutEndDateUtcChanged();
-    partial void OnLockoutEnabledChanging(bool value);
-    partial void OnLockoutEnabledChanged();
-    partial void OnAccessFailedCountChanging(int value);
-    partial void OnAccessFailedCountChanged();
-    partial void OnUserNameChanging(string value);
-    partial void OnUserNameChanged();
-    #endregion
-		
-		public AspNetUser()
-		{
-			this._AspNetUserClaims = new EntitySet<AspNetUserClaim>(new Action<AspNetUserClaim>(this.attach_AspNetUserClaims), new Action<AspNetUserClaim>(this.detach_AspNetUserClaims));
-			this._AspNetUserLogins = new EntitySet<AspNetUserLogin>(new Action<AspNetUserLogin>(this.attach_AspNetUserLogins), new Action<AspNetUserLogin>(this.detach_AspNetUserLogins));
-			this._AspNetUserRoles = new EntitySet<AspNetUserRole>(new Action<AspNetUserRole>(this.attach_AspNetUserRoles), new Action<AspNetUserRole>(this.detach_AspNetUserRoles));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="NVarChar(128) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(256)")]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmailConfirmed", DbType="Bit NOT NULL")]
-		public bool EmailConfirmed
-		{
-			get
-			{
-				return this._EmailConfirmed;
-			}
-			set
-			{
-				if ((this._EmailConfirmed != value))
-				{
-					this.OnEmailConfirmedChanging(value);
-					this.SendPropertyChanging();
-					this._EmailConfirmed = value;
-					this.SendPropertyChanged("EmailConfirmed");
-					this.OnEmailConfirmedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordHash", DbType="NVarChar(MAX)")]
-		public string PasswordHash
-		{
-			get
-			{
-				return this._PasswordHash;
-			}
-			set
-			{
-				if ((this._PasswordHash != value))
-				{
-					this.OnPasswordHashChanging(value);
-					this.SendPropertyChanging();
-					this._PasswordHash = value;
-					this.SendPropertyChanged("PasswordHash");
-					this.OnPasswordHashChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SecurityStamp", DbType="NVarChar(MAX)")]
-		public string SecurityStamp
-		{
-			get
-			{
-				return this._SecurityStamp;
-			}
-			set
-			{
-				if ((this._SecurityStamp != value))
-				{
-					this.OnSecurityStampChanging(value);
-					this.SendPropertyChanging();
-					this._SecurityStamp = value;
-					this.SendPropertyChanged("SecurityStamp");
-					this.OnSecurityStampChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="NVarChar(MAX)")]
-		public string PhoneNumber
-		{
-			get
-			{
-				return this._PhoneNumber;
-			}
-			set
-			{
-				if ((this._PhoneNumber != value))
-				{
-					this.OnPhoneNumberChanging(value);
-					this.SendPropertyChanging();
-					this._PhoneNumber = value;
-					this.SendPropertyChanged("PhoneNumber");
-					this.OnPhoneNumberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumberConfirmed", DbType="Bit NOT NULL")]
-		public bool PhoneNumberConfirmed
-		{
-			get
-			{
-				return this._PhoneNumberConfirmed;
-			}
-			set
-			{
-				if ((this._PhoneNumberConfirmed != value))
-				{
-					this.OnPhoneNumberConfirmedChanging(value);
-					this.SendPropertyChanging();
-					this._PhoneNumberConfirmed = value;
-					this.SendPropertyChanged("PhoneNumberConfirmed");
-					this.OnPhoneNumberConfirmedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TwoFactorEnabled", DbType="Bit NOT NULL")]
-		public bool TwoFactorEnabled
-		{
-			get
-			{
-				return this._TwoFactorEnabled;
-			}
-			set
-			{
-				if ((this._TwoFactorEnabled != value))
-				{
-					this.OnTwoFactorEnabledChanging(value);
-					this.SendPropertyChanging();
-					this._TwoFactorEnabled = value;
-					this.SendPropertyChanged("TwoFactorEnabled");
-					this.OnTwoFactorEnabledChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LockoutEndDateUtc", DbType="DateTime")]
-		public System.Nullable<System.DateTime> LockoutEndDateUtc
-		{
-			get
-			{
-				return this._LockoutEndDateUtc;
-			}
-			set
-			{
-				if ((this._LockoutEndDateUtc != value))
-				{
-					this.OnLockoutEndDateUtcChanging(value);
-					this.SendPropertyChanging();
-					this._LockoutEndDateUtc = value;
-					this.SendPropertyChanged("LockoutEndDateUtc");
-					this.OnLockoutEndDateUtcChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LockoutEnabled", DbType="Bit NOT NULL")]
-		public bool LockoutEnabled
-		{
-			get
-			{
-				return this._LockoutEnabled;
-			}
-			set
-			{
-				if ((this._LockoutEnabled != value))
-				{
-					this.OnLockoutEnabledChanging(value);
-					this.SendPropertyChanging();
-					this._LockoutEnabled = value;
-					this.SendPropertyChanged("LockoutEnabled");
-					this.OnLockoutEnabledChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccessFailedCount", DbType="Int NOT NULL")]
-		public int AccessFailedCount
-		{
-			get
-			{
-				return this._AccessFailedCount;
-			}
-			set
-			{
-				if ((this._AccessFailedCount != value))
-				{
-					this.OnAccessFailedCountChanging(value);
-					this.SendPropertyChanging();
-					this._AccessFailedCount = value;
-					this.SendPropertyChanged("AccessFailedCount");
-					this.OnAccessFailedCountChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
-		public string UserName
-		{
-			get
-			{
-				return this._UserName;
-			}
-			set
-			{
-				if ((this._UserName != value))
-				{
-					this.OnUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._UserName = value;
-					this.SendPropertyChanged("UserName");
-					this.OnUserNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_AspNetUserClaim", Storage="_AspNetUserClaims", ThisKey="Id", OtherKey="UserId")]
-		public EntitySet<AspNetUserClaim> AspNetUserClaims
-		{
-			get
-			{
-				return this._AspNetUserClaims;
-			}
-			set
-			{
-				this._AspNetUserClaims.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_AspNetUserLogin", Storage="_AspNetUserLogins", ThisKey="Id", OtherKey="UserId")]
-		public EntitySet<AspNetUserLogin> AspNetUserLogins
-		{
-			get
-			{
-				return this._AspNetUserLogins;
-			}
-			set
-			{
-				this._AspNetUserLogins.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_AspNetUserRole", Storage="_AspNetUserRoles", ThisKey="Id", OtherKey="UserId")]
-		public EntitySet<AspNetUserRole> AspNetUserRoles
-		{
-			get
-			{
-				return this._AspNetUserRoles;
-			}
-			set
-			{
-				this._AspNetUserRoles.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_AspNetUserClaims(AspNetUserClaim entity)
-		{
-			this.SendPropertyChanging();
-			entity.AspNetUser = this;
-		}
-		
-		private void detach_AspNetUserClaims(AspNetUserClaim entity)
-		{
-			this.SendPropertyChanging();
-			entity.AspNetUser = null;
-		}
-		
-		private void attach_AspNetUserLogins(AspNetUserLogin entity)
-		{
-			this.SendPropertyChanging();
-			entity.AspNetUser = this;
-		}
-		
-		private void detach_AspNetUserLogins(AspNetUserLogin entity)
-		{
-			this.SendPropertyChanging();
-			entity.AspNetUser = null;
-		}
-		
-		private void attach_AspNetUserRoles(AspNetUserRole entity)
-		{
-			this.SendPropertyChanging();
-			entity.AspNetUser = this;
-		}
-		
-		private void detach_AspNetUserRoles(AspNetUserRole entity)
-		{
-			this.SendPropertyChanging();
-			entity.AspNetUser = null;
 		}
 	}
 	
@@ -11686,1520 +11276,6 @@ namespace whris_v2.Data
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MstUser")]
-	public partial class MstUser : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _UserName;
-		
-		private string _Password;
-		
-		private string _FullName;
-		
-		private int _EntryUserId;
-		
-		private System.DateTime _EntryDateTime;
-		
-		private int _UpdateUserId;
-		
-		private System.DateTime _UpdateDateTime;
-		
-		private bool _IsLocked;
-		
-		private EntitySet<MstEmployeeLoan> _MstEmployeeLoans;
-		
-		private EntitySet<MstEmployeeLoan> _MstEmployeeLoans1;
-		
-		private EntitySet<MstShiftCode> _MstShiftCodes;
-		
-		private EntitySet<MstShiftCode> _MstShiftCodes1;
-		
-		private EntitySet<MstUserForm> _MstUserForms;
-		
-		private EntitySet<MstUserPayrollGroup> _MstUserPayrollGroups;
-		
-		private EntitySet<TrnChangeShift> _TrnChangeShifts;
-		
-		private EntitySet<TrnChangeShift> _TrnChangeShifts1;
-		
-		private EntitySet<TrnChangeShift> _TrnChangeShifts2;
-		
-		private EntitySet<TrnChangeShift> _TrnChangeShifts3;
-		
-		private EntitySet<TrnChangeShift> _TrnChangeShifts4;
-		
-		private EntitySet<TrnDTR> _TrnDTRs;
-		
-		private EntitySet<TrnDTR> _TrnDTRs1;
-		
-		private EntitySet<TrnDTR> _TrnDTRs2;
-		
-		private EntitySet<TrnDTR> _TrnDTRs3;
-		
-		private EntitySet<TrnDTR> _TrnDTRs4;
-		
-		private EntitySet<TrnLastWithholdingTax> _TrnLastWithholdingTaxes;
-		
-		private EntitySet<TrnLastWithholdingTax> _TrnLastWithholdingTaxes1;
-		
-		private EntitySet<TrnLastWithholdingTax> _TrnLastWithholdingTaxes2;
-		
-		private EntitySet<TrnLastWithholdingTax> _TrnLastWithholdingTaxes3;
-		
-		private EntitySet<TrnLastWithholdingTax> _TrnLastWithholdingTaxes4;
-		
-		private EntitySet<TrnLeaveApplication> _TrnLeaveApplications;
-		
-		private EntitySet<TrnLeaveApplication> _TrnLeaveApplications1;
-		
-		private EntitySet<TrnLeaveApplication> _TrnLeaveApplications2;
-		
-		private EntitySet<TrnLeaveApplication> _TrnLeaveApplications3;
-		
-		private EntitySet<TrnOverTime> _TrnOverTimes;
-		
-		private EntitySet<TrnOverTime> _TrnOverTimes1;
-		
-		private EntitySet<TrnOverTime> _TrnOverTimes2;
-		
-		private EntitySet<TrnOverTime> _TrnOverTimes3;
-		
-		private EntitySet<TrnOverTime> _TrnOverTimes4;
-		
-		private EntitySet<TrnPayroll> _TrnPayrolls;
-		
-		private EntitySet<TrnPayroll> _TrnPayrolls1;
-		
-		private EntitySet<TrnPayroll> _TrnPayrolls2;
-		
-		private EntitySet<TrnPayroll> _TrnPayrolls3;
-		
-		private EntitySet<TrnPayroll> _TrnPayrolls4;
-		
-		private EntitySet<TrnPayrollOtherDeduction> _TrnPayrollOtherDeductions;
-		
-		private EntitySet<TrnPayrollOtherDeduction> _TrnPayrollOtherDeductions1;
-		
-		private EntitySet<TrnPayrollOtherDeduction> _TrnPayrollOtherDeductions2;
-		
-		private EntitySet<TrnPayrollOtherDeduction> _TrnPayrollOtherDeductions3;
-		
-		private EntitySet<TrnPayrollOtherDeduction> _TrnPayrollOtherDeductions4;
-		
-		private EntitySet<TrnPayrollOtherIncome> _TrnPayrollOtherIncomes;
-		
-		private EntitySet<TrnPayrollOtherIncome> _TrnPayrollOtherIncomes1;
-		
-		private EntitySet<TrnPayrollOtherIncome> _TrnPayrollOtherIncomes2;
-		
-		private EntitySet<TrnPayrollOtherIncome> _TrnPayrollOtherIncomes3;
-		
-		private EntitySet<TrnPayrollOtherIncome> _TrnPayrollOtherIncomes4;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnUserNameChanging(string value);
-    partial void OnUserNameChanged();
-    partial void OnPasswordChanging(string value);
-    partial void OnPasswordChanged();
-    partial void OnFullNameChanging(string value);
-    partial void OnFullNameChanged();
-    partial void OnEntryUserIdChanging(int value);
-    partial void OnEntryUserIdChanged();
-    partial void OnEntryDateTimeChanging(System.DateTime value);
-    partial void OnEntryDateTimeChanged();
-    partial void OnUpdateUserIdChanging(int value);
-    partial void OnUpdateUserIdChanged();
-    partial void OnUpdateDateTimeChanging(System.DateTime value);
-    partial void OnUpdateDateTimeChanged();
-    partial void OnIsLockedChanging(bool value);
-    partial void OnIsLockedChanged();
-    #endregion
-		
-		public MstUser()
-		{
-			this._MstEmployeeLoans = new EntitySet<MstEmployeeLoan>(new Action<MstEmployeeLoan>(this.attach_MstEmployeeLoans), new Action<MstEmployeeLoan>(this.detach_MstEmployeeLoans));
-			this._MstEmployeeLoans1 = new EntitySet<MstEmployeeLoan>(new Action<MstEmployeeLoan>(this.attach_MstEmployeeLoans1), new Action<MstEmployeeLoan>(this.detach_MstEmployeeLoans1));
-			this._MstShiftCodes = new EntitySet<MstShiftCode>(new Action<MstShiftCode>(this.attach_MstShiftCodes), new Action<MstShiftCode>(this.detach_MstShiftCodes));
-			this._MstShiftCodes1 = new EntitySet<MstShiftCode>(new Action<MstShiftCode>(this.attach_MstShiftCodes1), new Action<MstShiftCode>(this.detach_MstShiftCodes1));
-			this._MstUserForms = new EntitySet<MstUserForm>(new Action<MstUserForm>(this.attach_MstUserForms), new Action<MstUserForm>(this.detach_MstUserForms));
-			this._MstUserPayrollGroups = new EntitySet<MstUserPayrollGroup>(new Action<MstUserPayrollGroup>(this.attach_MstUserPayrollGroups), new Action<MstUserPayrollGroup>(this.detach_MstUserPayrollGroups));
-			this._TrnChangeShifts = new EntitySet<TrnChangeShift>(new Action<TrnChangeShift>(this.attach_TrnChangeShifts), new Action<TrnChangeShift>(this.detach_TrnChangeShifts));
-			this._TrnChangeShifts1 = new EntitySet<TrnChangeShift>(new Action<TrnChangeShift>(this.attach_TrnChangeShifts1), new Action<TrnChangeShift>(this.detach_TrnChangeShifts1));
-			this._TrnChangeShifts2 = new EntitySet<TrnChangeShift>(new Action<TrnChangeShift>(this.attach_TrnChangeShifts2), new Action<TrnChangeShift>(this.detach_TrnChangeShifts2));
-			this._TrnChangeShifts3 = new EntitySet<TrnChangeShift>(new Action<TrnChangeShift>(this.attach_TrnChangeShifts3), new Action<TrnChangeShift>(this.detach_TrnChangeShifts3));
-			this._TrnChangeShifts4 = new EntitySet<TrnChangeShift>(new Action<TrnChangeShift>(this.attach_TrnChangeShifts4), new Action<TrnChangeShift>(this.detach_TrnChangeShifts4));
-			this._TrnDTRs = new EntitySet<TrnDTR>(new Action<TrnDTR>(this.attach_TrnDTRs), new Action<TrnDTR>(this.detach_TrnDTRs));
-			this._TrnDTRs1 = new EntitySet<TrnDTR>(new Action<TrnDTR>(this.attach_TrnDTRs1), new Action<TrnDTR>(this.detach_TrnDTRs1));
-			this._TrnDTRs2 = new EntitySet<TrnDTR>(new Action<TrnDTR>(this.attach_TrnDTRs2), new Action<TrnDTR>(this.detach_TrnDTRs2));
-			this._TrnDTRs3 = new EntitySet<TrnDTR>(new Action<TrnDTR>(this.attach_TrnDTRs3), new Action<TrnDTR>(this.detach_TrnDTRs3));
-			this._TrnDTRs4 = new EntitySet<TrnDTR>(new Action<TrnDTR>(this.attach_TrnDTRs4), new Action<TrnDTR>(this.detach_TrnDTRs4));
-			this._TrnLastWithholdingTaxes = new EntitySet<TrnLastWithholdingTax>(new Action<TrnLastWithholdingTax>(this.attach_TrnLastWithholdingTaxes), new Action<TrnLastWithholdingTax>(this.detach_TrnLastWithholdingTaxes));
-			this._TrnLastWithholdingTaxes1 = new EntitySet<TrnLastWithholdingTax>(new Action<TrnLastWithholdingTax>(this.attach_TrnLastWithholdingTaxes1), new Action<TrnLastWithholdingTax>(this.detach_TrnLastWithholdingTaxes1));
-			this._TrnLastWithholdingTaxes2 = new EntitySet<TrnLastWithholdingTax>(new Action<TrnLastWithholdingTax>(this.attach_TrnLastWithholdingTaxes2), new Action<TrnLastWithholdingTax>(this.detach_TrnLastWithholdingTaxes2));
-			this._TrnLastWithholdingTaxes3 = new EntitySet<TrnLastWithholdingTax>(new Action<TrnLastWithholdingTax>(this.attach_TrnLastWithholdingTaxes3), new Action<TrnLastWithholdingTax>(this.detach_TrnLastWithholdingTaxes3));
-			this._TrnLastWithholdingTaxes4 = new EntitySet<TrnLastWithholdingTax>(new Action<TrnLastWithholdingTax>(this.attach_TrnLastWithholdingTaxes4), new Action<TrnLastWithholdingTax>(this.detach_TrnLastWithholdingTaxes4));
-			this._TrnLeaveApplications = new EntitySet<TrnLeaveApplication>(new Action<TrnLeaveApplication>(this.attach_TrnLeaveApplications), new Action<TrnLeaveApplication>(this.detach_TrnLeaveApplications));
-			this._TrnLeaveApplications1 = new EntitySet<TrnLeaveApplication>(new Action<TrnLeaveApplication>(this.attach_TrnLeaveApplications1), new Action<TrnLeaveApplication>(this.detach_TrnLeaveApplications1));
-			this._TrnLeaveApplications2 = new EntitySet<TrnLeaveApplication>(new Action<TrnLeaveApplication>(this.attach_TrnLeaveApplications2), new Action<TrnLeaveApplication>(this.detach_TrnLeaveApplications2));
-			this._TrnLeaveApplications3 = new EntitySet<TrnLeaveApplication>(new Action<TrnLeaveApplication>(this.attach_TrnLeaveApplications3), new Action<TrnLeaveApplication>(this.detach_TrnLeaveApplications3));
-			this._TrnOverTimes = new EntitySet<TrnOverTime>(new Action<TrnOverTime>(this.attach_TrnOverTimes), new Action<TrnOverTime>(this.detach_TrnOverTimes));
-			this._TrnOverTimes1 = new EntitySet<TrnOverTime>(new Action<TrnOverTime>(this.attach_TrnOverTimes1), new Action<TrnOverTime>(this.detach_TrnOverTimes1));
-			this._TrnOverTimes2 = new EntitySet<TrnOverTime>(new Action<TrnOverTime>(this.attach_TrnOverTimes2), new Action<TrnOverTime>(this.detach_TrnOverTimes2));
-			this._TrnOverTimes3 = new EntitySet<TrnOverTime>(new Action<TrnOverTime>(this.attach_TrnOverTimes3), new Action<TrnOverTime>(this.detach_TrnOverTimes3));
-			this._TrnOverTimes4 = new EntitySet<TrnOverTime>(new Action<TrnOverTime>(this.attach_TrnOverTimes4), new Action<TrnOverTime>(this.detach_TrnOverTimes4));
-			this._TrnPayrolls = new EntitySet<TrnPayroll>(new Action<TrnPayroll>(this.attach_TrnPayrolls), new Action<TrnPayroll>(this.detach_TrnPayrolls));
-			this._TrnPayrolls1 = new EntitySet<TrnPayroll>(new Action<TrnPayroll>(this.attach_TrnPayrolls1), new Action<TrnPayroll>(this.detach_TrnPayrolls1));
-			this._TrnPayrolls2 = new EntitySet<TrnPayroll>(new Action<TrnPayroll>(this.attach_TrnPayrolls2), new Action<TrnPayroll>(this.detach_TrnPayrolls2));
-			this._TrnPayrolls3 = new EntitySet<TrnPayroll>(new Action<TrnPayroll>(this.attach_TrnPayrolls3), new Action<TrnPayroll>(this.detach_TrnPayrolls3));
-			this._TrnPayrolls4 = new EntitySet<TrnPayroll>(new Action<TrnPayroll>(this.attach_TrnPayrolls4), new Action<TrnPayroll>(this.detach_TrnPayrolls4));
-			this._TrnPayrollOtherDeductions = new EntitySet<TrnPayrollOtherDeduction>(new Action<TrnPayrollOtherDeduction>(this.attach_TrnPayrollOtherDeductions), new Action<TrnPayrollOtherDeduction>(this.detach_TrnPayrollOtherDeductions));
-			this._TrnPayrollOtherDeductions1 = new EntitySet<TrnPayrollOtherDeduction>(new Action<TrnPayrollOtherDeduction>(this.attach_TrnPayrollOtherDeductions1), new Action<TrnPayrollOtherDeduction>(this.detach_TrnPayrollOtherDeductions1));
-			this._TrnPayrollOtherDeductions2 = new EntitySet<TrnPayrollOtherDeduction>(new Action<TrnPayrollOtherDeduction>(this.attach_TrnPayrollOtherDeductions2), new Action<TrnPayrollOtherDeduction>(this.detach_TrnPayrollOtherDeductions2));
-			this._TrnPayrollOtherDeductions3 = new EntitySet<TrnPayrollOtherDeduction>(new Action<TrnPayrollOtherDeduction>(this.attach_TrnPayrollOtherDeductions3), new Action<TrnPayrollOtherDeduction>(this.detach_TrnPayrollOtherDeductions3));
-			this._TrnPayrollOtherDeductions4 = new EntitySet<TrnPayrollOtherDeduction>(new Action<TrnPayrollOtherDeduction>(this.attach_TrnPayrollOtherDeductions4), new Action<TrnPayrollOtherDeduction>(this.detach_TrnPayrollOtherDeductions4));
-			this._TrnPayrollOtherIncomes = new EntitySet<TrnPayrollOtherIncome>(new Action<TrnPayrollOtherIncome>(this.attach_TrnPayrollOtherIncomes), new Action<TrnPayrollOtherIncome>(this.detach_TrnPayrollOtherIncomes));
-			this._TrnPayrollOtherIncomes1 = new EntitySet<TrnPayrollOtherIncome>(new Action<TrnPayrollOtherIncome>(this.attach_TrnPayrollOtherIncomes1), new Action<TrnPayrollOtherIncome>(this.detach_TrnPayrollOtherIncomes1));
-			this._TrnPayrollOtherIncomes2 = new EntitySet<TrnPayrollOtherIncome>(new Action<TrnPayrollOtherIncome>(this.attach_TrnPayrollOtherIncomes2), new Action<TrnPayrollOtherIncome>(this.detach_TrnPayrollOtherIncomes2));
-			this._TrnPayrollOtherIncomes3 = new EntitySet<TrnPayrollOtherIncome>(new Action<TrnPayrollOtherIncome>(this.attach_TrnPayrollOtherIncomes3), new Action<TrnPayrollOtherIncome>(this.detach_TrnPayrollOtherIncomes3));
-			this._TrnPayrollOtherIncomes4 = new EntitySet<TrnPayrollOtherIncome>(new Action<TrnPayrollOtherIncome>(this.attach_TrnPayrollOtherIncomes4), new Action<TrnPayrollOtherIncome>(this.detach_TrnPayrollOtherIncomes4));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string UserName
-		{
-			get
-			{
-				return this._UserName;
-			}
-			set
-			{
-				if ((this._UserName != value))
-				{
-					this.OnUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._UserName = value;
-					this.SendPropertyChanged("UserName");
-					this.OnUserNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Password
-		{
-			get
-			{
-				return this._Password;
-			}
-			set
-			{
-				if ((this._Password != value))
-				{
-					this.OnPasswordChanging(value);
-					this.SendPropertyChanging();
-					this._Password = value;
-					this.SendPropertyChanged("Password");
-					this.OnPasswordChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FullName", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string FullName
-		{
-			get
-			{
-				return this._FullName;
-			}
-			set
-			{
-				if ((this._FullName != value))
-				{
-					this.OnFullNameChanging(value);
-					this.SendPropertyChanging();
-					this._FullName = value;
-					this.SendPropertyChanged("FullName");
-					this.OnFullNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EntryUserId", DbType="Int NOT NULL")]
-		public int EntryUserId
-		{
-			get
-			{
-				return this._EntryUserId;
-			}
-			set
-			{
-				if ((this._EntryUserId != value))
-				{
-					this.OnEntryUserIdChanging(value);
-					this.SendPropertyChanging();
-					this._EntryUserId = value;
-					this.SendPropertyChanged("EntryUserId");
-					this.OnEntryUserIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EntryDateTime", DbType="DateTime NOT NULL")]
-		public System.DateTime EntryDateTime
-		{
-			get
-			{
-				return this._EntryDateTime;
-			}
-			set
-			{
-				if ((this._EntryDateTime != value))
-				{
-					this.OnEntryDateTimeChanging(value);
-					this.SendPropertyChanging();
-					this._EntryDateTime = value;
-					this.SendPropertyChanged("EntryDateTime");
-					this.OnEntryDateTimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateUserId", DbType="Int NOT NULL")]
-		public int UpdateUserId
-		{
-			get
-			{
-				return this._UpdateUserId;
-			}
-			set
-			{
-				if ((this._UpdateUserId != value))
-				{
-					this.OnUpdateUserIdChanging(value);
-					this.SendPropertyChanging();
-					this._UpdateUserId = value;
-					this.SendPropertyChanged("UpdateUserId");
-					this.OnUpdateUserIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateDateTime", DbType="DateTime NOT NULL")]
-		public System.DateTime UpdateDateTime
-		{
-			get
-			{
-				return this._UpdateDateTime;
-			}
-			set
-			{
-				if ((this._UpdateDateTime != value))
-				{
-					this.OnUpdateDateTimeChanging(value);
-					this.SendPropertyChanging();
-					this._UpdateDateTime = value;
-					this.SendPropertyChanged("UpdateDateTime");
-					this.OnUpdateDateTimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsLocked", DbType="Bit NOT NULL")]
-		public bool IsLocked
-		{
-			get
-			{
-				return this._IsLocked;
-			}
-			set
-			{
-				if ((this._IsLocked != value))
-				{
-					this.OnIsLockedChanging(value);
-					this.SendPropertyChanging();
-					this._IsLocked = value;
-					this.SendPropertyChanged("IsLocked");
-					this.OnIsLockedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_MstEmployeeLoan", Storage="_MstEmployeeLoans", ThisKey="Id", OtherKey="EntryUserId")]
-		public EntitySet<MstEmployeeLoan> MstEmployeeLoans
-		{
-			get
-			{
-				return this._MstEmployeeLoans;
-			}
-			set
-			{
-				this._MstEmployeeLoans.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_MstEmployeeLoan1", Storage="_MstEmployeeLoans1", ThisKey="Id", OtherKey="UpdateUserId")]
-		public EntitySet<MstEmployeeLoan> MstEmployeeLoans1
-		{
-			get
-			{
-				return this._MstEmployeeLoans1;
-			}
-			set
-			{
-				this._MstEmployeeLoans1.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_MstShiftCode", Storage="_MstShiftCodes", ThisKey="Id", OtherKey="EntryUserId")]
-		public EntitySet<MstShiftCode> MstShiftCodes
-		{
-			get
-			{
-				return this._MstShiftCodes;
-			}
-			set
-			{
-				this._MstShiftCodes.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_MstShiftCode1", Storage="_MstShiftCodes1", ThisKey="Id", OtherKey="UpdateUserId")]
-		public EntitySet<MstShiftCode> MstShiftCodes1
-		{
-			get
-			{
-				return this._MstShiftCodes1;
-			}
-			set
-			{
-				this._MstShiftCodes1.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_MstUserForm", Storage="_MstUserForms", ThisKey="Id", OtherKey="UserId")]
-		public EntitySet<MstUserForm> MstUserForms
-		{
-			get
-			{
-				return this._MstUserForms;
-			}
-			set
-			{
-				this._MstUserForms.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_MstUserPayrollGroup", Storage="_MstUserPayrollGroups", ThisKey="Id", OtherKey="UserId")]
-		public EntitySet<MstUserPayrollGroup> MstUserPayrollGroups
-		{
-			get
-			{
-				return this._MstUserPayrollGroups;
-			}
-			set
-			{
-				this._MstUserPayrollGroups.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnChangeShift", Storage="_TrnChangeShifts", ThisKey="Id", OtherKey="EntryUserId")]
-		public EntitySet<TrnChangeShift> TrnChangeShifts
-		{
-			get
-			{
-				return this._TrnChangeShifts;
-			}
-			set
-			{
-				this._TrnChangeShifts.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnChangeShift1", Storage="_TrnChangeShifts1", ThisKey="Id", OtherKey="UpdateUserId")]
-		public EntitySet<TrnChangeShift> TrnChangeShifts1
-		{
-			get
-			{
-				return this._TrnChangeShifts1;
-			}
-			set
-			{
-				this._TrnChangeShifts1.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnChangeShift2", Storage="_TrnChangeShifts2", ThisKey="Id", OtherKey="PreparedBy")]
-		public EntitySet<TrnChangeShift> TrnChangeShifts2
-		{
-			get
-			{
-				return this._TrnChangeShifts2;
-			}
-			set
-			{
-				this._TrnChangeShifts2.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnChangeShift3", Storage="_TrnChangeShifts3", ThisKey="Id", OtherKey="CheckedBy")]
-		public EntitySet<TrnChangeShift> TrnChangeShifts3
-		{
-			get
-			{
-				return this._TrnChangeShifts3;
-			}
-			set
-			{
-				this._TrnChangeShifts3.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnChangeShift4", Storage="_TrnChangeShifts4", ThisKey="Id", OtherKey="ApprovedBy")]
-		public EntitySet<TrnChangeShift> TrnChangeShifts4
-		{
-			get
-			{
-				return this._TrnChangeShifts4;
-			}
-			set
-			{
-				this._TrnChangeShifts4.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnDTR", Storage="_TrnDTRs", ThisKey="Id", OtherKey="EntryUserId")]
-		public EntitySet<TrnDTR> TrnDTRs
-		{
-			get
-			{
-				return this._TrnDTRs;
-			}
-			set
-			{
-				this._TrnDTRs.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnDTR1", Storage="_TrnDTRs1", ThisKey="Id", OtherKey="UpdateUserId")]
-		public EntitySet<TrnDTR> TrnDTRs1
-		{
-			get
-			{
-				return this._TrnDTRs1;
-			}
-			set
-			{
-				this._TrnDTRs1.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnDTR2", Storage="_TrnDTRs2", ThisKey="Id", OtherKey="PreparedBy")]
-		public EntitySet<TrnDTR> TrnDTRs2
-		{
-			get
-			{
-				return this._TrnDTRs2;
-			}
-			set
-			{
-				this._TrnDTRs2.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnDTR3", Storage="_TrnDTRs3", ThisKey="Id", OtherKey="CheckedBy")]
-		public EntitySet<TrnDTR> TrnDTRs3
-		{
-			get
-			{
-				return this._TrnDTRs3;
-			}
-			set
-			{
-				this._TrnDTRs3.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnDTR4", Storage="_TrnDTRs4", ThisKey="Id", OtherKey="ApprovedBy")]
-		public EntitySet<TrnDTR> TrnDTRs4
-		{
-			get
-			{
-				return this._TrnDTRs4;
-			}
-			set
-			{
-				this._TrnDTRs4.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnLastWithholdingTax", Storage="_TrnLastWithholdingTaxes", ThisKey="Id", OtherKey="EntryUserId")]
-		public EntitySet<TrnLastWithholdingTax> TrnLastWithholdingTaxes
-		{
-			get
-			{
-				return this._TrnLastWithholdingTaxes;
-			}
-			set
-			{
-				this._TrnLastWithholdingTaxes.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnLastWithholdingTax1", Storage="_TrnLastWithholdingTaxes1", ThisKey="Id", OtherKey="UpdateUserId")]
-		public EntitySet<TrnLastWithholdingTax> TrnLastWithholdingTaxes1
-		{
-			get
-			{
-				return this._TrnLastWithholdingTaxes1;
-			}
-			set
-			{
-				this._TrnLastWithholdingTaxes1.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnLastWithholdingTax2", Storage="_TrnLastWithholdingTaxes2", ThisKey="Id", OtherKey="PreparedBy")]
-		public EntitySet<TrnLastWithholdingTax> TrnLastWithholdingTaxes2
-		{
-			get
-			{
-				return this._TrnLastWithholdingTaxes2;
-			}
-			set
-			{
-				this._TrnLastWithholdingTaxes2.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnLastWithholdingTax3", Storage="_TrnLastWithholdingTaxes3", ThisKey="Id", OtherKey="CheckedBy")]
-		public EntitySet<TrnLastWithholdingTax> TrnLastWithholdingTaxes3
-		{
-			get
-			{
-				return this._TrnLastWithholdingTaxes3;
-			}
-			set
-			{
-				this._TrnLastWithholdingTaxes3.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnLastWithholdingTax4", Storage="_TrnLastWithholdingTaxes4", ThisKey="Id", OtherKey="ApprovedBy")]
-		public EntitySet<TrnLastWithholdingTax> TrnLastWithholdingTaxes4
-		{
-			get
-			{
-				return this._TrnLastWithholdingTaxes4;
-			}
-			set
-			{
-				this._TrnLastWithholdingTaxes4.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnLeaveApplication", Storage="_TrnLeaveApplications", ThisKey="Id", OtherKey="EntryUserId")]
-		public EntitySet<TrnLeaveApplication> TrnLeaveApplications
-		{
-			get
-			{
-				return this._TrnLeaveApplications;
-			}
-			set
-			{
-				this._TrnLeaveApplications.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnLeaveApplication1", Storage="_TrnLeaveApplications1", ThisKey="Id", OtherKey="UpdateUserId")]
-		public EntitySet<TrnLeaveApplication> TrnLeaveApplications1
-		{
-			get
-			{
-				return this._TrnLeaveApplications1;
-			}
-			set
-			{
-				this._TrnLeaveApplications1.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnLeaveApplication2", Storage="_TrnLeaveApplications2", ThisKey="Id", OtherKey="PreparedBy")]
-		public EntitySet<TrnLeaveApplication> TrnLeaveApplications2
-		{
-			get
-			{
-				return this._TrnLeaveApplications2;
-			}
-			set
-			{
-				this._TrnLeaveApplications2.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnLeaveApplication3", Storage="_TrnLeaveApplications3", ThisKey="Id", OtherKey="ApprovedBy")]
-		public EntitySet<TrnLeaveApplication> TrnLeaveApplications3
-		{
-			get
-			{
-				return this._TrnLeaveApplications3;
-			}
-			set
-			{
-				this._TrnLeaveApplications3.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnOverTime", Storage="_TrnOverTimes", ThisKey="Id", OtherKey="EntryUserId")]
-		public EntitySet<TrnOverTime> TrnOverTimes
-		{
-			get
-			{
-				return this._TrnOverTimes;
-			}
-			set
-			{
-				this._TrnOverTimes.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnOverTime1", Storage="_TrnOverTimes1", ThisKey="Id", OtherKey="UpdateUserId")]
-		public EntitySet<TrnOverTime> TrnOverTimes1
-		{
-			get
-			{
-				return this._TrnOverTimes1;
-			}
-			set
-			{
-				this._TrnOverTimes1.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnOverTime2", Storage="_TrnOverTimes2", ThisKey="Id", OtherKey="PreparedBy")]
-		public EntitySet<TrnOverTime> TrnOverTimes2
-		{
-			get
-			{
-				return this._TrnOverTimes2;
-			}
-			set
-			{
-				this._TrnOverTimes2.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnOverTime3", Storage="_TrnOverTimes3", ThisKey="Id", OtherKey="CheckedBy")]
-		public EntitySet<TrnOverTime> TrnOverTimes3
-		{
-			get
-			{
-				return this._TrnOverTimes3;
-			}
-			set
-			{
-				this._TrnOverTimes3.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnOverTime4", Storage="_TrnOverTimes4", ThisKey="Id", OtherKey="ApprovedBy")]
-		public EntitySet<TrnOverTime> TrnOverTimes4
-		{
-			get
-			{
-				return this._TrnOverTimes4;
-			}
-			set
-			{
-				this._TrnOverTimes4.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayroll", Storage="_TrnPayrolls", ThisKey="Id", OtherKey="EntryUserId")]
-		public EntitySet<TrnPayroll> TrnPayrolls
-		{
-			get
-			{
-				return this._TrnPayrolls;
-			}
-			set
-			{
-				this._TrnPayrolls.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayroll1", Storage="_TrnPayrolls1", ThisKey="Id", OtherKey="UpdateUserId")]
-		public EntitySet<TrnPayroll> TrnPayrolls1
-		{
-			get
-			{
-				return this._TrnPayrolls1;
-			}
-			set
-			{
-				this._TrnPayrolls1.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayroll2", Storage="_TrnPayrolls2", ThisKey="Id", OtherKey="PreparedBy")]
-		public EntitySet<TrnPayroll> TrnPayrolls2
-		{
-			get
-			{
-				return this._TrnPayrolls2;
-			}
-			set
-			{
-				this._TrnPayrolls2.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayroll3", Storage="_TrnPayrolls3", ThisKey="Id", OtherKey="CheckedBy")]
-		public EntitySet<TrnPayroll> TrnPayrolls3
-		{
-			get
-			{
-				return this._TrnPayrolls3;
-			}
-			set
-			{
-				this._TrnPayrolls3.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayroll4", Storage="_TrnPayrolls4", ThisKey="Id", OtherKey="ApprovedBy")]
-		public EntitySet<TrnPayroll> TrnPayrolls4
-		{
-			get
-			{
-				return this._TrnPayrolls4;
-			}
-			set
-			{
-				this._TrnPayrolls4.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayrollOtherDeduction", Storage="_TrnPayrollOtherDeductions", ThisKey="Id", OtherKey="EntryUserId")]
-		public EntitySet<TrnPayrollOtherDeduction> TrnPayrollOtherDeductions
-		{
-			get
-			{
-				return this._TrnPayrollOtherDeductions;
-			}
-			set
-			{
-				this._TrnPayrollOtherDeductions.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayrollOtherDeduction1", Storage="_TrnPayrollOtherDeductions1", ThisKey="Id", OtherKey="UpdateUserId")]
-		public EntitySet<TrnPayrollOtherDeduction> TrnPayrollOtherDeductions1
-		{
-			get
-			{
-				return this._TrnPayrollOtherDeductions1;
-			}
-			set
-			{
-				this._TrnPayrollOtherDeductions1.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayrollOtherDeduction2", Storage="_TrnPayrollOtherDeductions2", ThisKey="Id", OtherKey="PreparedBy")]
-		public EntitySet<TrnPayrollOtherDeduction> TrnPayrollOtherDeductions2
-		{
-			get
-			{
-				return this._TrnPayrollOtherDeductions2;
-			}
-			set
-			{
-				this._TrnPayrollOtherDeductions2.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayrollOtherDeduction3", Storage="_TrnPayrollOtherDeductions3", ThisKey="Id", OtherKey="CheckedBy")]
-		public EntitySet<TrnPayrollOtherDeduction> TrnPayrollOtherDeductions3
-		{
-			get
-			{
-				return this._TrnPayrollOtherDeductions3;
-			}
-			set
-			{
-				this._TrnPayrollOtherDeductions3.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayrollOtherDeduction4", Storage="_TrnPayrollOtherDeductions4", ThisKey="Id", OtherKey="ApprovedBy")]
-		public EntitySet<TrnPayrollOtherDeduction> TrnPayrollOtherDeductions4
-		{
-			get
-			{
-				return this._TrnPayrollOtherDeductions4;
-			}
-			set
-			{
-				this._TrnPayrollOtherDeductions4.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayrollOtherIncome", Storage="_TrnPayrollOtherIncomes", ThisKey="Id", OtherKey="EntryUserId")]
-		public EntitySet<TrnPayrollOtherIncome> TrnPayrollOtherIncomes
-		{
-			get
-			{
-				return this._TrnPayrollOtherIncomes;
-			}
-			set
-			{
-				this._TrnPayrollOtherIncomes.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayrollOtherIncome1", Storage="_TrnPayrollOtherIncomes1", ThisKey="Id", OtherKey="UpdateUserId")]
-		public EntitySet<TrnPayrollOtherIncome> TrnPayrollOtherIncomes1
-		{
-			get
-			{
-				return this._TrnPayrollOtherIncomes1;
-			}
-			set
-			{
-				this._TrnPayrollOtherIncomes1.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayrollOtherIncome2", Storage="_TrnPayrollOtherIncomes2", ThisKey="Id", OtherKey="PreparedBy")]
-		public EntitySet<TrnPayrollOtherIncome> TrnPayrollOtherIncomes2
-		{
-			get
-			{
-				return this._TrnPayrollOtherIncomes2;
-			}
-			set
-			{
-				this._TrnPayrollOtherIncomes2.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayrollOtherIncome3", Storage="_TrnPayrollOtherIncomes3", ThisKey="Id", OtherKey="CheckedBy")]
-		public EntitySet<TrnPayrollOtherIncome> TrnPayrollOtherIncomes3
-		{
-			get
-			{
-				return this._TrnPayrollOtherIncomes3;
-			}
-			set
-			{
-				this._TrnPayrollOtherIncomes3.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayrollOtherIncome4", Storage="_TrnPayrollOtherIncomes4", ThisKey="Id", OtherKey="ApprovedBy")]
-		public EntitySet<TrnPayrollOtherIncome> TrnPayrollOtherIncomes4
-		{
-			get
-			{
-				return this._TrnPayrollOtherIncomes4;
-			}
-			set
-			{
-				this._TrnPayrollOtherIncomes4.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_MstEmployeeLoans(MstEmployeeLoan entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser = this;
-		}
-		
-		private void detach_MstEmployeeLoans(MstEmployeeLoan entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser = null;
-		}
-		
-		private void attach_MstEmployeeLoans1(MstEmployeeLoan entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser1 = this;
-		}
-		
-		private void detach_MstEmployeeLoans1(MstEmployeeLoan entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser1 = null;
-		}
-		
-		private void attach_MstShiftCodes(MstShiftCode entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser = this;
-		}
-		
-		private void detach_MstShiftCodes(MstShiftCode entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser = null;
-		}
-		
-		private void attach_MstShiftCodes1(MstShiftCode entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser1 = this;
-		}
-		
-		private void detach_MstShiftCodes1(MstShiftCode entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser1 = null;
-		}
-		
-		private void attach_MstUserForms(MstUserForm entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser = this;
-		}
-		
-		private void detach_MstUserForms(MstUserForm entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser = null;
-		}
-		
-		private void attach_MstUserPayrollGroups(MstUserPayrollGroup entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser = this;
-		}
-		
-		private void detach_MstUserPayrollGroups(MstUserPayrollGroup entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser = null;
-		}
-		
-		private void attach_TrnChangeShifts(TrnChangeShift entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser = this;
-		}
-		
-		private void detach_TrnChangeShifts(TrnChangeShift entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser = null;
-		}
-		
-		private void attach_TrnChangeShifts1(TrnChangeShift entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser1 = this;
-		}
-		
-		private void detach_TrnChangeShifts1(TrnChangeShift entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser1 = null;
-		}
-		
-		private void attach_TrnChangeShifts2(TrnChangeShift entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser2 = this;
-		}
-		
-		private void detach_TrnChangeShifts2(TrnChangeShift entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser2 = null;
-		}
-		
-		private void attach_TrnChangeShifts3(TrnChangeShift entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser3 = this;
-		}
-		
-		private void detach_TrnChangeShifts3(TrnChangeShift entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser3 = null;
-		}
-		
-		private void attach_TrnChangeShifts4(TrnChangeShift entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser4 = this;
-		}
-		
-		private void detach_TrnChangeShifts4(TrnChangeShift entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser4 = null;
-		}
-		
-		private void attach_TrnDTRs(TrnDTR entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser = this;
-		}
-		
-		private void detach_TrnDTRs(TrnDTR entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser = null;
-		}
-		
-		private void attach_TrnDTRs1(TrnDTR entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser1 = this;
-		}
-		
-		private void detach_TrnDTRs1(TrnDTR entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser1 = null;
-		}
-		
-		private void attach_TrnDTRs2(TrnDTR entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser2 = this;
-		}
-		
-		private void detach_TrnDTRs2(TrnDTR entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser2 = null;
-		}
-		
-		private void attach_TrnDTRs3(TrnDTR entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser3 = this;
-		}
-		
-		private void detach_TrnDTRs3(TrnDTR entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser3 = null;
-		}
-		
-		private void attach_TrnDTRs4(TrnDTR entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser4 = this;
-		}
-		
-		private void detach_TrnDTRs4(TrnDTR entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser4 = null;
-		}
-		
-		private void attach_TrnLastWithholdingTaxes(TrnLastWithholdingTax entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser = this;
-		}
-		
-		private void detach_TrnLastWithholdingTaxes(TrnLastWithholdingTax entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser = null;
-		}
-		
-		private void attach_TrnLastWithholdingTaxes1(TrnLastWithholdingTax entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser1 = this;
-		}
-		
-		private void detach_TrnLastWithholdingTaxes1(TrnLastWithholdingTax entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser1 = null;
-		}
-		
-		private void attach_TrnLastWithholdingTaxes2(TrnLastWithholdingTax entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser2 = this;
-		}
-		
-		private void detach_TrnLastWithholdingTaxes2(TrnLastWithholdingTax entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser2 = null;
-		}
-		
-		private void attach_TrnLastWithholdingTaxes3(TrnLastWithholdingTax entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser3 = this;
-		}
-		
-		private void detach_TrnLastWithholdingTaxes3(TrnLastWithholdingTax entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser3 = null;
-		}
-		
-		private void attach_TrnLastWithholdingTaxes4(TrnLastWithholdingTax entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser4 = this;
-		}
-		
-		private void detach_TrnLastWithholdingTaxes4(TrnLastWithholdingTax entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser4 = null;
-		}
-		
-		private void attach_TrnLeaveApplications(TrnLeaveApplication entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser = this;
-		}
-		
-		private void detach_TrnLeaveApplications(TrnLeaveApplication entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser = null;
-		}
-		
-		private void attach_TrnLeaveApplications1(TrnLeaveApplication entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser1 = this;
-		}
-		
-		private void detach_TrnLeaveApplications1(TrnLeaveApplication entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser1 = null;
-		}
-		
-		private void attach_TrnLeaveApplications2(TrnLeaveApplication entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser2 = this;
-		}
-		
-		private void detach_TrnLeaveApplications2(TrnLeaveApplication entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser2 = null;
-		}
-		
-		private void attach_TrnLeaveApplications3(TrnLeaveApplication entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser3 = this;
-		}
-		
-		private void detach_TrnLeaveApplications3(TrnLeaveApplication entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser3 = null;
-		}
-		
-		private void attach_TrnOverTimes(TrnOverTime entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser = this;
-		}
-		
-		private void detach_TrnOverTimes(TrnOverTime entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser = null;
-		}
-		
-		private void attach_TrnOverTimes1(TrnOverTime entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser1 = this;
-		}
-		
-		private void detach_TrnOverTimes1(TrnOverTime entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser1 = null;
-		}
-		
-		private void attach_TrnOverTimes2(TrnOverTime entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser2 = this;
-		}
-		
-		private void detach_TrnOverTimes2(TrnOverTime entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser2 = null;
-		}
-		
-		private void attach_TrnOverTimes3(TrnOverTime entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser3 = this;
-		}
-		
-		private void detach_TrnOverTimes3(TrnOverTime entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser3 = null;
-		}
-		
-		private void attach_TrnOverTimes4(TrnOverTime entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser4 = this;
-		}
-		
-		private void detach_TrnOverTimes4(TrnOverTime entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser4 = null;
-		}
-		
-		private void attach_TrnPayrolls(TrnPayroll entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser = this;
-		}
-		
-		private void detach_TrnPayrolls(TrnPayroll entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser = null;
-		}
-		
-		private void attach_TrnPayrolls1(TrnPayroll entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser1 = this;
-		}
-		
-		private void detach_TrnPayrolls1(TrnPayroll entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser1 = null;
-		}
-		
-		private void attach_TrnPayrolls2(TrnPayroll entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser2 = this;
-		}
-		
-		private void detach_TrnPayrolls2(TrnPayroll entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser2 = null;
-		}
-		
-		private void attach_TrnPayrolls3(TrnPayroll entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser3 = this;
-		}
-		
-		private void detach_TrnPayrolls3(TrnPayroll entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser3 = null;
-		}
-		
-		private void attach_TrnPayrolls4(TrnPayroll entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser4 = this;
-		}
-		
-		private void detach_TrnPayrolls4(TrnPayroll entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser4 = null;
-		}
-		
-		private void attach_TrnPayrollOtherDeductions(TrnPayrollOtherDeduction entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser = this;
-		}
-		
-		private void detach_TrnPayrollOtherDeductions(TrnPayrollOtherDeduction entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser = null;
-		}
-		
-		private void attach_TrnPayrollOtherDeductions1(TrnPayrollOtherDeduction entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser1 = this;
-		}
-		
-		private void detach_TrnPayrollOtherDeductions1(TrnPayrollOtherDeduction entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser1 = null;
-		}
-		
-		private void attach_TrnPayrollOtherDeductions2(TrnPayrollOtherDeduction entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser2 = this;
-		}
-		
-		private void detach_TrnPayrollOtherDeductions2(TrnPayrollOtherDeduction entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser2 = null;
-		}
-		
-		private void attach_TrnPayrollOtherDeductions3(TrnPayrollOtherDeduction entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser3 = this;
-		}
-		
-		private void detach_TrnPayrollOtherDeductions3(TrnPayrollOtherDeduction entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser3 = null;
-		}
-		
-		private void attach_TrnPayrollOtherDeductions4(TrnPayrollOtherDeduction entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser4 = this;
-		}
-		
-		private void detach_TrnPayrollOtherDeductions4(TrnPayrollOtherDeduction entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser4 = null;
-		}
-		
-		private void attach_TrnPayrollOtherIncomes(TrnPayrollOtherIncome entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser = this;
-		}
-		
-		private void detach_TrnPayrollOtherIncomes(TrnPayrollOtherIncome entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser = null;
-		}
-		
-		private void attach_TrnPayrollOtherIncomes1(TrnPayrollOtherIncome entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser1 = this;
-		}
-		
-		private void detach_TrnPayrollOtherIncomes1(TrnPayrollOtherIncome entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser1 = null;
-		}
-		
-		private void attach_TrnPayrollOtherIncomes2(TrnPayrollOtherIncome entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser2 = this;
-		}
-		
-		private void detach_TrnPayrollOtherIncomes2(TrnPayrollOtherIncome entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser2 = null;
-		}
-		
-		private void attach_TrnPayrollOtherIncomes3(TrnPayrollOtherIncome entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser3 = this;
-		}
-		
-		private void detach_TrnPayrollOtherIncomes3(TrnPayrollOtherIncome entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser3 = null;
-		}
-		
-		private void attach_TrnPayrollOtherIncomes4(TrnPayrollOtherIncome entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser4 = this;
-		}
-		
-		private void detach_TrnPayrollOtherIncomes4(TrnPayrollOtherIncome entity)
-		{
-			this.SendPropertyChanging();
-			entity.MstUser4 = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MstUserForm")]
 	public partial class MstUserForm : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -13228,9 +11304,9 @@ namespace whris_v2.Data
 		
 		private bool _CanView;
 		
-		private EntityRef<MstUser> _MstUser;
-		
 		private EntityRef<SysForm> _SysForm;
+		
+		private EntityRef<MstUser> _MstUser;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -13262,8 +11338,8 @@ namespace whris_v2.Data
 		
 		public MstUserForm()
 		{
-			this._MstUser = default(EntityRef<MstUser>);
 			this._SysForm = default(EntityRef<SysForm>);
+			this._MstUser = default(EntityRef<MstUser>);
 			OnCreated();
 		}
 		
@@ -13495,40 +11571,6 @@ namespace whris_v2.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_MstUserForm", Storage="_MstUser", ThisKey="UserId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public MstUser MstUser
-		{
-			get
-			{
-				return this._MstUser.Entity;
-			}
-			set
-			{
-				MstUser previousValue = this._MstUser.Entity;
-				if (((previousValue != value) 
-							|| (this._MstUser.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._MstUser.Entity = null;
-						previousValue.MstUserForms.Remove(this);
-					}
-					this._MstUser.Entity = value;
-					if ((value != null))
-					{
-						value.MstUserForms.Add(this);
-						this._UserId = value.Id;
-					}
-					else
-					{
-						this._UserId = default(int);
-					}
-					this.SendPropertyChanged("MstUser");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SysForm_MstUserForm", Storage="_SysForm", ThisKey="FormId", OtherKey="Id", IsForeignKey=true)]
 		public SysForm SysForm
 		{
@@ -13559,6 +11601,40 @@ namespace whris_v2.Data
 						this._FormId = default(int);
 					}
 					this.SendPropertyChanged("SysForm");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_MstUserForm", Storage="_MstUser", ThisKey="UserId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public MstUser MstUser
+		{
+			get
+			{
+				return this._MstUser.Entity;
+			}
+			set
+			{
+				MstUser previousValue = this._MstUser.Entity;
+				if (((previousValue != value) 
+							|| (this._MstUser.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._MstUser.Entity = null;
+						previousValue.MstUserForms.Remove(this);
+					}
+					this._MstUser.Entity = value;
+					if ((value != null))
+					{
+						value.MstUserForms.Add(this);
+						this._UserId = value.Id;
+					}
+					else
+					{
+						this._UserId = default(int);
+					}
+					this.SendPropertyChanged("MstUser");
 				}
 			}
 		}
@@ -15360,6 +13436,12 @@ namespace whris_v2.Data
 		
 		private EntityRef<MstPeriod> _MstPeriod;
 		
+		private EntityRef<TrnChangeShift> _TrnChangeShift;
+		
+		private EntityRef<TrnLeaveApplication> _TrnLeaveApplication;
+		
+		private EntityRef<TrnOverTime> _TrnOverTime;
+		
 		private EntityRef<MstUser> _MstUser;
 		
 		private EntityRef<MstUser> _MstUser1;
@@ -15369,12 +13451,6 @@ namespace whris_v2.Data
 		private EntityRef<MstUser> _MstUser3;
 		
 		private EntityRef<MstUser> _MstUser4;
-		
-		private EntityRef<TrnChangeShift> _TrnChangeShift;
-		
-		private EntityRef<TrnLeaveApplication> _TrnLeaveApplication;
-		
-		private EntityRef<TrnOverTime> _TrnOverTime;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -15426,14 +13502,14 @@ namespace whris_v2.Data
 			this._TrnPayrolls = new EntitySet<TrnPayroll>(new Action<TrnPayroll>(this.attach_TrnPayrolls), new Action<TrnPayroll>(this.detach_TrnPayrolls));
 			this._MstPayrollGroup = default(EntityRef<MstPayrollGroup>);
 			this._MstPeriod = default(EntityRef<MstPeriod>);
+			this._TrnChangeShift = default(EntityRef<TrnChangeShift>);
+			this._TrnLeaveApplication = default(EntityRef<TrnLeaveApplication>);
+			this._TrnOverTime = default(EntityRef<TrnOverTime>);
 			this._MstUser = default(EntityRef<MstUser>);
 			this._MstUser1 = default(EntityRef<MstUser>);
 			this._MstUser2 = default(EntityRef<MstUser>);
 			this._MstUser3 = default(EntityRef<MstUser>);
 			this._MstUser4 = default(EntityRef<MstUser>);
-			this._TrnChangeShift = default(EntityRef<TrnChangeShift>);
-			this._TrnLeaveApplication = default(EntityRef<TrnLeaveApplication>);
-			this._TrnOverTime = default(EntityRef<TrnOverTime>);
 			OnCreated();
 		}
 		
@@ -15951,6 +14027,108 @@ namespace whris_v2.Data
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TrnChangeShift_TrnDTR", Storage="_TrnChangeShift", ThisKey="ChangeShiftId", OtherKey="Id", IsForeignKey=true)]
+		public TrnChangeShift TrnChangeShift
+		{
+			get
+			{
+				return this._TrnChangeShift.Entity;
+			}
+			set
+			{
+				TrnChangeShift previousValue = this._TrnChangeShift.Entity;
+				if (((previousValue != value) 
+							|| (this._TrnChangeShift.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TrnChangeShift.Entity = null;
+						previousValue.TrnDTRs.Remove(this);
+					}
+					this._TrnChangeShift.Entity = value;
+					if ((value != null))
+					{
+						value.TrnDTRs.Add(this);
+						this._ChangeShiftId = value.Id;
+					}
+					else
+					{
+						this._ChangeShiftId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("TrnChangeShift");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TrnLeaveApplication_TrnDTR", Storage="_TrnLeaveApplication", ThisKey="LeaveApplicationId", OtherKey="Id", IsForeignKey=true)]
+		public TrnLeaveApplication TrnLeaveApplication
+		{
+			get
+			{
+				return this._TrnLeaveApplication.Entity;
+			}
+			set
+			{
+				TrnLeaveApplication previousValue = this._TrnLeaveApplication.Entity;
+				if (((previousValue != value) 
+							|| (this._TrnLeaveApplication.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TrnLeaveApplication.Entity = null;
+						previousValue.TrnDTRs.Remove(this);
+					}
+					this._TrnLeaveApplication.Entity = value;
+					if ((value != null))
+					{
+						value.TrnDTRs.Add(this);
+						this._LeaveApplicationId = value.Id;
+					}
+					else
+					{
+						this._LeaveApplicationId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("TrnLeaveApplication");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TrnOverTime_TrnDTR", Storage="_TrnOverTime", ThisKey="OvertTimeId", OtherKey="Id", IsForeignKey=true)]
+		public TrnOverTime TrnOverTime
+		{
+			get
+			{
+				return this._TrnOverTime.Entity;
+			}
+			set
+			{
+				TrnOverTime previousValue = this._TrnOverTime.Entity;
+				if (((previousValue != value) 
+							|| (this._TrnOverTime.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TrnOverTime.Entity = null;
+						previousValue.TrnDTRs.Remove(this);
+					}
+					this._TrnOverTime.Entity = value;
+					if ((value != null))
+					{
+						value.TrnDTRs.Add(this);
+						this._OvertTimeId = value.Id;
+					}
+					else
+					{
+						this._OvertTimeId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("TrnOverTime");
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnDTR", Storage="_MstUser", ThisKey="EntryUserId", OtherKey="Id", IsForeignKey=true)]
 		public MstUser MstUser
 		{
@@ -16117,108 +14295,6 @@ namespace whris_v2.Data
 						this._ApprovedBy = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("MstUser4");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TrnChangeShift_TrnDTR", Storage="_TrnChangeShift", ThisKey="ChangeShiftId", OtherKey="Id", IsForeignKey=true)]
-		public TrnChangeShift TrnChangeShift
-		{
-			get
-			{
-				return this._TrnChangeShift.Entity;
-			}
-			set
-			{
-				TrnChangeShift previousValue = this._TrnChangeShift.Entity;
-				if (((previousValue != value) 
-							|| (this._TrnChangeShift.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._TrnChangeShift.Entity = null;
-						previousValue.TrnDTRs.Remove(this);
-					}
-					this._TrnChangeShift.Entity = value;
-					if ((value != null))
-					{
-						value.TrnDTRs.Add(this);
-						this._ChangeShiftId = value.Id;
-					}
-					else
-					{
-						this._ChangeShiftId = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("TrnChangeShift");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TrnLeaveApplication_TrnDTR", Storage="_TrnLeaveApplication", ThisKey="LeaveApplicationId", OtherKey="Id", IsForeignKey=true)]
-		public TrnLeaveApplication TrnLeaveApplication
-		{
-			get
-			{
-				return this._TrnLeaveApplication.Entity;
-			}
-			set
-			{
-				TrnLeaveApplication previousValue = this._TrnLeaveApplication.Entity;
-				if (((previousValue != value) 
-							|| (this._TrnLeaveApplication.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._TrnLeaveApplication.Entity = null;
-						previousValue.TrnDTRs.Remove(this);
-					}
-					this._TrnLeaveApplication.Entity = value;
-					if ((value != null))
-					{
-						value.TrnDTRs.Add(this);
-						this._LeaveApplicationId = value.Id;
-					}
-					else
-					{
-						this._LeaveApplicationId = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("TrnLeaveApplication");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TrnOverTime_TrnDTR", Storage="_TrnOverTime", ThisKey="OvertTimeId", OtherKey="Id", IsForeignKey=true)]
-		public TrnOverTime TrnOverTime
-		{
-			get
-			{
-				return this._TrnOverTime.Entity;
-			}
-			set
-			{
-				TrnOverTime previousValue = this._TrnOverTime.Entity;
-				if (((previousValue != value) 
-							|| (this._TrnOverTime.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._TrnOverTime.Entity = null;
-						previousValue.TrnDTRs.Remove(this);
-					}
-					this._TrnOverTime.Entity = value;
-					if ((value != null))
-					{
-						value.TrnDTRs.Add(this);
-						this._OvertTimeId = value.Id;
-					}
-					else
-					{
-						this._OvertTimeId = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("TrnOverTime");
 				}
 			}
 		}
@@ -18835,11 +16911,11 @@ namespace whris_v2.Data
 		
 		private EntityRef<MstPeriod> _MstPeriod;
 		
+		private EntityRef<MstTaxCode> _MstTaxCode;
+		
 		private EntityRef<MstUser> _MstUser;
 		
 		private EntityRef<MstUser> _MstUser1;
-		
-		private EntityRef<MstTaxCode> _MstTaxCode;
 		
 		private EntityRef<MstUser> _MstUser2;
 		
@@ -18886,9 +16962,9 @@ namespace whris_v2.Data
 			this._TrnLeaveLedgers = new EntitySet<TrnLeaveLedger>(new Action<TrnLeaveLedger>(this.attach_TrnLeaveLedgers), new Action<TrnLeaveLedger>(this.detach_TrnLeaveLedgers));
 			this._MstPayrollGroup = default(EntityRef<MstPayrollGroup>);
 			this._MstPeriod = default(EntityRef<MstPeriod>);
+			this._MstTaxCode = default(EntityRef<MstTaxCode>);
 			this._MstUser = default(EntityRef<MstUser>);
 			this._MstUser1 = default(EntityRef<MstUser>);
-			this._MstTaxCode = default(EntityRef<MstTaxCode>);
 			this._MstUser2 = default(EntityRef<MstUser>);
 			this._MstUser3 = default(EntityRef<MstUser>);
 			OnCreated();
@@ -19309,6 +17385,40 @@ namespace whris_v2.Data
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstTaxCode_TrnLeaveApplication", Storage="_MstTaxCode", ThisKey="CheckedBy", OtherKey="Id", IsForeignKey=true)]
+		public MstTaxCode MstTaxCode
+		{
+			get
+			{
+				return this._MstTaxCode.Entity;
+			}
+			set
+			{
+				MstTaxCode previousValue = this._MstTaxCode.Entity;
+				if (((previousValue != value) 
+							|| (this._MstTaxCode.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._MstTaxCode.Entity = null;
+						previousValue.TrnLeaveApplications.Remove(this);
+					}
+					this._MstTaxCode.Entity = value;
+					if ((value != null))
+					{
+						value.TrnLeaveApplications.Add(this);
+						this._CheckedBy = value.Id;
+					}
+					else
+					{
+						this._CheckedBy = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("MstTaxCode");
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnLeaveApplication", Storage="_MstUser", ThisKey="EntryUserId", OtherKey="Id", IsForeignKey=true)]
 		public MstUser MstUser
 		{
@@ -19373,40 +17483,6 @@ namespace whris_v2.Data
 						this._UpdateUserId = default(int);
 					}
 					this.SendPropertyChanged("MstUser1");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstTaxCode_TrnLeaveApplication", Storage="_MstTaxCode", ThisKey="CheckedBy", OtherKey="Id", IsForeignKey=true)]
-		public MstTaxCode MstTaxCode
-		{
-			get
-			{
-				return this._MstTaxCode.Entity;
-			}
-			set
-			{
-				MstTaxCode previousValue = this._MstTaxCode.Entity;
-				if (((previousValue != value) 
-							|| (this._MstTaxCode.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._MstTaxCode.Entity = null;
-						previousValue.TrnLeaveApplications.Remove(this);
-					}
-					this._MstTaxCode.Entity = value;
-					if ((value != null))
-					{
-						value.TrnLeaveApplications.Add(this);
-						this._CheckedBy = value.Id;
-					}
-					else
-					{
-						this._CheckedBy = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("MstTaxCode");
 				}
 			}
 		}
@@ -22126,6 +20202,12 @@ namespace whris_v2.Data
 		
 		private EntityRef<MstPeriod> _MstPeriod;
 		
+		private EntityRef<TrnDTR> _TrnDTR;
+		
+		private EntityRef<TrnPayrollOtherDeduction> _TrnPayrollOtherDeduction;
+		
+		private EntityRef<TrnPayrollOtherIncome> _TrnPayrollOtherIncome;
+		
 		private EntityRef<MstUser> _MstUser;
 		
 		private EntityRef<MstUser> _MstUser1;
@@ -22135,12 +20217,6 @@ namespace whris_v2.Data
 		private EntityRef<MstUser> _MstUser3;
 		
 		private EntityRef<MstUser> _MstUser4;
-		
-		private EntityRef<TrnDTR> _TrnDTR;
-		
-		private EntityRef<TrnPayrollOtherDeduction> _TrnPayrollOtherDeduction;
-		
-		private EntityRef<TrnPayrollOtherIncome> _TrnPayrollOtherIncome;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -22192,14 +20268,14 @@ namespace whris_v2.Data
 			this._MstMonth = default(EntityRef<MstMonth>);
 			this._MstPayrollGroup = default(EntityRef<MstPayrollGroup>);
 			this._MstPeriod = default(EntityRef<MstPeriod>);
+			this._TrnDTR = default(EntityRef<TrnDTR>);
+			this._TrnPayrollOtherDeduction = default(EntityRef<TrnPayrollOtherDeduction>);
+			this._TrnPayrollOtherIncome = default(EntityRef<TrnPayrollOtherIncome>);
 			this._MstUser = default(EntityRef<MstUser>);
 			this._MstUser1 = default(EntityRef<MstUser>);
 			this._MstUser2 = default(EntityRef<MstUser>);
 			this._MstUser3 = default(EntityRef<MstUser>);
 			this._MstUser4 = default(EntityRef<MstUser>);
-			this._TrnDTR = default(EntityRef<TrnDTR>);
-			this._TrnPayrollOtherDeduction = default(EntityRef<TrnPayrollOtherDeduction>);
-			this._TrnPayrollOtherIncome = default(EntityRef<TrnPayrollOtherIncome>);
 			OnCreated();
 		}
 		
@@ -22742,6 +20818,108 @@ namespace whris_v2.Data
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TrnDTR_TrnPayroll", Storage="_TrnDTR", ThisKey="DTRId", OtherKey="Id", IsForeignKey=true)]
+		public TrnDTR TrnDTR
+		{
+			get
+			{
+				return this._TrnDTR.Entity;
+			}
+			set
+			{
+				TrnDTR previousValue = this._TrnDTR.Entity;
+				if (((previousValue != value) 
+							|| (this._TrnDTR.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TrnDTR.Entity = null;
+						previousValue.TrnPayrolls.Remove(this);
+					}
+					this._TrnDTR.Entity = value;
+					if ((value != null))
+					{
+						value.TrnPayrolls.Add(this);
+						this._DTRId = value.Id;
+					}
+					else
+					{
+						this._DTRId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("TrnDTR");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TrnPayrollOtherDeduction_TrnPayroll", Storage="_TrnPayrollOtherDeduction", ThisKey="PayrollOtherDeductionId", OtherKey="Id", IsForeignKey=true)]
+		public TrnPayrollOtherDeduction TrnPayrollOtherDeduction
+		{
+			get
+			{
+				return this._TrnPayrollOtherDeduction.Entity;
+			}
+			set
+			{
+				TrnPayrollOtherDeduction previousValue = this._TrnPayrollOtherDeduction.Entity;
+				if (((previousValue != value) 
+							|| (this._TrnPayrollOtherDeduction.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TrnPayrollOtherDeduction.Entity = null;
+						previousValue.TrnPayrolls.Remove(this);
+					}
+					this._TrnPayrollOtherDeduction.Entity = value;
+					if ((value != null))
+					{
+						value.TrnPayrolls.Add(this);
+						this._PayrollOtherDeductionId = value.Id;
+					}
+					else
+					{
+						this._PayrollOtherDeductionId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("TrnPayrollOtherDeduction");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TrnPayrollOtherIncome_TrnPayroll", Storage="_TrnPayrollOtherIncome", ThisKey="PayrollOtherIncomeId", OtherKey="Id", IsForeignKey=true)]
+		public TrnPayrollOtherIncome TrnPayrollOtherIncome
+		{
+			get
+			{
+				return this._TrnPayrollOtherIncome.Entity;
+			}
+			set
+			{
+				TrnPayrollOtherIncome previousValue = this._TrnPayrollOtherIncome.Entity;
+				if (((previousValue != value) 
+							|| (this._TrnPayrollOtherIncome.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TrnPayrollOtherIncome.Entity = null;
+						previousValue.TrnPayrolls.Remove(this);
+					}
+					this._TrnPayrollOtherIncome.Entity = value;
+					if ((value != null))
+					{
+						value.TrnPayrolls.Add(this);
+						this._PayrollOtherIncomeId = value.Id;
+					}
+					else
+					{
+						this._PayrollOtherIncomeId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("TrnPayrollOtherIncome");
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayroll", Storage="_MstUser", ThisKey="EntryUserId", OtherKey="Id", IsForeignKey=true)]
 		public MstUser MstUser
 		{
@@ -22908,108 +21086,6 @@ namespace whris_v2.Data
 						this._ApprovedBy = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("MstUser4");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TrnDTR_TrnPayroll", Storage="_TrnDTR", ThisKey="DTRId", OtherKey="Id", IsForeignKey=true)]
-		public TrnDTR TrnDTR
-		{
-			get
-			{
-				return this._TrnDTR.Entity;
-			}
-			set
-			{
-				TrnDTR previousValue = this._TrnDTR.Entity;
-				if (((previousValue != value) 
-							|| (this._TrnDTR.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._TrnDTR.Entity = null;
-						previousValue.TrnPayrolls.Remove(this);
-					}
-					this._TrnDTR.Entity = value;
-					if ((value != null))
-					{
-						value.TrnPayrolls.Add(this);
-						this._DTRId = value.Id;
-					}
-					else
-					{
-						this._DTRId = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("TrnDTR");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TrnPayrollOtherDeduction_TrnPayroll", Storage="_TrnPayrollOtherDeduction", ThisKey="PayrollOtherDeductionId", OtherKey="Id", IsForeignKey=true)]
-		public TrnPayrollOtherDeduction TrnPayrollOtherDeduction
-		{
-			get
-			{
-				return this._TrnPayrollOtherDeduction.Entity;
-			}
-			set
-			{
-				TrnPayrollOtherDeduction previousValue = this._TrnPayrollOtherDeduction.Entity;
-				if (((previousValue != value) 
-							|| (this._TrnPayrollOtherDeduction.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._TrnPayrollOtherDeduction.Entity = null;
-						previousValue.TrnPayrolls.Remove(this);
-					}
-					this._TrnPayrollOtherDeduction.Entity = value;
-					if ((value != null))
-					{
-						value.TrnPayrolls.Add(this);
-						this._PayrollOtherDeductionId = value.Id;
-					}
-					else
-					{
-						this._PayrollOtherDeductionId = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("TrnPayrollOtherDeduction");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TrnPayrollOtherIncome_TrnPayroll", Storage="_TrnPayrollOtherIncome", ThisKey="PayrollOtherIncomeId", OtherKey="Id", IsForeignKey=true)]
-		public TrnPayrollOtherIncome TrnPayrollOtherIncome
-		{
-			get
-			{
-				return this._TrnPayrollOtherIncome.Entity;
-			}
-			set
-			{
-				TrnPayrollOtherIncome previousValue = this._TrnPayrollOtherIncome.Entity;
-				if (((previousValue != value) 
-							|| (this._TrnPayrollOtherIncome.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._TrnPayrollOtherIncome.Entity = null;
-						previousValue.TrnPayrolls.Remove(this);
-					}
-					this._TrnPayrollOtherIncome.Entity = value;
-					if ((value != null))
-					{
-						value.TrnPayrolls.Add(this);
-						this._PayrollOtherIncomeId = value.Id;
-					}
-					else
-					{
-						this._PayrollOtherIncomeId = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("TrnPayrollOtherIncome");
 				}
 			}
 		}
@@ -26353,6 +24429,2023 @@ namespace whris_v2.Data
 		{
 			this.SendPropertyChanging();
 			entity.TrnPayrollOtherIncome = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AspNetUsers")]
+	public partial class AspNetUser : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Id;
+		
+		private string _Email;
+		
+		private bool _EmailConfirmed;
+		
+		private string _PasswordHash;
+		
+		private string _SecurityStamp;
+		
+		private string _PhoneNumber;
+		
+		private bool _PhoneNumberConfirmed;
+		
+		private bool _TwoFactorEnabled;
+		
+		private System.Nullable<System.DateTime> _LockoutEndDateUtc;
+		
+		private bool _LockoutEnabled;
+		
+		private int _AccessFailedCount;
+		
+		private string _UserName;
+		
+		private EntitySet<AspNetUserClaim> _AspNetUserClaims;
+		
+		private EntitySet<AspNetUserLogin> _AspNetUserLogins;
+		
+		private EntitySet<AspNetUserRole> _AspNetUserRoles;
+		
+		private EntitySet<MstUser> _MstUsers;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(string value);
+    partial void OnIdChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnEmailConfirmedChanging(bool value);
+    partial void OnEmailConfirmedChanged();
+    partial void OnPasswordHashChanging(string value);
+    partial void OnPasswordHashChanged();
+    partial void OnSecurityStampChanging(string value);
+    partial void OnSecurityStampChanged();
+    partial void OnPhoneNumberChanging(string value);
+    partial void OnPhoneNumberChanged();
+    partial void OnPhoneNumberConfirmedChanging(bool value);
+    partial void OnPhoneNumberConfirmedChanged();
+    partial void OnTwoFactorEnabledChanging(bool value);
+    partial void OnTwoFactorEnabledChanged();
+    partial void OnLockoutEndDateUtcChanging(System.Nullable<System.DateTime> value);
+    partial void OnLockoutEndDateUtcChanged();
+    partial void OnLockoutEnabledChanging(bool value);
+    partial void OnLockoutEnabledChanged();
+    partial void OnAccessFailedCountChanging(int value);
+    partial void OnAccessFailedCountChanged();
+    partial void OnUserNameChanging(string value);
+    partial void OnUserNameChanged();
+    #endregion
+		
+		public AspNetUser()
+		{
+			this._AspNetUserClaims = new EntitySet<AspNetUserClaim>(new Action<AspNetUserClaim>(this.attach_AspNetUserClaims), new Action<AspNetUserClaim>(this.detach_AspNetUserClaims));
+			this._AspNetUserLogins = new EntitySet<AspNetUserLogin>(new Action<AspNetUserLogin>(this.attach_AspNetUserLogins), new Action<AspNetUserLogin>(this.detach_AspNetUserLogins));
+			this._AspNetUserRoles = new EntitySet<AspNetUserRole>(new Action<AspNetUserRole>(this.attach_AspNetUserRoles), new Action<AspNetUserRole>(this.detach_AspNetUserRoles));
+			this._MstUsers = new EntitySet<MstUser>(new Action<MstUser>(this.attach_MstUsers), new Action<MstUser>(this.detach_MstUsers));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="NVarChar(128) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(256)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmailConfirmed", DbType="Bit NOT NULL")]
+		public bool EmailConfirmed
+		{
+			get
+			{
+				return this._EmailConfirmed;
+			}
+			set
+			{
+				if ((this._EmailConfirmed != value))
+				{
+					this.OnEmailConfirmedChanging(value);
+					this.SendPropertyChanging();
+					this._EmailConfirmed = value;
+					this.SendPropertyChanged("EmailConfirmed");
+					this.OnEmailConfirmedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordHash", DbType="NVarChar(MAX)")]
+		public string PasswordHash
+		{
+			get
+			{
+				return this._PasswordHash;
+			}
+			set
+			{
+				if ((this._PasswordHash != value))
+				{
+					this.OnPasswordHashChanging(value);
+					this.SendPropertyChanging();
+					this._PasswordHash = value;
+					this.SendPropertyChanged("PasswordHash");
+					this.OnPasswordHashChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SecurityStamp", DbType="NVarChar(MAX)")]
+		public string SecurityStamp
+		{
+			get
+			{
+				return this._SecurityStamp;
+			}
+			set
+			{
+				if ((this._SecurityStamp != value))
+				{
+					this.OnSecurityStampChanging(value);
+					this.SendPropertyChanging();
+					this._SecurityStamp = value;
+					this.SendPropertyChanged("SecurityStamp");
+					this.OnSecurityStampChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="NVarChar(MAX)")]
+		public string PhoneNumber
+		{
+			get
+			{
+				return this._PhoneNumber;
+			}
+			set
+			{
+				if ((this._PhoneNumber != value))
+				{
+					this.OnPhoneNumberChanging(value);
+					this.SendPropertyChanging();
+					this._PhoneNumber = value;
+					this.SendPropertyChanged("PhoneNumber");
+					this.OnPhoneNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumberConfirmed", DbType="Bit NOT NULL")]
+		public bool PhoneNumberConfirmed
+		{
+			get
+			{
+				return this._PhoneNumberConfirmed;
+			}
+			set
+			{
+				if ((this._PhoneNumberConfirmed != value))
+				{
+					this.OnPhoneNumberConfirmedChanging(value);
+					this.SendPropertyChanging();
+					this._PhoneNumberConfirmed = value;
+					this.SendPropertyChanged("PhoneNumberConfirmed");
+					this.OnPhoneNumberConfirmedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TwoFactorEnabled", DbType="Bit NOT NULL")]
+		public bool TwoFactorEnabled
+		{
+			get
+			{
+				return this._TwoFactorEnabled;
+			}
+			set
+			{
+				if ((this._TwoFactorEnabled != value))
+				{
+					this.OnTwoFactorEnabledChanging(value);
+					this.SendPropertyChanging();
+					this._TwoFactorEnabled = value;
+					this.SendPropertyChanged("TwoFactorEnabled");
+					this.OnTwoFactorEnabledChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LockoutEndDateUtc", DbType="DateTime")]
+		public System.Nullable<System.DateTime> LockoutEndDateUtc
+		{
+			get
+			{
+				return this._LockoutEndDateUtc;
+			}
+			set
+			{
+				if ((this._LockoutEndDateUtc != value))
+				{
+					this.OnLockoutEndDateUtcChanging(value);
+					this.SendPropertyChanging();
+					this._LockoutEndDateUtc = value;
+					this.SendPropertyChanged("LockoutEndDateUtc");
+					this.OnLockoutEndDateUtcChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LockoutEnabled", DbType="Bit NOT NULL")]
+		public bool LockoutEnabled
+		{
+			get
+			{
+				return this._LockoutEnabled;
+			}
+			set
+			{
+				if ((this._LockoutEnabled != value))
+				{
+					this.OnLockoutEnabledChanging(value);
+					this.SendPropertyChanging();
+					this._LockoutEnabled = value;
+					this.SendPropertyChanged("LockoutEnabled");
+					this.OnLockoutEnabledChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccessFailedCount", DbType="Int NOT NULL")]
+		public int AccessFailedCount
+		{
+			get
+			{
+				return this._AccessFailedCount;
+			}
+			set
+			{
+				if ((this._AccessFailedCount != value))
+				{
+					this.OnAccessFailedCountChanging(value);
+					this.SendPropertyChanging();
+					this._AccessFailedCount = value;
+					this.SendPropertyChanged("AccessFailedCount");
+					this.OnAccessFailedCountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		public string UserName
+		{
+			get
+			{
+				return this._UserName;
+			}
+			set
+			{
+				if ((this._UserName != value))
+				{
+					this.OnUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._UserName = value;
+					this.SendPropertyChanged("UserName");
+					this.OnUserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_AspNetUserClaim", Storage="_AspNetUserClaims", ThisKey="Id", OtherKey="UserId")]
+		public EntitySet<AspNetUserClaim> AspNetUserClaims
+		{
+			get
+			{
+				return this._AspNetUserClaims;
+			}
+			set
+			{
+				this._AspNetUserClaims.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_AspNetUserLogin", Storage="_AspNetUserLogins", ThisKey="Id", OtherKey="UserId")]
+		public EntitySet<AspNetUserLogin> AspNetUserLogins
+		{
+			get
+			{
+				return this._AspNetUserLogins;
+			}
+			set
+			{
+				this._AspNetUserLogins.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_AspNetUserRole", Storage="_AspNetUserRoles", ThisKey="Id", OtherKey="UserId")]
+		public EntitySet<AspNetUserRole> AspNetUserRoles
+		{
+			get
+			{
+				return this._AspNetUserRoles;
+			}
+			set
+			{
+				this._AspNetUserRoles.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_MstUser", Storage="_MstUsers", ThisKey="Id", OtherKey="AspNetUserId")]
+		public EntitySet<MstUser> MstUsers
+		{
+			get
+			{
+				return this._MstUsers;
+			}
+			set
+			{
+				this._MstUsers.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_AspNetUserClaims(AspNetUserClaim entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUser = this;
+		}
+		
+		private void detach_AspNetUserClaims(AspNetUserClaim entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUser = null;
+		}
+		
+		private void attach_AspNetUserLogins(AspNetUserLogin entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUser = this;
+		}
+		
+		private void detach_AspNetUserLogins(AspNetUserLogin entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUser = null;
+		}
+		
+		private void attach_AspNetUserRoles(AspNetUserRole entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUser = this;
+		}
+		
+		private void detach_AspNetUserRoles(AspNetUserRole entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUser = null;
+		}
+		
+		private void attach_MstUsers(MstUser entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUser = this;
+		}
+		
+		private void detach_MstUsers(MstUser entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUser = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MstUser")]
+	public partial class MstUser : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _UserName;
+		
+		private string _Password;
+		
+		private string _FullName;
+		
+		private string _AspNetUserId;
+		
+		private int _EntryUserId;
+		
+		private System.DateTime _EntryDateTime;
+		
+		private int _UpdateUserId;
+		
+		private System.DateTime _UpdateDateTime;
+		
+		private bool _IsLocked;
+		
+		private EntitySet<MstEmployeeLoan> _MstEmployeeLoans;
+		
+		private EntitySet<MstEmployeeLoan> _MstEmployeeLoans1;
+		
+		private EntitySet<MstShiftCode> _MstShiftCodes;
+		
+		private EntitySet<MstShiftCode> _MstShiftCodes1;
+		
+		private EntitySet<MstUserForm> _MstUserForms;
+		
+		private EntitySet<MstUserPayrollGroup> _MstUserPayrollGroups;
+		
+		private EntitySet<TrnChangeShift> _TrnChangeShifts;
+		
+		private EntitySet<TrnChangeShift> _TrnChangeShifts1;
+		
+		private EntitySet<TrnChangeShift> _TrnChangeShifts2;
+		
+		private EntitySet<TrnChangeShift> _TrnChangeShifts3;
+		
+		private EntitySet<TrnChangeShift> _TrnChangeShifts4;
+		
+		private EntitySet<TrnDTR> _TrnDTRs;
+		
+		private EntitySet<TrnDTR> _TrnDTRs1;
+		
+		private EntitySet<TrnDTR> _TrnDTRs2;
+		
+		private EntitySet<TrnDTR> _TrnDTRs3;
+		
+		private EntitySet<TrnDTR> _TrnDTRs4;
+		
+		private EntitySet<TrnLastWithholdingTax> _TrnLastWithholdingTaxes;
+		
+		private EntitySet<TrnLastWithholdingTax> _TrnLastWithholdingTaxes1;
+		
+		private EntitySet<TrnLastWithholdingTax> _TrnLastWithholdingTaxes2;
+		
+		private EntitySet<TrnLastWithholdingTax> _TrnLastWithholdingTaxes3;
+		
+		private EntitySet<TrnLastWithholdingTax> _TrnLastWithholdingTaxes4;
+		
+		private EntitySet<TrnLeaveApplication> _TrnLeaveApplications;
+		
+		private EntitySet<TrnLeaveApplication> _TrnLeaveApplications1;
+		
+		private EntitySet<TrnLeaveApplication> _TrnLeaveApplications2;
+		
+		private EntitySet<TrnLeaveApplication> _TrnLeaveApplications3;
+		
+		private EntitySet<TrnOverTime> _TrnOverTimes;
+		
+		private EntitySet<TrnOverTime> _TrnOverTimes1;
+		
+		private EntitySet<TrnOverTime> _TrnOverTimes2;
+		
+		private EntitySet<TrnOverTime> _TrnOverTimes3;
+		
+		private EntitySet<TrnOverTime> _TrnOverTimes4;
+		
+		private EntitySet<TrnPayroll> _TrnPayrolls;
+		
+		private EntitySet<TrnPayroll> _TrnPayrolls1;
+		
+		private EntitySet<TrnPayroll> _TrnPayrolls2;
+		
+		private EntitySet<TrnPayroll> _TrnPayrolls3;
+		
+		private EntitySet<TrnPayroll> _TrnPayrolls4;
+		
+		private EntitySet<TrnPayrollOtherDeduction> _TrnPayrollOtherDeductions;
+		
+		private EntitySet<TrnPayrollOtherDeduction> _TrnPayrollOtherDeductions1;
+		
+		private EntitySet<TrnPayrollOtherDeduction> _TrnPayrollOtherDeductions2;
+		
+		private EntitySet<TrnPayrollOtherDeduction> _TrnPayrollOtherDeductions3;
+		
+		private EntitySet<TrnPayrollOtherDeduction> _TrnPayrollOtherDeductions4;
+		
+		private EntitySet<TrnPayrollOtherIncome> _TrnPayrollOtherIncomes;
+		
+		private EntitySet<TrnPayrollOtherIncome> _TrnPayrollOtherIncomes1;
+		
+		private EntitySet<TrnPayrollOtherIncome> _TrnPayrollOtherIncomes2;
+		
+		private EntitySet<TrnPayrollOtherIncome> _TrnPayrollOtherIncomes3;
+		
+		private EntitySet<TrnPayrollOtherIncome> _TrnPayrollOtherIncomes4;
+		
+		private EntityRef<AspNetUser> _AspNetUser;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnUserNameChanging(string value);
+    partial void OnUserNameChanged();
+    partial void OnPasswordChanging(string value);
+    partial void OnPasswordChanged();
+    partial void OnFullNameChanging(string value);
+    partial void OnFullNameChanged();
+    partial void OnAspNetUserIdChanging(string value);
+    partial void OnAspNetUserIdChanged();
+    partial void OnEntryUserIdChanging(int value);
+    partial void OnEntryUserIdChanged();
+    partial void OnEntryDateTimeChanging(System.DateTime value);
+    partial void OnEntryDateTimeChanged();
+    partial void OnUpdateUserIdChanging(int value);
+    partial void OnUpdateUserIdChanged();
+    partial void OnUpdateDateTimeChanging(System.DateTime value);
+    partial void OnUpdateDateTimeChanged();
+    partial void OnIsLockedChanging(bool value);
+    partial void OnIsLockedChanged();
+    #endregion
+		
+		public MstUser()
+		{
+			this._MstEmployeeLoans = new EntitySet<MstEmployeeLoan>(new Action<MstEmployeeLoan>(this.attach_MstEmployeeLoans), new Action<MstEmployeeLoan>(this.detach_MstEmployeeLoans));
+			this._MstEmployeeLoans1 = new EntitySet<MstEmployeeLoan>(new Action<MstEmployeeLoan>(this.attach_MstEmployeeLoans1), new Action<MstEmployeeLoan>(this.detach_MstEmployeeLoans1));
+			this._MstShiftCodes = new EntitySet<MstShiftCode>(new Action<MstShiftCode>(this.attach_MstShiftCodes), new Action<MstShiftCode>(this.detach_MstShiftCodes));
+			this._MstShiftCodes1 = new EntitySet<MstShiftCode>(new Action<MstShiftCode>(this.attach_MstShiftCodes1), new Action<MstShiftCode>(this.detach_MstShiftCodes1));
+			this._MstUserForms = new EntitySet<MstUserForm>(new Action<MstUserForm>(this.attach_MstUserForms), new Action<MstUserForm>(this.detach_MstUserForms));
+			this._MstUserPayrollGroups = new EntitySet<MstUserPayrollGroup>(new Action<MstUserPayrollGroup>(this.attach_MstUserPayrollGroups), new Action<MstUserPayrollGroup>(this.detach_MstUserPayrollGroups));
+			this._TrnChangeShifts = new EntitySet<TrnChangeShift>(new Action<TrnChangeShift>(this.attach_TrnChangeShifts), new Action<TrnChangeShift>(this.detach_TrnChangeShifts));
+			this._TrnChangeShifts1 = new EntitySet<TrnChangeShift>(new Action<TrnChangeShift>(this.attach_TrnChangeShifts1), new Action<TrnChangeShift>(this.detach_TrnChangeShifts1));
+			this._TrnChangeShifts2 = new EntitySet<TrnChangeShift>(new Action<TrnChangeShift>(this.attach_TrnChangeShifts2), new Action<TrnChangeShift>(this.detach_TrnChangeShifts2));
+			this._TrnChangeShifts3 = new EntitySet<TrnChangeShift>(new Action<TrnChangeShift>(this.attach_TrnChangeShifts3), new Action<TrnChangeShift>(this.detach_TrnChangeShifts3));
+			this._TrnChangeShifts4 = new EntitySet<TrnChangeShift>(new Action<TrnChangeShift>(this.attach_TrnChangeShifts4), new Action<TrnChangeShift>(this.detach_TrnChangeShifts4));
+			this._TrnDTRs = new EntitySet<TrnDTR>(new Action<TrnDTR>(this.attach_TrnDTRs), new Action<TrnDTR>(this.detach_TrnDTRs));
+			this._TrnDTRs1 = new EntitySet<TrnDTR>(new Action<TrnDTR>(this.attach_TrnDTRs1), new Action<TrnDTR>(this.detach_TrnDTRs1));
+			this._TrnDTRs2 = new EntitySet<TrnDTR>(new Action<TrnDTR>(this.attach_TrnDTRs2), new Action<TrnDTR>(this.detach_TrnDTRs2));
+			this._TrnDTRs3 = new EntitySet<TrnDTR>(new Action<TrnDTR>(this.attach_TrnDTRs3), new Action<TrnDTR>(this.detach_TrnDTRs3));
+			this._TrnDTRs4 = new EntitySet<TrnDTR>(new Action<TrnDTR>(this.attach_TrnDTRs4), new Action<TrnDTR>(this.detach_TrnDTRs4));
+			this._TrnLastWithholdingTaxes = new EntitySet<TrnLastWithholdingTax>(new Action<TrnLastWithholdingTax>(this.attach_TrnLastWithholdingTaxes), new Action<TrnLastWithholdingTax>(this.detach_TrnLastWithholdingTaxes));
+			this._TrnLastWithholdingTaxes1 = new EntitySet<TrnLastWithholdingTax>(new Action<TrnLastWithholdingTax>(this.attach_TrnLastWithholdingTaxes1), new Action<TrnLastWithholdingTax>(this.detach_TrnLastWithholdingTaxes1));
+			this._TrnLastWithholdingTaxes2 = new EntitySet<TrnLastWithholdingTax>(new Action<TrnLastWithholdingTax>(this.attach_TrnLastWithholdingTaxes2), new Action<TrnLastWithholdingTax>(this.detach_TrnLastWithholdingTaxes2));
+			this._TrnLastWithholdingTaxes3 = new EntitySet<TrnLastWithholdingTax>(new Action<TrnLastWithholdingTax>(this.attach_TrnLastWithholdingTaxes3), new Action<TrnLastWithholdingTax>(this.detach_TrnLastWithholdingTaxes3));
+			this._TrnLastWithholdingTaxes4 = new EntitySet<TrnLastWithholdingTax>(new Action<TrnLastWithholdingTax>(this.attach_TrnLastWithholdingTaxes4), new Action<TrnLastWithholdingTax>(this.detach_TrnLastWithholdingTaxes4));
+			this._TrnLeaveApplications = new EntitySet<TrnLeaveApplication>(new Action<TrnLeaveApplication>(this.attach_TrnLeaveApplications), new Action<TrnLeaveApplication>(this.detach_TrnLeaveApplications));
+			this._TrnLeaveApplications1 = new EntitySet<TrnLeaveApplication>(new Action<TrnLeaveApplication>(this.attach_TrnLeaveApplications1), new Action<TrnLeaveApplication>(this.detach_TrnLeaveApplications1));
+			this._TrnLeaveApplications2 = new EntitySet<TrnLeaveApplication>(new Action<TrnLeaveApplication>(this.attach_TrnLeaveApplications2), new Action<TrnLeaveApplication>(this.detach_TrnLeaveApplications2));
+			this._TrnLeaveApplications3 = new EntitySet<TrnLeaveApplication>(new Action<TrnLeaveApplication>(this.attach_TrnLeaveApplications3), new Action<TrnLeaveApplication>(this.detach_TrnLeaveApplications3));
+			this._TrnOverTimes = new EntitySet<TrnOverTime>(new Action<TrnOverTime>(this.attach_TrnOverTimes), new Action<TrnOverTime>(this.detach_TrnOverTimes));
+			this._TrnOverTimes1 = new EntitySet<TrnOverTime>(new Action<TrnOverTime>(this.attach_TrnOverTimes1), new Action<TrnOverTime>(this.detach_TrnOverTimes1));
+			this._TrnOverTimes2 = new EntitySet<TrnOverTime>(new Action<TrnOverTime>(this.attach_TrnOverTimes2), new Action<TrnOverTime>(this.detach_TrnOverTimes2));
+			this._TrnOverTimes3 = new EntitySet<TrnOverTime>(new Action<TrnOverTime>(this.attach_TrnOverTimes3), new Action<TrnOverTime>(this.detach_TrnOverTimes3));
+			this._TrnOverTimes4 = new EntitySet<TrnOverTime>(new Action<TrnOverTime>(this.attach_TrnOverTimes4), new Action<TrnOverTime>(this.detach_TrnOverTimes4));
+			this._TrnPayrolls = new EntitySet<TrnPayroll>(new Action<TrnPayroll>(this.attach_TrnPayrolls), new Action<TrnPayroll>(this.detach_TrnPayrolls));
+			this._TrnPayrolls1 = new EntitySet<TrnPayroll>(new Action<TrnPayroll>(this.attach_TrnPayrolls1), new Action<TrnPayroll>(this.detach_TrnPayrolls1));
+			this._TrnPayrolls2 = new EntitySet<TrnPayroll>(new Action<TrnPayroll>(this.attach_TrnPayrolls2), new Action<TrnPayroll>(this.detach_TrnPayrolls2));
+			this._TrnPayrolls3 = new EntitySet<TrnPayroll>(new Action<TrnPayroll>(this.attach_TrnPayrolls3), new Action<TrnPayroll>(this.detach_TrnPayrolls3));
+			this._TrnPayrolls4 = new EntitySet<TrnPayroll>(new Action<TrnPayroll>(this.attach_TrnPayrolls4), new Action<TrnPayroll>(this.detach_TrnPayrolls4));
+			this._TrnPayrollOtherDeductions = new EntitySet<TrnPayrollOtherDeduction>(new Action<TrnPayrollOtherDeduction>(this.attach_TrnPayrollOtherDeductions), new Action<TrnPayrollOtherDeduction>(this.detach_TrnPayrollOtherDeductions));
+			this._TrnPayrollOtherDeductions1 = new EntitySet<TrnPayrollOtherDeduction>(new Action<TrnPayrollOtherDeduction>(this.attach_TrnPayrollOtherDeductions1), new Action<TrnPayrollOtherDeduction>(this.detach_TrnPayrollOtherDeductions1));
+			this._TrnPayrollOtherDeductions2 = new EntitySet<TrnPayrollOtherDeduction>(new Action<TrnPayrollOtherDeduction>(this.attach_TrnPayrollOtherDeductions2), new Action<TrnPayrollOtherDeduction>(this.detach_TrnPayrollOtherDeductions2));
+			this._TrnPayrollOtherDeductions3 = new EntitySet<TrnPayrollOtherDeduction>(new Action<TrnPayrollOtherDeduction>(this.attach_TrnPayrollOtherDeductions3), new Action<TrnPayrollOtherDeduction>(this.detach_TrnPayrollOtherDeductions3));
+			this._TrnPayrollOtherDeductions4 = new EntitySet<TrnPayrollOtherDeduction>(new Action<TrnPayrollOtherDeduction>(this.attach_TrnPayrollOtherDeductions4), new Action<TrnPayrollOtherDeduction>(this.detach_TrnPayrollOtherDeductions4));
+			this._TrnPayrollOtherIncomes = new EntitySet<TrnPayrollOtherIncome>(new Action<TrnPayrollOtherIncome>(this.attach_TrnPayrollOtherIncomes), new Action<TrnPayrollOtherIncome>(this.detach_TrnPayrollOtherIncomes));
+			this._TrnPayrollOtherIncomes1 = new EntitySet<TrnPayrollOtherIncome>(new Action<TrnPayrollOtherIncome>(this.attach_TrnPayrollOtherIncomes1), new Action<TrnPayrollOtherIncome>(this.detach_TrnPayrollOtherIncomes1));
+			this._TrnPayrollOtherIncomes2 = new EntitySet<TrnPayrollOtherIncome>(new Action<TrnPayrollOtherIncome>(this.attach_TrnPayrollOtherIncomes2), new Action<TrnPayrollOtherIncome>(this.detach_TrnPayrollOtherIncomes2));
+			this._TrnPayrollOtherIncomes3 = new EntitySet<TrnPayrollOtherIncome>(new Action<TrnPayrollOtherIncome>(this.attach_TrnPayrollOtherIncomes3), new Action<TrnPayrollOtherIncome>(this.detach_TrnPayrollOtherIncomes3));
+			this._TrnPayrollOtherIncomes4 = new EntitySet<TrnPayrollOtherIncome>(new Action<TrnPayrollOtherIncome>(this.attach_TrnPayrollOtherIncomes4), new Action<TrnPayrollOtherIncome>(this.detach_TrnPayrollOtherIncomes4));
+			this._AspNetUser = default(EntityRef<AspNetUser>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string UserName
+		{
+			get
+			{
+				return this._UserName;
+			}
+			set
+			{
+				if ((this._UserName != value))
+				{
+					this.OnUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._UserName = value;
+					this.SendPropertyChanged("UserName");
+					this.OnUserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Password
+		{
+			get
+			{
+				return this._Password;
+			}
+			set
+			{
+				if ((this._Password != value))
+				{
+					this.OnPasswordChanging(value);
+					this.SendPropertyChanging();
+					this._Password = value;
+					this.SendPropertyChanged("Password");
+					this.OnPasswordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FullName", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string FullName
+		{
+			get
+			{
+				return this._FullName;
+			}
+			set
+			{
+				if ((this._FullName != value))
+				{
+					this.OnFullNameChanging(value);
+					this.SendPropertyChanging();
+					this._FullName = value;
+					this.SendPropertyChanged("FullName");
+					this.OnFullNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AspNetUserId", DbType="NVarChar(128)")]
+		public string AspNetUserId
+		{
+			get
+			{
+				return this._AspNetUserId;
+			}
+			set
+			{
+				if ((this._AspNetUserId != value))
+				{
+					if (this._AspNetUser.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnAspNetUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._AspNetUserId = value;
+					this.SendPropertyChanged("AspNetUserId");
+					this.OnAspNetUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EntryUserId", DbType="Int NOT NULL")]
+		public int EntryUserId
+		{
+			get
+			{
+				return this._EntryUserId;
+			}
+			set
+			{
+				if ((this._EntryUserId != value))
+				{
+					this.OnEntryUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._EntryUserId = value;
+					this.SendPropertyChanged("EntryUserId");
+					this.OnEntryUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EntryDateTime", DbType="DateTime NOT NULL")]
+		public System.DateTime EntryDateTime
+		{
+			get
+			{
+				return this._EntryDateTime;
+			}
+			set
+			{
+				if ((this._EntryDateTime != value))
+				{
+					this.OnEntryDateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._EntryDateTime = value;
+					this.SendPropertyChanged("EntryDateTime");
+					this.OnEntryDateTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateUserId", DbType="Int NOT NULL")]
+		public int UpdateUserId
+		{
+			get
+			{
+				return this._UpdateUserId;
+			}
+			set
+			{
+				if ((this._UpdateUserId != value))
+				{
+					this.OnUpdateUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UpdateUserId = value;
+					this.SendPropertyChanged("UpdateUserId");
+					this.OnUpdateUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateDateTime", DbType="DateTime NOT NULL")]
+		public System.DateTime UpdateDateTime
+		{
+			get
+			{
+				return this._UpdateDateTime;
+			}
+			set
+			{
+				if ((this._UpdateDateTime != value))
+				{
+					this.OnUpdateDateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._UpdateDateTime = value;
+					this.SendPropertyChanged("UpdateDateTime");
+					this.OnUpdateDateTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsLocked", DbType="Bit NOT NULL")]
+		public bool IsLocked
+		{
+			get
+			{
+				return this._IsLocked;
+			}
+			set
+			{
+				if ((this._IsLocked != value))
+				{
+					this.OnIsLockedChanging(value);
+					this.SendPropertyChanging();
+					this._IsLocked = value;
+					this.SendPropertyChanged("IsLocked");
+					this.OnIsLockedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_MstEmployeeLoan", Storage="_MstEmployeeLoans", ThisKey="Id", OtherKey="EntryUserId")]
+		public EntitySet<MstEmployeeLoan> MstEmployeeLoans
+		{
+			get
+			{
+				return this._MstEmployeeLoans;
+			}
+			set
+			{
+				this._MstEmployeeLoans.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_MstEmployeeLoan1", Storage="_MstEmployeeLoans1", ThisKey="Id", OtherKey="UpdateUserId")]
+		public EntitySet<MstEmployeeLoan> MstEmployeeLoans1
+		{
+			get
+			{
+				return this._MstEmployeeLoans1;
+			}
+			set
+			{
+				this._MstEmployeeLoans1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_MstShiftCode", Storage="_MstShiftCodes", ThisKey="Id", OtherKey="EntryUserId")]
+		public EntitySet<MstShiftCode> MstShiftCodes
+		{
+			get
+			{
+				return this._MstShiftCodes;
+			}
+			set
+			{
+				this._MstShiftCodes.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_MstShiftCode1", Storage="_MstShiftCodes1", ThisKey="Id", OtherKey="UpdateUserId")]
+		public EntitySet<MstShiftCode> MstShiftCodes1
+		{
+			get
+			{
+				return this._MstShiftCodes1;
+			}
+			set
+			{
+				this._MstShiftCodes1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_MstUserForm", Storage="_MstUserForms", ThisKey="Id", OtherKey="UserId")]
+		public EntitySet<MstUserForm> MstUserForms
+		{
+			get
+			{
+				return this._MstUserForms;
+			}
+			set
+			{
+				this._MstUserForms.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_MstUserPayrollGroup", Storage="_MstUserPayrollGroups", ThisKey="Id", OtherKey="UserId")]
+		public EntitySet<MstUserPayrollGroup> MstUserPayrollGroups
+		{
+			get
+			{
+				return this._MstUserPayrollGroups;
+			}
+			set
+			{
+				this._MstUserPayrollGroups.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnChangeShift", Storage="_TrnChangeShifts", ThisKey="Id", OtherKey="EntryUserId")]
+		public EntitySet<TrnChangeShift> TrnChangeShifts
+		{
+			get
+			{
+				return this._TrnChangeShifts;
+			}
+			set
+			{
+				this._TrnChangeShifts.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnChangeShift1", Storage="_TrnChangeShifts1", ThisKey="Id", OtherKey="UpdateUserId")]
+		public EntitySet<TrnChangeShift> TrnChangeShifts1
+		{
+			get
+			{
+				return this._TrnChangeShifts1;
+			}
+			set
+			{
+				this._TrnChangeShifts1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnChangeShift2", Storage="_TrnChangeShifts2", ThisKey="Id", OtherKey="PreparedBy")]
+		public EntitySet<TrnChangeShift> TrnChangeShifts2
+		{
+			get
+			{
+				return this._TrnChangeShifts2;
+			}
+			set
+			{
+				this._TrnChangeShifts2.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnChangeShift3", Storage="_TrnChangeShifts3", ThisKey="Id", OtherKey="CheckedBy")]
+		public EntitySet<TrnChangeShift> TrnChangeShifts3
+		{
+			get
+			{
+				return this._TrnChangeShifts3;
+			}
+			set
+			{
+				this._TrnChangeShifts3.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnChangeShift4", Storage="_TrnChangeShifts4", ThisKey="Id", OtherKey="ApprovedBy")]
+		public EntitySet<TrnChangeShift> TrnChangeShifts4
+		{
+			get
+			{
+				return this._TrnChangeShifts4;
+			}
+			set
+			{
+				this._TrnChangeShifts4.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnDTR", Storage="_TrnDTRs", ThisKey="Id", OtherKey="EntryUserId")]
+		public EntitySet<TrnDTR> TrnDTRs
+		{
+			get
+			{
+				return this._TrnDTRs;
+			}
+			set
+			{
+				this._TrnDTRs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnDTR1", Storage="_TrnDTRs1", ThisKey="Id", OtherKey="UpdateUserId")]
+		public EntitySet<TrnDTR> TrnDTRs1
+		{
+			get
+			{
+				return this._TrnDTRs1;
+			}
+			set
+			{
+				this._TrnDTRs1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnDTR2", Storage="_TrnDTRs2", ThisKey="Id", OtherKey="PreparedBy")]
+		public EntitySet<TrnDTR> TrnDTRs2
+		{
+			get
+			{
+				return this._TrnDTRs2;
+			}
+			set
+			{
+				this._TrnDTRs2.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnDTR3", Storage="_TrnDTRs3", ThisKey="Id", OtherKey="CheckedBy")]
+		public EntitySet<TrnDTR> TrnDTRs3
+		{
+			get
+			{
+				return this._TrnDTRs3;
+			}
+			set
+			{
+				this._TrnDTRs3.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnDTR4", Storage="_TrnDTRs4", ThisKey="Id", OtherKey="ApprovedBy")]
+		public EntitySet<TrnDTR> TrnDTRs4
+		{
+			get
+			{
+				return this._TrnDTRs4;
+			}
+			set
+			{
+				this._TrnDTRs4.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnLastWithholdingTax", Storage="_TrnLastWithholdingTaxes", ThisKey="Id", OtherKey="EntryUserId")]
+		public EntitySet<TrnLastWithholdingTax> TrnLastWithholdingTaxes
+		{
+			get
+			{
+				return this._TrnLastWithholdingTaxes;
+			}
+			set
+			{
+				this._TrnLastWithholdingTaxes.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnLastWithholdingTax1", Storage="_TrnLastWithholdingTaxes1", ThisKey="Id", OtherKey="UpdateUserId")]
+		public EntitySet<TrnLastWithholdingTax> TrnLastWithholdingTaxes1
+		{
+			get
+			{
+				return this._TrnLastWithholdingTaxes1;
+			}
+			set
+			{
+				this._TrnLastWithholdingTaxes1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnLastWithholdingTax2", Storage="_TrnLastWithholdingTaxes2", ThisKey="Id", OtherKey="PreparedBy")]
+		public EntitySet<TrnLastWithholdingTax> TrnLastWithholdingTaxes2
+		{
+			get
+			{
+				return this._TrnLastWithholdingTaxes2;
+			}
+			set
+			{
+				this._TrnLastWithholdingTaxes2.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnLastWithholdingTax3", Storage="_TrnLastWithholdingTaxes3", ThisKey="Id", OtherKey="CheckedBy")]
+		public EntitySet<TrnLastWithholdingTax> TrnLastWithholdingTaxes3
+		{
+			get
+			{
+				return this._TrnLastWithholdingTaxes3;
+			}
+			set
+			{
+				this._TrnLastWithholdingTaxes3.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnLastWithholdingTax4", Storage="_TrnLastWithholdingTaxes4", ThisKey="Id", OtherKey="ApprovedBy")]
+		public EntitySet<TrnLastWithholdingTax> TrnLastWithholdingTaxes4
+		{
+			get
+			{
+				return this._TrnLastWithholdingTaxes4;
+			}
+			set
+			{
+				this._TrnLastWithholdingTaxes4.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnLeaveApplication", Storage="_TrnLeaveApplications", ThisKey="Id", OtherKey="EntryUserId")]
+		public EntitySet<TrnLeaveApplication> TrnLeaveApplications
+		{
+			get
+			{
+				return this._TrnLeaveApplications;
+			}
+			set
+			{
+				this._TrnLeaveApplications.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnLeaveApplication1", Storage="_TrnLeaveApplications1", ThisKey="Id", OtherKey="UpdateUserId")]
+		public EntitySet<TrnLeaveApplication> TrnLeaveApplications1
+		{
+			get
+			{
+				return this._TrnLeaveApplications1;
+			}
+			set
+			{
+				this._TrnLeaveApplications1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnLeaveApplication2", Storage="_TrnLeaveApplications2", ThisKey="Id", OtherKey="PreparedBy")]
+		public EntitySet<TrnLeaveApplication> TrnLeaveApplications2
+		{
+			get
+			{
+				return this._TrnLeaveApplications2;
+			}
+			set
+			{
+				this._TrnLeaveApplications2.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnLeaveApplication3", Storage="_TrnLeaveApplications3", ThisKey="Id", OtherKey="ApprovedBy")]
+		public EntitySet<TrnLeaveApplication> TrnLeaveApplications3
+		{
+			get
+			{
+				return this._TrnLeaveApplications3;
+			}
+			set
+			{
+				this._TrnLeaveApplications3.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnOverTime", Storage="_TrnOverTimes", ThisKey="Id", OtherKey="EntryUserId")]
+		public EntitySet<TrnOverTime> TrnOverTimes
+		{
+			get
+			{
+				return this._TrnOverTimes;
+			}
+			set
+			{
+				this._TrnOverTimes.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnOverTime1", Storage="_TrnOverTimes1", ThisKey="Id", OtherKey="UpdateUserId")]
+		public EntitySet<TrnOverTime> TrnOverTimes1
+		{
+			get
+			{
+				return this._TrnOverTimes1;
+			}
+			set
+			{
+				this._TrnOverTimes1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnOverTime2", Storage="_TrnOverTimes2", ThisKey="Id", OtherKey="PreparedBy")]
+		public EntitySet<TrnOverTime> TrnOverTimes2
+		{
+			get
+			{
+				return this._TrnOverTimes2;
+			}
+			set
+			{
+				this._TrnOverTimes2.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnOverTime3", Storage="_TrnOverTimes3", ThisKey="Id", OtherKey="CheckedBy")]
+		public EntitySet<TrnOverTime> TrnOverTimes3
+		{
+			get
+			{
+				return this._TrnOverTimes3;
+			}
+			set
+			{
+				this._TrnOverTimes3.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnOverTime4", Storage="_TrnOverTimes4", ThisKey="Id", OtherKey="ApprovedBy")]
+		public EntitySet<TrnOverTime> TrnOverTimes4
+		{
+			get
+			{
+				return this._TrnOverTimes4;
+			}
+			set
+			{
+				this._TrnOverTimes4.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayroll", Storage="_TrnPayrolls", ThisKey="Id", OtherKey="EntryUserId")]
+		public EntitySet<TrnPayroll> TrnPayrolls
+		{
+			get
+			{
+				return this._TrnPayrolls;
+			}
+			set
+			{
+				this._TrnPayrolls.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayroll1", Storage="_TrnPayrolls1", ThisKey="Id", OtherKey="UpdateUserId")]
+		public EntitySet<TrnPayroll> TrnPayrolls1
+		{
+			get
+			{
+				return this._TrnPayrolls1;
+			}
+			set
+			{
+				this._TrnPayrolls1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayroll2", Storage="_TrnPayrolls2", ThisKey="Id", OtherKey="PreparedBy")]
+		public EntitySet<TrnPayroll> TrnPayrolls2
+		{
+			get
+			{
+				return this._TrnPayrolls2;
+			}
+			set
+			{
+				this._TrnPayrolls2.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayroll3", Storage="_TrnPayrolls3", ThisKey="Id", OtherKey="CheckedBy")]
+		public EntitySet<TrnPayroll> TrnPayrolls3
+		{
+			get
+			{
+				return this._TrnPayrolls3;
+			}
+			set
+			{
+				this._TrnPayrolls3.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayroll4", Storage="_TrnPayrolls4", ThisKey="Id", OtherKey="ApprovedBy")]
+		public EntitySet<TrnPayroll> TrnPayrolls4
+		{
+			get
+			{
+				return this._TrnPayrolls4;
+			}
+			set
+			{
+				this._TrnPayrolls4.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayrollOtherDeduction", Storage="_TrnPayrollOtherDeductions", ThisKey="Id", OtherKey="EntryUserId")]
+		public EntitySet<TrnPayrollOtherDeduction> TrnPayrollOtherDeductions
+		{
+			get
+			{
+				return this._TrnPayrollOtherDeductions;
+			}
+			set
+			{
+				this._TrnPayrollOtherDeductions.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayrollOtherDeduction1", Storage="_TrnPayrollOtherDeductions1", ThisKey="Id", OtherKey="UpdateUserId")]
+		public EntitySet<TrnPayrollOtherDeduction> TrnPayrollOtherDeductions1
+		{
+			get
+			{
+				return this._TrnPayrollOtherDeductions1;
+			}
+			set
+			{
+				this._TrnPayrollOtherDeductions1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayrollOtherDeduction2", Storage="_TrnPayrollOtherDeductions2", ThisKey="Id", OtherKey="PreparedBy")]
+		public EntitySet<TrnPayrollOtherDeduction> TrnPayrollOtherDeductions2
+		{
+			get
+			{
+				return this._TrnPayrollOtherDeductions2;
+			}
+			set
+			{
+				this._TrnPayrollOtherDeductions2.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayrollOtherDeduction3", Storage="_TrnPayrollOtherDeductions3", ThisKey="Id", OtherKey="CheckedBy")]
+		public EntitySet<TrnPayrollOtherDeduction> TrnPayrollOtherDeductions3
+		{
+			get
+			{
+				return this._TrnPayrollOtherDeductions3;
+			}
+			set
+			{
+				this._TrnPayrollOtherDeductions3.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayrollOtherDeduction4", Storage="_TrnPayrollOtherDeductions4", ThisKey="Id", OtherKey="ApprovedBy")]
+		public EntitySet<TrnPayrollOtherDeduction> TrnPayrollOtherDeductions4
+		{
+			get
+			{
+				return this._TrnPayrollOtherDeductions4;
+			}
+			set
+			{
+				this._TrnPayrollOtherDeductions4.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayrollOtherIncome", Storage="_TrnPayrollOtherIncomes", ThisKey="Id", OtherKey="EntryUserId")]
+		public EntitySet<TrnPayrollOtherIncome> TrnPayrollOtherIncomes
+		{
+			get
+			{
+				return this._TrnPayrollOtherIncomes;
+			}
+			set
+			{
+				this._TrnPayrollOtherIncomes.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayrollOtherIncome1", Storage="_TrnPayrollOtherIncomes1", ThisKey="Id", OtherKey="UpdateUserId")]
+		public EntitySet<TrnPayrollOtherIncome> TrnPayrollOtherIncomes1
+		{
+			get
+			{
+				return this._TrnPayrollOtherIncomes1;
+			}
+			set
+			{
+				this._TrnPayrollOtherIncomes1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayrollOtherIncome2", Storage="_TrnPayrollOtherIncomes2", ThisKey="Id", OtherKey="PreparedBy")]
+		public EntitySet<TrnPayrollOtherIncome> TrnPayrollOtherIncomes2
+		{
+			get
+			{
+				return this._TrnPayrollOtherIncomes2;
+			}
+			set
+			{
+				this._TrnPayrollOtherIncomes2.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayrollOtherIncome3", Storage="_TrnPayrollOtherIncomes3", ThisKey="Id", OtherKey="CheckedBy")]
+		public EntitySet<TrnPayrollOtherIncome> TrnPayrollOtherIncomes3
+		{
+			get
+			{
+				return this._TrnPayrollOtherIncomes3;
+			}
+			set
+			{
+				this._TrnPayrollOtherIncomes3.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MstUser_TrnPayrollOtherIncome4", Storage="_TrnPayrollOtherIncomes4", ThisKey="Id", OtherKey="ApprovedBy")]
+		public EntitySet<TrnPayrollOtherIncome> TrnPayrollOtherIncomes4
+		{
+			get
+			{
+				return this._TrnPayrollOtherIncomes4;
+			}
+			set
+			{
+				this._TrnPayrollOtherIncomes4.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_MstUser", Storage="_AspNetUser", ThisKey="AspNetUserId", OtherKey="Id", IsForeignKey=true)]
+		public AspNetUser AspNetUser
+		{
+			get
+			{
+				return this._AspNetUser.Entity;
+			}
+			set
+			{
+				AspNetUser previousValue = this._AspNetUser.Entity;
+				if (((previousValue != value) 
+							|| (this._AspNetUser.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._AspNetUser.Entity = null;
+						previousValue.MstUsers.Remove(this);
+					}
+					this._AspNetUser.Entity = value;
+					if ((value != null))
+					{
+						value.MstUsers.Add(this);
+						this._AspNetUserId = value.Id;
+					}
+					else
+					{
+						this._AspNetUserId = default(string);
+					}
+					this.SendPropertyChanged("AspNetUser");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_MstEmployeeLoans(MstEmployeeLoan entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser = this;
+		}
+		
+		private void detach_MstEmployeeLoans(MstEmployeeLoan entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser = null;
+		}
+		
+		private void attach_MstEmployeeLoans1(MstEmployeeLoan entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser1 = this;
+		}
+		
+		private void detach_MstEmployeeLoans1(MstEmployeeLoan entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser1 = null;
+		}
+		
+		private void attach_MstShiftCodes(MstShiftCode entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser = this;
+		}
+		
+		private void detach_MstShiftCodes(MstShiftCode entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser = null;
+		}
+		
+		private void attach_MstShiftCodes1(MstShiftCode entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser1 = this;
+		}
+		
+		private void detach_MstShiftCodes1(MstShiftCode entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser1 = null;
+		}
+		
+		private void attach_MstUserForms(MstUserForm entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser = this;
+		}
+		
+		private void detach_MstUserForms(MstUserForm entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser = null;
+		}
+		
+		private void attach_MstUserPayrollGroups(MstUserPayrollGroup entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser = this;
+		}
+		
+		private void detach_MstUserPayrollGroups(MstUserPayrollGroup entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser = null;
+		}
+		
+		private void attach_TrnChangeShifts(TrnChangeShift entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser = this;
+		}
+		
+		private void detach_TrnChangeShifts(TrnChangeShift entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser = null;
+		}
+		
+		private void attach_TrnChangeShifts1(TrnChangeShift entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser1 = this;
+		}
+		
+		private void detach_TrnChangeShifts1(TrnChangeShift entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser1 = null;
+		}
+		
+		private void attach_TrnChangeShifts2(TrnChangeShift entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser2 = this;
+		}
+		
+		private void detach_TrnChangeShifts2(TrnChangeShift entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser2 = null;
+		}
+		
+		private void attach_TrnChangeShifts3(TrnChangeShift entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser3 = this;
+		}
+		
+		private void detach_TrnChangeShifts3(TrnChangeShift entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser3 = null;
+		}
+		
+		private void attach_TrnChangeShifts4(TrnChangeShift entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser4 = this;
+		}
+		
+		private void detach_TrnChangeShifts4(TrnChangeShift entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser4 = null;
+		}
+		
+		private void attach_TrnDTRs(TrnDTR entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser = this;
+		}
+		
+		private void detach_TrnDTRs(TrnDTR entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser = null;
+		}
+		
+		private void attach_TrnDTRs1(TrnDTR entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser1 = this;
+		}
+		
+		private void detach_TrnDTRs1(TrnDTR entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser1 = null;
+		}
+		
+		private void attach_TrnDTRs2(TrnDTR entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser2 = this;
+		}
+		
+		private void detach_TrnDTRs2(TrnDTR entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser2 = null;
+		}
+		
+		private void attach_TrnDTRs3(TrnDTR entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser3 = this;
+		}
+		
+		private void detach_TrnDTRs3(TrnDTR entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser3 = null;
+		}
+		
+		private void attach_TrnDTRs4(TrnDTR entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser4 = this;
+		}
+		
+		private void detach_TrnDTRs4(TrnDTR entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser4 = null;
+		}
+		
+		private void attach_TrnLastWithholdingTaxes(TrnLastWithholdingTax entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser = this;
+		}
+		
+		private void detach_TrnLastWithholdingTaxes(TrnLastWithholdingTax entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser = null;
+		}
+		
+		private void attach_TrnLastWithholdingTaxes1(TrnLastWithholdingTax entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser1 = this;
+		}
+		
+		private void detach_TrnLastWithholdingTaxes1(TrnLastWithholdingTax entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser1 = null;
+		}
+		
+		private void attach_TrnLastWithholdingTaxes2(TrnLastWithholdingTax entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser2 = this;
+		}
+		
+		private void detach_TrnLastWithholdingTaxes2(TrnLastWithholdingTax entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser2 = null;
+		}
+		
+		private void attach_TrnLastWithholdingTaxes3(TrnLastWithholdingTax entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser3 = this;
+		}
+		
+		private void detach_TrnLastWithholdingTaxes3(TrnLastWithholdingTax entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser3 = null;
+		}
+		
+		private void attach_TrnLastWithholdingTaxes4(TrnLastWithholdingTax entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser4 = this;
+		}
+		
+		private void detach_TrnLastWithholdingTaxes4(TrnLastWithholdingTax entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser4 = null;
+		}
+		
+		private void attach_TrnLeaveApplications(TrnLeaveApplication entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser = this;
+		}
+		
+		private void detach_TrnLeaveApplications(TrnLeaveApplication entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser = null;
+		}
+		
+		private void attach_TrnLeaveApplications1(TrnLeaveApplication entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser1 = this;
+		}
+		
+		private void detach_TrnLeaveApplications1(TrnLeaveApplication entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser1 = null;
+		}
+		
+		private void attach_TrnLeaveApplications2(TrnLeaveApplication entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser2 = this;
+		}
+		
+		private void detach_TrnLeaveApplications2(TrnLeaveApplication entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser2 = null;
+		}
+		
+		private void attach_TrnLeaveApplications3(TrnLeaveApplication entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser3 = this;
+		}
+		
+		private void detach_TrnLeaveApplications3(TrnLeaveApplication entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser3 = null;
+		}
+		
+		private void attach_TrnOverTimes(TrnOverTime entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser = this;
+		}
+		
+		private void detach_TrnOverTimes(TrnOverTime entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser = null;
+		}
+		
+		private void attach_TrnOverTimes1(TrnOverTime entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser1 = this;
+		}
+		
+		private void detach_TrnOverTimes1(TrnOverTime entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser1 = null;
+		}
+		
+		private void attach_TrnOverTimes2(TrnOverTime entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser2 = this;
+		}
+		
+		private void detach_TrnOverTimes2(TrnOverTime entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser2 = null;
+		}
+		
+		private void attach_TrnOverTimes3(TrnOverTime entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser3 = this;
+		}
+		
+		private void detach_TrnOverTimes3(TrnOverTime entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser3 = null;
+		}
+		
+		private void attach_TrnOverTimes4(TrnOverTime entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser4 = this;
+		}
+		
+		private void detach_TrnOverTimes4(TrnOverTime entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser4 = null;
+		}
+		
+		private void attach_TrnPayrolls(TrnPayroll entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser = this;
+		}
+		
+		private void detach_TrnPayrolls(TrnPayroll entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser = null;
+		}
+		
+		private void attach_TrnPayrolls1(TrnPayroll entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser1 = this;
+		}
+		
+		private void detach_TrnPayrolls1(TrnPayroll entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser1 = null;
+		}
+		
+		private void attach_TrnPayrolls2(TrnPayroll entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser2 = this;
+		}
+		
+		private void detach_TrnPayrolls2(TrnPayroll entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser2 = null;
+		}
+		
+		private void attach_TrnPayrolls3(TrnPayroll entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser3 = this;
+		}
+		
+		private void detach_TrnPayrolls3(TrnPayroll entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser3 = null;
+		}
+		
+		private void attach_TrnPayrolls4(TrnPayroll entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser4 = this;
+		}
+		
+		private void detach_TrnPayrolls4(TrnPayroll entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser4 = null;
+		}
+		
+		private void attach_TrnPayrollOtherDeductions(TrnPayrollOtherDeduction entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser = this;
+		}
+		
+		private void detach_TrnPayrollOtherDeductions(TrnPayrollOtherDeduction entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser = null;
+		}
+		
+		private void attach_TrnPayrollOtherDeductions1(TrnPayrollOtherDeduction entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser1 = this;
+		}
+		
+		private void detach_TrnPayrollOtherDeductions1(TrnPayrollOtherDeduction entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser1 = null;
+		}
+		
+		private void attach_TrnPayrollOtherDeductions2(TrnPayrollOtherDeduction entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser2 = this;
+		}
+		
+		private void detach_TrnPayrollOtherDeductions2(TrnPayrollOtherDeduction entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser2 = null;
+		}
+		
+		private void attach_TrnPayrollOtherDeductions3(TrnPayrollOtherDeduction entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser3 = this;
+		}
+		
+		private void detach_TrnPayrollOtherDeductions3(TrnPayrollOtherDeduction entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser3 = null;
+		}
+		
+		private void attach_TrnPayrollOtherDeductions4(TrnPayrollOtherDeduction entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser4 = this;
+		}
+		
+		private void detach_TrnPayrollOtherDeductions4(TrnPayrollOtherDeduction entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser4 = null;
+		}
+		
+		private void attach_TrnPayrollOtherIncomes(TrnPayrollOtherIncome entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser = this;
+		}
+		
+		private void detach_TrnPayrollOtherIncomes(TrnPayrollOtherIncome entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser = null;
+		}
+		
+		private void attach_TrnPayrollOtherIncomes1(TrnPayrollOtherIncome entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser1 = this;
+		}
+		
+		private void detach_TrnPayrollOtherIncomes1(TrnPayrollOtherIncome entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser1 = null;
+		}
+		
+		private void attach_TrnPayrollOtherIncomes2(TrnPayrollOtherIncome entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser2 = this;
+		}
+		
+		private void detach_TrnPayrollOtherIncomes2(TrnPayrollOtherIncome entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser2 = null;
+		}
+		
+		private void attach_TrnPayrollOtherIncomes3(TrnPayrollOtherIncome entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser3 = this;
+		}
+		
+		private void detach_TrnPayrollOtherIncomes3(TrnPayrollOtherIncome entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser3 = null;
+		}
+		
+		private void attach_TrnPayrollOtherIncomes4(TrnPayrollOtherIncome entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser4 = this;
+		}
+		
+		private void detach_TrnPayrollOtherIncomes4(TrnPayrollOtherIncome entity)
+		{
+			this.SendPropertyChanging();
+			entity.MstUser4 = null;
 		}
 	}
 }

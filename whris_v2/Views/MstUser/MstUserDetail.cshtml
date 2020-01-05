@@ -48,6 +48,7 @@
                     </span>Back
                 </button>
                 <button class="btn btn-outline-primary cmd-buttons pull-right btn-labeled"
+                        id="CmdPrint"
                         type="button">
                     <span class="btn-label">
                         <i class="fa fa-print"></i>
@@ -55,14 +56,18 @@
                     Print
                 </button>
                 <button class="btn btn-primary cmd-buttons pull-right btn-labeled"
-                        type="button">
+                        id="CmdUnlock"
+                        type="button"
+                         onclick="Unlock_OnClick()">
                     <span class="btn-label">
                         <i class="fa fa-pencil"></i>
                     </span>
                     Edit
                 </button>
                 <button class="btn btn-primary cmd-buttons pull-right btn-labeled"
-                        type="submit">
+                        id="CmdLock"
+                        type="submit"
+                         onclick="Lock_OnClick()">
                     <span class="btn-label">
                         <i class="fa fa-lock"></i>
                     </span>
@@ -96,7 +101,7 @@
                 <div class="form-group row">
                     @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
                     <div class="col-sm-9">
-                        @Html.PasswordFor(model => model.Password, new { @class = "form-control input-width-md", id = "PasswordMem", placeholder = "Password"})
+                        @Html.PasswordFor(model => model.Password, new { @class = "form-control input-width-md", id = "PasswordMem", placeholder = "Password", type = "text" })
                         @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -124,6 +129,22 @@
         location.href = "@Url.Action("Index","MstUser")";
     }
 
+    function Lock_OnClick()
+    {
+        $("#IsLockedMem").val(true);
+        $("#IsLockedMem").prop("checked", true);
+
+        pageFormLock();
+    }
+
+    function Unlock_OnClick()
+    {
+        $("#IsLockedMem").val(false);
+        $("#IsLockedMem").prop("checked", false);
+
+        pageFormLock();
+    }
+
     function cmbForm(container, options) {
         $('<input required name="' + options.field + '"/>')
             .appendTo(container)
@@ -145,6 +166,59 @@
         return null;
     }
 
+    function pageFormLock()
+    {
+        var isLocked = $("#IsLockedMem").is(":checked");
+
+        if (isLocked) {
+            var nodeList = document.getElementsByTagName("input");
+
+            for (item in nodeList) {
+                $("#" + nodeList[item].id).prop("disabled", true);
+            };
+
+            $(".k-header.k-grid-toolbar").addClass("k-state-disabled");
+            $(".k-grid-content.k-auto-scrollable").addClass("k-state-disabled");
+
+            $("#CmdLock").prop("disabled", true);
+            $("#CmdUnlock").prop("disabled", false);
+        }
+        else
+        {
+            var nodeList = document.getElementsByTagName("input");
+
+            for (item in nodeList) {
+                $("#" + nodeList[item].id).prop("disabled", false);
+            };
+
+            $(".k-header.k-grid-toolbar").removeClass("k-state-disabled");
+            $(".k-grid-content.k-auto-scrollable").removeClass("k-state-disabled");
+
+            $("#CmdLock").prop("disabled", false);
+            $("#CmdUnlock").prop("disabled", true);
+        }
+
+        $.ajax({
+            url: "@Url.Action("CurrentFormRights", "Security")?form=" + "MstUser",
+            async: false,
+            contentType: "application/json",
+            success: function (data) {
+                if (!data.CurrentUserForms.CanLock)
+                {
+                    $("#CmdLock").prop("disabled",true);
+                }
+                if (!data.CurrentUserForms.CanUnlock)
+                {
+                    $("#CmdUnlock").prop("disabled",true);
+                }
+                if (!data.CurrentUserForms.CanPrint)
+                {
+                    $("#CmdPrint").prop("disabled",true);
+                }
+            }
+        });
+    }
+
     $(document).ready(function ()
     {
         $.ajax({
@@ -160,6 +234,11 @@
         $("#MstUserLineGrid").kendoGrid({
             height: 400,
             columns: [
+                {
+                    command: ["destroy"],
+                    title: "&nbsp;",
+                    width: "120px"
+                },
                 {
                     width: "200px",
                     field: "FormId",
@@ -179,14 +258,7 @@
                 { width: "110px", field: "CanDelete", title: "Delete" },
                 { width: "110px", field: "CanLock", title: "Lock" },
                 { width: "110px", field: "CanUnlock", title: "Unlock" },
-                { width: "130px", field: "CanPreview", title: "Preview" },
-                { width: "100px", field: "CanPrint", title: "Print" },
-                { width: "100px", field: "CanView", title: "View" },
-                {
-                    command: ["destroy"],
-                    title: "&nbsp;",
-                    width: "200px"
-                }
+                { width: "100px", field: "CanPrint", title: "Print" }              
             ],
             editable: true,
             pageable: true,
@@ -217,9 +289,7 @@
                             CanDelete: { type: "boolean" },
                             CanLock: { type: "boolean" },
                             CanUnlock: { type: "boolean" },
-                            CanPreview: { type: "boolean" },
-                            CanPrint: { type: "boolean" },
-                            CanView: { type: "boolean" }
+                            CanPrint: { type: "boolean" }
                         }
                     }
                 },
@@ -266,5 +336,9 @@
             }
         });
     })
+
+    $(window).on('load', function () {
+        pageFormLock();
+    });
 </script>
 

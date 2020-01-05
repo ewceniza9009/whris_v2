@@ -52,25 +52,6 @@
       <Association Name="AspNetUser_AspNetUserRole" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.AspNetUsers" Member="AspNetUsers">
-    <Type Name="AspNetUser">
-      <Column Name="Id" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Email" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
-      <Column Name="EmailConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="PasswordHash" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="SecurityStamp" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="PhoneNumberConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="TwoFactorEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="LockoutEndDateUtc" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="LockoutEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="AccessFailedCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
-      <Association Name="AspNetUser_AspNetUserClaim" Member="AspNetUserClaims" ThisKey="Id" OtherKey="UserId" Type="AspNetUserClaim" />
-      <Association Name="AspNetUser_AspNetUserLogin" Member="AspNetUserLogins" ThisKey="Id" OtherKey="UserId" Type="AspNetUserLogin" />
-      <Association Name="AspNetUser_AspNetUserRole" Member="AspNetUserRoles" ThisKey="Id" OtherKey="UserId" Type="AspNetUserRole" />
-    </Type>
-  </Table>
   <Table Name="dbo.MstAccount" Member="MstAccounts">
     <Type Name="MstAccount">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -511,64 +492,6 @@
       <Association Name="MstTaxCode_TrnLeaveApplication" Member="TrnLeaveApplications" ThisKey="Id" OtherKey="CheckedBy" Type="TrnLeaveApplication" />
     </Type>
   </Table>
-  <Table Name="dbo.MstUser" Member="MstUsers">
-    <Type Name="MstUser">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="UserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="FullName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="EntryUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="EntryDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="UpdateUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="UpdateDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="IsLocked" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="MstUser_MstEmployeeLoan" Member="MstEmployeeLoans" ThisKey="Id" OtherKey="EntryUserId" Type="MstEmployeeLoan" />
-      <Association Name="MstUser_MstEmployeeLoan1" Member="MstEmployeeLoans1" ThisKey="Id" OtherKey="UpdateUserId" Type="MstEmployeeLoan" />
-      <Association Name="MstUser_MstShiftCode" Member="MstShiftCodes" ThisKey="Id" OtherKey="EntryUserId" Type="MstShiftCode" />
-      <Association Name="MstUser_MstShiftCode1" Member="MstShiftCodes1" ThisKey="Id" OtherKey="UpdateUserId" Type="MstShiftCode" />
-      <Association Name="MstUser_MstUserForm" Member="MstUserForms" ThisKey="Id" OtherKey="UserId" Type="MstUserForm" />
-      <Association Name="MstUser_MstUserPayrollGroup" Member="MstUserPayrollGroups" ThisKey="Id" OtherKey="UserId" Type="MstUserPayrollGroup" />
-      <Association Name="MstUser_TrnChangeShift" Member="TrnChangeShifts" ThisKey="Id" OtherKey="EntryUserId" Type="TrnChangeShift" />
-      <Association Name="MstUser_TrnChangeShift1" Member="TrnChangeShifts1" ThisKey="Id" OtherKey="UpdateUserId" Type="TrnChangeShift" />
-      <Association Name="MstUser_TrnChangeShift2" Member="TrnChangeShifts2" ThisKey="Id" OtherKey="PreparedBy" Type="TrnChangeShift" />
-      <Association Name="MstUser_TrnChangeShift3" Member="TrnChangeShifts3" ThisKey="Id" OtherKey="CheckedBy" Type="TrnChangeShift" />
-      <Association Name="MstUser_TrnChangeShift4" Member="TrnChangeShifts4" ThisKey="Id" OtherKey="ApprovedBy" Type="TrnChangeShift" />
-      <Association Name="MstUser_TrnDTR" Member="TrnDTRs" ThisKey="Id" OtherKey="EntryUserId" Type="TrnDTR" />
-      <Association Name="MstUser_TrnDTR1" Member="TrnDTRs1" ThisKey="Id" OtherKey="UpdateUserId" Type="TrnDTR" />
-      <Association Name="MstUser_TrnDTR2" Member="TrnDTRs2" ThisKey="Id" OtherKey="PreparedBy" Type="TrnDTR" />
-      <Association Name="MstUser_TrnDTR3" Member="TrnDTRs3" ThisKey="Id" OtherKey="CheckedBy" Type="TrnDTR" />
-      <Association Name="MstUser_TrnDTR4" Member="TrnDTRs4" ThisKey="Id" OtherKey="ApprovedBy" Type="TrnDTR" />
-      <Association Name="MstUser_TrnLastWithholdingTax" Member="TrnLastWithholdingTaxes" ThisKey="Id" OtherKey="EntryUserId" Type="TrnLastWithholdingTax" />
-      <Association Name="MstUser_TrnLastWithholdingTax1" Member="TrnLastWithholdingTaxes1" ThisKey="Id" OtherKey="UpdateUserId" Type="TrnLastWithholdingTax" />
-      <Association Name="MstUser_TrnLastWithholdingTax2" Member="TrnLastWithholdingTaxes2" ThisKey="Id" OtherKey="PreparedBy" Type="TrnLastWithholdingTax" />
-      <Association Name="MstUser_TrnLastWithholdingTax3" Member="TrnLastWithholdingTaxes3" ThisKey="Id" OtherKey="CheckedBy" Type="TrnLastWithholdingTax" />
-      <Association Name="MstUser_TrnLastWithholdingTax4" Member="TrnLastWithholdingTaxes4" ThisKey="Id" OtherKey="ApprovedBy" Type="TrnLastWithholdingTax" />
-      <Association Name="MstUser_TrnLeaveApplication" Member="TrnLeaveApplications" ThisKey="Id" OtherKey="EntryUserId" Type="TrnLeaveApplication" />
-      <Association Name="MstUser_TrnLeaveApplication1" Member="TrnLeaveApplications1" ThisKey="Id" OtherKey="UpdateUserId" Type="TrnLeaveApplication" />
-      <Association Name="MstUser_TrnLeaveApplication2" Member="TrnLeaveApplications2" ThisKey="Id" OtherKey="PreparedBy" Type="TrnLeaveApplication" />
-      <Association Name="MstUser_TrnLeaveApplication3" Member="TrnLeaveApplications3" ThisKey="Id" OtherKey="ApprovedBy" Type="TrnLeaveApplication" />
-      <Association Name="MstUser_TrnOverTime" Member="TrnOverTimes" ThisKey="Id" OtherKey="EntryUserId" Type="TrnOverTime" />
-      <Association Name="MstUser_TrnOverTime1" Member="TrnOverTimes1" ThisKey="Id" OtherKey="UpdateUserId" Type="TrnOverTime" />
-      <Association Name="MstUser_TrnOverTime2" Member="TrnOverTimes2" ThisKey="Id" OtherKey="PreparedBy" Type="TrnOverTime" />
-      <Association Name="MstUser_TrnOverTime3" Member="TrnOverTimes3" ThisKey="Id" OtherKey="CheckedBy" Type="TrnOverTime" />
-      <Association Name="MstUser_TrnOverTime4" Member="TrnOverTimes4" ThisKey="Id" OtherKey="ApprovedBy" Type="TrnOverTime" />
-      <Association Name="MstUser_TrnPayroll" Member="TrnPayrolls" ThisKey="Id" OtherKey="EntryUserId" Type="TrnPayroll" />
-      <Association Name="MstUser_TrnPayroll1" Member="TrnPayrolls1" ThisKey="Id" OtherKey="UpdateUserId" Type="TrnPayroll" />
-      <Association Name="MstUser_TrnPayroll2" Member="TrnPayrolls2" ThisKey="Id" OtherKey="PreparedBy" Type="TrnPayroll" />
-      <Association Name="MstUser_TrnPayroll3" Member="TrnPayrolls3" ThisKey="Id" OtherKey="CheckedBy" Type="TrnPayroll" />
-      <Association Name="MstUser_TrnPayroll4" Member="TrnPayrolls4" ThisKey="Id" OtherKey="ApprovedBy" Type="TrnPayroll" />
-      <Association Name="MstUser_TrnPayrollOtherDeduction" Member="TrnPayrollOtherDeductions" ThisKey="Id" OtherKey="EntryUserId" Type="TrnPayrollOtherDeduction" />
-      <Association Name="MstUser_TrnPayrollOtherDeduction1" Member="TrnPayrollOtherDeductions1" ThisKey="Id" OtherKey="UpdateUserId" Type="TrnPayrollOtherDeduction" />
-      <Association Name="MstUser_TrnPayrollOtherDeduction2" Member="TrnPayrollOtherDeductions2" ThisKey="Id" OtherKey="PreparedBy" Type="TrnPayrollOtherDeduction" />
-      <Association Name="MstUser_TrnPayrollOtherDeduction3" Member="TrnPayrollOtherDeductions3" ThisKey="Id" OtherKey="CheckedBy" Type="TrnPayrollOtherDeduction" />
-      <Association Name="MstUser_TrnPayrollOtherDeduction4" Member="TrnPayrollOtherDeductions4" ThisKey="Id" OtherKey="ApprovedBy" Type="TrnPayrollOtherDeduction" />
-      <Association Name="MstUser_TrnPayrollOtherIncome" Member="TrnPayrollOtherIncomes" ThisKey="Id" OtherKey="EntryUserId" Type="TrnPayrollOtherIncome" />
-      <Association Name="MstUser_TrnPayrollOtherIncome1" Member="TrnPayrollOtherIncomes1" ThisKey="Id" OtherKey="UpdateUserId" Type="TrnPayrollOtherIncome" />
-      <Association Name="MstUser_TrnPayrollOtherIncome2" Member="TrnPayrollOtherIncomes2" ThisKey="Id" OtherKey="PreparedBy" Type="TrnPayrollOtherIncome" />
-      <Association Name="MstUser_TrnPayrollOtherIncome3" Member="TrnPayrollOtherIncomes3" ThisKey="Id" OtherKey="CheckedBy" Type="TrnPayrollOtherIncome" />
-      <Association Name="MstUser_TrnPayrollOtherIncome4" Member="TrnPayrollOtherIncomes4" ThisKey="Id" OtherKey="ApprovedBy" Type="TrnPayrollOtherIncome" />
-    </Type>
-  </Table>
   <Table Name="dbo.MstUserForm" Member="MstUserForms">
     <Type Name="MstUserForm">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -582,8 +505,8 @@
       <Column Name="CanPreview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="CanPrint" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="CanView" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="MstUser_MstUserForm" Member="MstUser" ThisKey="UserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="SysForm_MstUserForm" Member="SysForm" ThisKey="FormId" OtherKey="Id" Type="SysForm" IsForeignKey="true" />
+      <Association Name="MstUser_MstUserForm" Member="MstUser" ThisKey="UserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.MstUserPayrollGroup" Member="MstUserPayrollGroups">
@@ -688,14 +611,14 @@
       <Association Name="TrnDTR_TrnPayroll" Member="TrnPayrolls" ThisKey="Id" OtherKey="DTRId" Type="TrnPayroll" />
       <Association Name="MstPayrollGroup_TrnDTR" Member="MstPayrollGroup" ThisKey="PayrollGroupId" OtherKey="Id" Type="MstPayrollGroup" IsForeignKey="true" />
       <Association Name="MstPeriod_TrnDTR" Member="MstPeriod" ThisKey="PeriodId" OtherKey="Id" Type="MstPeriod" IsForeignKey="true" />
+      <Association Name="TrnChangeShift_TrnDTR" Member="TrnChangeShift" ThisKey="ChangeShiftId" OtherKey="Id" Type="TrnChangeShift" IsForeignKey="true" />
+      <Association Name="TrnLeaveApplication_TrnDTR" Member="TrnLeaveApplication" ThisKey="LeaveApplicationId" OtherKey="Id" Type="TrnLeaveApplication" IsForeignKey="true" />
+      <Association Name="TrnOverTime_TrnDTR" Member="TrnOverTime" ThisKey="OvertTimeId" OtherKey="Id" Type="TrnOverTime" IsForeignKey="true" />
       <Association Name="MstUser_TrnDTR" Member="MstUser" ThisKey="EntryUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
       <Association Name="MstUser_TrnDTR1" Member="MstUser1" ThisKey="UpdateUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
       <Association Name="MstUser_TrnDTR2" Member="MstUser2" ThisKey="PreparedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
       <Association Name="MstUser_TrnDTR3" Member="MstUser3" ThisKey="CheckedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
       <Association Name="MstUser_TrnDTR4" Member="MstUser4" ThisKey="ApprovedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
-      <Association Name="TrnChangeShift_TrnDTR" Member="TrnChangeShift" ThisKey="ChangeShiftId" OtherKey="Id" Type="TrnChangeShift" IsForeignKey="true" />
-      <Association Name="TrnLeaveApplication_TrnDTR" Member="TrnLeaveApplication" ThisKey="LeaveApplicationId" OtherKey="Id" Type="TrnLeaveApplication" IsForeignKey="true" />
-      <Association Name="TrnOverTime_TrnDTR" Member="TrnOverTime" ThisKey="OvertTimeId" OtherKey="Id" Type="TrnOverTime" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.TrnDTRLine" Member="TrnDTRLines">
@@ -823,9 +746,9 @@
       <Association Name="TrnLeaveApplication_TrnLeaveLedger" Member="TrnLeaveLedgers" ThisKey="Id" OtherKey="LeaveApplicationId" Type="TrnLeaveLedger" />
       <Association Name="MstPayrollGroup_TrnLeaveApplication" Member="MstPayrollGroup" ThisKey="PayrollGroupId" OtherKey="Id" Type="MstPayrollGroup" IsForeignKey="true" />
       <Association Name="MstPeriod_TrnLeaveApplication" Member="MstPeriod" ThisKey="PeriodId" OtherKey="Id" Type="MstPeriod" IsForeignKey="true" />
+      <Association Name="MstTaxCode_TrnLeaveApplication" Member="MstTaxCode" ThisKey="CheckedBy" OtherKey="Id" Type="MstTaxCode" IsForeignKey="true" />
       <Association Name="MstUser_TrnLeaveApplication" Member="MstUser" ThisKey="EntryUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
       <Association Name="MstUser_TrnLeaveApplication1" Member="MstUser1" ThisKey="UpdateUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
-      <Association Name="MstTaxCode_TrnLeaveApplication" Member="MstTaxCode" ThisKey="CheckedBy" OtherKey="Id" Type="MstTaxCode" IsForeignKey="true" />
       <Association Name="MstUser_TrnLeaveApplication2" Member="MstUser2" ThisKey="PreparedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
       <Association Name="MstUser_TrnLeaveApplication3" Member="MstUser3" ThisKey="ApprovedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
     </Type>
@@ -966,14 +889,14 @@
       <Association Name="MstMonth_TrnPayroll" Member="MstMonth" ThisKey="MonthId" OtherKey="Id" Type="MstMonth" IsForeignKey="true" />
       <Association Name="MstPayrollGroup_TrnPayroll" Member="MstPayrollGroup" ThisKey="PayrollGroupId" OtherKey="Id" Type="MstPayrollGroup" IsForeignKey="true" />
       <Association Name="MstPeriod_TrnPayroll" Member="MstPeriod" ThisKey="PeriodId" OtherKey="Id" Type="MstPeriod" IsForeignKey="true" />
+      <Association Name="TrnDTR_TrnPayroll" Member="TrnDTR" ThisKey="DTRId" OtherKey="Id" Type="TrnDTR" IsForeignKey="true" />
+      <Association Name="TrnPayrollOtherDeduction_TrnPayroll" Member="TrnPayrollOtherDeduction" ThisKey="PayrollOtherDeductionId" OtherKey="Id" Type="TrnPayrollOtherDeduction" IsForeignKey="true" />
+      <Association Name="TrnPayrollOtherIncome_TrnPayroll" Member="TrnPayrollOtherIncome" ThisKey="PayrollOtherIncomeId" OtherKey="Id" Type="TrnPayrollOtherIncome" IsForeignKey="true" />
       <Association Name="MstUser_TrnPayroll" Member="MstUser" ThisKey="EntryUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
       <Association Name="MstUser_TrnPayroll1" Member="MstUser1" ThisKey="UpdateUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
       <Association Name="MstUser_TrnPayroll2" Member="MstUser2" ThisKey="PreparedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
       <Association Name="MstUser_TrnPayroll3" Member="MstUser3" ThisKey="CheckedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
       <Association Name="MstUser_TrnPayroll4" Member="MstUser4" ThisKey="ApprovedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
-      <Association Name="TrnDTR_TrnPayroll" Member="TrnDTR" ThisKey="DTRId" OtherKey="Id" Type="TrnDTR" IsForeignKey="true" />
-      <Association Name="TrnPayrollOtherDeduction_TrnPayroll" Member="TrnPayrollOtherDeduction" ThisKey="PayrollOtherDeductionId" OtherKey="Id" Type="TrnPayrollOtherDeduction" IsForeignKey="true" />
-      <Association Name="TrnPayrollOtherIncome_TrnPayroll" Member="TrnPayrollOtherIncome" ThisKey="PayrollOtherIncomeId" OtherKey="Id" Type="TrnPayrollOtherIncome" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.TrnPayrollLine" Member="TrnPayrollLines">
@@ -1106,6 +1029,86 @@
       <Association Name="MstUser_TrnPayrollOtherIncome2" Member="MstUser2" ThisKey="PreparedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
       <Association Name="MstUser_TrnPayrollOtherIncome3" Member="MstUser3" ThisKey="CheckedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
       <Association Name="MstUser_TrnPayrollOtherIncome4" Member="MstUser4" ThisKey="ApprovedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUsers" Member="AspNetUsers">
+    <Type Name="AspNetUser">
+      <Column Name="Id" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="EmailConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordHash" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="SecurityStamp" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PhoneNumberConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TwoFactorEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LockoutEndDateUtc" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LockoutEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AccessFailedCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Association Name="AspNetUser_AspNetUserClaim" Member="AspNetUserClaims" ThisKey="Id" OtherKey="UserId" Type="AspNetUserClaim" />
+      <Association Name="AspNetUser_AspNetUserLogin" Member="AspNetUserLogins" ThisKey="Id" OtherKey="UserId" Type="AspNetUserLogin" />
+      <Association Name="AspNetUser_AspNetUserRole" Member="AspNetUserRoles" ThisKey="Id" OtherKey="UserId" Type="AspNetUserRole" />
+      <Association Name="AspNetUser_MstUser" Member="MstUsers" ThisKey="Id" OtherKey="AspNetUserId" Type="MstUser" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstUser" Member="MstUsers">
+    <Type Name="MstUser">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="AspNetUserId" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="EntryUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EntryDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IsLocked" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="MstUser_MstEmployeeLoan" Member="MstEmployeeLoans" ThisKey="Id" OtherKey="EntryUserId" Type="MstEmployeeLoan" />
+      <Association Name="MstUser_MstEmployeeLoan1" Member="MstEmployeeLoans1" ThisKey="Id" OtherKey="UpdateUserId" Type="MstEmployeeLoan" />
+      <Association Name="MstUser_MstShiftCode" Member="MstShiftCodes" ThisKey="Id" OtherKey="EntryUserId" Type="MstShiftCode" />
+      <Association Name="MstUser_MstShiftCode1" Member="MstShiftCodes1" ThisKey="Id" OtherKey="UpdateUserId" Type="MstShiftCode" />
+      <Association Name="MstUser_MstUserForm" Member="MstUserForms" ThisKey="Id" OtherKey="UserId" Type="MstUserForm" />
+      <Association Name="MstUser_MstUserPayrollGroup" Member="MstUserPayrollGroups" ThisKey="Id" OtherKey="UserId" Type="MstUserPayrollGroup" />
+      <Association Name="MstUser_TrnChangeShift" Member="TrnChangeShifts" ThisKey="Id" OtherKey="EntryUserId" Type="TrnChangeShift" />
+      <Association Name="MstUser_TrnChangeShift1" Member="TrnChangeShifts1" ThisKey="Id" OtherKey="UpdateUserId" Type="TrnChangeShift" />
+      <Association Name="MstUser_TrnChangeShift2" Member="TrnChangeShifts2" ThisKey="Id" OtherKey="PreparedBy" Type="TrnChangeShift" />
+      <Association Name="MstUser_TrnChangeShift3" Member="TrnChangeShifts3" ThisKey="Id" OtherKey="CheckedBy" Type="TrnChangeShift" />
+      <Association Name="MstUser_TrnChangeShift4" Member="TrnChangeShifts4" ThisKey="Id" OtherKey="ApprovedBy" Type="TrnChangeShift" />
+      <Association Name="MstUser_TrnDTR" Member="TrnDTRs" ThisKey="Id" OtherKey="EntryUserId" Type="TrnDTR" />
+      <Association Name="MstUser_TrnDTR1" Member="TrnDTRs1" ThisKey="Id" OtherKey="UpdateUserId" Type="TrnDTR" />
+      <Association Name="MstUser_TrnDTR2" Member="TrnDTRs2" ThisKey="Id" OtherKey="PreparedBy" Type="TrnDTR" />
+      <Association Name="MstUser_TrnDTR3" Member="TrnDTRs3" ThisKey="Id" OtherKey="CheckedBy" Type="TrnDTR" />
+      <Association Name="MstUser_TrnDTR4" Member="TrnDTRs4" ThisKey="Id" OtherKey="ApprovedBy" Type="TrnDTR" />
+      <Association Name="MstUser_TrnLastWithholdingTax" Member="TrnLastWithholdingTaxes" ThisKey="Id" OtherKey="EntryUserId" Type="TrnLastWithholdingTax" />
+      <Association Name="MstUser_TrnLastWithholdingTax1" Member="TrnLastWithholdingTaxes1" ThisKey="Id" OtherKey="UpdateUserId" Type="TrnLastWithholdingTax" />
+      <Association Name="MstUser_TrnLastWithholdingTax2" Member="TrnLastWithholdingTaxes2" ThisKey="Id" OtherKey="PreparedBy" Type="TrnLastWithholdingTax" />
+      <Association Name="MstUser_TrnLastWithholdingTax3" Member="TrnLastWithholdingTaxes3" ThisKey="Id" OtherKey="CheckedBy" Type="TrnLastWithholdingTax" />
+      <Association Name="MstUser_TrnLastWithholdingTax4" Member="TrnLastWithholdingTaxes4" ThisKey="Id" OtherKey="ApprovedBy" Type="TrnLastWithholdingTax" />
+      <Association Name="MstUser_TrnLeaveApplication" Member="TrnLeaveApplications" ThisKey="Id" OtherKey="EntryUserId" Type="TrnLeaveApplication" />
+      <Association Name="MstUser_TrnLeaveApplication1" Member="TrnLeaveApplications1" ThisKey="Id" OtherKey="UpdateUserId" Type="TrnLeaveApplication" />
+      <Association Name="MstUser_TrnLeaveApplication2" Member="TrnLeaveApplications2" ThisKey="Id" OtherKey="PreparedBy" Type="TrnLeaveApplication" />
+      <Association Name="MstUser_TrnLeaveApplication3" Member="TrnLeaveApplications3" ThisKey="Id" OtherKey="ApprovedBy" Type="TrnLeaveApplication" />
+      <Association Name="MstUser_TrnOverTime" Member="TrnOverTimes" ThisKey="Id" OtherKey="EntryUserId" Type="TrnOverTime" />
+      <Association Name="MstUser_TrnOverTime1" Member="TrnOverTimes1" ThisKey="Id" OtherKey="UpdateUserId" Type="TrnOverTime" />
+      <Association Name="MstUser_TrnOverTime2" Member="TrnOverTimes2" ThisKey="Id" OtherKey="PreparedBy" Type="TrnOverTime" />
+      <Association Name="MstUser_TrnOverTime3" Member="TrnOverTimes3" ThisKey="Id" OtherKey="CheckedBy" Type="TrnOverTime" />
+      <Association Name="MstUser_TrnOverTime4" Member="TrnOverTimes4" ThisKey="Id" OtherKey="ApprovedBy" Type="TrnOverTime" />
+      <Association Name="MstUser_TrnPayroll" Member="TrnPayrolls" ThisKey="Id" OtherKey="EntryUserId" Type="TrnPayroll" />
+      <Association Name="MstUser_TrnPayroll1" Member="TrnPayrolls1" ThisKey="Id" OtherKey="UpdateUserId" Type="TrnPayroll" />
+      <Association Name="MstUser_TrnPayroll2" Member="TrnPayrolls2" ThisKey="Id" OtherKey="PreparedBy" Type="TrnPayroll" />
+      <Association Name="MstUser_TrnPayroll3" Member="TrnPayrolls3" ThisKey="Id" OtherKey="CheckedBy" Type="TrnPayroll" />
+      <Association Name="MstUser_TrnPayroll4" Member="TrnPayrolls4" ThisKey="Id" OtherKey="ApprovedBy" Type="TrnPayroll" />
+      <Association Name="MstUser_TrnPayrollOtherDeduction" Member="TrnPayrollOtherDeductions" ThisKey="Id" OtherKey="EntryUserId" Type="TrnPayrollOtherDeduction" />
+      <Association Name="MstUser_TrnPayrollOtherDeduction1" Member="TrnPayrollOtherDeductions1" ThisKey="Id" OtherKey="UpdateUserId" Type="TrnPayrollOtherDeduction" />
+      <Association Name="MstUser_TrnPayrollOtherDeduction2" Member="TrnPayrollOtherDeductions2" ThisKey="Id" OtherKey="PreparedBy" Type="TrnPayrollOtherDeduction" />
+      <Association Name="MstUser_TrnPayrollOtherDeduction3" Member="TrnPayrollOtherDeductions3" ThisKey="Id" OtherKey="CheckedBy" Type="TrnPayrollOtherDeduction" />
+      <Association Name="MstUser_TrnPayrollOtherDeduction4" Member="TrnPayrollOtherDeductions4" ThisKey="Id" OtherKey="ApprovedBy" Type="TrnPayrollOtherDeduction" />
+      <Association Name="MstUser_TrnPayrollOtherIncome" Member="TrnPayrollOtherIncomes" ThisKey="Id" OtherKey="EntryUserId" Type="TrnPayrollOtherIncome" />
+      <Association Name="MstUser_TrnPayrollOtherIncome1" Member="TrnPayrollOtherIncomes1" ThisKey="Id" OtherKey="UpdateUserId" Type="TrnPayrollOtherIncome" />
+      <Association Name="MstUser_TrnPayrollOtherIncome2" Member="TrnPayrollOtherIncomes2" ThisKey="Id" OtherKey="PreparedBy" Type="TrnPayrollOtherIncome" />
+      <Association Name="MstUser_TrnPayrollOtherIncome3" Member="TrnPayrollOtherIncomes3" ThisKey="Id" OtherKey="CheckedBy" Type="TrnPayrollOtherIncome" />
+      <Association Name="MstUser_TrnPayrollOtherIncome4" Member="TrnPayrollOtherIncomes4" ThisKey="Id" OtherKey="ApprovedBy" Type="TrnPayrollOtherIncome" />
+      <Association Name="AspNetUser_MstUser" Member="AspNetUser" ThisKey="AspNetUserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

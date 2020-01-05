@@ -1397,4 +1397,12 @@
             }
         });
     });
+
+    $(window).on('load', function () {
+        var nodeList = document.getElementsByTagName("input");
+
+        for(item in nodeList) {
+            console.log(nodeList[item]);
+        };
+    });
 </script>
