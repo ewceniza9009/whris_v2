@@ -295,6 +295,7 @@
     <Compile Include="Models\MstUser.cs" />
     <Compile Include="Models\MstUserLine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Menu.cs" />
     <Compile Include="Services\Security.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -1232,7 +1233,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Security\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

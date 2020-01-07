@@ -765,6 +765,14 @@ namespace whris_v2.Data
 				return this.GetTable<MstUser>();
 			}
 		}
+		
+		public System.Data.Linq.Table<WebMenu> WebMenus
+		{
+			get
+			{
+				return this.GetTable<WebMenu>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[__MigrationHistory]")]
@@ -26446,6 +26454,105 @@ namespace whris_v2.Data
 		{
 			this.SendPropertyChanging();
 			entity.MstUser4 = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.WebMenu")]
+	public partial class WebMenu
+	{
+		
+		private int _Id;
+		
+		private string _Category;
+		
+		private string _Menu;
+		
+		private string _Action;
+		
+		private string _Controller;
+		
+		public WebMenu()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this._Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Category", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Category
+		{
+			get
+			{
+				return this._Category;
+			}
+			set
+			{
+				if ((this._Category != value))
+				{
+					this._Category = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Menu", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Menu
+		{
+			get
+			{
+				return this._Menu;
+			}
+			set
+			{
+				if ((this._Menu != value))
+				{
+					this._Menu = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Action", DbType="NVarChar(50)")]
+		public string Action
+		{
+			get
+			{
+				return this._Action;
+			}
+			set
+			{
+				if ((this._Action != value))
+				{
+					this._Action = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Controller", DbType="NVarChar(50)")]
+		public string Controller
+		{
+			get
+			{
+				return this._Controller;
+			}
+			set
+			{
+				if ((this._Controller != value))
+				{
+					this._Controller = value;
+				}
+			}
 		}
 	}
 }
