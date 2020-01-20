@@ -259,6 +259,7 @@
     <Compile Include="Controllers\MstUserController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\TrnDTRController.cs" />
+    <Compile Include="Models\ComboBox\MstEmployee\CmbPayrollGroup.cs" />
     <Compile Include="Models\TrnDTRLine.cs" />
     <Compile Include="Data\whris.designer.cs">
       <AutoGen>True</AutoGen>

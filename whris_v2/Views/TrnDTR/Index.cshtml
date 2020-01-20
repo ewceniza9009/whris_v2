@@ -1,1 +1,226 @@
-﻿Yeah
+﻿@{
+    ViewBag.Title = "DTR";
+}
+
+<style>
+    .cmd-buttons {
+        margin-left: 10px;
+        width: 90px;
+    }
+</style>
+
+<div class="row" style="margin-bottom: 20px; margin-top: -20px">
+    <div class="col-md-6">
+        <h5 style="margin-top: 5px;">DTR</h5>
+    </div>
+
+    <div class="col-md-6">
+        <button class="btn btn-danger cmd-buttons pull-right btn-labeled"
+                type="button"
+                onclick="Back()">
+            <span class="btn-label">
+                <i class="fa fa-arrow-left"></i>
+            </span>Home
+        </button>
+        <button class="btn btn-primary cmd-buttons pull-right btn-labeled"
+                id="CmdAdd"
+                type="button"
+                onclick="Add()">
+            <span class="btn-label">
+                <i class="fa fa-plus-square"></i>
+            </span>
+            Add
+        </button>
+    </div>
+</div>
+
+<div id="content">
+    <div class="form-group row">
+        <div class="col-md-12">
+            @(Html.Kendo().ComboBox()
+                .Name("PayrollGroupFilter")
+                .Placeholder("Filter Payroll Group")
+                .DataTextField("PayrollGroup")
+                .DataValueField("Id")
+                .AutoWidth(true)
+                .HtmlAttributes(new { id = "PayrollGroupFilter"})
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                    {
+                        read.Action("CmbFilterByPayrollGroup", "TrnDTR");
+                    });
+                })
+            )
+        </div>
+    </div>
+
+    <div id="TrnDTRGrid"></div>
+</div>
+
+<script>
+    function Add() {
+        location.href = "@Url.Action("TrnDTRDetail","TrnDTR")?Id=0";
+    }
+
+    function Back()
+    {
+        location.href = "@Url.Action("Index","Home")";
+    }
+
+    function ShowUser(e) {
+        var tr = $(e.target).closest("tr");
+        var item = this.dataItem(tr);
+
+        location.href = "@Url.Action("TrnDTRDetail","TrnDTR")?modelId=" + item.Id;
+    }
+
+    function DeleteUser(e) {
+        var tr = $(e.target).closest("tr");
+        var item = this.dataItem(tr);
+
+        @*$.ajax({
+            url: "@Url.Action("DeleteUser", "MstUser")?modelId=" + item.Id,
+            type: "DELETE",
+            async: false,
+            contentType: "application/json",
+            success: function (data) {
+                $('#MstUserGrid').data('kendoGrid').dataSource.read();
+                $("#MstUserGrid").data('kendoGrid').refresh();
+
+                alert("Successfully Deleted!!!");
+            }
+        });*@
+    }
+
+    $("#PayrollGroupFilter").change(function () {
+        var grid = $('#TrnDTRGrid').data('kendoGrid');
+            var field = 'PayrollGroupId';
+            var operator = 'equals';
+            var value = $("#PayrollGroupFilter").val();
+            grid.dataSource.filter({
+              field: field,
+              operator: operator,
+              value: value
+            });
+    });
+
+    $(document).ready(function () {
+        var dtrGridDS = new kendo.data.DataSource({
+            serverPaging: true,
+            serverFiltering: true,
+            serverSorting: true,
+            pageSize: 10,
+            schema: {
+                data: "Data",
+                total: "Total",
+                model: {
+                    id: "Id",
+                    fields: {
+                        Id: { editable: false },
+                        DTRDate: { editable: false, type: "date" },
+                        DTRNumber: { editable: false },
+                        DateStart: { editable: false, type: "date" },
+                        DateEnd: { editable: false, type: "date" },
+                        Remarks: { editable: false },
+                        PayrollGroupId: {editable: false, type: "number"},
+                        IsLocked: { type: "boolean" }
+                    }
+                }
+            },
+            transport: {
+                read: {
+                    url: "@Url.Action("GetDTRList", "TrnDTR")",
+                    contentType: "application/json",
+                    type: "POST"
+                },
+                parameterMap: function (data, operation) {
+                    return JSON.stringify(data);
+                }
+            }
+        });
+
+         $("#TrnDTRGrid").kendoGrid({
+            height: 500,
+            columns: [
+                {
+                    command: {
+                        id: "CmdDetail",
+                        text: "Detail",
+                        click: ShowUser,
+                        className: "k-primary"
+                    },
+                    title: "Detail",
+                    width: 110
+
+                },
+                {
+                    command: {
+                        id: "CmdDelete",
+                        text: "Delete",
+                        click: DeleteUser,
+                        attributes: {
+                            "class": "btn btn-danger"
+                        }
+                    },
+                    title: "Delete",
+                    width: 110
+
+                },
+                {
+                    field: "Id",
+                    title: "Id",
+                    width: 80,
+                    hidden: true
+                },
+                {
+                    field: "DTRDate",
+                    title: "Date",
+                    format: "{0:MM/dd/yyyy}",
+                    width: 120
+                },
+                {
+                    field: "DTRNumber",
+                    title: "DTR No.",
+                    width: 120
+                },
+                {
+                    field: "DateStart",
+                    title: "Date St.",
+                    format: "{0:MM/dd/yyyy}",
+                    width: 120
+                },
+                {
+                    field: "DateEnd",
+                    title: "Date En.",
+                    format: "{0:MM/dd/yyyy}",
+                    width: 120
+                }
+                ,
+                {
+                    field: "Remarks",
+                    title: "Remarks"
+                },
+                {
+                    template: "<input type=\"checkbox\" #= IsLocked ? \"checked=checked\" : \"\" # disabled=\"disabled\"></input>",
+                    width: "50px",
+                    field: "IsLocked",
+                    title: "L"
+                },
+                {
+                    field: "PayrollGroupId",
+                    title: "PayrollGroupId",
+                    hidden: true
+                }
+            ],
+            sortable: true,
+            filterable: false,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+             },
+            dataSource: dtrGridDS
+        });
+    });
+</script>
