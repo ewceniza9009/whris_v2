@@ -17,9 +17,56 @@ namespace whris_v2.Controllers
         {
             return View();
         }
+
+        public ActionResult TrnDTRDetail(int modelId)
+        {
+            var result = new Models.TrnDTR();
+            var data = new Data.TrnDTR();
+
+            var mappingProfile = new Mapping.MappingProfile<Data.TrnDTR, Models.TrnDTR>();
+
+            using (whris = new Data.whrisDataContext())
+            {
+                data = whris.TrnDTRs.Where(x => x.Id == modelId).FirstOrDefault();
+
+                if (modelId == 0)
+                {
+                    var DefaultPeriodId = whris.MstPeriods.LastOrDefault().Id;
+
+                    var maxDTRNumber = Int64.Parse(whris.TrnDTRs.Max(x => x.DTRNumber).Substring(5, 6));
+
+                    var DefaultDTRNumber = DateTime.Now.Year + "-" + (maxDTRNumber + 1000001).ToString().Substring(1, 6);
+
+                    var DefaultPayrollGroupId = whris.MstPayrollGroups.FirstOrDefault().Id;
+                    var DefaultDTRDate = DateTime.Now;
+
+
+                    data = new Data.TrnDTR
+                    {
+                        Id = 0,
+                        PeriodId = DefaultPeriodId,
+                        DTRNumber = DefaultDTRNumber,
+                        DTRDate = DefaultDTRDate,
+                        PayrollGroupId = DefaultPayrollGroupId,
+                        DateStart = DefaultDTRDate,
+                        DateEnd = DefaultDTRDate,
+                        Remarks = "NA",
+                        EntryUserId = 1,
+                        EntryDateTime = DateTime.Now,
+                        UpdateUserId = 1,
+                        UpdateDateTime = DateTime.Now,
+                        IsLocked = false
+                    };
+                }
+            }
+
+            result = mappingProfile.mapper.Map<Data.TrnDTR, Models.TrnDTR>(data);
+
+            return View(result);
+        }
         #endregion
 
-        public JsonResult GetDTRList(int take, int skip, IEnumerable<Sort> sort, Kendo.DynamicLinq.Filter filter) 
+        public JsonResult GetDTRList(int take, int skip, IEnumerable<Sort> sort, Kendo.DynamicLinq.Filter filter)
         {
             if (filter != null)
             {
@@ -31,16 +78,16 @@ namespace whris_v2.Controllers
                         {
                             f.Value = int.Parse(f.Value.ToString());
                         }
-                        else if(f.Field == "PayrollGroupId" && f.Value == null) 
+                        else if (f.Field == "PayrollGroupId" && f.Value == null)
                         {
                             filter = null;
                         }
                     }
                 }
-                
+
             }
 
-            using (whris = new Data.whrisDataContext()) 
+            using (whris = new Data.whrisDataContext())
             {
                 var result = whris.TrnDTRs
                     .Select(x => new Models.TrnDTR
@@ -57,6 +104,76 @@ namespace whris_v2.Controllers
 
                 return Json(result);
             }
+        }
+
+        public JsonResult CmbPeriod()
+        {
+            whris = new Data.whrisDataContext();
+
+            var result = from i in whris.MstPeriods
+                         select new Models.ComboBox.MstEmployee.CmbPeriod
+                         {
+                             Id = i.Id,
+                             Period = i.Period
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult CmbPayrollGroup() 
+        {
+            whris = new Data.whrisDataContext();
+
+            var result = from i in whris.MstPayrollGroups
+                         select new Models.ComboBox.MstEmployee.CmbPayrollGroup
+                         {
+                             Id = i.Id,
+                             PayrollGroup = i.PayrollGroup
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult CmbPreparedBy() 
+        {
+            whris = new Data.whrisDataContext();
+
+            var result = from i in whris.MstUsers
+                         select new Models.ComboBox.MstEmployee.CmbUser
+                         {
+                             Id = i.Id,
+                             UserName = i.UserName
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult CmbCheckedBy()
+        {
+            whris = new Data.whrisDataContext();
+
+            var result = from i in whris.MstUsers
+                         select new Models.ComboBox.MstEmployee.CmbUser
+                         {
+                             Id = i.Id,
+                             UserName = i.UserName
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult CmbApprovedBy()
+        {
+            whris = new Data.whrisDataContext();
+
+            var result = from i in whris.MstUsers
+                         select new Models.ComboBox.MstEmployee.CmbUser
+                         {
+                             Id = i.Id,
+                             UserName = i.UserName
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult CmbFilterByPayrollGroup()

@@ -1,0 +1,168 @@
+﻿@model whris_v2.Models.TrnDTR
+
+@{
+    ViewBag.Title = "DTR Detail";
+}
+
+<style>
+    .cmd-buttons {
+        margin-left: 10px;
+        width: 90px;
+    }
+
+    .row-padding {
+        padding-top: 5px;
+    }
+
+    .input-width-sm {
+        width: 100px;
+    }
+
+    .input-width-md {
+        width: 180px;
+    }
+
+    .input-width-lg {
+        width: 500px;
+    }
+
+    .ui-label {
+        padding-top: 7px;
+        padding-left: 0px;
+    }
+</style>
+
+<div id="model">
+    @using (Ajax.BeginForm("", "", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "model", OnSuccess = "ModelSaveSuccess" }))
+    {
+        <div class="row" style="margin-bottom: 20px; margin-top: -20px">
+            <div class="col-md-6">
+                <h5 style="margin-top: 5px;">DTR Detail</h5>
+            </div>
+            <div class="col-md-6">
+                <button class="btn btn-danger cmd-buttons pull-right btn-labeled"
+                        type="button"
+                        onclick="Close_OnClick()">
+                    <span class="btn-label">
+                        <i class="fa fa-arrow-left"></i>
+                    </span>Back
+                </button>
+                <button class="btn btn-outline-primary cmd-buttons pull-right btn-labeled"
+                        type="button">
+                    <span class="btn-label">
+                        <i class="fa fa-print"></i>
+                    </span>
+                    Print
+                </button>
+                <button class="btn btn-primary cmd-buttons pull-right btn-labeled"
+                        type="button">
+                    <span class="btn-label">
+                        <i class="fa fa-pencil"></i>
+                    </span>
+                    Edit
+                </button>
+                <button class="btn btn-primary cmd-buttons pull-right btn-labeled"
+                        type="submit">
+                    <span class="btn-label">
+                        <i class="fa fa-lock"></i>
+                    </span>
+                    Save
+                </button>
+            </div>
+        </div>
+
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id, new { id = "IdMem" })
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.PeriodId, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                    <div class="col-sm-9">
+                        @(Html.Kendo().ComboBoxFor(model => model.PeriodId)
+                           .Placeholder("Period")
+                           .DataTextField("Period")
+                           .DataValueField("Id")
+                           .DataSource(source =>
+                                   {
+                               source.Read(read =>
+                               {
+                                   read.Action("CmbPeriod", "TrnDTR");
+                               });
+                           })
+                        )
+                        @Html.ValidationMessageFor(model => model.PeriodId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.DTRNumber, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.DTRNumber, new { @class = "form-control input-width-md", id = "DTRNumberMem", placeholder = "DTR Number", type = "text" })
+                        @Html.ValidationMessageFor(model => model.DTRNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.DTRDate, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.DTRDate, new { @class = "form-control input-width-md", id = "DTRDateMem", placeholder = "DTR Date" })
+                        @Html.ValidationMessageFor(model => model.DTRDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.PayrollGroupId, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                    <div class="col-sm-9">
+                        @(Html.Kendo().ComboBoxFor(model => model.PayrollGroupId)
+                           .Placeholder("Payroll Group")
+                           .DataTextField("PayrollGroup")
+                           .DataValueField("Id")
+                           .AutoWidth(true)
+                           .HtmlAttributes(new { style = "width: 280px;" })
+                           .DataSource(source =>
+                                   {
+                               source.Read(read =>
+                               {
+                                   read.Action("CmbPayrollGroup", "TrnDTR");
+                               });
+                           })
+                        )
+                        @Html.ValidationMessageFor(model => model.PayrollGroupId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.DateStart, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.DateStart, new { @class = "form-control input-width-md", id = "DateStartMem", placeholder = "Date Start" })
+                        @Html.ValidationMessageFor(model => model.DateStart, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.DateEnd, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.DateEnd, new { @class = "form-control input-width-md", id = "DateEndMem", placeholder = "Date Start" })
+                        @Html.ValidationMessageFor(model => model.DateEnd, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.Remarks, new { @class = "form-control input-width-md", id = "RemarksMem", placeholder = "Remarks", type = "text" })
+                        @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+
+            </div>
+        </div>
+    }
+</div>
+
