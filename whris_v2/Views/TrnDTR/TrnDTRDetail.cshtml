@@ -295,6 +295,539 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="row" style="padding: 10px 10px 10px 0px">
+                <div class="col-md-12">
+                    <div id="TrnDTRDetailSF1">
+                    </div>
+                </div>
+            </div>
+        </div>
     }
 </div>
+
+<script>
+    var dtrId = 0;
+    var employees = null;
+    var shiftCodes = null;
+    var dayTypes = null;
+
+    function GetParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    function DTRLineDataSource(dtrId)
+    {
+        var dataSource = new kendo.data.DataSource({
+            serverPaging: true,
+            serverFiltering: true,
+            serverSorting: true,
+            pageSize: 10,
+            schema: {
+                data: "Data",
+                total: "Total",
+                model: {
+                    id: "Id",
+                    fields: {
+                        Id: { editable: false },
+                        DTRId: { editable: false },
+                        EmployeeId: { editable: true },
+                        ShiftCodeId: { editable: true },
+                        Date: { editable: true },
+                        TimeIn1: { editable: true },
+                        TimeOut1: { editable: true },
+                        TimeIn2: { editable: true },
+                        TimeOut2: { editable: true },
+                        OfficialBusiness: { editable: true },
+                        OnLeave: { editable: true },
+                        Absent: { editable: true },
+                        HalfDayAbsent: { editable: true },
+                        RegularHours: { editable: true },
+                        NightHours: { editable: true },
+                        OvertimeHours: { editable: true },
+                        OvertimeNightHours: { editable: true },
+                        GrossTotalHours: { editable: true },
+                        TardyLateHours: { editable: true },
+                        TardyUndertimeHours: { editable: true },
+                        NetTotalHours: { editable: true },
+                        DayTypeId: { editable: true },
+                        RestDay: { editable: true },
+                        DayMultiplier: { editable: true },
+                        RatePerHour: { editable: true },
+                        RatePerNightHour: { editable: true },
+                        RatePerOvertimeHour: { editable: true },
+                        RatePerOvertimeNightHour: { editable: true },
+                        RegularAmount: { editable: true },
+                        NightAmount: { editable: true },
+                        OvertimeAmount: { editable: true },
+                        OvertimeNightAmount: { editable: true },
+                        TotalAmount: { editable: true },
+                        RatePerHourTardy: { editable: true },
+                        RatePerAbsentDay: { editable: true },
+                        RatePerAbsentAmount: { editable: true },
+                        NetAmount: { editable: true },
+                    }
+                }
+            },
+            batch: true,
+            transport: {
+                create: {
+                    url: "@Url.Action("CreateDTRLine", "TrnDTR")?modelFilterId=" + dtrId,
+                    type: "POST"
+                },
+                read: {
+                    url: "@Url.Action("ReadDTRLines", "TrnDTR")?modelFilterId=" + dtrId,
+                    contentType: "application/json",
+                    type: "POST"
+                },
+                update: {
+                    url:"@Url.Action("UpdateDTRLine", "TrnDTR")?modelFilterId=" + dtrId,
+                    type: "POST"
+                },
+                destroy: {
+                    url: "@Url.Action("DestroyDTRLine", "TrnDTR")?modelFilterId=" + dtrId,
+                    type: "POST"
+                },
+                parameterMap: function (data, operation)
+                {
+                    if (operation !== "read") {
+                        var result = {};
+
+                        for (var i = 0; i < data.models.length; i++) {
+                            var dtrLines = data.models[i];
+
+                            for (var member in dtrLines) {
+                                if (dtrLines.hasOwnProperty(member)) {
+                                    result["models[" + i + "]." + member] = dtrLines[member];
+                                }
+                            }
+                        }
+
+                        return result;
+                    }
+                    else
+                    {
+                        return JSON.stringify(data);
+                    }
+                }
+            }           
+        });
+
+        return dataSource;
+    }
+
+    function CmbEmployee(container, options)
+    {
+        $('<input required name="' + options.field + '"/>')
+            .appendTo(container)
+            .kendoDropDownList({
+                autoBind: false,
+                dataTextField: "FullName",
+                dataValueField: "Id",
+                dataSource: employees
+            });
+    }
+
+    function GetEmployees(employeeId)
+    {
+        for (var idx = 0, length = employees.length; idx < length; idx++)
+        {
+            if (employees[idx].Id === employeeId)
+            {
+                return employees[idx].FullName;
+            }
+        }
+
+        return null;
+    }
+
+    function CmbShiftCode(container, options)
+    {
+        $('<input required name="' + options.field + '"/>')
+            .appendTo(container)
+            .kendoDropDownList({
+                autoBind: false,
+                dataTextField: "ShiftCode",
+                dataValueField: "Id",
+                dataSource: shiftCodes
+            });
+    }
+
+    function GetShiftCodes(shiftCodeId)
+    {
+        for (var idx = 0, length = shiftCodes.length; idx < length; idx++)
+        {
+            if (shiftCodes[idx].Id === shiftCodeId)
+            {
+                return shiftCodes[idx].ShiftCode;
+            }
+        }
+
+        return null;
+    }
+
+    function CmbDayType(container, options)
+    {
+        $('<input required name="' + options.field + '"/>')
+            .appendTo(container)
+            .kendoDropDownList({
+                autoBind: false,
+                dataTextField: "DayType",
+                dataValueField: "Id",
+                dataSource: dayTypes
+            });
+    }
+
+    function GetDaytypes(dayTypeId)
+    {
+        for (var idx = 0, length = dayTypes.length; idx < length; idx++)
+        {
+            if (dayTypes[idx].Id === dayTypeId)
+            {
+                return dayTypes[idx].DayType;
+            }
+        }
+
+        return null;
+    }
+
+    $(document).ready(function () {
+        dtrId = GetParameterByName('modelId');
+
+        $("#TrnDTRDetailSF1").kendoGrid({
+            columns: [
+                {
+                    command: ["destroy"],
+                    title: "&nbsp;",
+                    width: 110
+                },
+                {
+                    width: "0px",
+                    field: "Id",
+                    title: "Id",
+                    hidden: true
+                },
+                {
+                    width: "0px",
+                    field: "DTRId",
+                    title: "DTRId",
+                    hidden: true
+                },
+                {
+                    width: 210,
+                    field: "EmployeeId",
+                    title: "Employee",
+                    editor: CmbEmployee,
+                    template: "#=GetEmployees(EmployeeId)#"
+                },
+                {
+                    width: 100,
+                    field: "ShiftCodeId",
+                    title: "Shift Code",
+                    editor: CmbShiftCode,
+                    template: "#=GetShiftCodes(ShiftCodeId)#"
+                },
+                {
+                    width: 100,
+                    field: "Date",
+                    title: "Date",
+                    type: "date",
+                    format: "{0:MM/dd/yyyy}"
+                },
+                {
+                    title: "Day",
+                    columns: [{
+                        width: 100,
+                        field: "DayTypeId",
+                        title: "Type",
+                        editor: CmbDayType,
+                        template: "#=GetDaytypes(DayTypeId)#"
+                    },
+                    {
+                        width: 100,
+                        field: "DayMultiplier",
+                        title: "DM"
+                    }]
+                },  
+                {
+                    width: 100,
+                    field: "RestDay",
+                    title: "RD",
+                    template: "<input type=\"checkbox\" #= RestDay ? \"checked=checked\" : \"\" # disabled=\"disabled\"></input>",
+                },
+                {
+                    width: 100,
+                    field: "TimeIn1",
+                    title: "TimeIn1",
+                    type: "date",
+                    format: "{0:MM/dd/yyyy}"
+                },
+                {
+                    width: 100,
+                    field: "TimeOut1",
+                    title: "TimeOut1",
+                    type: "date",
+                    format: "{0:MM/dd/yyyy}"
+                },
+                {
+                    width: 100,
+                    field: "TimeIn2",
+                    title: "TimeIn2",
+                    type: "date",
+                    format: "{0:MM/dd/yyyy}"
+                },
+                {
+                    width: 100,
+                    field: "TimeOut2",
+                    title: "TimeOut2",
+                    type: "date",
+                    format: "{0:MM/dd/yyyy}"
+                },
+                {
+                    title: "DTR Status",
+                    columns: [{
+                        width: 100,
+                        field: "OfficialBusiness",
+                        title: "OB",
+                        template: "<input type=\"checkbox\" #= OfficialBusiness ? \"checked=checked\" : \"\" # disabled=\"disabled\"></input>",
+                    },
+                    {
+                        width: 100,
+                        field: "OnLeave",
+                        title: "OL",
+                        template: "<input type=\"checkbox\" #= OnLeave ? \"checked=checked\" : \"\" # disabled=\"disabled\"></input>",
+                    },
+                    {
+                        width: 100,
+                        field: "Absent",
+                        title: "A",
+                        template: "<input type=\"checkbox\" #= Absent ? \"checked=checked\" : \"\" # disabled=\"disabled\"></input>",
+                    },
+                    {
+                        width: 100,
+                        field: "HalfdayAbsent",
+                        title: "HA",
+                        template: "<input type=\"checkbox\" #= HalfdayAbsent ? \"checked=checked\" : \"\" # disabled=\"disabled\"></input>",
+                    }]
+                },
+                {
+                    title: "Work Hours",
+                    columns: [{
+                        width: 100,
+                        field: "RegularHours",
+                        title: "Reg",
+                        type: "number",
+                        validation: { min: 0, required: true }
+                    },
+                    {
+                        width: 100,
+                        field: "NightHours",
+                        title: "N",
+                        type: "number",
+                        validation: { min: 0, required: true }
+                    },
+                    {
+                        width: 100,
+                        field: "OvertimeHours",
+                        title: "OT",
+                        type: "number",
+                        validation: { min: 0, required: true }
+                    },
+                    {
+                        width: 100,
+                        field: "OvertimeNightHours",
+                        title: "OTN",
+                        type: "number",
+                        validation: { min: 0, required: true }
+                    },
+                    {
+                        width: 100,
+                        field: "GrossTotalHours",
+                        title: "Total",
+                        type: "number",
+                        validation: { min: 0, required: true }
+                    }]
+                },
+                {
+                    title: "Tardy Hours",
+                    columns: [{
+                        width: 100,
+                        field: "TardyLateHours",
+                        title: "Late",
+                        type: "number",
+                        validation: { min: 0, required: true }
+                    },
+                    {
+                        width: 100,
+                        field: "TardyUndertimeHours",
+                        title: "UT",
+                        type: "number",
+                        validation: { min: 0, required: true }
+                    }]
+                },
+                {
+                    width: 100,
+                    field: "NetTotalHours",
+                    title: "Net Hours",
+                    type: "number",
+                    validation: { min: 0, required: true }
+                },
+                {
+                    title: "Rate per Hour",
+                    columns: [{
+                        width: 100,
+                        field: "RatePerHour",
+                        title: "Reg",
+                        type: "number",
+                        validation: { min: 0, required: true }
+                    },
+                    {
+                        width: 100,
+                        field: "RatePerNightHour",
+                        title: "N",
+                        type: "number",
+                        validation: { min: 0, required: true }
+                    },
+                    {
+                        width: 100,
+                        field: "RatePerOvertimeHour",
+                        title: "OT",
+                        type: "number",
+                        validation: { min: 0, required: true }
+                    },
+                    {
+                        width: 100,
+                        field: "RatePerOvertimeNightHour",
+                        title: "OTN",
+                        type: "number",
+                        validation: { min: 0, required: true }
+                    }]
+                },
+                {
+                    title: "Amount",
+                    columns: [{
+                        width: 100,
+                        field: "RegularAmount",
+                        title: "Reg",
+                        type: "number",
+                        validation: { min: 0, required: true }
+                    },
+                    {
+                        width: 100,
+                        field: "NightAmount",
+                        title: "N",
+                        type: "number",
+                        validation: { min: 0, required: true }
+                    },
+                    {
+                        width: 100,
+                        field: "OvertimeAmount",
+                        title: "OT",
+                        type: "number",
+                        validation: { min: 0, required: true }
+                    },
+                    {
+                        width: 100,
+                        field: "OvertimeNightAmount",
+                        title: "OTN",
+                        type: "number",
+                        validation: { min: 0, required: true }
+                    }]
+                },
+                {
+                    width: 100,
+                    field: "TotalAmount",
+                    title: "Ttl Amt",
+                    type: "number",
+                    validation: { min: 0, required: true }
+                },
+                {
+                    width: 100,
+                    field: "RatePerHourTardy",
+                    title: "Tardy RPH",
+                    type: "number",
+                    validation: { min: 0, required: true }
+                },
+                {
+                    width: 100,
+                    field: "TardyAmount",
+                    title: "Tardy Amt",
+                    type: "number",
+                    validation: { min: 0, required: true }
+                },
+                {
+                    width: 100,
+                    field: "RatePerAbsentDay",
+                    title: "Abs RPD",
+                    type: "number",
+                    validation: { min: 0, required: true }
+                },
+                {
+                    width: 100,
+                    field: "AbsentAmount",
+                    title: "Abs Amt",
+                    type: "number",
+                    validation: { min: 0, required: true }
+                },
+                {
+                    width: 100,
+                    field: "NetAmount",
+                    title: "Net Amt",
+                    type: "number",
+                    validation: { min: 0, required: true }
+                }                
+            ],
+            editable: true,
+            pageable: true,
+            sortable: true,
+            filterable: true,
+            toolbar: ["create", "save", "cancel"],
+            dataBound: function(e){
+              $('.k-grid-add').unbind("click");
+
+              $('.k-grid-add').bind("click", function(){
+                  ReloadPage();
+              });
+            },
+            dataSource: DTRLineDataSource(dtrId)
+        });
+
+        $.ajax({
+            url: "@Url.Action("CmbEmployee", "TrnDTR")",
+            type: "GET",
+            async: false,
+            contentType: "application/json",
+            success: function(data) {
+                employees = data;
+            }
+        });
+
+        $.ajax({
+            url: "@Url.Action("CmbShiftCodes", "TrnDTR")",
+            type: "GET",
+            async: false,
+            contentType: "application/json",
+            success: function(data) {
+                shiftCodes = data;
+            }
+        });
+
+        $.ajax({
+            url: "@Url.Action("CmbDaytype", "TrnDTR")",
+            type: "GET",
+            async: false,
+            contentType: "application/json",
+            success: function(data) {
+                dayTypes = data;
+            }
+        });
+    });
+</script>
 

@@ -64,20 +64,6 @@ namespace whris_v2.Controllers
 
             return View(result);
         }
-
-        public JsonResult ReadDTRLines(int take, int skip, IEnumerable<Sort> sort, Kendo.DynamicLinq.Filter filter, int modelFilterId) 
-        {
-            using (whris = new Data.whrisDataContext()) 
-            {
-                var result = whris.TrnDTRLines
-                    .Where(x => x.DTRId == modelFilterId)
-                    .Select(x => new Models.TrnDTRLine()
-                    {
-                    });
-            }
-
-            return null;
-        }
         #endregion
 
         public JsonResult GetDTRList(int take, int skip, IEnumerable<Sort> sort, Kendo.DynamicLinq.Filter filter)
@@ -119,7 +105,36 @@ namespace whris_v2.Controllers
                 return Json(result);
             }
         }
+        public JsonResult ReadDTRLines(int take, int skip, IEnumerable<Sort> sort, Kendo.DynamicLinq.Filter filter, int modelFilterId)
+        {
+            var result = new DataSourceResult();
+            var mappingProfile = new Mapping.MappingProfile<Data.TrnDTRLine, Models.TrnDTRLine>();
 
+            using (whris = new Data.whrisDataContext())
+            {
+                var data = whris.TrnDTRLines.Where(x => x.DTRId == modelFilterId).ToList();
+                var outputData = mappingProfile.mapper.Map<List<Data.TrnDTRLine>, List<Models.TrnDTRLine>>(data);
+
+                result = outputData.AsQueryable().ToDataSourceResult(take, skip, sort, filter);
+            } 
+
+            return Json(result);
+        }
+
+        public JsonResult CreateDTRLine(IEnumerable<Models.TrnDTRLine> models, int modelFilterId) 
+        {
+            return null;
+        }
+
+        public JsonResult UpdateDTRLine(IEnumerable<Models.TrnDTRLine> models, int modelFilterId)
+        {
+            return null;
+        }
+
+        public JsonResult DestroyDTRLine(IEnumerable<Models.TrnDTRLine> models, int modelFilterId)
+        {
+            return null;
+        }
         public JsonResult CmbPeriod()
         {
             whris = new Data.whrisDataContext();
@@ -241,6 +256,48 @@ namespace whris_v2.Controllers
                          { 
                             Id = i.Id,
                             PayrollGroup = i.PayrollGroup
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult CmbEmployee() 
+        {
+            whris = new Data.whrisDataContext();
+
+            var result = from i in whris.MstEmployees
+                         select new Models.ComboBox.TrnDTR.CmbEmployee
+                         {
+                             Id = i.Id,
+                             FullName = i.FullName
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult CmbShiftCodes() 
+        {
+            whris = new Data.whrisDataContext();
+
+            var result = from i in whris.MstShiftCodes
+                         select new Models.ComboBox.MstEmployee.CmbEmployeeShiftCode
+                         {
+                             Id = i.Id,
+                             ShiftCode = i.ShiftCode
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult CmbDaytype()
+        {
+            whris = new Data.whrisDataContext();
+
+            var result = from i in whris.MstDayTypes
+                         select new Models.ComboBox.TrnDTR.CmbDaytype
+                         {
+                             Id = i.Id,
+                             DayType = i.DayType
                          };
 
             return Json(result, JsonRequestBehavior.AllowGet);

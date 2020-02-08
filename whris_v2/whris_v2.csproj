@@ -275,6 +275,8 @@
     <Compile Include="Models\ComboBox\MstEmployee\CmbPeriod.cs" />
     <Compile Include="Models\ComboBox\MstEmployee\CmbUser.cs" />
     <Compile Include="Models\ComboBox\TrnDTR\CmbChangeShift.cs" />
+    <Compile Include="Models\ComboBox\TrnDTR\CmbDaytype.cs" />
+    <Compile Include="Models\ComboBox\TrnDTR\CmbEmployee.cs" />
     <Compile Include="Models\ComboBox\TrnDTR\CmbLANumber.cs" />
     <Compile Include="Models\ComboBox\TrnDTR\CmbOvertime.cs" />
     <Compile Include="Models\TrnDTRLine.cs" />

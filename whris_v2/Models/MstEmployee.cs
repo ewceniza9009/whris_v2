@@ -8,7 +8,7 @@ namespace whris_v2.Models
 {
     public class MstEmployee
     {
-        #region List
+        #region List View
         public int Id { get; set; }
         [Display(Name = "Id Number")]
         public string IdNumber { get; set; }
