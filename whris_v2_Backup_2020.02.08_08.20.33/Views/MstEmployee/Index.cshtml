@@ -1,0 +1,190 @@
+﻿@{
+    ViewBag.Title = "Employee";
+}
+
+<style>
+    .cmd-buttons {
+        margin-left: 10px;
+        width: 90px;
+    }
+</style>
+
+<div class="row" style="margin-bottom: 20px; margin-top: -20px">
+    <div class="col-md-6">
+        <h5 style="margin-top: 5px;">Employee</h5>
+    </div>
+
+    <div class="col-md-6">
+        <button class="btn btn-danger cmd-buttons pull-right btn-labeled"
+                type="button"
+                onclick="Back()">
+            <span class="btn-label">
+                <i class="fa fa-arrow-left"></i>
+            </span>Home
+        </button>
+        <button class="btn btn-primary cmd-buttons pull-right btn-labeled"
+                type="button"
+                onclick="Add()">
+            <span class="btn-label">
+                <i class="fa fa-plus-square"></i>
+            </span>
+            Add
+        </button>
+    </div>
+</div>
+
+<div id="content">
+    <div id="MstEmployeeGrid"></div>
+    
+</div>
+
+<script>
+    function Add() {
+        location.href = "@Url.Action("MstEmployeeDetail","MstEmployee")?modelId=" + "0";
+    }
+
+    function Back()
+    {
+        location.href = "@Url.Action("Index","Home")";
+    }
+
+    function ShowEmployee(e) {
+        var tr = $(e.target).closest("tr");
+        var item = this.dataItem(tr);
+
+        location.href = "@Url.Action("MstEmployeeDetail", "MstEmployee")" + "?modelId=" + item.Id;
+    }
+
+    function DeleteEmployee(e) {
+        var tr = $(e.target).closest("tr");
+        var item = this.dataItem(tr);
+
+        $.ajax({
+            url: "@Url.Action("DeleteEmployee", "MstEmployee")",
+            contentType: "application/json",
+            data: {
+                'modelId': item.Id
+            },
+            success: function (data) {
+                toastr["success"]("Deleted!")
+
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+
+                $("#MstEmployeeGrid").data("kendoGrid").dataSource.read();
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        $("#MstEmployeeGrid").kendoGrid({
+            height: 500,
+            columns: [
+                {
+                    command: {
+                        text: "Detail",
+                        click: ShowEmployee,
+                        className: "k-primary"
+                    },
+                    title: "Detail",
+                    width: 110
+
+                },
+                {
+                    command: {
+                        text: "Delete",
+                        click: DeleteEmployee,
+                        attributes: {
+                            "class": "btn btn-danger"
+                        }
+                    },
+                    title: "Delete",
+                    width: 110
+
+                },
+                {
+                    hidden: true,
+                    field: "Id",
+                    title: "Id",
+                    width: 80
+                },
+                {
+                    field: "IdNumber",
+                    title: "Id Number",
+                    width: 130
+                },
+                {
+                    field: "FullName",
+                    title: "Name",
+                    width: 500
+                },
+                {
+                    field: "Position",
+                    title: "Position"
+                },
+                {
+                    template: "<input type=\"checkbox\" #= IsLocked ? \"checked=checked\" : \"\" # disabled=\"disabled\"></input>",
+                    width: "50px",
+                    field: "IsLocked",
+                    title: "L"
+                }
+            ],
+            sortable: true,
+            filterable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
+            dataSource: {
+                serverPaging: true,
+                serverFiltering: true,
+                serverSorting: true,
+                pageSize: 20,
+                schema: {
+                    data: "Data",
+                    total: "Total",
+                    model: {
+                        id: "Id",
+                        fields: {
+                            Id: { editable: false },
+                            IdNumber: { editable: false },
+                            FullName: { editable: false },
+                            FullName: { editable: false },
+                            Position: { editable: false },
+                            IsLocked: { type: "boolean" }
+                        }
+                    }
+                },
+                transport: {
+                    read: {
+                        url: "@Url.Action("GetEmployeeList", "MstEmployee")",
+                        contentType: "application/json",
+                        type: "POST"
+                    },
+                    parameterMap: function (data, operation) {
+                        return JSON.stringify(data);
+                    }
+                }
+            }
+        });
+    });
+</script>
+
+
+

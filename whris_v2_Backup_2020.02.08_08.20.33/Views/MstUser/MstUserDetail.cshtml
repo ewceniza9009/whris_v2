@@ -1,0 +1,348 @@
+﻿@model whris_v2.Models.MstUser
+
+@{
+    ViewBag.Title = "User Detail";
+}
+
+    <style>
+        .cmd-buttons {
+            margin-left: 10px;
+            width: 90px;
+        }
+
+        .row-padding {
+            padding-top: 5px;
+        }
+
+        .input-width-sm {
+            width: 100px;
+        }
+
+        .input-width-md {
+            width: 180px;
+        }
+
+        .input-width-lg {
+            width: 500px;
+        }
+
+        .ui-label {
+            padding-top: 7px;
+            padding-left: 0px;
+        }
+    </style>
+
+<div id="model">
+    @using (Ajax.BeginForm("SaveUser", "MstUser", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "model", OnSuccess="ModelSaveSuccess" }))
+    {
+        <div class="row" style="margin-bottom: 20px; margin-top: -20px">
+            <div class="col-md-6">
+                <h5 style="margin-top: 5px;">User Detail</h5>
+            </div>
+            <div class="col-md-6">
+                <button class="btn btn-danger cmd-buttons pull-right btn-labeled"
+                        type="button"
+                        onclick="Close_OnClick()">
+                    <span class="btn-label">
+                        <i class="fa fa-arrow-left"></i>
+                    </span>Back
+                </button>
+                <button class="btn btn-outline-primary cmd-buttons pull-right btn-labeled"
+                        id="CmdPrint"
+                        type="button">
+                    <span class="btn-label">
+                        <i class="fa fa-print"></i>
+                    </span>
+                    Print
+                </button>
+                <button class="btn btn-primary cmd-buttons pull-right btn-labeled"
+                        id="CmdUnlock"
+                        type="button"
+                         onclick="Unlock_OnClick()">
+                    <span class="btn-label">
+                        <i class="fa fa-pencil"></i>
+                    </span>
+                    Edit
+                </button>
+                <button class="btn btn-primary cmd-buttons pull-right btn-labeled"
+                        id="CmdLock"
+                        type="submit"
+                         onclick="Lock_OnClick()">
+                    <span class="btn-label">
+                        <i class="fa fa-lock"></i>
+                    </span>
+                    Save
+                </button>
+            </div>
+        </div>
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.Username, new { @class = "form-control input-width-md", id = "UsernameMem", placeholder = "Username", type = "text" })
+                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.FullName, new { @class = "form-control input-width-lg", id = "FullNameMem", placeholder = "Fullname", type = "text" })
+                        @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                    <div class="col-sm-9">
+                        @Html.PasswordFor(model => model.Password, new { @class = "form-control input-width-md", id = "PasswordMem", placeholder = "Password", type = "password", value = Model.Password })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.IsLocked, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                    <div class="col-sm-9">
+                        @Html.CheckBoxFor(model => model.IsLocked, new { @class = "form-check-input", id = "IsLockedMem", disabled = "disabled", style = "margin-left: 5px; margin-top: 10px" })
+                        @Html.ValidationMessageFor(model => model.IsLocked, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div id="userLines">
+    <div id="MstUserLineGrid">
+    </div>
+</div>
+
+<script src="~/Scripts/jquery.dirtyforms.min.js"></script>
+
+<script>
+    function Close_OnClick()
+    {
+        location.href = "@Url.Action("Index","MstUser")";
+    }
+
+    function Lock_OnClick()
+    {
+        $("#IsLockedMem").val(true);
+        $("#IsLockedMem").prop("checked", true);
+
+        pageFormLock();
+    }
+
+    function Unlock_OnClick()
+    {
+        $("#IsLockedMem").val(false);
+        $("#IsLockedMem").prop("checked", false);
+
+        pageFormLock();
+    }
+
+    function cmbForm(container, options) {
+        $('<input required name="' + options.field + '"/>')
+            .appendTo(container)
+            .kendoDropDownList({
+                autoBind: false,
+                dataTextField: "FormName",
+                dataValueField: "Id",
+                dataSource: forms
+            });
+    }
+
+    function getForms(formId) {
+        for (var idx = 0, length = forms.length; idx < length; idx++) {
+            if (forms[idx].Id === formId) {
+                return forms[idx].FormName;
+            }
+        }
+
+        return null;
+    }
+
+    function pageFormLock()
+    {
+        var isLocked = $("#IsLockedMem").is(":checked");
+
+        if (isLocked) {
+            var nodeList = document.getElementsByTagName("input");
+
+            for (item in nodeList) {
+                $("#" + nodeList[item].id).prop("disabled", true);
+            };
+
+            $(".k-header.k-grid-toolbar").addClass("k-state-disabled");
+            $(".k-grid-content.k-auto-scrollable").addClass("k-state-disabled");
+
+            $("#CmdLock").prop("disabled", true);
+            $("#CmdUnlock").prop("disabled", false);
+        }
+        else
+        {
+            var nodeList = document.getElementsByTagName("input");
+
+            for (item in nodeList) {
+                $("#" + nodeList[item].id).prop("disabled", false);
+            };
+
+            $(".k-header.k-grid-toolbar").removeClass("k-state-disabled");
+            $(".k-grid-content.k-auto-scrollable").removeClass("k-state-disabled");
+
+            $("#CmdLock").prop("disabled", false);
+            $("#CmdUnlock").prop("disabled", true);
+        }
+
+        $.ajax({
+            url: "@Url.Action("CurrentFormRights", "Security")?form=" + "MstUser",
+            async: false,
+            contentType: "application/json",
+            success: function (data) {
+                if (!data.CurrentUserForms.CanLock)
+                {
+                    $("#CmdLock").prop("disabled",true);
+                }
+                if (!data.CurrentUserForms.CanUnlock)
+                {
+                    $("#CmdUnlock").prop("disabled",true);
+                }
+                if (!data.CurrentUserForms.CanPrint)
+                {
+                    $("#CmdPrint").prop("disabled",true);
+                }
+            }
+        });
+    }
+
+    $('form').dirtyForms();
+
+    $(document).ready(function ()
+    {
+        $.ajax({
+        url: "@Url.Action("GetCmbForms", "MstUser")",
+        type: "GET",
+        async: false,
+        contentType: "application/json",
+        success: function(data) {
+            forms = data;
+            }
+        });
+
+        $("#MstUserLineGrid").kendoGrid({
+            height: 400,
+            columns: [
+                {
+                    command: ["destroy"],
+                    title: "&nbsp;",
+                    width: "120px"
+                },
+                {
+                    width: "200px",
+                    field: "FormId",
+                    title: "Form",
+                    editor: cmbForm,
+                    template: "#=getForms(FormId)#"
+                },
+                //{
+                //    template:
+                //        "<input type=\"checkbox\" #= CanAdd ? \"checked=checked\" : \"\" #></input>",
+                //    width: "70px",
+                //    field: "CanAdd",
+                //    title: "Add"
+                //}
+                { width: "90px", field: "CanAdd", title: "Add" },
+                { width: "90px", field: "CanEdit", title: "Edit" },
+                { width: "110px", field: "CanDelete", title: "Delete" },
+                { width: "110px", field: "CanLock", title: "Lock" },
+                { width: "110px", field: "CanUnlock", title: "Unlock" },
+                { width: "100px", field: "CanPrint", title: "Print" }              
+            ],
+            editable: true,
+            pageable: true,
+            sortable: true,
+            filterable: true,
+            //pageable: {
+            //    refresh: true,
+            //    pageSizes: true,
+            //    buttonCount: 5
+            //},
+            toolbar: ["create", "save", "cancel"],
+            dataSource: {
+                serverPaging: true,
+                serverFiltering: true,
+                serverSorting: true,
+                pageSize: 20,
+                schema: {
+                    data: "Data",
+                    total: "Total",
+                    model: {
+                        id: "Id",
+                        fields: {
+                            Id: { editable: false },
+                            UserId: { editable: false },
+                            FormId: { editable: true },
+                            CanAdd: { type: "boolean" },
+                            CanEdit: { type: "boolean" },
+                            CanDelete: { type: "boolean" },
+                            CanLock: { type: "boolean" },
+                            CanUnlock: { type: "boolean" },
+                            CanPrint: { type: "boolean" }
+                        }
+                    }
+                },
+                batch: true,
+                transport: {
+                    create: {
+                        url: "@Url.Action("Create", "MstUser")",
+                        type: "POST"
+                    },
+                    read: {
+                        url: "@Url.Action("Read", "MstUser", new {modelFilterId = HttpContext.Current.Request.QueryString["modelId"]})",
+                        contentType: "application/json",
+                        type: "POST"
+                    },
+                    update: {
+                        url:"@Url.Action("Update", "MstUser")",
+                        type: "POST"
+                    },
+                    destroy: {
+                        url: "@Url.Action("Destroy", "MstUser")",
+                        type: "POST"
+                    },
+                    parameterMap: function(data, operation) {
+                        if (operation !== "read") {
+                            var result = {};
+
+                            for (var i = 0; i < data.models.length; i++) {
+                                var userLine = data.models[i];
+
+                                for (var member in userLine) {
+                                    if (userLine.hasOwnProperty(member)) {
+                                        result["model[" + i + "]." + member] = userLine[member];
+                                    }
+                                }
+                            }
+
+                            return result;
+                        }
+                        else {
+                            return JSON.stringify(data);
+                        }
+                    }
+                }
+            }
+        });
+    })
+
+    $(window).on('load', function () {
+        pageFormLock();
+    });
+</script>
+

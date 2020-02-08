@@ -1,0 +1,120 @@
+﻿@model List<whris_v2.Services.MenuModel>
+<div id="model">
+    @using (Ajax.BeginForm("Search", "Menu", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.ReplaceWith, UpdateTargetId = "model" }))
+    {
+        <!-- sidebar-header  -->
+        @*<div class="sidebar-search">
+            <div>
+                <div class="input-group">
+                    <input type="text" class="form-control search-menu" name="search" value="" placeholder="Search...">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                            <button id="CmdSearch" class="btn btn-sm fa fa-search" style="height: 20px; padding-top: 0px; color: #6c757d;" type="submit" value="Search"></button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+        <!-- sidebar-search  -->
+        <div class="sidebar-menu">
+            <ul>
+                @*<li class="header-menu">
+                    <span>System Navigation</span>
+                </li>*@
+                <li class="sidebar-dropdown">
+                    <a href="#">
+                        <i class="fa fa-list"></i>
+                        <span>Setup</span>
+                    </a>
+                    <div class="sidebar-submenu">
+                        <ul>
+                            @foreach (var m in Model)
+                            {
+                                if (m.Category == "Setup")
+                                {
+                                    <li>
+                                        <a href="@Url.Action(m.Action, m.Controller)">@m.Menu</a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </li>
+                <li class="sidebar-dropdown">
+                    <a href="#">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span>Activities</span>
+                    </a>
+                    <div class="sidebar-submenu">
+                        <ul>
+                            @foreach (var m in Model)
+                            {
+                                if (m.Category == "Activities")
+                                {
+                                    <li>
+                                        <a href="@Url.Action(m.Action, m.Controller)">@m.Menu</a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </li>
+                <li class="sidebar-dropdown">
+                    <a href="#">
+                        <i class="fa fa-compass"></i>
+                        <span>Reports</span>
+                    </a>
+                    <div class="sidebar-submenu">
+                        <ul>
+                            @foreach (var m in Model)
+                            {
+                                if (m.Category == "Reports")
+                                {
+                                    <li>
+                                        <a href="@Url.Action(m.Action, m.Controller)">@m.Menu</a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </li>
+                <li class="sidebar-dropdown">
+                    <a href="#">
+                        <i class="fa fa-area-chart"></i>
+                        <span>Settings</span>
+                    </a>
+                    <div class="sidebar-submenu">
+                        <ul>
+                            @foreach (var m in Model)
+                            {
+                                if (m.Category == "Settings")
+                                {
+                                    <li>
+                                        <a href="@Url.Action(m.Action, m.Controller)">@m.Menu</a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </li>
+                <li class="header-menu">
+                    <span>Extra</span>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-book"></i>
+                        <span>Documentation</span>
+                        <span class="badge badge-pill badge-primary">Beta</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-calendar"></i>
+                        <span>Calendar</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    }
+</div>

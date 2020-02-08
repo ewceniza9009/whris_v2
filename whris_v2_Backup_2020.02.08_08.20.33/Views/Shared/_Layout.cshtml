@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - WebHR</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <!--This bundle was moved by the Telerik VS Extensions for compatibility reasons-->
+    @Scripts.Render("~/bundles/jquery")
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery-migrate-3.0.0.min.js"></script>
+
+    <link href="@Url.Content("~/Content/kendo/2019.1.115/kendo.bootstrap-v4.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/kendo/2019.1.115/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2019.1.115/jszip.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2019.1.115/kendo.all.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2019.1.115/kendo.aspnetmvc.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+
+    <link href="~/Content/toastr.css" rel="stylesheet" />
+    <script src="~/Scripts/toastr.min.js"></script>
+
+    <style>
+        a:hover {
+            text-decoration: none;
+        }
+
+        .btn.btn-sm.fa.fa-search:focus {
+            outline: none !important;
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+    @*<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm fixed-top">
+            <h5 class="my-0 mr-md-auto font-weight-normal">@Html.ActionLink("HRManager", "Index", "Home", new { area = "" }, null)</h5>
+            <form class="form-inline mt-2 mt-md-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+            </form>
+            <nav class="my-2 my-md-0 mr-md-3">
+                <a class="p-2 text-dark" href="#">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</a>
+                <a class="p-2 text-dark" href="#">@Html.ActionLink("About", "About", "Home")</a>
+                <a class="p-2 text-dark" href="#">@Html.ActionLink("Contact", "Contact", "Home")</a>
+            </nav>
+            @Html.Partial("_LoginPartial")
+        </div>*@
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <h5 id="logo" class="my-0 mr-md-auto font-weight-normal">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</h5>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("About","Home")">About<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a>
+                </li>
+            </ul>
+            @Html.Partial("_LoginPartial")
+        </div>
+    </nav>
+
+    <div class="page-wrapper chiller-theme toggled">
+        @if (Request.IsAuthenticated)
+        {
+            <button id="show-sidebar" class="btn btn-sm btn-dark">
+                <i class="fa fa-bars"></i>
+            </button>
+            <nav id="sidebar" class="sidebar-wrapper">
+                <div class="sidebar-content">
+                    <div class="sidebar-brand">
+                        <a href="#">Menu</a>
+                        <div id="close-sidebar">
+                            <i class="fa fa-times"></i>
+                        </div>
+                    </div>
+                    @{Html.RenderAction("Index", "Menu");}
+                </div>
+            </nav>
+        }
+        <main class="page-content">
+            <div class="container body-content" style="padding-top: 80px; padding-bottom: 20px; margin-bottom:20px; border-radius: 0px 0px 15px 15px; background-color: #e9ecefe6">
+                @RenderBody()
+            </div>
+
+            <footer class="footer">
+                <div class="container bottom_border">
+                    <div class="row">
+                        <div class=" col-sm-4 col-md col-sm-4  col-12 col">
+                            <h5 class="headin5_amrc col_white_amrc pt2">About us</h5>
+                            <p class="mb10">WeMake offers unique accounting solutions for your growing business. You can gain a competitive edge with a unique, modified version of our ERP software. Learn more.</p>
+                            <p><i class="fa fa-location-arrow"></i> 1445 Technology Lane, Suite A5 Mandaue City, Philippines</p>
+                            <p>
+                                <i class="fa fa-phone"></i>
+                                +63 807-8896,
+                                +63 778-71120
+                            </p>
+                        </div>
+
+
+                        <div class=" col-sm-4 col-md  col-6 col">
+                            <h5 class="headin5_amrc col_white_amrc pt2">Quick links</h5>
+                            <ul class="footer_ul_amrc">
+                                <li><a href="http://google.com">WeMake Forms Division</a></li>
+                                <li><a href="http://google.com">Customer Service</a></li>
+                                <li><a href="http://google.com">Technical Support for Licensed WeMake Clients</a></li>
+                                <li><a href="http://google.com">Product information and all other Inquiries</a></li>
+                                <li><a href="http://google.com">Press Relations</a></li>
+                                <li><a href="http://google.com">Public Relations and Marketing</a></li>
+                            </ul>
+                        </div>
+
+
+                        <div class=" col-sm-4 col-md  col-6 col">
+                            <h5 class="headin5_amrc col_white_amrc pt2">Quick links</h5>
+                            <ul class="footer_ul_amrc">
+                                <li><a href="http://google.com">Vertical Solutions Integrated with WeMake Software</a></li>
+                                <li><a href="http://google.com">Case Studies</a></li>
+                                <li><a href="http://google.com">WebMaster, WebInquiries, Web-Related Support</a></li>
+                            </ul>
+                        </div>
+
+
+                        <div class=" col-sm-4 col-md  col-12 col">
+                            <h5 class="headin5_amrc col_white_amrc pt2">Testimonials</h5>
+
+                            <ul class="footer_ul2_amrc">
+                                <li><a href="#"><i class="fa fa-twitter fleft padding-right"></i> </a><p>We signed up as a resller 15 years ago...<a href="https://WeMake.com/Public/testimonialsbp.asp">https://wemake.com</a></p></li>
+                                <li><a href="#"><i class="fa fa-twitter fleft padding-right"></i> </a><p>Since INFOtrac for WeMake centralizes...<a href="https://WeMake.com/Public/testimonialsbp.asp">https://wemake.com/</a></p></li>
+                                <li><a href="#"><i class="fa fa-twitter fleft padding-right"></i> </a><p>That package and the follow-up...<a href="https://WeMake.com/Public/testimonialsbp.asp">https://wemake.com</a></p></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <ul class="foote_bottom_ul_amrc">
+                        <li><a href="#">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</a></li>
+                        <li><a href="#">@Html.ActionLink("About ", "About", "Home", new { area = "" }, null)</a></li>
+                        <li><a href="#">@Html.ActionLink("Contact ", "Contact", "Home", new { area = "" }, null)</a></li>
+                    </ul>
+
+                    <p>&copy; @DateTime.Now.Year - WeMake Software</p>
+
+                    <ul class="social_footer_ul">
+                        <li><a href="http://facebook.com"><i class="fa fa-facebook-f"></i></a></li>
+                        <li><a href="http://twitter.com"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="http://linkedin.com"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="http://instagram.com"><i class="fa fa-instagram"></i></a></li>
+                    </ul>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script>
+        $(function () {
+            $(".sidebar-dropdown > a").click(function () {
+                $(".sidebar-submenu").slideUp(200);
+                if (
+                    $(this)
+                        .parent()
+                        .hasClass("active")
+                ) {
+                    $(".sidebar-dropdown").removeClass("active");
+                    $(this)
+                        .parent()
+                        .removeClass("active");
+                } else {
+                    $(".sidebar-dropdown").removeClass("active");
+                    $(this)
+                        .next(".sidebar-submenu")
+                        .slideDown(200);
+                    $(this)
+                        .parent()
+                        .addClass("active");
+                }
+            });
+        });
+
+        $(".page-wrapper").removeClass("toggled");
+
+        $("#close-sidebar").click(function () {
+            $(".page-wrapper").removeClass("toggled");
+        });
+        $("#show-sidebar").click(function () {
+            $(".page-wrapper").addClass("toggled");
+        });
+    </script>
+</body>
+</html>

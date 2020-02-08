@@ -1,0 +1,1123 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="hris_mavill" Class="whrisDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=EWCENIZA\SQLSERV17;Initial Catalog=hris_mavill;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="hris_mavillConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.[__MigrationHistory]" Member="__MigrationHistories">
+    <Type Name="__MigrationHistory">
+      <Column Name="MigrationId" Type="System.String" DbType="NVarChar(150) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ContextKey" Type="System.String" DbType="NVarChar(300) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Model" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ProductVersion" Type="System.String" DbType="NVarChar(32) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrnPayrollOtherIncomeLine" Member="TrnPayrollOtherIncomeLines">
+    <Type Name="TrnPayrollOtherIncomeLine">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PayrollOtherIncomeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="OtherIncomeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Association Name="MstEmployee_TrnPayrollOtherIncomeLine" Member="MstEmployee" ThisKey="EmployeeId" OtherKey="Id" Type="MstEmployee" IsForeignKey="true" />
+      <Association Name="MstOtherIncome_TrnPayrollOtherIncomeLine" Member="MstOtherIncome" ThisKey="OtherIncomeId" OtherKey="Id" Type="MstOtherIncome" IsForeignKey="true" />
+      <Association Name="TrnPayrollOtherIncome_TrnPayrollOtherIncomeLine" Member="TrnPayrollOtherIncome" ThisKey="PayrollOtherIncomeId" OtherKey="Id" Type="TrnPayrollOtherIncome" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetRoles" Member="AspNetRoles">
+    <Type Name="AspNetRole">
+      <Column Name="Id" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Association Name="AspNetRole_AspNetUserRole" Member="AspNetUserRoles" ThisKey="Id" OtherKey="RoleId" Type="AspNetUserRole" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUserClaims" Member="AspNetUserClaims">
+    <Type Name="AspNetUserClaim">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="ClaimType" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ClaimValue" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="AspNetUser_AspNetUserClaim" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUserLogins" Member="AspNetUserLogins">
+    <Type Name="AspNetUserLogin">
+      <Column Name="LoginProvider" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ProviderKey" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="AspNetUser_AspNetUserLogin" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUserRoles" Member="AspNetUserRoles">
+    <Type Name="AspNetUserRole">
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="AspNetRole_AspNetUserRole" Member="AspNetRole" ThisKey="RoleId" OtherKey="Id" Type="AspNetRole" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="AspNetUser_AspNetUserRole" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstAccount" Member="MstAccounts">
+    <Type Name="MstAccount">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AccountCode" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Account" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="MstAccount_MstEmployee" Member="MstEmployees" ThisKey="Id" OtherKey="AccountId" Type="MstEmployee" />
+      <Association Name="MstAccount_MstOtherDeduction" Member="MstOtherDeductions" ThisKey="Id" OtherKey="AccountId" Type="MstOtherDeduction" />
+      <Association Name="MstAccount_MstOtherIncome" Member="MstOtherIncomes" ThisKey="Id" OtherKey="AccountId" Type="MstOtherIncome" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstBranch" Member="MstBranches">
+    <Type Name="MstBranch">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Branch" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="CompanyId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MstBranch_MstEmployee" Member="MstEmployees" ThisKey="Id" OtherKey="BranchId" Type="MstEmployee" />
+      <Association Name="MstCompany_MstBranch" Member="MstCompany" ThisKey="CompanyId" OtherKey="Id" Type="MstCompany" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstCitizenship" Member="MstCitizenships">
+    <Type Name="MstCitizenship">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Citizenship" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="MstCitizenship_MstEmployee" Member="MstEmployees" ThisKey="Id" OtherKey="CitizenshipId" Type="MstEmployee" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstCompany" Member="MstCompanies">
+    <Type Name="MstCompany">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Company" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="SSSNumber" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PHICNumber" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="HDMFNumber" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TIN" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PayrollGroupId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EntryUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EntryDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IsLocked" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="MstCompany_MstBranch" Member="MstBranches" ThisKey="Id" OtherKey="CompanyId" Type="MstBranch" />
+      <Association Name="MstCompany_MstEmployee" Member="MstEmployees" ThisKey="Id" OtherKey="CompanyId" Type="MstEmployee" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstDayType" Member="MstDayTypes">
+    <Type Name="MstDayType">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DayType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="WorkingDays" Type="System.Decimal" DbType="Decimal(18,4) NOT NULL" CanBeNull="false" />
+      <Column Name="RestdayDays" Type="System.Decimal" DbType="Decimal(18,4) NOT NULL" CanBeNull="false" />
+      <Column Name="EntryUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EntryDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IsLocked" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="MstDayType_MstDayTypeDay" Member="MstDayTypeDays" ThisKey="Id" OtherKey="DayTypeId" Type="MstDayTypeDay" />
+      <Association Name="MstDayType_TrnDTRLine" Member="TrnDTRLines" ThisKey="Id" OtherKey="DayTypeId" Type="TrnDTRLine" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstDayTypeDay" Member="MstDayTypeDays">
+    <Type Name="MstDayTypeDay">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DayTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BranchId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DateAfter" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DateBefore" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ExcludedInFixed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Remarks" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="WithAbsentInFixed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="MstDayType_MstDayTypeDay" Member="MstDayType" ThisKey="DayTypeId" OtherKey="Id" Type="MstDayType" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstDepartment" Member="MstDepartments">
+    <Type Name="MstDepartment">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Department" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="MstDepartment_MstEmployee" Member="MstEmployees" ThisKey="Id" OtherKey="DepartmentId" Type="MstEmployee" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstDivision" Member="MstDivisions">
+    <Type Name="MstDivision">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Division" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstEmployee" Member="MstEmployees">
+    <Type Name="MstEmployee">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdNumber" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="BiometricIdNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="MiddleName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ExtensionName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="ZipCodeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CellphoneNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="EmailAddress" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DateOfBirth" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PlaceOfBirth" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PlaceOfBirthZipCodeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DateHired" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DateResigned" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Sex" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CivilStatus" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CitizenshipId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ReligionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Height" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="Weight" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="GSISNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SSSNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="HDMFNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PHICNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TIN" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TaxCodeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ATMAccountNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CompanyId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BranchId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DepartmentId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DivisionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PositionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PayrollGroupId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AccountId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PayrollTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ShiftCodeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FixNumberOfDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FixNumberOfHours" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MonthlyRate" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="PayrollRate" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="DailyRate" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="AbsentDailyRate" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="HourlyRate" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="NightHourlyRate" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="OvertimeHourlyRate" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="OvertimeNightHourlyRate" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TardyHourlyRate" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="EntryUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EntryDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IsLocked" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TaxTable" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="HDMFAddOn" Type="System.Decimal" DbType="Decimal(18,5)" CanBeNull="true" />
+      <Column Name="SSSAddOn" Type="System.Decimal" DbType="Decimal(18,5)" CanBeNull="true" />
+      <Column Name="HDMFType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SSSIsGrossAmount" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsMinimumWageEarner" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="MstEmployee_TrnPayrollOtherIncomeLine" Member="TrnPayrollOtherIncomeLines" ThisKey="Id" OtherKey="EmployeeId" Type="TrnPayrollOtherIncomeLine" />
+      <Association Name="MstEmployee_MstEmployeeLoan" Member="MstEmployeeLoans" ThisKey="Id" OtherKey="EmployeeId" Type="MstEmployeeLoan" />
+      <Association Name="MstEmployee_MstEmployeeMemo" Member="MstEmployeeMemos" ThisKey="Id" OtherKey="EmployeeId" Type="MstEmployeeMemo" />
+      <Association Name="MstEmployee_MstEmployeeShiftCode" Member="MstEmployeeShiftCodes" ThisKey="Id" OtherKey="EmployeeId" Type="MstEmployeeShiftCode" />
+      <Association Name="MstEmployee_TrnChangeShiftLine" Member="TrnChangeShiftLines" ThisKey="Id" OtherKey="EmployeeId" Type="TrnChangeShiftLine" />
+      <Association Name="MstEmployee_TrnDTRLine" Member="TrnDTRLines" ThisKey="Id" OtherKey="EmployeeId" Type="TrnDTRLine" />
+      <Association Name="MstEmployee_TrnDTRLog" Member="TrnDTRLogs" ThisKey="Id" OtherKey="EmployeeId" Type="TrnDTRLog" />
+      <Association Name="MstEmployee_TrnLastWithholdingTaxLine" Member="TrnLastWithholdingTaxLines" ThisKey="Id" OtherKey="EmployeeId" Type="TrnLastWithholdingTaxLine" />
+      <Association Name="MstEmployee_TrnLeaveApplicationLine" Member="TrnLeaveApplicationLines" ThisKey="Id" OtherKey="EmployeeId" Type="TrnLeaveApplicationLine" />
+      <Association Name="MstEmployee_TrnLeaveLedger" Member="TrnLeaveLedgers" ThisKey="Id" OtherKey="EmployeeId" Type="TrnLeaveLedger" />
+      <Association Name="MstEmployee_TrnOverTimeLine" Member="TrnOverTimeLines" ThisKey="Id" OtherKey="EmployeeId" Type="TrnOverTimeLine" />
+      <Association Name="MstEmployee_TrnPayrollLine" Member="TrnPayrollLines" ThisKey="Id" OtherKey="EmployeeId" Type="TrnPayrollLine" />
+      <Association Name="MstEmployee_TrnPayrollOtherDeductionLine" Member="TrnPayrollOtherDeductionLines" ThisKey="Id" OtherKey="EmployeeId" Type="TrnPayrollOtherDeductionLine" />
+      <Association Name="MstAccount_MstEmployee" Member="MstAccount" ThisKey="AccountId" OtherKey="Id" Type="MstAccount" IsForeignKey="true" />
+      <Association Name="MstBranch_MstEmployee" Member="MstBranch" ThisKey="BranchId" OtherKey="Id" Type="MstBranch" IsForeignKey="true" />
+      <Association Name="MstCitizenship_MstEmployee" Member="MstCitizenship" ThisKey="CitizenshipId" OtherKey="Id" Type="MstCitizenship" IsForeignKey="true" />
+      <Association Name="MstCompany_MstEmployee" Member="MstCompany" ThisKey="CompanyId" OtherKey="Id" Type="MstCompany" IsForeignKey="true" />
+      <Association Name="MstDepartment_MstEmployee" Member="MstDepartment" ThisKey="DepartmentId" OtherKey="Id" Type="MstDepartment" IsForeignKey="true" />
+      <Association Name="MstPayrollGroup_MstEmployee" Member="MstPayrollGroup" ThisKey="PayrollGroupId" OtherKey="Id" Type="MstPayrollGroup" IsForeignKey="true" />
+      <Association Name="MstPayrollType_MstEmployee" Member="MstPayrollType" ThisKey="PayrollTypeId" OtherKey="Id" Type="MstPayrollType" IsForeignKey="true" />
+      <Association Name="MstPosition_MstEmployee" Member="MstPosition" ThisKey="PositionId" OtherKey="Id" Type="MstPosition" IsForeignKey="true" />
+      <Association Name="MstReligion_MstEmployee" Member="MstReligion" ThisKey="ReligionId" OtherKey="Id" Type="MstReligion" IsForeignKey="true" />
+      <Association Name="MstShiftCode_MstEmployee" Member="MstShiftCode" ThisKey="ShiftCodeId" OtherKey="Id" Type="MstShiftCode" IsForeignKey="true" />
+      <Association Name="MstTaxCode_MstEmployee" Member="MstTaxCode" ThisKey="TaxCodeId" OtherKey="Id" Type="MstTaxCode" IsForeignKey="true" />
+      <Association Name="MstZipCode_MstEmployee" Member="MstZipCode" ThisKey="ZipCodeId" OtherKey="Id" Type="MstZipCode" IsForeignKey="true" />
+      <Association Name="MstZipCode_MstEmployee1" Member="MstZipCode1" ThisKey="PlaceOfBirthZipCodeId" OtherKey="Id" Type="MstZipCode" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstEmployeeLoan" Member="MstEmployeeLoans">
+    <Type Name="MstEmployeeLoan">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EmployeeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="OtherDeductionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LoanNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LoanAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="MonthlyAmortization" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="NumberOfMonths" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DateStart" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TotalPayment" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="Balance" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="IsPaid" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="EntryUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EntryDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IsLocked" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Remarks" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="MstEmployeeLoan_TrnPayrollOtherDeductionLine" Member="TrnPayrollOtherDeductionLines" ThisKey="Id" OtherKey="EmployeeLoanId" Type="TrnPayrollOtherDeductionLine" />
+      <Association Name="MstEmployee_MstEmployeeLoan" Member="MstEmployee" ThisKey="EmployeeId" OtherKey="Id" Type="MstEmployee" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="MstOtherDeduction_MstEmployeeLoan" Member="MstOtherDeduction" ThisKey="OtherDeductionId" OtherKey="Id" Type="MstOtherDeduction" IsForeignKey="true" />
+      <Association Name="MstUser_MstEmployeeLoan" Member="MstUser" ThisKey="EntryUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_MstEmployeeLoan1" Member="MstUser1" ThisKey="UpdateUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstEmployeeMemo" Member="MstEmployeeMemos">
+    <Type Name="MstEmployeeMemo">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EmployeeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MemoDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="MemoSubject" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="MemoContent" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PreparedBy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ApprovedBy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MstEmployee_MstEmployeeMemo" Member="MstEmployee" ThisKey="EmployeeId" OtherKey="Id" Type="MstEmployee" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstEmployeeShiftCode" Member="MstEmployeeShiftCodes">
+    <Type Name="MstEmployeeShiftCode">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EmployeeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ShiftCodeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MstEmployee_MstEmployeeShiftCode" Member="MstEmployee" ThisKey="EmployeeId" OtherKey="Id" Type="MstEmployee" IsForeignKey="true" />
+      <Association Name="MstShiftCode_MstEmployeeShiftCode" Member="MstShiftCode" ThisKey="ShiftCodeId" OtherKey="Id" Type="MstShiftCode" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstLeave" Member="MstLeaves">
+    <Type Name="MstLeave">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Leave" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LeaveType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="MstLeave_TrnLeaveApplicationLine" Member="TrnLeaveApplicationLines" ThisKey="Id" OtherKey="LeaveId" Type="TrnLeaveApplicationLine" />
+      <Association Name="MstLeave_TrnLeaveLedger" Member="TrnLeaveLedgers" ThisKey="Id" OtherKey="LeaveId" Type="TrnLeaveLedger" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstMandatoryTable" Member="MstMandatoryTables">
+    <Type Name="MstMandatoryTable">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MandatoryDeduction" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="AmountStart" Type="System.Decimal" DbType="Decimal(18,4) NOT NULL" CanBeNull="false" />
+      <Column Name="AmountEnd" Type="System.Decimal" DbType="Decimal(18,4) NOT NULL" CanBeNull="false" />
+      <Column Name="Rate" Type="System.Decimal" DbType="Decimal(18,4) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstMonth" Member="MstMonths">
+    <Type Name="MstMonth">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Month" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Quarter" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MstMonth_TrnPayroll" Member="TrnPayrolls" ThisKey="Id" OtherKey="MonthId" Type="TrnPayroll" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstOtherDeduction" Member="MstOtherDeductions">
+    <Type Name="MstOtherDeduction">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OtherDeduction" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="LoanType" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AccountId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Association Name="MstOtherDeduction_MstEmployeeLoan" Member="MstEmployeeLoans" ThisKey="Id" OtherKey="OtherDeductionId" Type="MstEmployeeLoan" />
+      <Association Name="MstOtherDeduction_TrnPayrollOtherDeductionLine" Member="TrnPayrollOtherDeductionLines" ThisKey="Id" OtherKey="OtherDeductionId" Type="TrnPayrollOtherDeductionLine" />
+      <Association Name="MstAccount_MstOtherDeduction" Member="MstAccount" ThisKey="AccountId" OtherKey="Id" Type="MstAccount" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstOtherIncome" Member="MstOtherIncomes">
+    <Type Name="MstOtherIncome">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OtherIncome" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Taxable" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TaxCeiling" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="IncludeMandatory" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AccountId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Association Name="MstOtherIncome_TrnPayrollOtherIncomeLine" Member="TrnPayrollOtherIncomeLines" ThisKey="Id" OtherKey="OtherIncomeId" Type="TrnPayrollOtherIncomeLine" />
+      <Association Name="MstAccount_MstOtherIncome" Member="MstAccount" ThisKey="AccountId" OtherKey="Id" Type="MstAccount" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstPayrollGroup" Member="MstPayrollGroups">
+    <Type Name="MstPayrollGroup">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PayrollGroup" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="MstPayrollGroup_MstEmployee" Member="MstEmployees" ThisKey="Id" OtherKey="PayrollGroupId" Type="MstEmployee" />
+      <Association Name="MstPayrollGroup_MstUserPayrollGroup" Member="MstUserPayrollGroups" ThisKey="Id" OtherKey="PayrollGroupId" Type="MstUserPayrollGroup" />
+      <Association Name="MstPayrollGroup_TrnChangeShift" Member="TrnChangeShifts" ThisKey="Id" OtherKey="PayrollGroupId" Type="TrnChangeShift" />
+      <Association Name="MstPayrollGroup_TrnDTR" Member="TrnDTRs" ThisKey="Id" OtherKey="PayrollGroupId" Type="TrnDTR" />
+      <Association Name="MstPayrollGroup_TrnLastWithholdingTax" Member="TrnLastWithholdingTaxes" ThisKey="Id" OtherKey="PayrollGroupId" Type="TrnLastWithholdingTax" />
+      <Association Name="MstPayrollGroup_TrnLeaveApplication" Member="TrnLeaveApplications" ThisKey="Id" OtherKey="PayrollGroupId" Type="TrnLeaveApplication" />
+      <Association Name="MstPayrollGroup_TrnOverTime" Member="TrnOverTimes" ThisKey="Id" OtherKey="PayrollGroupId" Type="TrnOverTime" />
+      <Association Name="MstPayrollGroup_TrnPayroll" Member="TrnPayrolls" ThisKey="Id" OtherKey="PayrollGroupId" Type="TrnPayroll" />
+      <Association Name="MstPayrollGroup_TrnPayrollOtherDeduction" Member="TrnPayrollOtherDeductions" ThisKey="Id" OtherKey="PayrollGroupId" Type="TrnPayrollOtherDeduction" />
+      <Association Name="MstPayrollGroup_TrnPayrollOtherIncome" Member="TrnPayrollOtherIncomes" ThisKey="Id" OtherKey="PayrollGroupId" Type="TrnPayrollOtherIncome" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstPayrollType" Member="MstPayrollTypes">
+    <Type Name="MstPayrollType">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PayrollType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="MstPayrollType_MstEmployee" Member="MstEmployees" ThisKey="Id" OtherKey="PayrollTypeId" Type="MstEmployee" />
+      <Association Name="MstPayrollType_TrnPayrollLine" Member="TrnPayrollLines" ThisKey="Id" OtherKey="PayrollTypeId" Type="TrnPayrollLine" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstPeriod" Member="MstPeriods">
+    <Type Name="MstPeriod">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Period" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="MstPeriod_TrnChangeShift" Member="TrnChangeShifts" ThisKey="Id" OtherKey="PeriodId" Type="TrnChangeShift" />
+      <Association Name="MstPeriod_TrnDTR" Member="TrnDTRs" ThisKey="Id" OtherKey="PeriodId" Type="TrnDTR" />
+      <Association Name="MstPeriod_TrnLastWithholdingTax" Member="TrnLastWithholdingTaxes" ThisKey="Id" OtherKey="PeriodId" Type="TrnLastWithholdingTax" />
+      <Association Name="MstPeriod_TrnLeaveApplication" Member="TrnLeaveApplications" ThisKey="Id" OtherKey="PeriodId" Type="TrnLeaveApplication" />
+      <Association Name="MstPeriod_TrnLeaveLedger" Member="TrnLeaveLedgers" ThisKey="Id" OtherKey="PeriodId" Type="TrnLeaveLedger" />
+      <Association Name="MstPeriod_TrnOverTime" Member="TrnOverTimes" ThisKey="Id" OtherKey="PeriodId" Type="TrnOverTime" />
+      <Association Name="MstPeriod_TrnPayroll" Member="TrnPayrolls" ThisKey="Id" OtherKey="PeriodId" Type="TrnPayroll" />
+      <Association Name="MstPeriod_TrnPayrollOtherDeduction" Member="TrnPayrollOtherDeductions" ThisKey="Id" OtherKey="PeriodId" Type="TrnPayrollOtherDeduction" />
+      <Association Name="MstPeriod_TrnPayrollOtherIncome" Member="TrnPayrollOtherIncomes" ThisKey="Id" OtherKey="PeriodId" Type="TrnPayrollOtherIncome" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstPosition" Member="MstPositions">
+    <Type Name="MstPosition">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Position" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="MstPosition_MstEmployee" Member="MstEmployees" ThisKey="Id" OtherKey="PositionId" Type="MstEmployee" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstReligion" Member="MstReligions">
+    <Type Name="MstReligion">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Religion" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="MstReligion_MstEmployee" Member="MstEmployees" ThisKey="Id" OtherKey="ReligionId" Type="MstEmployee" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstShiftCode" Member="MstShiftCodes">
+    <Type Name="MstShiftCode">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ShiftCode" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Remarks" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="EntryUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EntryDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IsLocked" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="MstShiftCode_MstEmployee" Member="MstEmployees" ThisKey="Id" OtherKey="ShiftCodeId" Type="MstEmployee" />
+      <Association Name="MstShiftCode_MstEmployeeShiftCode" Member="MstEmployeeShiftCodes" ThisKey="Id" OtherKey="ShiftCodeId" Type="MstEmployeeShiftCode" />
+      <Association Name="MstShiftCode_MstShiftCodeDay" Member="MstShiftCodeDays" ThisKey="Id" OtherKey="ShiftCodeId" Type="MstShiftCodeDay" />
+      <Association Name="MstShiftCode_TrnChangeShiftLine" Member="TrnChangeShiftLines" ThisKey="Id" OtherKey="ShiftCodeId" Type="TrnChangeShiftLine" />
+      <Association Name="MstShiftCode_TrnDTRLine" Member="TrnDTRLines" ThisKey="Id" OtherKey="ShiftCodeId" Type="TrnDTRLine" />
+      <Association Name="MstUser_MstShiftCode" Member="MstUser" ThisKey="EntryUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_MstShiftCode1" Member="MstUser1" ThisKey="UpdateUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstShiftCodeDay" Member="MstShiftCodeDays">
+    <Type Name="MstShiftCodeDay">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ShiftCodeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RestDay" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Day" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TimeIn1" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TimeOut1" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TimeIn2" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TimeOut2" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="NumberOfHours" Type="System.Decimal" DbType="Decimal(18,4) NOT NULL" CanBeNull="false" />
+      <Column Name="LateFlexibility" Type="System.Decimal" DbType="Decimal(18,4) NOT NULL" CanBeNull="false" />
+      <Column Name="LateGraceMinute" Type="System.Decimal" DbType="Decimal(18,4) NOT NULL" CanBeNull="false" />
+      <Column Name="NightHours" Type="System.Decimal" DbType="Decimal(18,4) NOT NULL" CanBeNull="false" />
+      <Association Name="MstShiftCode_MstShiftCodeDay" Member="MstShiftCode" ThisKey="ShiftCodeId" OtherKey="Id" Type="MstShiftCode" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstTableHDMF" Member="MstTableHDMFs">
+    <Type Name="MstTableHDMF">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AmountStart" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="AmountEnd" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="EmployerPercentage" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeePercentage" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="EmployerValue" Type="System.Decimal" DbType="Decimal(18,5)" CanBeNull="true" />
+      <Column Name="EmployeeValue" Type="System.Decimal" DbType="Decimal(18,5)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstTablePHIC" Member="MstTablePHICs">
+    <Type Name="MstTablePHIC">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AmountStart" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="AmountEnd" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="SalaryBracket" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EmployerContribution" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeContribution" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstTableSSS" Member="MstTableSSSes">
+    <Type Name="MstTableSSS">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AmountStart" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="AmountEnd" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="EmployerContribution" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeContribution" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="EmployerEC" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeEC" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstTableWTaxMonthly" Member="MstTableWTaxMonthlies">
+    <Type Name="MstTableWTaxMonthly">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TaxCodeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TaxCodeValue" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="Tax" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="Percentage" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Association Name="MstTaxCode_MstTableWTaxMonthly" Member="MstTaxCode" ThisKey="TaxCodeId" OtherKey="Id" Type="MstTaxCode" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstTableWTaxSemiMonthly" Member="MstTableWTaxSemiMonthlies">
+    <Type Name="MstTableWTaxSemiMonthly">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TaxCodeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TaxCodeValue" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="Tax" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="Percentage" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstTableWTaxYearly" Member="MstTableWTaxYearlies">
+    <Type Name="MstTableWTaxYearly">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AmountStart" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="AmountEnd" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="Percentage" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="AdditionalAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstTaxCode" Member="MstTaxCodes">
+    <Type Name="MstTaxCode">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TaxCode" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ExemptionAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="DependentAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Association Name="MstTaxCode_MstEmployee" Member="MstEmployees" ThisKey="Id" OtherKey="TaxCodeId" Type="MstEmployee" />
+      <Association Name="MstTaxCode_MstTableWTaxMonthly" Member="MstTableWTaxMonthlies" ThisKey="Id" OtherKey="TaxCodeId" Type="MstTableWTaxMonthly" />
+      <Association Name="MstTaxCode_TrnLastWithholdingTaxLine" Member="TrnLastWithholdingTaxLines" ThisKey="Id" OtherKey="TaxCodeId" Type="TrnLastWithholdingTaxLine" />
+      <Association Name="MstTaxCode_TrnLeaveApplication" Member="TrnLeaveApplications" ThisKey="Id" OtherKey="CheckedBy" Type="TrnLeaveApplication" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstUserForm" Member="MstUserForms">
+    <Type Name="MstUserForm">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FormId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CanAdd" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CanEdit" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CanDelete" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CanLock" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CanUnlock" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CanPreview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CanPrint" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CanView" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="SysForm_MstUserForm" Member="SysForm" ThisKey="FormId" OtherKey="Id" Type="SysForm" IsForeignKey="true" />
+      <Association Name="MstUser_MstUserForm" Member="MstUser" ThisKey="UserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstUserPayrollGroup" Member="MstUserPayrollGroups">
+    <Type Name="MstUserPayrollGroup">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PayrollGroupId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MstPayrollGroup_MstUserPayrollGroup" Member="MstPayrollGroup" ThisKey="PayrollGroupId" OtherKey="Id" Type="MstPayrollGroup" IsForeignKey="true" />
+      <Association Name="MstUser_MstUserPayrollGroup" Member="MstUser" ThisKey="UserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstZipCode" Member="MstZipCodes">
+    <Type Name="MstZipCode">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ZipCode" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Location" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Area" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="MstZipCode_MstEmployee" Member="MstEmployees" ThisKey="Id" OtherKey="ZipCodeId" Type="MstEmployee" />
+      <Association Name="MstZipCode_MstEmployee1" Member="MstEmployees1" ThisKey="Id" OtherKey="PlaceOfBirthZipCodeId" Type="MstEmployee" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SysForm" Member="SysForms">
+    <Type Name="SysForm">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FormName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Remarks" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="SysForm_MstUserForm" Member="MstUserForms" ThisKey="Id" OtherKey="FormId" Type="MstUserForm" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrnChangeShift" Member="TrnChangeShifts">
+    <Type Name="TrnChangeShift">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PeriodId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CSNumber" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CSDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PayrollGroupId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Remarks" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="PreparedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CheckedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ApprovedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EntryUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EntryDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IsLocked" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="TrnChangeShift_TrnChangeShiftLine" Member="TrnChangeShiftLines" ThisKey="Id" OtherKey="ChangeShiftId" Type="TrnChangeShiftLine" />
+      <Association Name="TrnChangeShift_TrnDTR" Member="TrnDTRs" ThisKey="Id" OtherKey="ChangeShiftId" Type="TrnDTR" />
+      <Association Name="MstPayrollGroup_TrnChangeShift" Member="MstPayrollGroup" ThisKey="PayrollGroupId" OtherKey="Id" Type="MstPayrollGroup" IsForeignKey="true" />
+      <Association Name="MstPeriod_TrnChangeShift" Member="MstPeriod" ThisKey="PeriodId" OtherKey="Id" Type="MstPeriod" IsForeignKey="true" />
+      <Association Name="MstUser_TrnChangeShift" Member="MstUser" ThisKey="EntryUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnChangeShift1" Member="MstUser1" ThisKey="UpdateUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnChangeShift2" Member="MstUser2" ThisKey="PreparedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnChangeShift3" Member="MstUser3" ThisKey="CheckedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnChangeShift4" Member="MstUser4" ThisKey="ApprovedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrnChangeShiftDraft" Member="TrnChangeShiftDrafts">
+    <Type Name="TrnChangeShiftDraft">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DocRefNumber" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeIdNumber" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ShiftCode" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Remarks" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrnChangeShiftLine" Member="TrnChangeShiftLines">
+    <Type Name="TrnChangeShiftLine">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ChangeShiftId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ShiftCodeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Remarks" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="MstEmployee_TrnChangeShiftLine" Member="MstEmployee" ThisKey="EmployeeId" OtherKey="Id" Type="MstEmployee" IsForeignKey="true" />
+      <Association Name="MstShiftCode_TrnChangeShiftLine" Member="MstShiftCode" ThisKey="ShiftCodeId" OtherKey="Id" Type="MstShiftCode" IsForeignKey="true" />
+      <Association Name="TrnChangeShift_TrnChangeShiftLine" Member="TrnChangeShift" ThisKey="ChangeShiftId" OtherKey="Id" Type="TrnChangeShift" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrnDTR" Member="TrnDTRs">
+    <Type Name="TrnDTR">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PeriodId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DTRNumber" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DTRDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PayrollGroupId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DateStart" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DateEnd" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="OvertTimeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LeaveApplicationId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ChangeShiftId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Remarks" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="PreparedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CheckedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ApprovedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EntryUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EntryDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IsLocked" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="TrnDTR_TrnDTRLine" Member="TrnDTRLines" ThisKey="Id" OtherKey="DTRId" Type="TrnDTRLine" />
+      <Association Name="TrnDTR_TrnPayroll" Member="TrnPayrolls" ThisKey="Id" OtherKey="DTRId" Type="TrnPayroll" />
+      <Association Name="MstPayrollGroup_TrnDTR" Member="MstPayrollGroup" ThisKey="PayrollGroupId" OtherKey="Id" Type="MstPayrollGroup" IsForeignKey="true" />
+      <Association Name="MstPeriod_TrnDTR" Member="MstPeriod" ThisKey="PeriodId" OtherKey="Id" Type="MstPeriod" IsForeignKey="true" />
+      <Association Name="TrnChangeShift_TrnDTR" Member="TrnChangeShift" ThisKey="ChangeShiftId" OtherKey="Id" Type="TrnChangeShift" IsForeignKey="true" />
+      <Association Name="TrnLeaveApplication_TrnDTR" Member="TrnLeaveApplication" ThisKey="LeaveApplicationId" OtherKey="Id" Type="TrnLeaveApplication" IsForeignKey="true" />
+      <Association Name="TrnOverTime_TrnDTR" Member="TrnOverTime" ThisKey="OvertTimeId" OtherKey="Id" Type="TrnOverTime" IsForeignKey="true" />
+      <Association Name="MstUser_TrnDTR" Member="MstUser" ThisKey="EntryUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnDTR1" Member="MstUser1" ThisKey="UpdateUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnDTR2" Member="MstUser2" ThisKey="PreparedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnDTR3" Member="MstUser3" ThisKey="CheckedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnDTR4" Member="MstUser4" ThisKey="ApprovedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrnDTRLine" Member="TrnDTRLines">
+    <Type Name="TrnDTRLine">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DTRId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ShiftCodeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TimeIn1" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TimeOut1" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TimeIn2" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TimeOut2" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="OfficialBusiness" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="OnLeave" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Absent" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="HalfdayAbsent" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="RegularHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="NightHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="OvertimeHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="OvertimeNightHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="GrossTotalHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TardyLateHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TardyUndertimeHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="NetTotalHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="DayTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RestDay" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DayMultiplier" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="RatePerHour" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="RatePerNightHour" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="RatePerOvertimeHour" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="RatePerOvertimeNightHour" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="RegularAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="NightAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="OvertimeAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="OvertimeNightAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="RatePerHourTardy" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="RatePerAbsentDay" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TardyAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="AbsentAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="NetAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Association Name="MstDayType_TrnDTRLine" Member="MstDayType" ThisKey="DayTypeId" OtherKey="Id" Type="MstDayType" IsForeignKey="true" />
+      <Association Name="MstEmployee_TrnDTRLine" Member="MstEmployee" ThisKey="EmployeeId" OtherKey="Id" Type="MstEmployee" IsForeignKey="true" />
+      <Association Name="MstShiftCode_TrnDTRLine" Member="MstShiftCode" ThisKey="ShiftCodeId" OtherKey="Id" Type="MstShiftCode" IsForeignKey="true" />
+      <Association Name="TrnDTR_TrnDTRLine" Member="TrnDTR" ThisKey="DTRId" OtherKey="Id" Type="TrnDTR" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrnDTRLog" Member="TrnDTRLogs">
+    <Type Name="TrnDTRLog">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EmployeeId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="LogType" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Time" Type="System.DateTime" DbType="DateTime NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="MstEmployee_TrnDTRLog" Member="MstEmployee" ThisKey="EmployeeId" OtherKey="Id" Type="MstEmployee" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrnLastWithholdingTax" Member="TrnLastWithholdingTaxes">
+    <Type Name="TrnLastWithholdingTax">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PeriodId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LWTNumber" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LWTDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PayrollGroupId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Remarks" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PreparedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CheckedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ApprovedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EntryUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EntryDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IsLocked" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="TrnLastWithholdingTax_TrnLastWithholdingTaxLine" Member="TrnLastWithholdingTaxLines" ThisKey="Id" OtherKey="LastWithholdingTaxId" Type="TrnLastWithholdingTaxLine" />
+      <Association Name="MstPayrollGroup_TrnLastWithholdingTax" Member="MstPayrollGroup" ThisKey="PayrollGroupId" OtherKey="Id" Type="MstPayrollGroup" IsForeignKey="true" />
+      <Association Name="MstPeriod_TrnLastWithholdingTax" Member="MstPeriod" ThisKey="PeriodId" OtherKey="Id" Type="MstPeriod" IsForeignKey="true" />
+      <Association Name="MstUser_TrnLastWithholdingTax" Member="MstUser" ThisKey="EntryUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnLastWithholdingTax1" Member="MstUser1" ThisKey="UpdateUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnLastWithholdingTax2" Member="MstUser2" ThisKey="PreparedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnLastWithholdingTax3" Member="MstUser3" ThisKey="CheckedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnLastWithholdingTax4" Member="MstUser4" ThisKey="ApprovedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrnLastWithholdingTaxLine" Member="TrnLastWithholdingTaxLines">
+    <Type Name="TrnLastWithholdingTaxLine">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LastWithholdingTaxId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TaxCodeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TotalNetSalaryAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalOtherIncomeTaxable" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalSSSContribution" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalSSSECContribution" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalPHICContribution" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalHDMFContribution" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalOtherDeductionTaxable" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="Exemption" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="Tax" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TaxWithheld" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="LastTax" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Association Name="MstEmployee_TrnLastWithholdingTaxLine" Member="MstEmployee" ThisKey="EmployeeId" OtherKey="Id" Type="MstEmployee" IsForeignKey="true" />
+      <Association Name="MstTaxCode_TrnLastWithholdingTaxLine" Member="MstTaxCode" ThisKey="TaxCodeId" OtherKey="Id" Type="MstTaxCode" IsForeignKey="true" />
+      <Association Name="TrnLastWithholdingTax_TrnLastWithholdingTaxLine" Member="TrnLastWithholdingTax" ThisKey="LastWithholdingTaxId" OtherKey="Id" Type="TrnLastWithholdingTax" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrnLeaveApplication" Member="TrnLeaveApplications">
+    <Type Name="TrnLeaveApplication">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PeriodId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LANumber" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LADate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PayrollGroupId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Remarks" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="PreparedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CheckedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ApprovedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EntryUserId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EntryDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IsLocked" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="TrnLeaveApplication_TrnDTR" Member="TrnDTRs" ThisKey="Id" OtherKey="LeaveApplicationId" Type="TrnDTR" />
+      <Association Name="TrnLeaveApplication_TrnLeaveApplicationLine" Member="TrnLeaveApplicationLines" ThisKey="Id" OtherKey="LeaveApplicationId" Type="TrnLeaveApplicationLine" />
+      <Association Name="TrnLeaveApplication_TrnLeaveLedger" Member="TrnLeaveLedgers" ThisKey="Id" OtherKey="LeaveApplicationId" Type="TrnLeaveLedger" />
+      <Association Name="MstPayrollGroup_TrnLeaveApplication" Member="MstPayrollGroup" ThisKey="PayrollGroupId" OtherKey="Id" Type="MstPayrollGroup" IsForeignKey="true" />
+      <Association Name="MstPeriod_TrnLeaveApplication" Member="MstPeriod" ThisKey="PeriodId" OtherKey="Id" Type="MstPeriod" IsForeignKey="true" />
+      <Association Name="MstTaxCode_TrnLeaveApplication" Member="MstTaxCode" ThisKey="CheckedBy" OtherKey="Id" Type="MstTaxCode" IsForeignKey="true" />
+      <Association Name="MstUser_TrnLeaveApplication" Member="MstUser" ThisKey="EntryUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnLeaveApplication1" Member="MstUser1" ThisKey="UpdateUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnLeaveApplication2" Member="MstUser2" ThisKey="PreparedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnLeaveApplication3" Member="MstUser3" ThisKey="ApprovedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrnLeaveApplicationDraft" Member="TrnLeaveApplicationDrafts">
+    <Type Name="TrnLeaveApplicationDraft">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DocRefNumber" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeIdNumber" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="LeaveCode" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="NumberOfHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="WithPay" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DebitToLedger" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Remarks" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrnLeaveApplicationLine" Member="TrnLeaveApplicationLines">
+    <Type Name="TrnLeaveApplicationLine">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LeaveApplicationId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LeaveId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="NumberOfHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="WithPay" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DebitToLedger" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Remarks" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="MstEmployee_TrnLeaveApplicationLine" Member="MstEmployee" ThisKey="EmployeeId" OtherKey="Id" Type="MstEmployee" IsForeignKey="true" />
+      <Association Name="MstLeave_TrnLeaveApplicationLine" Member="MstLeave" ThisKey="LeaveId" OtherKey="Id" Type="MstLeave" IsForeignKey="true" />
+      <Association Name="TrnLeaveApplication_TrnLeaveApplicationLine" Member="TrnLeaveApplication" ThisKey="LeaveApplicationId" OtherKey="Id" Type="TrnLeaveApplication" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrnLeaveLedger" Member="TrnLeaveLedgers">
+    <Type Name="TrnLeaveLedger">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PeriodId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LeaveId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LeaveType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Debit" Type="System.Decimal" DbType="Decimal(18,4) NOT NULL" CanBeNull="false" />
+      <Column Name="Credit" Type="System.Decimal" DbType="Decimal(18,4) NOT NULL" CanBeNull="false" />
+      <Column Name="LeaveApplicationId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MstEmployee_TrnLeaveLedger" Member="MstEmployee" ThisKey="EmployeeId" OtherKey="Id" Type="MstEmployee" IsForeignKey="true" />
+      <Association Name="MstLeave_TrnLeaveLedger" Member="MstLeave" ThisKey="LeaveId" OtherKey="Id" Type="MstLeave" IsForeignKey="true" />
+      <Association Name="MstPeriod_TrnLeaveLedger" Member="MstPeriod" ThisKey="PeriodId" OtherKey="Id" Type="MstPeriod" IsForeignKey="true" />
+      <Association Name="TrnLeaveApplication_TrnLeaveLedger" Member="TrnLeaveApplication" ThisKey="LeaveApplicationId" OtherKey="Id" Type="TrnLeaveApplication" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrnLoanLedger" Member="TrnLoanLedgers">
+    <Type Name="TrnLoanLedger">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PeriodId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeLoanId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Debit" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="Credit" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="PayrollOtherDeductionId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrnOverTime" Member="TrnOverTimes">
+    <Type Name="TrnOverTime">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PeriodId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="OTNumber" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="OTDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PayrollGroupId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Remarks" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="PreparedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CheckedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ApprovedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EntryUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EntryDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IsLocked" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="TrnOverTime_TrnDTR" Member="TrnDTRs" ThisKey="Id" OtherKey="OvertTimeId" Type="TrnDTR" />
+      <Association Name="TrnOverTime_TrnOverTimeLine" Member="TrnOverTimeLines" ThisKey="Id" OtherKey="OverTimeId" Type="TrnOverTimeLine" />
+      <Association Name="MstPayrollGroup_TrnOverTime" Member="MstPayrollGroup" ThisKey="PayrollGroupId" OtherKey="Id" Type="MstPayrollGroup" IsForeignKey="true" />
+      <Association Name="MstPeriod_TrnOverTime" Member="MstPeriod" ThisKey="PeriodId" OtherKey="Id" Type="MstPeriod" IsForeignKey="true" />
+      <Association Name="MstUser_TrnOverTime" Member="MstUser" ThisKey="EntryUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnOverTime1" Member="MstUser1" ThisKey="UpdateUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnOverTime2" Member="MstUser2" ThisKey="PreparedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnOverTime3" Member="MstUser3" ThisKey="CheckedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnOverTime4" Member="MstUser4" ThisKey="ApprovedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrnOverTimeDraft" Member="TrnOverTimeDrafts">
+    <Type Name="TrnOverTimeDraft">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DocRefNumber" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeIdNumber" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="OvertimeHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="OvertimeNightHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="OvertimeLimitHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="Remarks" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrnOverTimeLine" Member="TrnOverTimeLines">
+    <Type Name="TrnOverTimeLine">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OverTimeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="OvertimeHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="OvertimeNightHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="OvertimeLimitHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="Remarks" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="MstEmployee_TrnOverTimeLine" Member="MstEmployee" ThisKey="EmployeeId" OtherKey="Id" Type="MstEmployee" IsForeignKey="true" />
+      <Association Name="TrnOverTime_TrnOverTimeLine" Member="TrnOverTime" ThisKey="OverTimeId" OtherKey="Id" Type="TrnOverTime" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrnPayroll" Member="TrnPayrolls">
+    <Type Name="TrnPayroll">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PeriodId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MonthId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PayrollNumber" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PayrollDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PayrollGroupId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DTRId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PayrollOtherIncomeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PayrollOtherDeductionId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Remarks" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PreparedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CheckedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ApprovedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EntryUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EntryDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IsLocked" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LastWithholdingTaxId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TrnPayroll_TrnPayrollLine" Member="TrnPayrollLines" ThisKey="Id" OtherKey="PayrollId" Type="TrnPayrollLine" />
+      <Association Name="MstMonth_TrnPayroll" Member="MstMonth" ThisKey="MonthId" OtherKey="Id" Type="MstMonth" IsForeignKey="true" />
+      <Association Name="MstPayrollGroup_TrnPayroll" Member="MstPayrollGroup" ThisKey="PayrollGroupId" OtherKey="Id" Type="MstPayrollGroup" IsForeignKey="true" />
+      <Association Name="MstPeriod_TrnPayroll" Member="MstPeriod" ThisKey="PeriodId" OtherKey="Id" Type="MstPeriod" IsForeignKey="true" />
+      <Association Name="TrnDTR_TrnPayroll" Member="TrnDTR" ThisKey="DTRId" OtherKey="Id" Type="TrnDTR" IsForeignKey="true" />
+      <Association Name="TrnPayrollOtherDeduction_TrnPayroll" Member="TrnPayrollOtherDeduction" ThisKey="PayrollOtherDeductionId" OtherKey="Id" Type="TrnPayrollOtherDeduction" IsForeignKey="true" />
+      <Association Name="TrnPayrollOtherIncome_TrnPayroll" Member="TrnPayrollOtherIncome" ThisKey="PayrollOtherIncomeId" OtherKey="Id" Type="TrnPayrollOtherIncome" IsForeignKey="true" />
+      <Association Name="MstUser_TrnPayroll" Member="MstUser" ThisKey="EntryUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnPayroll1" Member="MstUser1" ThisKey="UpdateUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnPayroll2" Member="MstUser2" ThisKey="PreparedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnPayroll3" Member="MstUser3" ThisKey="CheckedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnPayroll4" Member="MstUser4" ThisKey="ApprovedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrnPayrollLine" Member="TrnPayrollLines">
+    <Type Name="TrnPayrollLine">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PayrollId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PayrollTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TaxCodeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TotalRegularWorkingHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalLegalHolidayWorkingHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalSpecialHolidayWorkingHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalRegularRestdayHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalLegalHolidayRestdayHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalSpecialHolidayRestdayHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalRegularOvertimeHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalLegalHolidayOvertimeHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalSpecialHolidayOvertimeHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalRegularNightHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalLegalHolidayNightHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalSpecialHolidayNightHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalRegularNightOvertimeHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalLegalHolidayNightOvertimeHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalSpecialHolidayNighOvertimetHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalTardyLateHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalTardyUndertimeHours" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalRegularWorkingAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalLegalHolidayWorkingAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalSpecialHolidayWorkingAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalRegularRestdayAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalLegalHolidayRestdayAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalSpecialHolidayRestdayAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalRegularOvertimeAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalLegalHolidayOvertimeAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalSpecialHolidayOvertimeAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalRegularNightAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalLegalHolidayNightAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalSpecialHolidayNightAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalRegularNightOvertimeAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalLegalHolidayNightOvertimeAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalSpecialHolidayNightOvertimeAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalSalaryAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalTardyAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalAbsentAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalNetSalaryAmount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalOtherIncomeTaxable" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="GrossIncome" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalOtherIncomeNonTaxable" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="GrossIncomeWithNonTaxable" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="SSSContribution" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="SSSECContribution" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="PHICContribution" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="HDMFContribution" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="Tax" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalOtherDeduction" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="NetIncome" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="SSSContributionEmployer" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="SSSECContributionEmployer" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="PHICContributionEmployer" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="HDMFContributionEmployer" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="AccountId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="MstEmployee_TrnPayrollLine" Member="MstEmployee" ThisKey="EmployeeId" OtherKey="Id" Type="MstEmployee" IsForeignKey="true" />
+      <Association Name="MstPayrollType_TrnPayrollLine" Member="MstPayrollType" ThisKey="PayrollTypeId" OtherKey="Id" Type="MstPayrollType" IsForeignKey="true" />
+      <Association Name="TrnPayroll_TrnPayrollLine" Member="TrnPayroll" ThisKey="PayrollId" OtherKey="Id" Type="TrnPayroll" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrnPayrollOtherDeduction" Member="TrnPayrollOtherDeductions">
+    <Type Name="TrnPayrollOtherDeduction">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PeriodId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PODNumber" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PODDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PayrollGroupId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Remarks" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PreparedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CheckedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ApprovedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EntryUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EntryDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IsLocked" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="TrnPayrollOtherDeduction_TrnPayroll" Member="TrnPayrolls" ThisKey="Id" OtherKey="PayrollOtherDeductionId" Type="TrnPayroll" />
+      <Association Name="TrnPayrollOtherDeduction_TrnPayrollOtherDeductionLine" Member="TrnPayrollOtherDeductionLines" ThisKey="Id" OtherKey="PayrollOtherDeductionId" Type="TrnPayrollOtherDeductionLine" />
+      <Association Name="MstPayrollGroup_TrnPayrollOtherDeduction" Member="MstPayrollGroup" ThisKey="PayrollGroupId" OtherKey="Id" Type="MstPayrollGroup" IsForeignKey="true" />
+      <Association Name="MstPeriod_TrnPayrollOtherDeduction" Member="MstPeriod" ThisKey="PeriodId" OtherKey="Id" Type="MstPeriod" IsForeignKey="true" />
+      <Association Name="MstUser_TrnPayrollOtherDeduction" Member="MstUser" ThisKey="EntryUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnPayrollOtherDeduction1" Member="MstUser1" ThisKey="UpdateUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnPayrollOtherDeduction2" Member="MstUser2" ThisKey="PreparedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnPayrollOtherDeduction3" Member="MstUser3" ThisKey="CheckedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnPayrollOtherDeduction4" Member="MstUser4" ThisKey="ApprovedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrnPayrollOtherDeductionLine" Member="TrnPayrollOtherDeductionLines">
+    <Type Name="TrnPayrollOtherDeductionLine">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PayrollOtherDeductionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="OtherDeductionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeLoanId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Association Name="MstEmployee_TrnPayrollOtherDeductionLine" Member="MstEmployee" ThisKey="EmployeeId" OtherKey="Id" Type="MstEmployee" IsForeignKey="true" />
+      <Association Name="MstEmployeeLoan_TrnPayrollOtherDeductionLine" Member="MstEmployeeLoan" ThisKey="EmployeeLoanId" OtherKey="Id" Type="MstEmployeeLoan" IsForeignKey="true" />
+      <Association Name="MstOtherDeduction_TrnPayrollOtherDeductionLine" Member="MstOtherDeduction" ThisKey="OtherDeductionId" OtherKey="Id" Type="MstOtherDeduction" IsForeignKey="true" />
+      <Association Name="TrnPayrollOtherDeduction_TrnPayrollOtherDeductionLine" Member="TrnPayrollOtherDeduction" ThisKey="PayrollOtherDeductionId" OtherKey="Id" Type="TrnPayrollOtherDeduction" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrnPayrollOtherIncome" Member="TrnPayrollOtherIncomes">
+    <Type Name="TrnPayrollOtherIncome">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PeriodId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="POINumber" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="POIDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PayrollGroupId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Remarks" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PreparedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CheckedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ApprovedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EntryUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EntryDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IsLocked" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="TrnPayrollOtherIncome_TrnPayrollOtherIncomeLine" Member="TrnPayrollOtherIncomeLines" ThisKey="Id" OtherKey="PayrollOtherIncomeId" Type="TrnPayrollOtherIncomeLine" />
+      <Association Name="TrnPayrollOtherIncome_TrnPayroll" Member="TrnPayrolls" ThisKey="Id" OtherKey="PayrollOtherIncomeId" Type="TrnPayroll" />
+      <Association Name="MstPayrollGroup_TrnPayrollOtherIncome" Member="MstPayrollGroup" ThisKey="PayrollGroupId" OtherKey="Id" Type="MstPayrollGroup" IsForeignKey="true" />
+      <Association Name="MstPeriod_TrnPayrollOtherIncome" Member="MstPeriod" ThisKey="PeriodId" OtherKey="Id" Type="MstPeriod" IsForeignKey="true" />
+      <Association Name="MstUser_TrnPayrollOtherIncome" Member="MstUser" ThisKey="EntryUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnPayrollOtherIncome1" Member="MstUser1" ThisKey="UpdateUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnPayrollOtherIncome2" Member="MstUser2" ThisKey="PreparedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnPayrollOtherIncome3" Member="MstUser3" ThisKey="CheckedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnPayrollOtherIncome4" Member="MstUser4" ThisKey="ApprovedBy" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUsers" Member="AspNetUsers">
+    <Type Name="AspNetUser">
+      <Column Name="Id" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="EmailConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordHash" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="SecurityStamp" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PhoneNumberConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TwoFactorEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LockoutEndDateUtc" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LockoutEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AccessFailedCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Association Name="AspNetUser_AspNetUserClaim" Member="AspNetUserClaims" ThisKey="Id" OtherKey="UserId" Type="AspNetUserClaim" />
+      <Association Name="AspNetUser_AspNetUserLogin" Member="AspNetUserLogins" ThisKey="Id" OtherKey="UserId" Type="AspNetUserLogin" />
+      <Association Name="AspNetUser_AspNetUserRole" Member="AspNetUserRoles" ThisKey="Id" OtherKey="UserId" Type="AspNetUserRole" />
+      <Association Name="AspNetUser_MstUser" Member="MstUsers" ThisKey="Id" OtherKey="AspNetUserId" Type="MstUser" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstUser" Member="MstUsers">
+    <Type Name="MstUser">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="AspNetUserId" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="EntryUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EntryDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IsLocked" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="MstUser_MstEmployeeLoan" Member="MstEmployeeLoans" ThisKey="Id" OtherKey="EntryUserId" Type="MstEmployeeLoan" />
+      <Association Name="MstUser_MstEmployeeLoan1" Member="MstEmployeeLoans1" ThisKey="Id" OtherKey="UpdateUserId" Type="MstEmployeeLoan" />
+      <Association Name="MstUser_MstShiftCode" Member="MstShiftCodes" ThisKey="Id" OtherKey="EntryUserId" Type="MstShiftCode" />
+      <Association Name="MstUser_MstShiftCode1" Member="MstShiftCodes1" ThisKey="Id" OtherKey="UpdateUserId" Type="MstShiftCode" />
+      <Association Name="MstUser_MstUserForm" Member="MstUserForms" ThisKey="Id" OtherKey="UserId" Type="MstUserForm" />
+      <Association Name="MstUser_MstUserPayrollGroup" Member="MstUserPayrollGroups" ThisKey="Id" OtherKey="UserId" Type="MstUserPayrollGroup" />
+      <Association Name="MstUser_TrnChangeShift" Member="TrnChangeShifts" ThisKey="Id" OtherKey="EntryUserId" Type="TrnChangeShift" />
+      <Association Name="MstUser_TrnChangeShift1" Member="TrnChangeShifts1" ThisKey="Id" OtherKey="UpdateUserId" Type="TrnChangeShift" />
+      <Association Name="MstUser_TrnChangeShift2" Member="TrnChangeShifts2" ThisKey="Id" OtherKey="PreparedBy" Type="TrnChangeShift" />
+      <Association Name="MstUser_TrnChangeShift3" Member="TrnChangeShifts3" ThisKey="Id" OtherKey="CheckedBy" Type="TrnChangeShift" />
+      <Association Name="MstUser_TrnChangeShift4" Member="TrnChangeShifts4" ThisKey="Id" OtherKey="ApprovedBy" Type="TrnChangeShift" />
+      <Association Name="MstUser_TrnDTR" Member="TrnDTRs" ThisKey="Id" OtherKey="EntryUserId" Type="TrnDTR" />
+      <Association Name="MstUser_TrnDTR1" Member="TrnDTRs1" ThisKey="Id" OtherKey="UpdateUserId" Type="TrnDTR" />
+      <Association Name="MstUser_TrnDTR2" Member="TrnDTRs2" ThisKey="Id" OtherKey="PreparedBy" Type="TrnDTR" />
+      <Association Name="MstUser_TrnDTR3" Member="TrnDTRs3" ThisKey="Id" OtherKey="CheckedBy" Type="TrnDTR" />
+      <Association Name="MstUser_TrnDTR4" Member="TrnDTRs4" ThisKey="Id" OtherKey="ApprovedBy" Type="TrnDTR" />
+      <Association Name="MstUser_TrnLastWithholdingTax" Member="TrnLastWithholdingTaxes" ThisKey="Id" OtherKey="EntryUserId" Type="TrnLastWithholdingTax" />
+      <Association Name="MstUser_TrnLastWithholdingTax1" Member="TrnLastWithholdingTaxes1" ThisKey="Id" OtherKey="UpdateUserId" Type="TrnLastWithholdingTax" />
+      <Association Name="MstUser_TrnLastWithholdingTax2" Member="TrnLastWithholdingTaxes2" ThisKey="Id" OtherKey="PreparedBy" Type="TrnLastWithholdingTax" />
+      <Association Name="MstUser_TrnLastWithholdingTax3" Member="TrnLastWithholdingTaxes3" ThisKey="Id" OtherKey="CheckedBy" Type="TrnLastWithholdingTax" />
+      <Association Name="MstUser_TrnLastWithholdingTax4" Member="TrnLastWithholdingTaxes4" ThisKey="Id" OtherKey="ApprovedBy" Type="TrnLastWithholdingTax" />
+      <Association Name="MstUser_TrnLeaveApplication" Member="TrnLeaveApplications" ThisKey="Id" OtherKey="EntryUserId" Type="TrnLeaveApplication" />
+      <Association Name="MstUser_TrnLeaveApplication1" Member="TrnLeaveApplications1" ThisKey="Id" OtherKey="UpdateUserId" Type="TrnLeaveApplication" />
+      <Association Name="MstUser_TrnLeaveApplication2" Member="TrnLeaveApplications2" ThisKey="Id" OtherKey="PreparedBy" Type="TrnLeaveApplication" />
+      <Association Name="MstUser_TrnLeaveApplication3" Member="TrnLeaveApplications3" ThisKey="Id" OtherKey="ApprovedBy" Type="TrnLeaveApplication" />
+      <Association Name="MstUser_TrnOverTime" Member="TrnOverTimes" ThisKey="Id" OtherKey="EntryUserId" Type="TrnOverTime" />
+      <Association Name="MstUser_TrnOverTime1" Member="TrnOverTimes1" ThisKey="Id" OtherKey="UpdateUserId" Type="TrnOverTime" />
+      <Association Name="MstUser_TrnOverTime2" Member="TrnOverTimes2" ThisKey="Id" OtherKey="PreparedBy" Type="TrnOverTime" />
+      <Association Name="MstUser_TrnOverTime3" Member="TrnOverTimes3" ThisKey="Id" OtherKey="CheckedBy" Type="TrnOverTime" />
+      <Association Name="MstUser_TrnOverTime4" Member="TrnOverTimes4" ThisKey="Id" OtherKey="ApprovedBy" Type="TrnOverTime" />
+      <Association Name="MstUser_TrnPayroll" Member="TrnPayrolls" ThisKey="Id" OtherKey="EntryUserId" Type="TrnPayroll" />
+      <Association Name="MstUser_TrnPayroll1" Member="TrnPayrolls1" ThisKey="Id" OtherKey="UpdateUserId" Type="TrnPayroll" />
+      <Association Name="MstUser_TrnPayroll2" Member="TrnPayrolls2" ThisKey="Id" OtherKey="PreparedBy" Type="TrnPayroll" />
+      <Association Name="MstUser_TrnPayroll3" Member="TrnPayrolls3" ThisKey="Id" OtherKey="CheckedBy" Type="TrnPayroll" />
+      <Association Name="MstUser_TrnPayroll4" Member="TrnPayrolls4" ThisKey="Id" OtherKey="ApprovedBy" Type="TrnPayroll" />
+      <Association Name="MstUser_TrnPayrollOtherDeduction" Member="TrnPayrollOtherDeductions" ThisKey="Id" OtherKey="EntryUserId" Type="TrnPayrollOtherDeduction" />
+      <Association Name="MstUser_TrnPayrollOtherDeduction1" Member="TrnPayrollOtherDeductions1" ThisKey="Id" OtherKey="UpdateUserId" Type="TrnPayrollOtherDeduction" />
+      <Association Name="MstUser_TrnPayrollOtherDeduction2" Member="TrnPayrollOtherDeductions2" ThisKey="Id" OtherKey="PreparedBy" Type="TrnPayrollOtherDeduction" />
+      <Association Name="MstUser_TrnPayrollOtherDeduction3" Member="TrnPayrollOtherDeductions3" ThisKey="Id" OtherKey="CheckedBy" Type="TrnPayrollOtherDeduction" />
+      <Association Name="MstUser_TrnPayrollOtherDeduction4" Member="TrnPayrollOtherDeductions4" ThisKey="Id" OtherKey="ApprovedBy" Type="TrnPayrollOtherDeduction" />
+      <Association Name="MstUser_TrnPayrollOtherIncome" Member="TrnPayrollOtherIncomes" ThisKey="Id" OtherKey="EntryUserId" Type="TrnPayrollOtherIncome" />
+      <Association Name="MstUser_TrnPayrollOtherIncome1" Member="TrnPayrollOtherIncomes1" ThisKey="Id" OtherKey="UpdateUserId" Type="TrnPayrollOtherIncome" />
+      <Association Name="MstUser_TrnPayrollOtherIncome2" Member="TrnPayrollOtherIncomes2" ThisKey="Id" OtherKey="PreparedBy" Type="TrnPayrollOtherIncome" />
+      <Association Name="MstUser_TrnPayrollOtherIncome3" Member="TrnPayrollOtherIncomes3" ThisKey="Id" OtherKey="CheckedBy" Type="TrnPayrollOtherIncome" />
+      <Association Name="MstUser_TrnPayrollOtherIncome4" Member="TrnPayrollOtherIncomes4" ThisKey="Id" OtherKey="ApprovedBy" Type="TrnPayrollOtherIncome" />
+      <Association Name="AspNetUser_MstUser" Member="AspNetUser" ThisKey="AspNetUserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.WebMenu" Member="WebMenus">
+    <Type Name="WebMenu">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Category" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Menu" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Action" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Controller" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
