@@ -40,7 +40,6 @@ namespace whris_v2.Controllers
                     var DefaultPayrollGroupId = whris.MstPayrollGroups.FirstOrDefault().Id;
                     var DefaultDTRDate = DateTime.Now;
 
-
                     data = new Data.TrnDTR
                     {
                         Id = 0,

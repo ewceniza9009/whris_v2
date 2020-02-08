@@ -30,6 +30,15 @@
         padding-top: 7px;
         padding-left: 0px;
     }
+
+    #TrnDTRDetailSF1 {
+        min-width: 1050px;
+        width: 1090px;
+    }
+
+    .k-grid-header .k-header{
+       text-align: center;
+    }
 </style>
 
 <div id="model">
@@ -329,7 +338,7 @@
             serverPaging: true,
             serverFiltering: true,
             serverSorting: true,
-            pageSize: 10,
+            pageSize: 5,
             schema: {
                 data: "Data",
                 total: "Total",
@@ -340,39 +349,39 @@
                         DTRId: { editable: false },
                         EmployeeId: { editable: true },
                         ShiftCodeId: { editable: true },
-                        Date: { editable: true },
-                        TimeIn1: { editable: true },
-                        TimeOut1: { editable: true },
-                        TimeIn2: { editable: true },
-                        TimeOut2: { editable: true },
-                        OfficialBusiness: { editable: true },
-                        OnLeave: { editable: true },
-                        Absent: { editable: true },
-                        HalfDayAbsent: { editable: true },
-                        RegularHours: { editable: true },
-                        NightHours: { editable: true },
-                        OvertimeHours: { editable: true },
-                        OvertimeNightHours: { editable: true },
-                        GrossTotalHours: { editable: true },
-                        TardyLateHours: { editable: true },
-                        TardyUndertimeHours: { editable: true },
-                        NetTotalHours: { editable: true },
+                        Date: { editable: true, type: "date" },
+                        TimeIn1: { editable: true, type: "date" },
+                        TimeOut1: { editable: true, type: "date" },
+                        TimeIn2: { editable: true, type: "date" },
+                        TimeOut2: { editable: true, type: "date" },
+                        OfficialBusiness: { editable: true, type: "boolean" },
+                        OnLeave: { editable: true, type: "boolean" },
+                        Absent: { editable: true, type: "boolean" },
+                        HalfDayAbsent: { editable: true,type: "boolean" },
+                        RegularHours: { editable: true, type: "number" },
+                        NightHours: { editable: true, type: "number" },
+                        OvertimeHours: { editable: true, type: "number" },
+                        OvertimeNightHours: { editable: true, type: "number" },
+                        GrossTotalHours: { editable: true, type: "number" },
+                        TardyLateHours: { editable: true, type: "number" },
+                        TardyUndertimeHours: { editable: true, type: "number" },
+                        NetTotalHours: { editable: true, type: "number" },
                         DayTypeId: { editable: true },
-                        RestDay: { editable: true },
-                        DayMultiplier: { editable: true },
-                        RatePerHour: { editable: true },
-                        RatePerNightHour: { editable: true },
-                        RatePerOvertimeHour: { editable: true },
-                        RatePerOvertimeNightHour: { editable: true },
-                        RegularAmount: { editable: true },
-                        NightAmount: { editable: true },
-                        OvertimeAmount: { editable: true },
-                        OvertimeNightAmount: { editable: true },
-                        TotalAmount: { editable: true },
-                        RatePerHourTardy: { editable: true },
-                        RatePerAbsentDay: { editable: true },
-                        RatePerAbsentAmount: { editable: true },
-                        NetAmount: { editable: true },
+                        RestDay: { editable: true, type: "boolean" },
+                        DayMultiplier: { editable: true, type: "number" },
+                        RatePerHour: { editable: true, type: "number" },
+                        RatePerNightHour: { editable: true, type: "number" },
+                        RatePerOvertimeHour: { editable: true, type: "number" },
+                        RatePerOvertimeNightHour: { editable: true, type: "number" },
+                        RegularAmount: { editable: true, type: "number" },
+                        NightAmount: { editable: true, type: "number" },
+                        OvertimeAmount: { editable: true, type: "number" },
+                        OvertimeNightAmount: { editable: true, type: "number" },
+                        TotalAmount: { editable: true, type: "number" },
+                        RatePerHourTardy: { editable: true, type: "number" },
+                        RatePerAbsentDay: { editable: true, type: "number" },
+                        RatePerAbsentAmount: { editable: true, type: "number" },
+                        NetAmount: { editable: true, type: "number" },
                     }
                 }
             },
@@ -506,7 +515,9 @@
                 {
                     command: ["destroy"],
                     title: "&nbsp;",
-                    width: 110
+                    width: 110,
+                    locked: true,
+                    lockable: false,
                 },
                 {
                     width: "0px",
@@ -524,6 +535,8 @@
                     width: 210,
                     field: "EmployeeId",
                     title: "Employee",
+                    locked: true,
+                    lockable: false,
                     editor: CmbEmployee,
                     template: "#=GetEmployees(EmployeeId)#"
                 },
@@ -538,7 +551,6 @@
                     width: 100,
                     field: "Date",
                     title: "Date",
-                    type: "date",
                     format: "{0:MM/dd/yyyy}"
                 },
                 {
@@ -553,9 +565,10 @@
                     {
                         width: 100,
                         field: "DayMultiplier",
-                        title: "DM"
+                        title: "DM",
+                        format: "{0:N2}"
                     }]
-                },  
+                },
                 {
                     width: 100,
                     field: "RestDay",
@@ -593,25 +606,25 @@
                 {
                     title: "DTR Status",
                     columns: [{
-                        width: 100,
+                        width: 70,
                         field: "OfficialBusiness",
                         title: "OB",
                         template: "<input type=\"checkbox\" #= OfficialBusiness ? \"checked=checked\" : \"\" # disabled=\"disabled\"></input>",
                     },
                     {
-                        width: 100,
+                        width: 70,
                         field: "OnLeave",
                         title: "OL",
                         template: "<input type=\"checkbox\" #= OnLeave ? \"checked=checked\" : \"\" # disabled=\"disabled\"></input>",
                     },
                     {
-                        width: 100,
+                        width: 70,
                         field: "Absent",
                         title: "A",
                         template: "<input type=\"checkbox\" #= Absent ? \"checked=checked\" : \"\" # disabled=\"disabled\"></input>",
                     },
                     {
-                        width: 100,
+                        width: 70,
                         field: "HalfdayAbsent",
                         title: "HA",
                         template: "<input type=\"checkbox\" #= HalfdayAbsent ? \"checked=checked\" : \"\" # disabled=\"disabled\"></input>",
@@ -623,36 +636,31 @@
                         width: 100,
                         field: "RegularHours",
                         title: "Reg",
-                        type: "number",
-                        validation: { min: 0, required: true }
+                        format: "{0:N2}"
                     },
                     {
                         width: 100,
                         field: "NightHours",
                         title: "N",
-                        type: "number",
-                        validation: { min: 0, required: true }
+                        format: "{0:N2}"
                     },
                     {
                         width: 100,
                         field: "OvertimeHours",
                         title: "OT",
-                        type: "number",
-                        validation: { min: 0, required: true }
+                        format: "{0:N2}"
                     },
                     {
                         width: 100,
                         field: "OvertimeNightHours",
                         title: "OTN",
-                        type: "number",
-                        validation: { min: 0, required: true }
+                        format: "{0:N2}"
                     },
                     {
                         width: 100,
                         field: "GrossTotalHours",
                         title: "Total",
-                        type: "number",
-                        validation: { min: 0, required: true }
+                        format: "{0:N2}"
                     }]
                 },
                 {
@@ -661,23 +669,20 @@
                         width: 100,
                         field: "TardyLateHours",
                         title: "Late",
-                        type: "number",
-                        validation: { min: 0, required: true }
+                        format: "{0:N2}"
                     },
                     {
                         width: 100,
                         field: "TardyUndertimeHours",
                         title: "UT",
-                        type: "number",
-                        validation: { min: 0, required: true }
+                        format: "{0:N2}"
                     }]
                 },
                 {
                     width: 100,
                     field: "NetTotalHours",
                     title: "Net Hours",
-                    type: "number",
-                    validation: { min: 0, required: true }
+                    format: "{0:N2}"
                 },
                 {
                     title: "Rate per Hour",
@@ -685,29 +690,25 @@
                         width: 100,
                         field: "RatePerHour",
                         title: "Reg",
-                        type: "number",
-                        validation: { min: 0, required: true }
+                        format: "{0:N2}"
                     },
                     {
                         width: 100,
                         field: "RatePerNightHour",
                         title: "N",
-                        type: "number",
-                        validation: { min: 0, required: true }
+                        format: "{0:N2}"
                     },
                     {
                         width: 100,
                         field: "RatePerOvertimeHour",
                         title: "OT",
-                        type: "number",
-                        validation: { min: 0, required: true }
+                        format: "{0:N2}"
                     },
                     {
                         width: 100,
                         field: "RatePerOvertimeNightHour",
                         title: "OTN",
-                        type: "number",
-                        validation: { min: 0, required: true }
+                        format: "{0:N2}"
                     }]
                 },
                 {
@@ -716,78 +717,70 @@
                         width: 100,
                         field: "RegularAmount",
                         title: "Reg",
-                        type: "number",
-                        validation: { min: 0, required: true }
+                        format: "{0:N2}"
                     },
                     {
                         width: 100,
                         field: "NightAmount",
                         title: "N",
-                        type: "number",
-                        validation: { min: 0, required: true }
+                        format: "{0:N2}"
                     },
                     {
                         width: 100,
                         field: "OvertimeAmount",
                         title: "OT",
-                        type: "number",
-                        validation: { min: 0, required: true }
+                        format: "{0:N2}"
                     },
                     {
                         width: 100,
                         field: "OvertimeNightAmount",
                         title: "OTN",
-                        type: "number",
-                        validation: { min: 0, required: true }
+                        format: "{0:N2}"
                     }]
                 },
                 {
                     width: 100,
                     field: "TotalAmount",
                     title: "Ttl Amt",
-                    type: "number",
-                    validation: { min: 0, required: true }
+                    format: "{0:N2}"
                 },
                 {
                     width: 100,
                     field: "RatePerHourTardy",
                     title: "Tardy RPH",
-                    type: "number",
-                    validation: { min: 0, required: true }
+                    format: "{0:N2}"
                 },
                 {
                     width: 100,
                     field: "TardyAmount",
                     title: "Tardy Amt",
-                    type: "number",
-                    validation: { min: 0, required: true }
+                    format: "{0:N2}"
                 },
                 {
                     width: 100,
                     field: "RatePerAbsentDay",
                     title: "Abs RPD",
-                    type: "number",
-                    validation: { min: 0, required: true }
+                    format: "{0:N2}"
                 },
                 {
                     width: 100,
                     field: "AbsentAmount",
                     title: "Abs Amt",
-                    type: "number",
-                    validation: { min: 0, required: true }
+                    format: "{0:N2}"
                 },
                 {
                     width: 100,
                     field: "NetAmount",
                     title: "Net Amt",
-                    type: "number",
-                    validation: { min: 0, required: true }
-                }                
+                    format: "{0:N2}"
+                }
             ],
             editable: true,
             pageable: true,
             sortable: true,
-            filterable: true,
+            scrollable: {
+                virtual: true
+            },
             toolbar: ["create", "save", "cancel"],
             dataBound: function(e){
               $('.k-grid-add').unbind("click");
