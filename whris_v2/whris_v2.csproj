@@ -279,6 +279,7 @@
     <Compile Include="Models\ComboBox\TrnDTR\CmbEmployee.cs" />
     <Compile Include="Models\ComboBox\TrnDTR\CmbLANumber.cs" />
     <Compile Include="Models\ComboBox\TrnDTR\CmbOvertime.cs" />
+    <Compile Include="Models\DataTables\DTR.cs" />
     <Compile Include="Models\TrnDTRLine.cs" />
     <Compile Include="Data\whris.designer.cs">
       <AutoGen>True</AutoGen>
@@ -318,8 +319,9 @@
     <Compile Include="Models\MstUser.cs" />
     <Compile Include="Models\MstUserLine.cs" />
     <Compile Include="Models\TrnDTR.cs" />
-    <Compile Include="PayrollLogics\DTR.cs" />
+    <Compile Include="Modules\DTR.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ExcelUploadUtil.cs" />
     <Compile Include="Services\Menu.cs" />
     <Compile Include="Services\Security.cs" />
     <Compile Include="Startup.cs" />
