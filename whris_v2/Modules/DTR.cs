@@ -51,16 +51,15 @@ namespace whris_v2.Modules
 
                 int? currentShiftCodeId = rsDTRLine.ShiftCodeId;
 
-                changeShiftId = ctx.TrnDTRs.Where(x => x.Id == rsDTRLine.Id).FirstOrDefault()?.ChangeShiftId;
+                changeShiftId = ctx.TrnDTRs.FirstOrDefault(x => x.Id == rsDTRLine.Id)?.ChangeShiftId;
 
                 if (changeShiftId != null && rsDTRLine?.EmployeeId != null)
                 {
                     shiftCodeId = ctx.TrnChangeShiftLines
-                        .Where(x => x.ChangeShiftId == changeShiftId &&
-                            x.EmployeeId == rsDTRLine.EmployeeId &&
-                            x.Date.Date == rsDTRLine.Date.Date)
-                        .FirstOrDefault()
-                        .ShiftCodeId;
+                        .FirstOrDefault(x => x.ChangeShiftId == changeShiftId &&
+                                             x.EmployeeId == rsDTRLine.EmployeeId &&
+                                             x.Date.Date == rsDTRLine.Date.Date)
+                        ?.ShiftCodeId;
 
                     if (shiftCodeId > 0)
                     {
@@ -83,9 +82,10 @@ namespace whris_v2.Modules
 
             using (var ctx = new Data.whrisDataContext())
             {
-                Data.MstShiftCodeDay rsShiftCodeDay = ctx.MstShiftCodeDays
+                var rsShiftCodeDay = ctx.MstShiftCodeDays
                     .Where(x => x.ShiftCodeId == rsDTRLine.ShiftCodeId &&
-                        x.Day.ToUpper() == rsDTRLine.Date.ToString("dddd").ToUpper())
+                        string.Equals(x.Day, rsDTRLine.Date.ToString("dddd"),
+                            StringComparison.CurrentCultureIgnoreCase))
                     ?.FirstOrDefault();
 
                 if (rsShiftCodeDay != null)
@@ -107,9 +107,8 @@ namespace whris_v2.Modules
 
             using (var ctx = new Data.whrisDataContext())
             {
-                int? leaveApplicationId = ctx.TrnDTRs
-                    .Where(x => x.Id == rsDTRLine.DTRId)
-                    .FirstOrDefault()
+                var leaveApplicationId = ctx.TrnDTRs
+                    .FirstOrDefault(x => x.Id == rsDTRLine.DTRId)
                     ?.LeaveApplicationId;
 
                 if (leaveApplicationId != null && rsDTRLine?.EmployeeId != null)
@@ -118,14 +117,7 @@ namespace whris_v2.Modules
                         .Where(x => x.LeaveApplicationId == leaveApplicationId &&
                             x.EmployeeId == rsDTRLine.EmployeeId &&
                             x.Date.Date == rsDTRLine.Date.Date);
-                    if (rsLeaveApplication != null && rsLeaveApplication.Count() > 0)
-                    {
-                        bolReturn = true;
-                    }
-                    else
-                    {
-                        bolReturn = false;
-                    }
+                    bolReturn = rsLeaveApplication.Any();
                 }
             }
 
@@ -375,14 +367,7 @@ namespace whris_v2.Modules
                             {
                                 dblActualOTHoursOnIn = Convert.ToDecimal(((TimeSpan)(rsDTRLine.TimeOut2 - rsDTRLine.TimeIn1)).TotalHours);
 
-                                if (dblActualOTHoursOnIn > 0)
-                                {
-                                    dblActualOTHours = dblActualOTHoursOnIn;
-                                }
-                                else
-                                {
-                                    dblActualOTHours = 0;
-                                }
+                                dblActualOTHours = dblActualOTHoursOnIn > 0 ? dblActualOTHoursOnIn : 0;
                             }
                             else
                             {
@@ -391,7 +376,7 @@ namespace whris_v2.Modules
 
                             if (dblActualOTHours > dblRegHours)
                             {
-                                dblActualOTHours = dblActualOTHours - dblRegHours;
+                                dblActualOTHours -= dblRegHours;
                             }
                             else
                             {
@@ -400,7 +385,7 @@ namespace whris_v2.Modules
 
                             if (dblOTHours > dblRegHours)
                             {
-                                dblOTHours = dblOTHours - dblRegHours;
+                                dblOTHours -= dblRegHours;
 
                                 if (dblOTHours > dblActualOTHours)
                                 {
@@ -416,7 +401,8 @@ namespace whris_v2.Modules
                         {
                             var timeIn1 = ctx.MstShiftCodeDays
                                 .Where(x => x.ShiftCodeId == rsDTRLine.ShiftCodeId &&
-                                    x.Day.ToUpper() == rsDTRLine.Date.ToString("dddd").ToUpper())
+                                    string.Equals(x.Day, rsDTRLine.Date.ToString("dddd"),
+                                        StringComparison.CurrentCultureIgnoreCase))
                                 ?.FirstOrDefault()
                                 ?.TimeIn1
                                 ?.ToString();
@@ -437,10 +423,17 @@ namespace whris_v2.Modules
                                 }
                                 else 
                                 {
-                                    if (rsDTRLine.TimeIn1 != null) 
+                                    if (rsDTRLine.TimeIn1 != null)
                                     {
-                                        //TODO: Complete this code
-                                        //datShiftTimeIn1 = 
+                                        datShiftTimeIn1 = DateTime.Parse($"{rsDTRLine.Date.ToShortDateString()} {timeIn1}");
+
+                                        if (datShiftTimeIn1 != DateTime.Parse($"{rsDTRLine.Date} 12:00:00 AM"))
+                                        {
+                                            dblActualOTHoursOnIn =
+                                                Convert.ToDecimal(((TimeSpan) (rsDTRLine.TimeIn1 - datShiftTimeIn1))
+                                                    .TotalMinutes) / 60;
+                                        }
+
                                     }
                                 }
                             }

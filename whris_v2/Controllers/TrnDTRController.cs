@@ -26,18 +26,16 @@ namespace whris_v2.Controllers
         [HttpPost]
         public void ImportExcel()
         {
-            var DTRFile = "DTRFile";
+            const string dtrFile = "DTRFile";
 
-            if (Request.Files[DTRFile].ContentLength > 0)
+            if (Request.Files != null && Request.Files[dtrFile].ContentLength > 0)
             {
-                string extension = System.IO.Path.GetExtension(Request.Files[DTRFile].FileName).ToLower();
-                string query = null;
-                string connString = "";
+                string extension = Path.GetExtension(Request.Files[dtrFile].FileName)?.ToLower();
 
                 var dt = new DataTable();
                         
                 string[] validFileTypes = { ".xls", ".xlsx", ".csv", ".txt" };
-                string path1 = string.Format("{0}/{1}", Server.MapPath("~/Content/Uploads"), Request.Files[DTRFile].FileName);
+                string path1 = $"{Server.MapPath("~/Content/Uploads")}/{Request.Files[dtrFile].FileName}";
 
                 if (!Directory.Exists(path1))
                 {
@@ -49,23 +47,27 @@ namespace whris_v2.Controllers
                     {
                         System.IO.File.Delete(path1);
                     }
-                    Request.Files[DTRFile].SaveAs(path1);
+                    Request.Files[dtrFile].SaveAs(path1);
                     if (extension == ".csv" || extension == ".txt")
                     {
                         dt = Services.ExcelUploadUtil.ConvertToDataTable(path1);
                         ViewBag.Data = dt;
                     }
-                    else if (extension.Trim() == ".xls")
+                    else
                     {
-                        connString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + path1 + ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=2\"";
-                        dt = Services.ExcelUploadUtil.ConvertXSLXtoDataTable(path1, connString);
-                        ViewBag.Data = dt;
-                    }
-                    else if (extension.Trim() == ".xlsx")
-                    {
-                        connString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + path1 + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
-                        dt = Services.ExcelUploadUtil.ConvertXSLXtoDataTable(path1, connString);
-                        ViewBag.Data = dt;
+                        var connString = "";
+                        if (extension != null && extension.Trim() == ".xls")
+                        {
+                            connString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + path1 + ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=2\"";
+                            dt = Services.ExcelUploadUtil.ConvertXSLXtoDataTable(path1, connString);
+                            ViewBag.Data = dt;
+                        }
+                        else if (extension != null && extension.Trim() == ".xlsx")
+                        {
+                            connString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + path1 + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
+                            dt = Services.ExcelUploadUtil.ConvertXSLXtoDataTable(path1, connString);
+                            ViewBag.Data = dt;
+                        }
                     }
                 }
                 else
@@ -73,11 +75,11 @@ namespace whris_v2.Controllers
                     ViewBag.Error = "Please Upload Files in .xls, .xlsx, .csv or .txt format";
                 }
 
-                var tblDTR = new List<Models.DataTables.DTR>();
+                var tblDtr = new List<Models.DataTables.DTR>();
 
                 foreach (DataRow row in dt.Rows)
                 {
-                    tblDTR.Add(new Models.DataTables.DTR()
+                    var dtr = new Models.DataTables.DTR
                     {
                         No = Convert.ToInt32(row["No"]),
                         TMNo = Convert.ToInt32(row["TMNo"]),
@@ -86,9 +88,9 @@ namespace whris_v2.Controllers
                         INOUT = Convert.ToInt32(row["INOUT"]),
                         Mode = Convert.ToInt32(row["Mode"]),
                         DateTime = Convert.ToDateTime(row["DateTime"])
-                    });
+                    };
+                    tblDtr.Add(dtr);
                 }
-
             }
         }
         public ActionResult TrnDTRDetail(int modelId)
