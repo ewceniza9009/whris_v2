@@ -19,6 +19,13 @@ namespace whris_v2.Controllers
         {
             return View();
         }
+
+        public ActionResult PrintEmployeeDetail(Int64 Id)
+        {
+            ViewBag.EmpId = Id;
+            return View();
+        }
+
         #endregion
 
         #region Parent

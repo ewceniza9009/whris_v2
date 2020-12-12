@@ -1,0 +1,530 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="_UpgradeWizard_Files\UpgradeWizardLog.xslt"?>
+<log>
+  <event>Get project references.</event>
+  <event action="Analyze" type="Success" name="Assembly References" path="D:\9.Developments\asp\whris_v2\whris_v2\whris_v2.csproj" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" name="201912250655594_accountmanagement.resx" path="D:\9.Developments\asp\whris_v2\whris_v2\Migrations\201912250655594_accountmanagement.resx" />
+  <event action="Analyze" type="Success" name="Assembly References" path="D:\9.Developments\asp\whris_v2\whris_v2\packages.config" />
+  <event action="Analyze" type="Success" name="Http Handlers" path="D:\9.Developments\asp\whris_v2\whris_v2\packages.config" />
+  <event action="Analyze" type="Success" name="Handlers (IIS7+)" path="D:\9.Developments\asp\whris_v2\whris_v2\packages.config" />
+  <event action="Analyze" type="Success" name="Config Sections" path="D:\9.Developments\asp\whris_v2\whris_v2\packages.config" />
+  <event action="Analyze" type="Success" name="Render Extensions" path="D:\9.Developments\asp\whris_v2\whris_v2\packages.config" />
+  <event action="Analyze" type="Success" name="Session State Providers" path="D:\9.Developments\asp\whris_v2\whris_v2\packages.config" />
+  <event action="Analyze" type="Success" name="packages.config" path="D:\9.Developments\asp\whris_v2\whris_v2\packages.config" />
+  <event action="Analyze" type="Success" name="EmployeeDetail.resx" path="D:\9.Developments\asp\whris_v2\whris_v2\Reporting\EmployeeDetail.resx" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\_ViewStart.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\_ViewStart.cshtml" />
+  <event action="Analyze" type="Success" name="_ViewStart.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\_ViewStart.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\_ExternalLoginsListPartial.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\_ExternalLoginsListPartial.cshtml" />
+  <event action="Analyze" type="Success" name="_ExternalLoginsListPartial.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\_ExternalLoginsListPartial.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\ConfirmEmail.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\ConfirmEmail.cshtml" />
+  <event action="Analyze" type="Success" name="ConfirmEmail.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\ConfirmEmail.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\ExternalLoginConfirmation.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\ExternalLoginConfirmation.cshtml" />
+  <event action="Analyze" type="Success" name="ExternalLoginConfirmation.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\ExternalLoginConfirmation.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\ExternalLoginFailure.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\ExternalLoginFailure.cshtml" />
+  <event action="Analyze" type="Success" name="ExternalLoginFailure.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\ExternalLoginFailure.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\ForgotPassword.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\ForgotPassword.cshtml" />
+  <event action="Analyze" type="Success" name="ForgotPassword.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\ForgotPassword.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\ForgotPasswordConfirmation.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\ForgotPasswordConfirmation.cshtml" />
+  <event action="Analyze" type="Success" name="ForgotPasswordConfirmation.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\ForgotPasswordConfirmation.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\Login.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\Login.cshtml" />
+  <event action="Analyze" type="Success" name="Login.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\Login.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\Register.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\Register.cshtml" />
+  <event action="Analyze" type="Success" name="Register.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\Register.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\ResetPassword.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\ResetPassword.cshtml" />
+  <event action="Analyze" type="Success" name="ResetPassword.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\ResetPassword.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\ResetPasswordConfirmation.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\ResetPasswordConfirmation.cshtml" />
+  <event action="Analyze" type="Success" name="ResetPasswordConfirmation.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\ResetPasswordConfirmation.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\SendCode.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\SendCode.cshtml" />
+  <event action="Analyze" type="Success" name="SendCode.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\SendCode.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\VerifyCode.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\VerifyCode.cshtml" />
+  <event action="Analyze" type="Success" name="VerifyCode.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Account\VerifyCode.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Home\About.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Home\About.cshtml" />
+  <event action="Analyze" type="Success" name="About.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Home\About.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Home\Contact.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Home\Contact.cshtml" />
+  <event action="Analyze" type="Success" name="Contact.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Home\Contact.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Home\Index.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Home\Index.cshtml" />
+  <event action="Analyze" type="Success" name="Index.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Home\Index.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Manage\AddPhoneNumber.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Manage\AddPhoneNumber.cshtml" />
+  <event action="Analyze" type="Success" name="AddPhoneNumber.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Manage\AddPhoneNumber.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Manage\ChangePassword.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Manage\ChangePassword.cshtml" />
+  <event action="Analyze" type="Success" name="ChangePassword.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Manage\ChangePassword.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Manage\Index.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Manage\Index.cshtml" />
+  <event action="Analyze" type="Success" name="Index.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Manage\Index.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Manage\ManageLogins.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Manage\ManageLogins.cshtml" />
+  <event action="Analyze" type="Success" name="ManageLogins.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Manage\ManageLogins.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Manage\SetPassword.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Manage\SetPassword.cshtml" />
+  <event action="Analyze" type="Success" name="SetPassword.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Manage\SetPassword.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Manage\VerifyPhoneNumber.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Manage\VerifyPhoneNumber.cshtml" />
+  <event action="Analyze" type="Success" name="VerifyPhoneNumber.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Manage\VerifyPhoneNumber.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Menu\Index.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Menu\Index.cshtml" />
+  <event action="Analyze" type="Success" name="Index.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Menu\Index.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\MstEmployee\Index.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\MstEmployee\Index.cshtml" />
+  <event action="Analyze" type="Success" name="Index.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\MstEmployee\Index.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\MstEmployee\MstEmployeeDetail.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\MstEmployee\MstEmployeeDetail.cshtml" />
+  <event action="Analyze" type="Success" name="MstEmployeeDetail.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\MstEmployee\MstEmployeeDetail.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\MstUser\Index.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\MstUser\Index.cshtml" />
+  <event action="Analyze" type="Success" name="Index.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\MstUser\Index.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\MstUser\MstUserDetail.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\MstUser\MstUserDetail.cshtml" />
+  <event action="Analyze" type="Success" name="MstUserDetail.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\MstUser\MstUserDetail.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\_Layout.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\_Layout.cshtml" />
+  <event action="Analyze" type="Success" name="_Layout.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\_Layout.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\_LoginPartial.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\_LoginPartial.cshtml" />
+  <event action="Analyze" type="Success" name="_LoginPartial.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\_LoginPartial.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Boolean.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Boolean.cshtml" />
+  <event action="Analyze" type="Success" name="Boolean.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Boolean.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Currency.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Currency.cshtml" />
+  <event action="Analyze" type="Success" name="Currency.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Currency.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Date.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Date.cshtml" />
+  <event action="Analyze" type="Success" name="Date.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Date.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\DateTime.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\DateTime.cshtml" />
+  <event action="Analyze" type="Success" name="DateTime.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\DateTime.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Email.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Email.cshtml" />
+  <event action="Analyze" type="Success" name="Email.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Email.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\EmailAddress.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\EmailAddress.cshtml" />
+  <event action="Analyze" type="Success" name="EmailAddress.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\EmailAddress.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\GridForeignKey.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\GridForeignKey.cshtml" />
+  <event action="Analyze" type="Success" name="GridForeignKey.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\GridForeignKey.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Integer.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Integer.cshtml" />
+  <event action="Analyze" type="Success" name="Integer.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Integer.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Number.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Number.cshtml" />
+  <event action="Analyze" type="Success" name="Number.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Number.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Password.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Password.cshtml" />
+  <event action="Analyze" type="Success" name="Password.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Password.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\String.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\String.cshtml" />
+  <event action="Analyze" type="Success" name="String.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\String.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Time.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Time.cshtml" />
+  <event action="Analyze" type="Success" name="Time.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Time.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Url.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Url.cshtml" />
+  <event action="Analyze" type="Success" name="Url.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\EditorTemplates\Url.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\Error.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\Error.cshtml" />
+  <event action="Analyze" type="Success" name="Error.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\Error.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\Lockout.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\Lockout.cshtml" />
+  <event action="Analyze" type="Success" name="Lockout.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Shared\Lockout.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\TrnDTR\Index.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\TrnDTR\Index.cshtml" />
+  <event action="Analyze" type="Success" name="Index.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\TrnDTR\Index.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\TrnDTR\TrnDTRDetail.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\TrnDTR\TrnDTRDetail.cshtml" />
+  <event action="Analyze" type="Success" name="TrnDTRDetail.cshtml" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\TrnDTR\TrnDTRDetail.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly References" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Web.config" />
+  <event action="Analyze" type="Success" name="Http Handlers" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Web.config" />
+  <event action="Analyze" type="Success" name="Handlers (IIS7+)" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Web.config" />
+  <event action="Analyze" type="Success" name="Config Sections" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Web.config" />
+  <event action="Analyze" type="Success" name="Render Extensions" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Web.config" />
+  <event action="Analyze" type="Success" name="Session State Providers" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Web.config" />
+  <event action="Analyze" type="Success" name="Web.config" path="D:\9.Developments\asp\whris_v2\whris_v2\Views\Web.config" />
+  <event action="Analyze" type="Success" name="Assembly References" path="D:\9.Developments\asp\whris_v2\whris_v2\Web.config" />
+  <event action="Analyze" type="Success" name="Http Handlers" path="D:\9.Developments\asp\whris_v2\whris_v2\Web.config" />
+  <event action="Analyze" type="Success" name="Handlers (IIS7+)" path="D:\9.Developments\asp\whris_v2\whris_v2\Web.config" />
+  <event action="Analyze" type="Success" name="Config Sections" path="D:\9.Developments\asp\whris_v2\whris_v2\Web.config" />
+  <event action="Analyze" type="Success" name="Render Extensions" path="D:\9.Developments\asp\whris_v2\whris_v2\Web.config" />
+  <event action="Analyze" type="Success" name="Session State Providers" path="D:\9.Developments\asp\whris_v2\whris_v2\Web.config" />
+  <event action="Analyze" type="Success" name="Web.config" path="D:\9.Developments\asp\whris_v2\whris_v2\Web.config" />
+  <event action="Analyze" type="Success" name="Assembly References" path="D:\9.Developments\asp\whris_v2\whris_v2\Web.Debug.config" />
+  <event action="Analyze" type="Success" name="Http Handlers" path="D:\9.Developments\asp\whris_v2\whris_v2\Web.Debug.config" />
+  <event action="Analyze" type="Success" name="Handlers (IIS7+)" path="D:\9.Developments\asp\whris_v2\whris_v2\Web.Debug.config" />
+  <event action="Analyze" type="Success" name="Config Sections" path="D:\9.Developments\asp\whris_v2\whris_v2\Web.Debug.config" />
+  <event action="Analyze" type="Success" name="Render Extensions" path="D:\9.Developments\asp\whris_v2\whris_v2\Web.Debug.config" />
+  <event action="Analyze" type="Success" name="Session State Providers" path="D:\9.Developments\asp\whris_v2\whris_v2\Web.Debug.config" />
+  <event action="Analyze" type="Success" name="Web.Debug.config" path="D:\9.Developments\asp\whris_v2\whris_v2\Web.Debug.config" />
+  <event action="Analyze" type="Success" name="Assembly References" path="D:\9.Developments\asp\whris_v2\whris_v2\Web.Release.config" />
+  <event action="Analyze" type="Success" name="Http Handlers" path="D:\9.Developments\asp\whris_v2\whris_v2\Web.Release.config" />
+  <event action="Analyze" type="Success" name="Handlers (IIS7+)" path="D:\9.Developments\asp\whris_v2\whris_v2\Web.Release.config" />
+  <event action="Analyze" type="Success" name="Config Sections" path="D:\9.Developments\asp\whris_v2\whris_v2\Web.Release.config" />
+  <event action="Analyze" type="Success" name="Render Extensions" path="D:\9.Developments\asp\whris_v2\whris_v2\Web.Release.config" />
+  <event action="Analyze" type="Success" name="Session State Providers" path="D:\9.Developments\asp\whris_v2\whris_v2\Web.Release.config" />
+  <event action="Analyze" type="Success" name="Web.Release.config" path="D:\9.Developments\asp\whris_v2\whris_v2\Web.Release.config" />
+  <event action="Analyze" type="Success" name="whris_v2" path="D:\9.Developments\asp\whris_v2\whris_v2\whris_v2.csproj" />
+  <event action="Analyze" type="Success" name="whris_v2" path="D:\9.Developments\asp\whris_v2\whris_v2.sln" />
+  <event action="Upgrade" type="Success" name="Assembly References" path="D:\9.Developments\asp\whris_v2\whris_v2\whris_v2.csproj" />
+  <event action="Upgrade" type="Success" name="whris_v2" path="D:\9.Developments\asp\whris_v2\whris_v2\whris_v2.csproj" />
+  <event action="Upgrade" type="Success" name="whris_v2" path="D:\9.Developments\asp\whris_v2\whris_v2.sln" />
+</log>

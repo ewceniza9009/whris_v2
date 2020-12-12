@@ -27,6 +27,7 @@ namespace whris_v2.Controllers
         public void ImportExcel()
         {
             const string dtrFile = "DTRFile";
+            var tblDtr = new List<Models.DataTables.DTR>();
 
             if (Request.Files != null && Request.Files[dtrFile].ContentLength > 0)
             {
@@ -74,8 +75,6 @@ namespace whris_v2.Controllers
                 {
                     ViewBag.Error = "Please Upload Files in .xls, .xlsx, .csv or .txt format";
                 }
-
-                var tblDtr = new List<Models.DataTables.DTR>();
 
                 foreach (DataRow row in dt.Rows)
                 {

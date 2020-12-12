@@ -1,0 +1,58 @@
+@using whris_v2.Views.MstEmployee
+@using Telerik.Reporting
+@using Telerik.ReportViewer.Mvc
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Print Employee Detail</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <link href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.blueopal.min.css" rel="stylesheet" />
+
+	<!--If Kendo is used it should be added before the report viewer.-->
+    <script src="@Url.Content("~/api/reports/resources/js/telerikReportViewer-14.2.20.1021.min.js/")"></script>  
+
+    <style> 
+        #reportViewer1 {
+            position: relative;
+            width: 1300px;
+            height: 900px;
+            font-family: Verdana, Arial;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container-fluid">
+        <div align="center">
+            @{
+                var typeReportSource = new TypeReportSource() { TypeName = "whris_v2.Reports.PrintEmployeeDetail, whris_v2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" };
+                typeReportSource.Parameters.Add("Id", ViewBag.EmpId);
+            }
+
+            @(Html.TelerikReporting().ReportViewer()
+                .Id("reportViewer1")
+                .ServiceUrl(Url.Content("~/api/reports"))
+                .ReportSource(typeReportSource)
+                .ViewMode(ViewMode.Interactive)
+                .ScaleMode(ScaleMode.FitPage)
+                .Scale(1.0)
+                .PersistSession(false)
+                .PrintMode(PrintMode.AutoSelect)
+                .SendEmail(new SendEmail {Enabled = true})
+                .EnableAccessibility(true))
+        </div>
+    </div>
+</body>
+</html>
