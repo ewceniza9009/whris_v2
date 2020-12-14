@@ -371,7 +371,6 @@ namespace whris_v2.Controllers
                 return Json(result);
             }
         }
-
         public ActionResult ReadEmployeeMemoDetail(int modelId)
         {
             var result = new Models.MstEmployeeMemo();
@@ -407,7 +406,6 @@ namespace whris_v2.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
         [HttpPost]
         public ActionResult SaveEmployeeMemoDetail(Models.MstEmployeeMemo model)
         {
@@ -442,7 +440,6 @@ namespace whris_v2.Controllers
 
             return null;
         }
-
         [HttpDelete]
         public ActionResult DeleteEmployeeMemoDetail(int modelId)
         {
@@ -594,7 +591,6 @@ namespace whris_v2.Controllers
         {
             return Json(whris_v2.Models.ComboBox.MstEmployee.Simple.CmbSex.Sex, JsonRequestBehavior.AllowGet);
         }
-
         public JsonResult CmbCivilStatus()
         {
             return Json(whris_v2.Models.ComboBox.MstEmployee.Simple.CmbCivilStatus.CivilStatus, JsonRequestBehavior.AllowGet);
@@ -802,6 +798,5 @@ namespace whris_v2.Controllers
         }
         #endregion
         #endregion
-
     }
 }
