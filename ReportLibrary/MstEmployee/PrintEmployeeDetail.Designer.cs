@@ -1,5 +1,5 @@
 
-namespace whris_v2.Reports
+namespace ReportLibrary.MstEmployee
 {
     partial class PrintEmployeeDetail
     {

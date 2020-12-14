@@ -9,13 +9,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Print Employee Detail</title>
+    <title>Print Employee Memo</title>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
@@ -39,8 +37,8 @@
     <div class="container-fluid">
         <div align="center">
             @{
-                var typeReportSource = new TypeReportSource() { TypeName = "ReportLibrary.MstEmployee.PrintEmployeeDetail, ReportLibrary" };
-                typeReportSource.Parameters.Add("Id", ViewBag.EmpId);
+                var typeReportSource = new TypeReportSource() { TypeName = " ReportLibrary.MstEmployee.PrintEmployeeMemo, ReportLibrary" };
+                typeReportSource.Parameters.Add("MemoId", ViewBag.MemoId);
             }
 
             @(Html.TelerikReporting().ReportViewer()

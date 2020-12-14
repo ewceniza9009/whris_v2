@@ -26,6 +26,11 @@ namespace whris_v2.Controllers
             return View();
         }
 
+        public ActionResult PrintEmployeeMemo(Int64 MemoId)
+        {
+            ViewBag.MemoId = MemoId;
+            return View();
+        }
         #endregion
 
         #region Parent

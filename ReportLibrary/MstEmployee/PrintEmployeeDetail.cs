@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using Telerik.Reporting;
 using Telerik.Reporting.Drawing;
 
-namespace whris_v2.Reports
+namespace ReportLibrary.MstEmployee
 {
     /// <summary>
     /// Summary description for PrintEmployeeDetail.

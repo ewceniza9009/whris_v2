@@ -361,12 +361,6 @@
     <Compile Include="Models\TrnDTR.cs" />
     <Compile Include="Modules\DTR.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reports\PrintEmployeeDetail.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reports\PrintEmployeeDetail.Designer.cs">
-      <DependentUpon>PrintEmployeeDetail.cs</DependentUpon>
-    </Compile>
     <Compile Include="Services\ExcelUploadUtil.cs" />
     <Compile Include="Services\Menu.cs" />
     <Compile Include="Services\Security.cs" />
@@ -1328,6 +1322,7 @@
     <Content Include="Scripts\kendo\2020.1.114\kendo.virtuallist.min.js.map" />
     <Content Include="Scripts\kendo\2020.1.114\kendo.web.min.js.map" />
     <Content Include="Scripts\kendo\2020.1.114\kendo.window.min.js.map" />
+    <Content Include="Views\MstEmployee\PrintEmployeeMemo.cshtml" />
     <Content Include="Views\MstEmployee\PrintEmployeeDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -1355,9 +1350,12 @@
       <DependentUpon>201912250655594_accountmanagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
-    <EmbeddedResource Include="Reports\PrintEmployeeDetail.resx">
-      <DependentUpon>PrintEmployeeDetail.cs</DependentUpon>
-    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ReportLibrary\ReportLibrary.csproj">
+      <Project>{33BF825B-3FEC-4153-B311-3EB1E8B47308}</Project>
+      <Name>ReportLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
