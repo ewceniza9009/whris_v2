@@ -8,6 +8,8 @@ using Kendo.DynamicLinq;
 using System.Data;
 using System.Data.OleDb;
 using System.IO;
+using Telerik.Windows.Documents.Spreadsheet.Expressions.Functions;
+using Convert = System.Convert;
 
 namespace whris_v2.Controllers
 {
@@ -27,14 +29,23 @@ namespace whris_v2.Controllers
         public void ImportExcel()
         {
             const string dtrFile = "DTRFile";
-            var tblDtr = new List<Models.DataTables.DTR>();
 
-            if (Request.Files != null && Request.Files[dtrFile].ContentLength > 0)
+            if (Request.Files != null && (Request.Files[dtrFile]?.ContentLength ?? 0) > 0)
             {
                 string extension = Path.GetExtension(Request.Files[dtrFile].FileName)?.ToLower();
 
                 var dt = new DataTable();
-                        
+
+                var departmentId = 0;
+                var employeeId = 0;
+                var startDate = DateTime.Now.Date;
+                var endDate = DateTime.Now.Date;
+
+                if (!string.IsNullOrEmpty(Request.Form[0])) departmentId = int.Parse(Request.Form[0]);
+                if (!string.IsNullOrEmpty(Request.Form[1])) employeeId = int.Parse(Request.Form[1]);
+                if (!string.IsNullOrEmpty(Request.Form[2])) startDate = DateTime.Parse(Request.Form[2]).Date;
+                if (!string.IsNullOrEmpty(Request.Form[3])) endDate = DateTime.Parse(Request.Form[3]).Date;
+
                 string[] validFileTypes = { ".xls", ".xlsx", ".csv", ".txt" };
                 string path1 = $"{Server.MapPath("~/Content/Uploads")}/{Request.Files[dtrFile].FileName}";
 
@@ -76,19 +87,26 @@ namespace whris_v2.Controllers
                     ViewBag.Error = "Please Upload Files in .xls, .xlsx, .csv or .txt format";
                 }
 
-                foreach (DataRow row in dt.Rows)
+
+                using (var ctx = new Data.whrisDataContext())
                 {
-                    var dtr = new Models.DataTables.DTR
+                    var allDtr = ctx.TrnDTRLogs.Where(x => x.Date.Date >= startDate && x.Date <= endDate);
+
+                    ctx.TrnDTRLogs.DeleteAllOnSubmit(allDtr);
+
+                    foreach (DataRow row in dt.Rows)
                     {
-                        No = Convert.ToInt32(row["No"]),
-                        TMNo = Convert.ToInt32(row["TMNo"]),
-                        EnNo = Convert.ToInt32(row["EnNo"]),
-                        Name = row["Name"].ToString(),
-                        INOUT = Convert.ToInt32(row["INOUT"]),
-                        Mode = Convert.ToInt32(row["Mode"]),
-                        DateTime = Convert.ToDateTime(row["DateTime"])
-                    };
-                    tblDtr.Add(dtr);
+                        var dtr = new Models.DataTables.DTR
+                        {
+                            No = Convert.ToInt32(row["No"]),
+                            TMNo = Convert.ToInt32(row["TMNo"]),
+                            EnNo = Convert.ToInt32(row["EnNo"]),
+                            Name = row["Name"].ToString(),
+                            INOUT = Convert.ToInt32(row["INOUT"]),
+                            Mode = Convert.ToInt32(row["Mode"]),
+                            DateTime = Convert.ToDateTime(row["DateTime"])
+                        };
+                    }
                 }
             }
         }
@@ -101,17 +119,17 @@ namespace whris_v2.Controllers
 
             using (whris = new Data.whrisDataContext())
             {
-                data = whris.TrnDTRs.Where(x => x.Id == modelId).FirstOrDefault();
+                data = whris.TrnDTRs.FirstOrDefault(x => x.Id == modelId);
 
                 if (modelId == 0)
                 {
-                    var DefaultPeriodId = whris.MstPeriods.LastOrDefault().Id;
+                    var DefaultPeriodId = whris.MstPeriods.ToList().LastOrDefault()?.Id ?? 0;
 
                     var maxDTRNumber = Int64.Parse(whris.TrnDTRs.Max(x => x.DTRNumber).Substring(5, 6));
 
                     var DefaultDTRNumber = DateTime.Now.Year + "-" + (maxDTRNumber + 1000001).ToString().Substring(1, 6);
 
-                    var DefaultPayrollGroupId = whris.MstPayrollGroups.FirstOrDefault().Id;
+                    var DefaultPayrollGroupId = whris.MstPayrollGroups.FirstOrDefault()?.Id ?? 0;
                     var DefaultDTRDate = DateTime.Now;
 
                     data = new Data.TrnDTR
@@ -139,23 +157,19 @@ namespace whris_v2.Controllers
         }
         public JsonResult GetDTRList(int take, int skip, IEnumerable<Sort> sort, Kendo.DynamicLinq.Filter filter)
         {
-            if (filter != null)
+            if (filter?.Filters != null)
             {
-                if (filter.Filters != null)
+                foreach (var f in filter.Filters)
                 {
-                    foreach (var f in filter.Filters)
+                    if (f.Field == "PayrollGroupId" && f.Value != null)
                     {
-                        if (f.Field == "PayrollGroupId" && f.Value != null)
-                        {
-                            f.Value = int.Parse(f.Value.ToString());
-                        }
-                        else if (f.Field == "PayrollGroupId" && f.Value == null)
-                        {
-                            filter = null;
-                        }
+                        f.Value = int.Parse(f.Value.ToString());
+                    }
+                    else if (f.Field == "PayrollGroupId" && f.Value == null)
+                    {
+                        filter = null;
                     }
                 }
-
             }
 
             using (whris = new Data.whrisDataContext())

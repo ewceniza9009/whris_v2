@@ -11,6 +11,7 @@ namespace ReportLibrary.MstEmployee
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintEmployeeMemo));
+            Telerik.Reporting.Barcodes.EAN13Encoder eaN13Encoder1 = new Telerik.Reporting.Barcodes.EAN13Encoder();
             Telerik.Reporting.ReportParameter reportParameter1 = new Telerik.Reporting.ReportParameter();
             Telerik.Reporting.Drawing.StyleRule styleRule1 = new Telerik.Reporting.Drawing.StyleRule();
             this.pageHeaderSection1 = new Telerik.Reporting.PageHeaderSection();
@@ -30,6 +31,7 @@ namespace ReportLibrary.MstEmployee
             this.shape3 = new Telerik.Reporting.Shape();
             this.detail = new Telerik.Reporting.DetailSection();
             this.PrintEmployeeMemoSource = new Telerik.Reporting.SqlDataSource();
+            this.barcode1 = new Telerik.Reporting.Barcode();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // pageHeaderSection1
@@ -49,7 +51,8 @@ namespace ReportLibrary.MstEmployee
             this.textBox11,
             this.shape2,
             this.textBox12,
-            this.shape3});
+            this.shape3,
+            this.barcode1});
             this.pageHeaderSection1.Name = "pageHeaderSection1";
             // 
             // textBox1
@@ -169,6 +172,14 @@ namespace ReportLibrary.MstEmployee
             this.PrintEmployeeMemoSource.Parameters.Add(new Telerik.Reporting.SqlDataSourceParameter("@MemoId", System.Data.DbType.Int32, "= Parameters.MemoId.Value"));
             this.PrintEmployeeMemoSource.SelectCommand = resources.GetString("PrintEmployeeMemoSource.SelectCommand");
             // 
+            // barcode1
+            // 
+            this.barcode1.Encoder = eaN13Encoder1;
+            this.barcode1.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(4.4D), Telerik.Reporting.Drawing.Unit.Inch(0.4D));
+            this.barcode1.Name = "barcode1";
+            this.barcode1.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(2D), Telerik.Reporting.Drawing.Unit.Inch(0.6D));
+            this.barcode1.Value = "=Fields.Id";
+            // 
             // PrintEmployeeMemo
             // 
             this.DataSource = this.PrintEmployeeMemoSource;
@@ -212,5 +223,6 @@ namespace ReportLibrary.MstEmployee
         private Telerik.Reporting.Shape shape2;
         private Telerik.Reporting.TextBox textBox12;
         private Telerik.Reporting.Shape shape3;
+        private Telerik.Reporting.Barcode barcode1;
     }
 }

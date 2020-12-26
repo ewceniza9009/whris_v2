@@ -33,5 +33,16 @@ namespace ReportLibrary.Properties {
                 return ((string)(this["hrismavill_connection"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=EWCENIZA\\SQLSERV17;Initial Catalog=hris_mavill;Integrated Security=Tr" +
+            "ue")]
+        public string hrismavill {
+            get {
+                return ((string)(this["hrismavill"]));
+            }
+        }
     }
 }

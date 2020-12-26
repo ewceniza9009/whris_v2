@@ -365,11 +365,12 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Department</label>
-                                    @(Html.Kendo().ComboBox()
+                        <form id="upload">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Department</label>
+                                        @(Html.Kendo().ComboBox()
                                         .Name("ProcessDepartmentFilter")
                                         .Placeholder("Department")
                                         .DataTextField("Department")
@@ -383,14 +384,14 @@
                                                 read.Action("CmbDepartment", "TrnDTR");
                                             });
                                         })
-                                    )
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Employee</label>
-                                    @(Html.Kendo().ComboBox()
+                                        )
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Employee</label>
+                                        @(Html.Kendo().ComboBox()
                                         .Name("ProcessEmployeeFilter")
                                         .Placeholder("Employee")
-                                        .DataTextField("Employee")
+                                        .DataTextField("FullName")
                                         .DataValueField("Id")
                                         .AutoWidth(true)
                                         .HtmlAttributes(new { id = "ProcessEmployeeFilter", style = "width: 400px" })
@@ -401,24 +402,24 @@
                                                 read.Action("CmbEmployee", "TrnDTR");
                                             });
                                         })
-                                    )
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Date Start</label>
-                                    @(Html.Kendo().DatePicker()
-                                      .Name("ProcessStartDateFilter")
-                                      .HtmlAttributes(new { id = "ProcessStartDateFilter", placeholder = "Date", title = "datepicker" })
-                                    )
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Date End</label>
-                                    @(Html.Kendo().DatePicker()
-                                      .Name("ProcessEndDateFilter")
-                                      .HtmlAttributes(new { id = "ProcessEndDateFilter", placeholder = "Date", title = "datepicker" })
-                                    )
-                                </div>
+                                        )
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Date Start</label>
+                                        @(Html.Kendo().DatePicker()
+                                        .Name("ProcessStartDateFilter")
+                                        .HtmlAttributes(new { id = "ProcessStartDateFilter", placeholder = "Date", title = "datepicker" })
+                                        )
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Date End</label>
+                                        @(Html.Kendo().DatePicker()
+                                        .Name("ProcessEndDateFilter")
+                                        .HtmlAttributes(new { id = "ProcessEndDateFilter", placeholder = "Date", title = "datepicker" })
+                                        )
+                                    </div>
 
-                                <form id="upload" enctype="multipart/form-data">
+
                                     <div class="form-group row" style="margin-top: 20px; justify-content:center">
                                         <input id="UploadFileXls" type="file" class="form-control" />
                                         @*@(Html.Kendo().Upload()
@@ -440,16 +441,16 @@
                                         </button>
 
                                     </div>
-                                </form>
 
-                                <div class="form-group row" style="margin-top: 20px; justify-content:center">
-                                    @(Html.Kendo().ProgressBar()
-                                      .Name("theHelp")
-                                      .Type(ProgressBarType.Percent)
-                                      .Animation(a => a.Duration(600)))
+                                    <div class="form-group row" style="margin-top: 20px; justify-content:center">
+                                        @(Html.Kendo().ProgressBar()
+                                        .Name("theHelp")
+                                        .Type(ProgressBarType.Percent)
+                                        .Animation(a => a.Duration(600)))
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -666,28 +667,39 @@
     }
 
     $('#CmdProcess').click(function () {
-            var fileUpload = $("#UploadFileXls").get(0);  
-            var files = fileUpload.files;  
+        var fileUpload = $("#UploadFileXls").get(0);  
+        var files = fileUpload.files;  
 
-            var fileData = new FormData();
+        var fileData = new FormData();
 
-            for (var i = 0; i < files.length; i++) {  
-                fileData.append("DTRFile", files[i]);  
-            } 
+        var param1 = $("#ProcessDepartmentFilter").val();
+        var param2 = $("#ProcessEmployeeFilter").val();
+        var param3 = $("#ProcessStartDateFilter").val();
+        var param4 = $("#ProcessEndDateFilter").val();
 
-            $.ajax({  
-                url: '@Url.Action("ImportExcel","TrnDTR")',  
-                type: "POST",  
-                contentType: false, // Not to set any content header  
-                processData: false, // Not to process data  
-                data: fileData,  
-                success: function (result) {  
-                    alert(result);  
-                },  
-                error: function (err) {  
-                    alert(err.statusText);  
-                }  
-            });  
+        fileData.append("DepartmentId", param1);
+        fileData.append("EmployeeId", param2);
+        fileData.append("StartDate", param3);
+        fileData.append("EndDate", param4);
+
+        for (var i = 0; i < files.length; i++) {  
+            fileData.append("DTRFile", files[i]);  
+        }
+
+
+        $.ajax({  
+            url: '@Url.Action("ImportExcel","TrnDTR")',  
+            type: "POST",  
+            contentType: false, // Not to set any content header  
+            processData: false, // Not to process data  
+            data: fileData,  
+            success: function (result) {  
+                alert(result);  
+            },  
+            error: function (err) {  
+                alert(err.statusText);  
+            }  
+        });  
         });
 
     $(document).ready(function () {

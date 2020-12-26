@@ -122,11 +122,12 @@
   </metadata>
   <data name="PrintEmployeeDetailSource.SelectCommand" xml:space="preserve">
     <value>SELECT        MstEmployee.Id, MstEmployee.IdNumber, MstEmployee.BiometricIdNumber, MstEmployee.LastName, MstEmployee.FirstName, MstEmployee.MiddleName, MstEmployee.ExtensionName, MstEmployee.FullName, 
-                         MstEmployee.Address, MstZipCode.ZipCode, MstEmployee.PhoneNumber, MstEmployee.CellphoneNumber, MstEmployee.EmailAddress, MstEmployee.DateOfBirth, MstEmployee.PlaceOfBirth, 
+                         MstPosition.Position, MstEmployee.Address, MstZipCode.ZipCode, MstEmployee.PhoneNumber, MstEmployee.CellphoneNumber, MstEmployee.EmailAddress, MstEmployee.DateOfBirth, MstEmployee.PlaceOfBirth, 
                          MstZipCode_1.ZipCode AS PlaceOfBirthZipCode, MstEmployee.DateHired, MstEmployee.DateResigned, MstEmployee.Sex, MstEmployee.CivilStatus, MstCitizenship.Citizenship, MstReligion.Religion, MstEmployee.Height, 
                          MstEmployee.Weight, MstEmployee.GSISNumber, MstEmployee.SSSNumber, MstEmployee.HDMFNumber, MstEmployee.PHICNumber, MstEmployee.TIN, MstTaxCode.TaxCode, MstEmployee.ATMAccountNumber, 
                          MstCompany.Company, MstBranch.Branch
-FROM            MstEmployee LEFT OUTER JOIN
+FROM            MstEmployee INNER JOIN
+                         MstPosition ON MstEmployee.PositionId = MstPosition.Id LEFT OUTER JOIN
                          MstZipCode ON MstEmployee.ZipCodeId = MstZipCode.Id LEFT OUTER JOIN
                          MstZipCode AS MstZipCode_1 ON MstEmployee.PlaceOfBirthZipCodeId = MstZipCode_1.Id LEFT OUTER JOIN
                          MstCitizenship ON MstEmployee.CitizenshipId = MstCitizenship.Id LEFT OUTER JOIN

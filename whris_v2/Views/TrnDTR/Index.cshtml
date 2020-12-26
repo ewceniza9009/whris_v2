@@ -60,7 +60,7 @@
 
 <script>
     function Add() {
-        location.href = "@Url.Action("TrnDTRDetail","TrnDTR")?Id=0";
+        location.href = "@Url.Action("TrnDTRDetail","TrnDTR")?modelId=0";
     }
 
     function Back()
@@ -68,14 +68,14 @@
         location.href = "@Url.Action("Index","Home")";
     }
 
-    function ShowUser(e) {
+    function ShowDTR(e) {
         var tr = $(e.target).closest("tr");
         var item = this.dataItem(tr);
 
         location.href = "@Url.Action("TrnDTRDetail","TrnDTR")?modelId=" + item.Id;
     }
 
-    function DeleteUser(e) {
+    function DeleteDTR(e) {
         var tr = $(e.target).closest("tr");
         var item = this.dataItem(tr);
 
@@ -147,7 +147,7 @@
                     command: {
                         id: "CmdDetail",
                         text: "Detail",
-                        click: ShowUser,
+                        click: ShowDTR,
                         className: "k-primary"
                     },
                     title: "Detail",
@@ -158,7 +158,7 @@
                     command: {
                         id: "CmdDelete",
                         text: "Delete",
-                        click: DeleteUser,
+                        click: DeleteDTR,
                         attributes: {
                             "class": "btn btn-danger"
                         }

@@ -311,6 +311,11 @@
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\TrnDTRController.cs" />
+    <Compile Include="Data\tempdb.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>tempdb.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Models\ComboBox\MstEmployee\CmbPayrollGroup.cs" />
     <Compile Include="Models\ComboBox\MstEmployee\CmbPeriod.cs" />
     <Compile Include="Models\ComboBox\MstEmployee\CmbUser.cs" />
@@ -367,6 +372,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\TempDB.mdf" />
+    <Content Include="App_Data\TempDB_log.ldf">
+      <DependentUpon>TempDB.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -866,6 +875,11 @@
     <Content Include="Content\kendo\2020.1.114\fonts\glyphs\WebComponentsIcons.woff" />
     <Content Include="Content\kendo\2020.1.114\images\kendoui.ttf" />
     <Content Include="Content\kendo\2020.1.114\images\kendoui.woff" />
+    <Content Include="Data\tempdb.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>tempdb.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1325,9 +1339,7 @@
     <Content Include="Views\MstEmployee\PrintEmployeeMemo.cshtml" />
     <Content Include="Views\MstEmployee\PrintEmployeeDetail.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
@@ -1346,6 +1358,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Data\tempdb.dbml.layout">
+      <DependentUpon>tempdb.dbml</DependentUpon>
+    </None>
     <EmbeddedResource Include="Migrations\201912250655594_accountmanagement.resx">
       <DependentUpon>201912250655594_accountmanagement.cs</DependentUpon>
     </EmbeddedResource>

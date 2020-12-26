@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using whris_v2.Data;
 
 namespace whris_v2.Modules
 {
     public class DTR
     {
         Data.whrisDataContext whris;
-        public void ProcessDTRDate(int dtrId, int? payrollGroupId, int? departmentId, int? employeeId)
+        public void ProcessDTRDate(int dtrId, int? payrollGroupId, int? departmentId, int? employeeId, DateTime? startDate, DateTime? endDate)
         {
             using (whris = new Data.whrisDataContext())
             {
@@ -36,9 +37,76 @@ namespace whris_v2.Modules
                         .ToList();
                 }
 
+                if (rsEmployee.Count > 0)
+                {
+                    if (employeeId == null)
+                    {
+                        if (departmentId == null)
+                        {
+                            var deleteLine = whris.TrnDTRLines.Where(x =>
+                                x.DTRId == dtrId && x.Date.Date >= startDate && x.Date.Date <= endDate);
+                        }
+                        else
+                        {
+                            var deleteLine = whris.TrnDTRLines.Where(x =>
+                                x.DTRId == dtrId && x.MstEmployee.DepartmentId == departmentId && x.Date.Date >= startDate && x.Date.Date <= endDate);
+                        }
+                    }
+                    else
+                    {
+                        var deleteLine = whris.TrnDTRLines.Where(x =>
+                            x.DTRId == dtrId && x.EmployeeId == employeeId && x.Date.Date >= startDate && x.Date.Date <= endDate);
+                    }
+                }
+
                 foreach (var emp in rsEmployee)
                 {
+                    foreach (var d in EachDay(startDate ?? DateTime.Now.Date, endDate ?? DateTime.Now.Date))
+                    {
+                        var newDTRLine = new Data.TrnDTRLine
+                        {
+                            DTRId = dtrId,
+                            EmployeeId = emp.Id,
+                            Date = d,
+                            ShiftCodeId = 0,
+                            TimeIn1 = null,
+                            TimeOut1 = null,
+                            TimeIn2 = null,
+                            TimeOut2 = null,
+                            OfficialBusiness = false,
+                            OnLeave = false,
+                            Absent = false,
+                            HalfdayAbsent = false,
+                            RegularHours = 0,
+                            NightHours = 0,
+                            OvertimeHours = 0,
+                            OvertimeNightHours = 0,
+                            GrossTotalHours = 0,
+                            TardyLateHours = 0,
+                            TardyUndertimeHours = 0,
+                            NetTotalHours = 0,
+                            DayTypeId = 1,
+                            RestDay = false,
+                            DayMultiplier = 1,
+                            RatePerHour = 0,
+                            RatePerNightHour = 0,
+                            RatePerOvertimeHour = 0,
+                            RatePerOvertimeNightHour = 0,
+                            RegularAmount = 0,
+                            NightAmount = 0,
+                            OvertimeAmount = 0,
+                            OvertimeNightAmount = 0,
+                            TotalAmount = 0,
+                            RatePerHourTardy = 0,
+                            RatePerAbsentDay = 0,
+                            TardyAmount = 0,
+                            AbsentAmount = 0,
+                            NetAmount = 0
+                        };
 
+                        whris.TrnDTRLines.InsertOnSubmit(newDTRLine);
+                        whris.SubmitChanges();
+                    }
                 }
             }
         }
@@ -443,6 +511,12 @@ namespace whris_v2.Modules
             }
 
             return null;
+        }
+
+        public IEnumerable<DateTime> EachDay(DateTime from, DateTime thru)
+        {
+            for (var day = from.Date; day.Date <= thru.Date; day = day.AddDays(1))
+                yield return day;
         }
     }
 }
